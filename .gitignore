@@ -1,0 +1,4 @@
+qa_out/
+dist/
+*.png
+__pycache__/
