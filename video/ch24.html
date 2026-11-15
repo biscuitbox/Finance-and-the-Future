@@ -1,0 +1,524 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>24차시 영상 · 보험의 의미, 종류, 목적 | 금융과 미래</title>
+<style>
+@font-face{font-family:"VidKR";src:url("fonts/ch24-Regular.woff2?v=3eb1e46b") format("woff2");font-weight:100 450;font-display:block}
+@font-face{font-family:"VidKR";src:url("fonts/ch24-Medium.woff2?v=24ec35c5") format("woff2");font-weight:451 550;font-display:block}
+@font-face{font-family:"VidKR";src:url("fonts/ch24-Bold.woff2?v=bf773220") format("woff2");font-weight:551 750;font-display:block}
+@font-face{font-family:"VidKR";src:url("fonts/ch24-Black.woff2?v=da0a4e73") format("woff2");font-weight:751 1000;font-display:block}
+
+:root{--pine:#10403B;--teal:#127475;--steel:#1C6E8C;--amber:#E08E0B;--amberdk:#A96A08;--brick:#8C3A3A;--brickbg:#F5EFEF;--tealbg:#E9F2F0;--amberbg:#FCF4E4;--steelbg:#E8F1F5;--ink:#17302D;--grey:#5C6B68;--line:#D5E1DE}
+*{box-sizing:border-box;margin:0;padding:0}
+#frame{width:1920px;height:1080px;overflow:hidden;background:#fff;font-family:"VidKR","Malgun Gothic","Noto Sans CJK KR","Noto Sans KR",sans-serif;color:var(--ink);word-break:keep-all}
+#stage{position:absolute;inset:0;background:#fff}
+.scene{position:absolute;left:0;top:0;width:1920px;height:910px;display:none;background:#fff}
+.scene.dark{background:var(--pine);color:#fff}
+.hdr{position:absolute;left:90px;top:44px;right:90px;display:flex;align-items:center;gap:22px}
+.hdr .tag{background:var(--pine);color:#fff;font-weight:800;font-size:34px;padding:10px 28px;border-radius:40px}
+.hdr .ttl{font-size:46px;font-weight:800;color:var(--pine)}
+.hdr .lesson{margin-left:auto;font-size:26px;color:var(--grey);font-weight:600}
+.body{position:absolute;left:90px;right:90px;top:140px;bottom:30px}
+.card{background:var(--tealbg);border-radius:28px;padding:30px 38px}
+.card.am{background:var(--amberbg)}.card.st{background:var(--steelbg)}.card.br{background:var(--brickbg)}.card.wh{background:#fff;border:3px solid var(--line)}
+.card h3{font-size:44px;font-weight:800;color:var(--pine);margin-bottom:12px}
+.card p{font-size:34px;line-height:1.45;font-weight:600}
+.big{font-size:84px;font-weight:900;letter-spacing:-1px}
+.mid{font-size:50px;font-weight:800}
+.teal{color:var(--teal)}.steel{color:var(--steel)}.amber{color:var(--amber)}.amberdk{color:var(--amberdk)}.brick{color:var(--brick)}.pine{color:var(--pine)}.grey{color:var(--grey)}
+.pill{display:inline-block;border-radius:999px;padding:10px 28px;font-weight:800;font-size:34px;background:var(--pine);color:#fff}
+.pill.teal{background:var(--teal);color:#fff}.pill.steel{background:var(--steel);color:#fff}.pill.amber{background:var(--amberdk);color:#fff}.pill.brick{background:var(--brick);color:#fff}.pill.light{background:var(--tealbg);color:var(--pine)}
+.row{display:flex;align-items:center;gap:24px}
+.col{display:flex;flex-direction:column;gap:24px}
+.src{position:absolute;left:90px;right:90px;bottom:6px;font-size:22px;color:var(--grey);font-weight:600}
+.hl{outline:6px solid var(--amber);outline-offset:6px;box-shadow:0 0 0 14px rgba(224,142,11,.18)}
+.stamp{border:6px solid var(--brick);color:var(--brick);font-weight:900;font-size:40px;padding:6px 22px;border-radius:14px;background:rgba(255,255,255,.92)}
+svg text{font-family:"VidKR","Malgun Gothic","Noto Sans CJK KR",sans-serif}
+.ico{width:120px;height:120px}
+/* 자막 */
+#bar{position:absolute;left:0;right:0;bottom:0;height:170px;background:var(--pine);border-top:6px solid var(--amber)}
+#sub{position:absolute;left:250px;right:250px;top:14px;bottom:10px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+#who{font-size:26px;font-weight:800;padding:3px 18px;border-radius:20px;margin-bottom:6px}
+#who.T{background:var(--teal);color:#fff}#who.S{background:var(--amber);color:#10302c}
+#txt{font-size:44px;line-height:1.3;font-weight:700;color:#fff}
+.av{position:absolute;bottom:8px;width:190px;height:200px}
+#avT{left:34px}#avS{right:34px}
+.avname{position:absolute;bottom:-2px;left:0;right:0;text-align:center;font-size:22px;font-weight:800;color:#cfe3df}
+#pausebadge{position:absolute;right:70px;bottom:196px;transform-origin:100% 50%;opacity:0;z-index:5;display:flex;align-items:center;gap:22px;background:var(--brick);color:#fff;border-radius:999px;padding:16px 40px 16px 20px;font-size:38px;font-weight:700;white-space:nowrap;box-shadow:0 10px 28px rgba(0,0,0,.25);pointer-events:none}
+#pausebadge b{font-weight:900;color:#FFE8A8;margin-right:8px}
+#pausebadge .pb-ico{width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;gap:9px}
+#pausebadge .pb-ico i{display:block;width:11px;height:30px;background:var(--brick);border-radius:3px}
+
+
+.sumi{display:flex;align-items:center;gap:30px;background:rgba(255,255,255,.08);border-radius:26px;padding:22px 36px;font-size:40px;font-weight:800;color:#fff}
+.sumi .n{min-width:72px;height:72px;border-radius:50%;background:var(--amber);color:#10302c;display:flex;align-items:center;justify-content:center;font-weight:900}
+.hk{border-radius:30px;padding:26px 28px;height:400px;position:relative;text-align:center}
+.hk h3{font-size:44px;font-weight:900;margin-top:10px} .hk p{font-size:32px;font-weight:700;line-height:1.4;margin-top:12px}
+.fbox{border-radius:26px;padding:18px;text-align:center;background:#fff;border:4px solid var(--line);position:absolute}
+.fbox b{display:block;font-size:40px;font-weight:900} .fbox span{font-size:28px;font-weight:700;color:var(--grey)}
+.col2{border-radius:30px;padding:26px 36px;position:relative}
+.col2 h3{font-size:44px;font-weight:900;color:#fff;border-radius:18px;padding:8px 26px;display:inline-block}
+.col2 li{font-size:33px;font-weight:700;margin:14px 0 0 40px;line-height:1.35}
+.bub{background:#FFF7D6;border:4px solid #e2c766;border-radius:30px 30px 30px 6px;padding:16px 30px;font-size:34px;font-weight:900}
+.trow{display:grid;grid-template-columns:320px 1fr 360px;align-items:center;height:92px;border-bottom:3px solid var(--line);font-size:36px;font-weight:800;padding:0 30px}
+.trow .tl{font-size:40px;font-weight:900;color:var(--pine)}
+.trow.h{height:64px;background:var(--tealbg);border:0;border-radius:16px 16px 0 0;font-size:28px;color:var(--grey)}
+.opt{position:absolute;width:440px;height:140px;border-radius:24px;background:#fff;border:4px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:900}
+.step{position:absolute;width:560px;height:240px;border-radius:26px;background:var(--tealbg);padding:22px 28px}
+.step .sn{position:absolute;right:24px;top:20px;width:64px;height:64px;border-radius:50%;background:var(--pine);color:#fff;font-size:38px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.step .st{font-size:44px;font-weight:900;color:var(--pine);margin-top:4px} .step .sd{font-size:31px;font-weight:700;line-height:1.4;margin-top:16px}
+
+html,body{margin:0;width:100%;height:100%;background:#0b1f1c;overflow:hidden}
+#frame{position:absolute;left:0;top:0;transform-origin:0 0;box-shadow:0 0 0 1px #000}
+/* 플레이어 */
+#ui{position:fixed;left:0;right:0;bottom:0;padding:14px 18px 12px;background:linear-gradient(transparent,rgba(5,20,18,.92));color:#fff;font:600 15px/1.2 "VidKR","Malgun Gothic",sans-serif;transition:opacity .3s;z-index:20}
+#ui.hide{opacity:0;pointer-events:none}
+#seekwrap{position:relative;height:22px;cursor:pointer;margin-bottom:8px}
+#seekbg{position:absolute;left:0;right:0;top:9px;height:5px;border-radius:3px;background:rgba(255,255,255,.28)}
+#seekfill{position:absolute;left:0;top:9px;height:5px;border-radius:3px;background:#E08E0B}
+#seekknob{position:absolute;top:4px;width:15px;height:15px;margin-left:-7px;border-radius:50%;background:#fff}
+.mk{position:absolute;top:7px;width:2px;height:9px;background:rgba(255,255,255,.55)}
+.mk.q{width:8px;height:8px;top:-3px;margin-left:-4px;border-radius:50%;background:#E05555}
+#tip{position:absolute;bottom:24px;transform:translateX(-50%);background:#10403B;padding:4px 9px;border-radius:6px;white-space:nowrap;display:none;font-size:13px}
+#row{display:flex;align-items:center;gap:10px}
+#ui button{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}
+#ui button:hover{background:rgba(255,255,255,.25)}
+#ui button.on{background:#127475}
+#time{font-variant-numeric:tabular-nums;min-width:110px}
+#sp{flex:1}
+#cover{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:30;color:#fff;font-family:"VidKR","Malgun Gothic",sans-serif;text-align:center}
+#cover{background:rgba(8,30,27,.55)}
+#quiz{position:absolute;right:70px;bottom:300px;z-index:6;display:none}
+.big{width:120px;height:120px;border-radius:50%;border:0;background:#E08E0B;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.big:disabled{background:#6b7b78;cursor:wait}
+.big i{display:block;width:0;height:0;border-left:42px solid #10302c;border-top:26px solid transparent;border-bottom:26px solid transparent;margin-left:12px}
+.cap{font-size:22px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.cap small{display:block;font-size:15px;font-weight:600;opacity:.85;margin-top:6px}
+#qgo{background:#fff;color:#8C3A3A;border:6px solid #8C3A3A;border-radius:999px;padding:18px 44px;font:900 40px "VidKR",sans-serif;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.25)}
+#qgo small{font-size:26px;font-weight:700;opacity:.7}
+#ui a.rel{color:#10302c;background:#E08E0B;border-radius:8px;padding:7px 12px;text-decoration:none;font-weight:800}
+#cover a.rel{color:#fff;font:700 17px "VidKR",sans-serif;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:9px 20px;text-decoration:none}
+#cover a.rel:hover,#ui a.rel:hover{filter:brightness(1.1)}
+</style></head><body>
+<div id="frame">
+
+<svg width="0" height="0" style="position:absolute">
+ <symbol id="i-bank" viewBox="0 0 120 120"><path d="M60 8 L112 36 L8 36 Z" fill="currentColor"/><rect x="14" y="40" width="92" height="8" fill="currentColor"/><g fill="currentColor"><rect x="20" y="52" width="12" height="44"/><rect x="42" y="52" width="12" height="44"/><rect x="66" y="52" width="12" height="44"/><rect x="88" y="52" width="12" height="44"/></g><rect x="8" y="100" width="104" height="12" rx="3" fill="currentColor"/></symbol>
+ <symbol id="i-money" viewBox="0 0 120 120"><g><rect x="10" y="52" width="100" height="52" rx="8" fill="#0e5c4f"/><rect x="16" y="40" width="100" height="52" rx="8" fill="#127475" transform="translate(-6 0)"/><rect x="10" y="28" width="100" height="52" rx="8" fill="#1a8a7c"/><circle cx="60" cy="54" r="15" fill="none" stroke="#fff" stroke-width="5"/><text x="60" y="61" font-size="20" text-anchor="middle" fill="#fff" font-weight="900">₩</text></g></symbol>
+ <symbol id="i-shield" viewBox="0 0 120 120"><path d="M60 6 L106 22 L106 58 Q106 96 60 114 Q14 96 14 58 L14 22 Z" fill="currentColor"/><path d="M38 60 L54 76 L84 44" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-person" viewBox="0 0 120 120"><circle cx="60" cy="34" r="22" fill="currentColor"/><path d="M18 116 Q18 66 60 64 Q102 66 102 116 Z" fill="currentColor"/></symbol>
+ <symbol id="i-coin" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="#E08E0B"/><circle cx="60" cy="60" r="40" fill="none" stroke="#fff" stroke-width="6" opacity=".7"/><text x="60" y="76" font-size="46" text-anchor="middle" fill="#fff" font-weight="900">₩</text></symbol>
+ <symbol id="i-receipt" viewBox="0 0 120 120"><path d="M22 8 H98 V112 L86 104 L74 112 L62 104 L50 112 L38 104 L22 112 Z" fill="currentColor"/><g stroke="#fff" stroke-width="7" stroke-linecap="round"><path d="M38 34 H82"/><path d="M38 54 H82"/><path d="M38 74 H66"/></g></symbol>
+ <symbol id="i-snow" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="#e9f2f0" stroke="#127475" stroke-width="6"/><circle cx="44" cy="44" r="9" fill="#fff"/><path d="M30 80 Q60 96 90 76" stroke="#127475" stroke-width="5" fill="none" opacity=".4"/></symbol>
+ <symbol id="i-check" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="currentColor"/><path d="M34 62 L52 80 L88 42" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-x" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="currentColor"/><path d="M38 38 L82 82 M82 38 L38 82" stroke="#fff" stroke-width="12" stroke-linecap="round"/></symbol>
+ <symbol id="i-scale" viewBox="0 0 120 120"><path d="M60 14 V100 M30 104 H90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/><path d="M18 34 H102" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M18 34 L6 66 H30 Z M102 34 L90 66 H114 Z" fill="currentColor"/><circle cx="60" cy="14" r="8" fill="currentColor"/></symbol>
+ <symbol id="i-tv" viewBox="0 0 120 120"><rect x="6" y="14" width="108" height="78" rx="10" fill="currentColor"/><path d="M40 108 H80 M60 92 V108" stroke="currentColor" stroke-width="8" stroke-linecap="round"/></symbol>
+</svg>
+
+<div id="stage">
+
+<!-- S1 표지 -->
+<section class="scene dark" id="s1">
+ <div style="position:absolute;left:150px;top:170px;width:1080px">
+  <div data-at="t0.1" style="font-size:38px;font-weight:700;color:#bfe0da">금융과 미래 · Ⅱ. 투자의 종류와 방법</div>
+  <div data-at="t0.3" style="margin-top:30px"><span class="pill" style="background:var(--amber);color:#10302c;font-size:44px">24차시</span></div>
+  <div data-at="t0.5" style="font-size:100px;font-weight:900;margin-top:26px;line-height:1.15">보험의 의미, 종류, 목적</div>
+  <div data-at="t0.8" style="font-size:50px;font-weight:800;color:var(--amber);margin-top:20px">적은 돈을 모아 큰 위험에 함께 대비한다</div>
+  <div data-at="2" class="row" style="margin-top:44px;gap:18px">
+   <span class="pill light">보험료 · 보험금</span><span class="pill light">민영 보험 · 사회 보험</span><span class="pill light">가입할 때 주의할 점</span>
+  </div>
+ </div>
+ <div data-at="t0.7" data-fx="down" style="position:absolute;left:1330px;top:150px"><svg viewBox="0 0 400 360" width="460" height="414">
+<path d="M20 170 Q200 -20 380 170 Q350 150 320 170 Q290 150 260 170 Q230 150 200 170 Q170 150 140 170 Q110 150 80 170 Q50 150 20 170Z" fill="#E08E0B"/>
+<path d="M200 60 V300 Q200 330 175 330 Q152 330 150 308" fill="none" stroke="#bfe0da" stroke-width="10" stroke-linecap="round"/></svg></div>
+ <div data-at="t1.0" style="position:absolute;left:1380px;top:440px;width:360px"><div class="row" style="justify-content:center;gap:0;color:#bfe0da"><svg width="100" height="100"><use href="#i-person"/></svg><svg width="130" height="130"><use href="#i-person"/></svg><svg width="100" height="100"><use href="#i-person"/></svg></div></div>
+ <div data-at="t0.9" style="position:absolute;left:1300px;top:110px;width:8px;height:34px;border-radius:4px;background:#7fb3c9;transform:rotate(15deg)"></div><div data-at="t1.0" style="position:absolute;left:1390px;top:140px;width:8px;height:34px;border-radius:4px;background:#7fb3c9;transform:rotate(15deg)"></div><div data-at="t1.1" style="position:absolute;left:1480px;top:110px;width:8px;height:34px;border-radius:4px;background:#7fb3c9;transform:rotate(15deg)"></div><div data-at="t1.2" style="position:absolute;left:1570px;top:140px;width:8px;height:34px;border-radius:4px;background:#7fb3c9;transform:rotate(15deg)"></div><div data-at="t1.3" style="position:absolute;left:1660px;top:110px;width:8px;height:34px;border-radius:4px;background:#7fb3c9;transform:rotate(15deg)"></div><div data-at="t1.4" style="position:absolute;left:1750px;top:140px;width:8px;height:34px;border-radius:4px;background:#7fb3c9;transform:rotate(15deg)"></div>
+</section>
+
+<!-- S2 이런 일이 생긴다면 -->
+<section class="scene" id="s2">
+ <div class="hdr"><span class="tag">생각 열기</span><span class="ttl">이런 일이 생긴다면?</span><span class="lesson">금융과 미래 · 24차시</span></div>
+ <div class="body">
+  <div class="row" style="position:absolute;left:0;right:0;top:0;gap:30px;align-items:stretch">
+   <div data-at="0@0.3" class="hk" style="flex:1;background:var(--steelbg)"><svg width="110" height="120" viewBox="0 0 110 120"><rect x="25" y="6" width="60" height="108" rx="12" fill="#1C6E8C"/><rect x="31" y="16" width="48" height="84" rx="4" fill="#E8F1F5"/><path d="M40 30 L58 52 L46 62 L70 90" fill="none" stroke="#8C3A3A" stroke-width="4"/></svg><h3 class="steel">휴대전화 파손</h3><p>수리비 수십만 원,<br>누가 낼까?</p></div>
+   <div data-at="1" class="hk" style="flex:1;background:var(--tealbg)"><svg width="110" height="120" viewBox="0 0 110 120"><rect x="10" y="20" width="90" height="90" rx="14" fill="#fff" stroke="#127475" stroke-width="7"/><path d="M55 40 V90 M30 65 H80" stroke="#D23B3B" stroke-width="16" stroke-linecap="round"/></svg><h3 class="teal">갑자기 입원</h3><p>병원비가<br>걱정된다</p></div>
+   <div data-at="1@0.5" class="hk" style="flex:1;background:var(--amberbg)"><svg width="130" height="120" viewBox="0 0 130 120"><path d="M14 74 L30 40 H96 L114 74 V96 H14Z" fill="#A96A08"/><rect x="38" y="48" width="22" height="20" fill="#FCF4E4"/><rect x="68" y="48" width="22" height="20" fill="#FCF4E4"/><circle cx="36" cy="98" r="13" fill="#17302D"/><circle cx="94" cy="98" r="13" fill="#17302D"/><path d="M110 20 L118 34 M122 26 L108 30" stroke="#D23B3B" stroke-width="5" stroke-linecap="round"/></svg><h3 class="amberdk">가족의 교통사고</h3><p>치료비와 생활비는<br>어떻게 할까?</p></div>
+  </div>
+  <div data-at="2" data-fx="pop" data-out="3" class="bub" style="position:absolute;left:0;top:440px">“혼자 마련해야 한다면… 너무 막막해요!”</div>
+  <div data-at="3@0.3" data-fx="pop" class="card" style="position:absolute;left:0;right:0;top:500px;background:var(--pine);color:#fff;padding:20px 36px;text-align:center"><p style="font-size:36px;font-weight:800">언제 올지 모르는 위험 — <span style="color:var(--amber)">혼자보다 함께</span> 대비하면 덜 무섭다</p></div>
+ </div>
+</section>
+
+<!-- S3 보험이란 -->
+<section class="scene" id="s3">
+ <div class="hdr"><span class="tag">개념 ①</span><span class="ttl">보험이란 무엇일까?</span><span class="lesson">금융과 미래 · 24차시</span></div>
+ <div class="body">
+  <div data-at="0" class="card" style="position:absolute;left:0;right:0;top:0;padding:20px 36px;display:flex;align-items:center;gap:30px"><span class="pill teal" style="font-size:44px">보험</span><span style="font-size:40px;font-weight:900">많은 사람이 <span class="teal">조금씩 모아</span> 사고 난 사람을 돕는 제도</span></div>
+  <div data-at="1" class="fbox" style="left:0;top:140px;width:440px;height:260px"><div class="row" style="justify-content:center;gap:0;color:var(--steel)"><svg width="80" height="80"><use href="#i-person"/></svg><svg width="100" height="100"><use href="#i-person"/></svg><svg width="80" height="80"><use href="#i-person"/></svg></div><b class="steel">가입자들</b><span>보험료를 조금씩 낸다</span>
+   <div class="row" style="justify-content:center;gap:6px;margin-top:6px"><span data-at="1@0.3" data-fx="down"><svg width="40" height="40" viewBox="0 0 60 60"><circle cx="30" cy="30" r="27" fill="#E08E0B"/><circle cx="30" cy="30" r="20" fill="none" stroke="#fff" stroke-width="3"/><text x="30" y="38" font-size="22" font-weight="900" text-anchor="middle" fill="#fff">₩</text></svg></span><span data-at="1@0.4" data-fx="down"><svg width="40" height="40" viewBox="0 0 60 60"><circle cx="30" cy="30" r="27" fill="#E08E0B"/><circle cx="30" cy="30" r="20" fill="none" stroke="#fff" stroke-width="3"/><text x="30" y="38" font-size="22" font-weight="900" text-anchor="middle" fill="#fff">₩</text></svg></span><span data-at="1@0.5" data-fx="down"><svg width="40" height="40" viewBox="0 0 60 60"><circle cx="30" cy="30" r="27" fill="#E08E0B"/><circle cx="30" cy="30" r="20" fill="none" stroke="#fff" stroke-width="3"/><text x="30" y="38" font-size="22" font-weight="900" text-anchor="middle" fill="#fff">₩</text></svg></span><span data-at="1@0.6" data-fx="down"><svg width="40" height="40" viewBox="0 0 60 60"><circle cx="30" cy="30" r="27" fill="#E08E0B"/><circle cx="30" cy="30" r="20" fill="none" stroke="#fff" stroke-width="3"/><text x="30" y="38" font-size="22" font-weight="900" text-anchor="middle" fill="#fff">₩</text></svg></span></div></div>
+  <div data-at="1@0.4" style="position:absolute;left:450px;top:230px;font-size:70px;font-weight:900" class="amber">→</div>
+  <div data-at="1@0.5" class="fbox" style="left:540px;top:140px;width:520px;height:260px;border-color:var(--teal);background:var(--tealbg)"><svg width="110" height="110" style="color:var(--teal)"><use href="#i-shield"/></svg><b class="teal">보험 회사 · 국가</b><span>모은 돈으로 큰 기금</span></div>
+  <div data-at="2" style="position:absolute;left:1070px;top:230px;font-size:70px;font-weight:900" class="amber">→</div>
+  <div data-at="2@0.2" class="fbox" style="left:1160px;top:140px;width:580px;height:260px"><svg width="90" height="90" style="color:var(--brick)"><use href="#i-person"/></svg><b class="brick">사고 난 사람</b><span>정해진 보험금을 받는다</span>
+   <div style="margin-top:6px"><svg width="56" height="56" viewBox="0 0 60 60"><circle cx="30" cy="30" r="27" fill="#E08E0B"/><circle cx="30" cy="30" r="20" fill="none" stroke="#fff" stroke-width="3"/><text x="30" y="38" font-size="22" font-weight="900" text-anchor="middle" fill="#fff">₩</text></svg></div></div>
+  <div data-at="3" class="row" style="position:absolute;left:0;top:430px;gap:24px">
+   <span class="pill" style="background:var(--steel);font-size:38px">보험료 = 내는 돈</span><span class="pill" style="background:var(--brick);font-size:38px">보험금 = 받는 돈</span></div>
+  <div data-at="4" class="card am" style="position:absolute;left:0;right:0;top:530px;padding:16px 30px;text-align:center"><p style="font-size:33px">보험 = 나의 금전적 위험을 보험 회사에 넘기는 <b class="amberdk">‘위험 이전’</b> 수단 → 불안 ↓ 공부 · 일에 집중</p></div>
+ </div>
+</section>
+
+<!-- S4 민영 vs 사회 -->
+<section class="scene" id="s4">
+ <div class="hdr"><span class="tag">개념 ②</span><span class="ttl">민영 보험과 사회 보험</span><span class="lesson">금융과 미래 · 24차시</span></div>
+ <div class="body">
+  <div data-at="1" class="col2" style="position:absolute;left:0;top:0;width:840px;height:520px;background:var(--steelbg)">
+   <h3 style="background:var(--steel)">민영 보험</h3>
+   <ul><li>필요한 사람이 골라 <b class="steel">보험 회사와 계약</b></li><li data-at="1@0.45"><b>생명 보험</b> — 사망 · 질병</li><li data-at="1@0.6"><b>손해 보험</b> — 교통사고 · 화재 · 도난</li><li data-at="1@0.75"><b>제3보험</b> — 상해 · 질병 · 간병</li></ul>
+   <div data-at="2" data-fx="pop" style="position:absolute;left:0;right:0;bottom:24px;text-align:center"><span class="pill steel" style="font-size:32px">예: 자동차 보험 · 실손 보험</span></div></div>
+  <div data-at="3" class="col2" style="position:absolute;left:900px;top:0;width:840px;height:520px;background:var(--tealbg)">
+   <h3 style="background:var(--teal)">사회 보험</h3>
+   <ul><li><b class="teal">국가</b>가 운영</li><li data-at="3@0.3">법에 따라 <b>가입이 의무</b></li><li data-at="3@0.55">보험료 · 보험금은 <b>법률</b>로 정함</li><li data-at="5">건강 · 연금 · 고용 · 산재 · 장기요양</li></ul>
+   <div data-at="4@0.3" data-fx="pop" style="position:absolute;left:0;right:0;bottom:24px;text-align:center"><span class="pill teal" style="font-size:32px">예: 국민건강보험 · 국민연금</span></div></div>
+ </div>
+</section>
+
+<!-- S5 사회 보험 다섯 가지 -->
+<section class="scene" id="s5">
+ <div class="hdr"><span class="tag">개념 ③</span><span class="ttl">사회 보험 다섯 가지</span><span class="lesson">금융과 미래 · 24차시</span></div>
+ <div class="body"><div style="position:absolute;left:0;top:0;width:1760px;height:560px"><div data-at="0" style="position:absolute;left:0px;top:0px;width:560px;height:260px;border-radius:26px;background:#fff;border:4px solid #127475;overflow:hidden"><div style="background:#127475;color:#fff;font-size:42px;font-weight:900;padding:16px 24px">국민건강보험</div><p style="font-size:33px;font-weight:700;line-height:1.45;padding:22px 26px">질병 · 부상 병원비 부담을 덜어 줘요</p></div><div data-at="1" style="position:absolute;left:590px;top:0px;width:560px;height:260px;border-radius:26px;background:#fff;border:4px solid #1C6E8C;overflow:hidden"><div style="background:#1C6E8C;color:#fff;font-size:42px;font-weight:900;padding:16px 24px">국민연금</div><p style="font-size:33px;font-weight:700;line-height:1.45;padding:22px 26px">은퇴 · 소득이 줄 때를 대비해요</p></div><div data-at="2" style="position:absolute;left:1180px;top:0px;width:560px;height:260px;border-radius:26px;background:#fff;border:4px solid #127475;overflow:hidden"><div style="background:#127475;color:#fff;font-size:42px;font-weight:900;padding:16px 24px">고용 보험</div><p style="font-size:33px;font-weight:700;line-height:1.45;padding:22px 26px">일자리를 잃었을 때 생계를 도와요</p></div><div data-at="2@0.5" style="position:absolute;left:0px;top:290px;width:560px;height:260px;border-radius:26px;background:#fff;border:4px solid #1C6E8C;overflow:hidden"><div style="background:#1C6E8C;color:#fff;font-size:42px;font-weight:900;padding:16px 24px">산재 보험</div><p style="font-size:33px;font-weight:700;line-height:1.45;padding:22px 26px">일하다 다친 근로자를 보상해요</p></div><div data-at="3" style="position:absolute;left:590px;top:290px;width:560px;height:260px;border-radius:26px;background:#fff;border:4px solid #127475;overflow:hidden"><div style="background:#127475;color:#fff;font-size:42px;font-weight:900;padding:16px 24px">노인장기요양보험</div><p style="font-size:33px;font-weight:700;line-height:1.45;padding:22px 26px">노후 돌봄 · 부양 부담을 줄여요</p></div><div data-at="4" style="position:absolute;left:1180px;top:290px;width:560px;height:260px;border-radius:26px;background:#fff;border:4px solid #A96A08;overflow:hidden"><div style="background:#A96A08;color:#fff;font-size:42px;font-weight:900;padding:16px 24px">공통점</div><p style="font-size:33px;font-weight:700;line-height:1.45;padding:22px 26px">나라가 운영 · 법으로 가입과 보험료를 정해요</p></div></div>
+  <div data-at="0" class="src" style="left:0;right:0;bottom:0">국민연금은 26차시에서 자세히 배워요</div></div>
+</section>
+
+<!-- S6 건강보험료 -->
+<section class="scene" id="s6">
+ <div class="hdr"><span class="tag">실생활 자료</span><span class="ttl">건강 보험료, 얼마나 낼까?</span><span class="lesson">금융과 미래 · 24차시</span></div>
+ <div class="body">
+  <div data-at="0" class="card" style="position:absolute;left:0;top:0;width:600px;height:560px;background:var(--pine);color:#fff">
+   <div style="font-size:32px;font-weight:800;color:#bfe0da">2026년 건강 보험료율</div>
+   <div style="font-size:130px;font-weight:900;color:var(--amber);line-height:1.15;margin-top:10px"><span data-count="7.19" data-dec="2" data-cat="0@0.4" data-cd="1.0">0</span>%</div>
+   <div style="font-size:32px;font-weight:700;line-height:1.45;margin-top:10px">월급(보수월액)에 곱해요</div>
+   <div data-at="3" data-fx="pop" style="margin-top:30px;background:rgba(255,255,255,.12);border-radius:20px;padding:16px 22px"><div style="font-size:28px;font-weight:800;color:#bfe0da">2027년은?</div><div style="font-size:44px;font-weight:900">7.19% 그대로 (동결)</div></div>
+  </div>
+  <div data-at="1" class="card wh" style="position:absolute;left:650px;top:0;width:1090px;height:560px">
+   <div style="font-size:34px;font-weight:900" class="pine">회사와 내가 반씩 나누어 내요</div>
+   <div class="row" style="gap:0;margin-top:26px">
+    <div data-at="1@0.2" data-fx="growx" style="width:500px;height:100px;background:var(--steel);border-radius:20px 0 0 20px;color:#fff;font-size:38px;font-weight:900;display:flex;align-items:center;justify-content:center">회사 3.595%</div>
+    <div data-at="1@0.35" data-fx="growx" style="width:500px;height:100px;background:var(--amber);border-radius:0 20px 20px 0;color:#10302c;font-size:38px;font-weight:900;display:flex;align-items:center;justify-content:center">나 3.595%</div></div>
+   <div data-at="1@0.55" style="margin-top:40px;font-size:40px;font-weight:800">월급 3,000,000원 × 3.595%</div>
+   <div data-at="1@0.7" style="font-size:70px;font-weight:900;margin-top:8px" class="amberdk">= 내 몫 <span data-count="107850" data-cat="1@0.75" data-cd="1.0">0</span>원</div>
+   <div data-at="4" class="card" style="margin-top:30px;padding:16px 24px"><p style="font-size:31px">아프지 않아도 매달 · <b class="teal">모두가 함께</b> 아픈 사람의 병원비를 부담</p></div>
+  </div>
+  <div class="src" data-at="0">출처: 보건복지부(2025. 8. 28. 발표, 2026년 7.19%) · 건강보험정책심의위원회 2026. 9. 8.(2027년 7.19% 동결, 뉴데일리 2026. 9. 9.)</div>
+ </div>
+</section>
+
+<!-- S7 보험 용어 -->
+<section class="scene" id="s7">
+ <div class="hdr"><span class="tag">보험 용어</span><span class="ttl">보험에 등장하는 사람들</span><span class="lesson">금융과 미래 · 24차시</span></div>
+ <div class="body">
+  <div data-at="0" class="card am" style="position:absolute;left:0;right:0;top:0;padding:16px 30px"><p style="font-size:34px">예: <b class="amberdk">엄마</b>가 <b class="teal">나</b>를 위해 상해 보험에 가입했다면?</p></div>
+  <div style="position:absolute;left:0;top:110px;width:1740px">
+   <div class="trow h" data-at="0@0.4"><span>용어</span><span>뜻</span><span>예시</span></div><div data-at="1" class="trow"><span class="tl">보험자</span><span>보험금을 주는 보험 회사</span><span class="teal">○○보험 회사</span></div><div data-at="2" class="trow"><span class="tl">보험 계약자</span><span>계약하고 보험료를 내는 사람</span><span class="teal">엄마</span></div><div data-at="2@0.55" class="trow"><span class="tl">피보험자</span><span>보험의 보장을 받는 사람</span><span class="teal">나</span></div><div data-at="3" class="trow"><span class="tl">보험 수익자</span><span>사고 때 보험금을 받는 사람</span><span class="teal">나 또는 엄마</span></div></div>
+  <div data-at="1@0.6" data-fx="stamp" class="stamp" style="position:absolute;left:1080px;top:580px;font-size:40px;white-space:nowrap">‘보험자’ = 사람이 아니라 회사!</div>
+  <div data-at="3@0.6" class="src" style="left:0;right:0;bottom:30px;font-size:28px">계약자 · 피보험자 · 수익자는 같을 수도, 다를 수도 있어요</div>
+ </div>
+</section>
+
+<!-- S8 퀴즈 -->
+<section class="scene" id="s8">
+ <div class="hdr"><span class="tag" style="background:var(--amberdk)">잠깐 퀴즈</span><span class="ttl">사회 보험이 아닌 것은?</span><span class="lesson">금융과 미래 · 24차시</span></div>
+ <div class="body">
+  <div data-at="0" class="card am" style="position:absolute;left:0;right:0;top:0;padding:22px 36px"><p style="font-size:42px;font-weight:900">다음 중 <span class="brick">사회 보험이 아닌 것</span>은?</p></div>
+  <div style="position:absolute;left:0;top:140px;width:940px;height:330px"><div data-at="0@0.3" data-fx="pop" class="opt" style="left:0px;top:0px">① 국민연금</div><div data-at="0@0.4" data-fx="pop" class="opt" style="left:470px;top:0px">② 고용 보험</div><div data-at="0@0.5" data-fx="pop" data-hl="1@0.1" class="opt" style="left:0px;top:170px">③ 자동차 보험</div><div data-at="0@0.6" data-fx="pop" class="opt" style="left:470px;top:170px">④ 산재 보험</div></div>
+  <div data-timer="e0+0.3" data-n="5" style="position:absolute;left:1020px;top:170px;width:240px;height:240px;opacity:0">
+   <svg width="240" height="240"><circle cx="120" cy="120" r="100" stroke="#E9F2F0" stroke-width="22" fill="none"/><circle class="tring" cx="120" cy="120" r="100" stroke="#E08E0B" stroke-width="22" fill="none" pathLength="1" stroke-dasharray="1" transform="rotate(-90 120 120)"/></svg>
+   <div class="tnum" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:100px;font-weight:900;color:var(--pine)">5</div></div>
+  <div data-at="1@0.4" data-fx="pop" class="card st" style="position:absolute;left:1300px;top:150px;width:440px;padding:22px 26px"><p style="font-size:34px;font-weight:900">정답: <span class="steel">③ 자동차 보험</span><br><span style="font-size:28px">보험 회사와 계약하는<br>민영 보험(손해 보험)</span></p></div>
+  <div data-at="2@0.3" class="card" style="position:absolute;left:0;right:0;top:520px;padding:16px 30px;text-align:center"><p style="font-size:32px">사회 보험 = 건강 · <b class="teal">연금</b> · <b class="teal">고용</b> · <b class="teal">산재</b> · 장기요양</p></div>
+ </div>
+</section>
+
+<!-- S9 주의할 점 -->
+<section class="scene" id="s9">
+ <div class="hdr"><span class="tag">핵심 정리</span><span class="ttl">보험 가입 때 주의할 점</span><span class="lesson">금융과 미래 · 24차시</span></div>
+ <div class="body"><div style="position:absolute;left:0;top:0;width:1760px;height:540px"><div data-at="0@0.3" class="step" style="left:0px;top:0px"><span class="sn">1</span><div class="st">종류 확인</div><div class="sd">상품 이름에서 어떤 보험인지 먼저</div></div><div data-at="0@0.7" class="step" style="left:590px;top:0px"><span class="sn">2</span><div class="st">기간 확인</div><div class="sd">보장 기간 · 납입 기간 구분<br><b>20년 납 100세 만기</b></div></div><div data-at="2" class="step" style="left:1180px;top:0px"><span class="sn">3</span><div class="st">자필 서명</div><div class="sd">청약서에는 반드시 본인이 직접</div></div><div data-at="2@0.55" class="step" style="left:0px;top:270px"><span class="sn">4</span><div class="st">낼 돈 먼저</div><div class="sd">받을 돈보다 낼 보험료를 먼저 따지기</div></div><div data-at="3" class="step" style="left:590px;top:270px"><span class="sn">5</span><div class="st">서류 보관</div><div class="sd">약관 · 설계서 · 증권을 읽고 보관</div></div><div data-at="5" class="step" style="left:1180px;top:270px"><span class="sn">6</span><div class="st">보장이 목적</div><div class="sd">수익 · 부자 되기가 아니라<br>경제적 · 심리적 안정</div></div></div>
+  <div data-at="1" data-fx="pop" data-out="2" class="bub" style="position:absolute;left:300px;top:560px;font-size:30px">20년 동안 보험료를 내고 → 100세까지 보장</div>
+  <div data-at="4@0.3" data-fx="pop" data-out="5" class="bub" style="position:absolute;left:300px;top:560px;font-size:30px">“보험으로 돈을 불릴 수도 있어요?”</div>
+ </div>
+</section>
+
+<!-- S10 정리 -->
+<section class="scene dark" id="s10">
+ <div class="hdr"><span class="tag" style="background:var(--amber);color:#10302c">오늘의 정리</span><span class="ttl" style="color:#fff">보험의 의미, 종류, 목적</span><span class="lesson" style="color:#bfe0da">금융과 미래 · 24차시</span></div>
+ <div class="body col" style="gap:22px">
+  <div data-at="0" class="sumi"><span class="n">1</span><span><span style="color:var(--amber)">보험</span> = 많은 사람이 조금씩 모아 사고 난 사람을 돕는 위험 대비</span></div>
+  <div data-at="1" class="sumi"><span class="n">2</span><span><span style="color:var(--amber)">민영 보험</span>은 개인이 골라 계약 · <span style="color:var(--amber)">사회 보험</span>은 나라가 법으로</span></div>
+  <div data-at="2" class="sumi"><span class="n">3</span><span>가입할 때는 <span style="color:var(--amber)">낼 돈 먼저</span> · 수익이 아니라 <span style="color:var(--amber)">보장</span></span></div>
+  <div data-at="4" class="card am" style="color:var(--ink);padding:18px 36px"><p style="font-size:30px;color:var(--amberdk);font-weight:800">다음 시간 · 25차시</p><div class="mid" style="font-size:44px">보험 상품 만들기 <span class="grey" style="font-size:30px">— 우리 주변의 위험, 내가 만든 보험으로</span></div></div>
+ </div>
+</section>
+
+</div>
+<div id="bar"><div id="sub"><div id="who" class="T">선생님</div><div id="txt"></div></div><div class="av" id="avT"></div><div class="av" id="avS"></div></div>
+
+<div id="quiz"><button id="qgo">▶ 다 풀었으면 계속하기 <small>(Space)</small></button></div>
+</div>
+<div id="cover"><button class="big" id="start" disabled aria-label="재생"><i></i></button><div class="cap" id="ctext">불러오는 중…<small>24차시 · 보험의 의미, 종류, 목적</small></div></div>
+<div id="ui" class="hide">
+ <div id="seekwrap"><div id="seekbg"></div><div id="marks"></div><div id="seekfill"></div><div id="seekknob"></div><div id="tip"></div></div>
+ <div id="row"><button id="pp">▶ 재생</button><span id="time">0:00 / 0:00</span><span id="sp"></span>
+  <button id="bq" class="on" title="퀴즈에서 자동으로 멈추기">퀴즈 멈춤</button><button id="bc" class="on" title="자막 (C)">자막</button><button id="bs" title="속도">1×</button><button id="bf" title="전체 화면 (F)">전체 화면</button></div>
+</div>
+<script>// 모션그래픽 엔진: render(t) 한 번에 한 프레임을 결정적으로 그림
+let TL = null, SCN = [], NAMES = { T: "선생님", S: "준서" };
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const eOut = p => 1 - Math.pow(1 - p, 3);
+const eBack = p => { const c = 1.70158, q = p - 1; return 1 + (c + 1) * q * q * q + c * q * q; };
+const eIO = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+
+function avatarSVG(kind) {
+  const T = kind === "T";
+  const skin = "#F4D3B5", hair = T ? "#3A2A22" : "#2B2B33", shirt = T ? "#127475" : "#E08E0B";
+  return `<svg viewBox="0 0 190 200" width="190" height="200">
+   <g class="avbody">
+    <path d="M30 200 Q30 140 95 136 Q160 140 160 200 Z" fill="${shirt}"/>
+    ${T ? '<path d="M80 138 L95 160 L110 138 Z" fill="#fff"/>' : '<path d="M70 140 Q95 165 120 140" stroke="#fff" stroke-width="6" fill="none"/>'}
+    <rect x="83" y="112" width="24" height="30" rx="8" fill="${skin}"/>
+    <g class="avhead">
+     ${T ? `<circle cx="95" cy="22" r="20" fill="${hair}"/>` : ""}
+     <ellipse cx="95" cy="75" rx="52" ry="56" fill="${skin}"/>
+     ${T ? `<path d="M43 78 Q40 22 95 20 Q150 22 147 78 Q140 44 95 40 Q52 44 43 78Z" fill="${hair}"/>`
+         : `<path d="M42 70 Q40 18 95 18 Q152 18 148 70 Q132 40 112 46 Q90 36 70 46 Q52 46 42 70Z" fill="${hair}"/>`}
+     <g class="eyes"><ellipse cx="75" cy="80" rx="6" ry="7" fill="#222"/><ellipse cx="115" cy="80" rx="6" ry="7" fill="#222"/></g>
+     ${T ? '<g fill="none" stroke="#3A2A22" stroke-width="3.5"><circle cx="75" cy="80" r="15"/><circle cx="115" cy="80" r="15"/><path d="M90 80 L100 80"/></g>' : ""}
+     <ellipse cx="62" cy="98" rx="9" ry="5" fill="#F2A9A0" opacity=".55"/><ellipse cx="128" cy="98" rx="9" ry="5" fill="#F2A9A0" opacity=".55"/>
+     <ellipse class="mouth" cx="95" cy="104" rx="11" ry="3" fill="#8B3A3A"/>
+    </g>
+   </g></svg><div class="avname">${NAMES[kind]}</div>`;
+}
+
+function setup(tl) {
+  TL = tl;
+  document.getElementById("avT").innerHTML = avatarSVG("T");
+  document.getElementById("avS").innerHTML = avatarSVG("S");
+  SCN = tl.scenes.map(sc => ({ sc, el: document.getElementById(sc.id) }));
+  // 퀴즈 '잠깐 멈추세요' 표시 (멈춤이 있는 대사가 끝난 직후, 카운트다운 동안)
+  if (!document.getElementById("pausebadge")) {
+    const b = document.createElement("div"); b.id = "pausebadge";
+    b.innerHTML = '<span class="pb-ico"><i></i><i></i></span><span><b>잠깐 멈추세요!</b> 영상을 멈추고 직접 풀어 보세요</span>';
+    document.getElementById("stage").appendChild(b);
+  }
+  for (const { el } of SCN) if (!el) throw new Error("scene missing");
+  return SCN.length;
+}
+
+function resolve(spec, sc) {
+  spec = String(spec).trim();
+  let m;
+  if ((m = spec.match(/^t([\d.]+)$/))) return +m[1];
+  if ((m = spec.match(/^end([+-][\d.]+)?$/))) return sc.dur + (m[1] ? +m[1] : 0);
+  m = spec.match(/^(e?)(\d+)(?:@([\d.]+))?([+-][\d.]+)?$/);
+  if (!m) throw new Error("bad spec " + spec);
+  const ln = sc.lines[+m[2]];
+  if (!ln) throw new Error("no line " + spec + " in " + sc.id);
+  let t = m[1] ? ln.t1 : ln.t0;
+  if (m[3]) t = ln.t0 + (+m[3]) * (ln.t1 - ln.t0);
+  if (m[4]) t += +m[4];
+  return t;
+}
+
+function korMoney(n) {
+  n = Math.round(n);
+  const eok = Math.floor(n / 1e8), man = Math.floor((n % 1e8) / 1e4), rest = n % 1e4;
+  const f = x => x.toLocaleString("en-US");
+  let s = [];
+  if (eok) s.push(eok + "억");
+  if (man) s.push(f(man) + "만");
+  if (rest) s.push(f(rest));
+  return (s.join(" ") || "0");
+}
+
+function fmtNum(v, el) {
+  const fm = el.dataset.fmt || "comma", dec = +(el.dataset.dec || 0);
+  if (fm === "kor") return korMoney(v);
+  if (dec) return v.toFixed(dec);
+  return Math.round(v).toLocaleString("en-US");
+}
+
+function applyFx(el, p, fx) {
+  const e = eOut(p);
+  let tr = "", op = e;
+  switch (fx) {
+    case "pop": tr = `scale(${0.4 + 0.6 * eBack(p)})`; op = clamp(p * 3); break;
+    case "left": tr = `translateX(${-70 * (1 - e)}px)`; break;
+    case "right": tr = `translateX(${70 * (1 - e)}px)`; break;
+    case "down": tr = `translateY(${-40 * (1 - e)}px)`; break;
+    case "growy": tr = `scaleY(${e})`; op = 1; el.style.transformOrigin = "50% 100%"; if (p <= 0) op = 0; break;
+    case "growx": tr = `scaleX(${e})`; op = 1; el.style.transformOrigin = "0% 50%"; if (p <= 0) op = 0; break;
+    case "fade": break;
+    case "draw": op = p > 0 ? 1 : 0; el.style.strokeDasharray = "1"; el.style.strokeDashoffset = String(1 - eIO(p)); break;
+    case "stamp": tr = `rotate(-8deg) scale(${1 + 1.2 * (1 - eOut(p))})`; op = clamp(p * 2); break;
+    default: tr = `translateY(${40 * (1 - e)}px)`;
+  }
+  return [tr, op];
+}
+
+function render(t) {
+  const frame = Math.round(t * TL.fps);
+  let cur = SCN[SCN.length - 1];
+  for (const s of SCN) if (t >= s.sc.start && t < s.sc.start + s.sc.dur) { cur = s; break; }
+  const sc = cur.sc, lt = t - sc.start, R = spec => resolve(spec, sc);
+  for (const s of SCN) s.el.style.display = s === cur ? "block" : "none";
+  const fin = clamp(lt / 0.35), fout = clamp((sc.dur - lt) / 0.35);
+  cur.el.style.opacity = Math.min(fin, fout);
+
+  for (const el of cur.el.querySelectorAll("[data-at]")) {
+    const a = R(el.dataset.at), d = +(el.dataset.d || 0.55);
+    let p = clamp((lt - a) / d);
+    let [tr, op] = applyFx(el, p, el.dataset.fx || "up");
+    if (el.dataset.out) { const o = R(el.dataset.out); op *= 1 - clamp((lt - o) / 0.4); }
+    if (el.dataset.dim) { const o = R(el.dataset.dim); op *= 1 - 0.6 * clamp((lt - o) / 0.4); }
+    el.style.opacity = op; el.style.transform = tr;
+  }
+  for (const el of cur.el.querySelectorAll("[data-count]")) {
+    const a = R(el.dataset.cat || el.dataset.at || "t0"), d = +(el.dataset.cd || 1.3);
+    const from = +(el.dataset.from || 0), to = +el.dataset.count;
+    const p = eOut(clamp((lt - a) / d));
+    el.textContent = (el.dataset.pre || "") + fmtNum(from + (to - from) * p, el) + (el.dataset.suf || "");
+  }
+  for (const el of cur.el.querySelectorAll("[data-hl]")) {
+    const a = R(el.dataset.hl), b = el.dataset.hlend ? R(el.dataset.hlend) : 1e9;
+    el.classList.toggle("hl", lt >= a && lt < b);
+  }
+  for (const el of cur.el.querySelectorAll("[data-timer]")) {
+    const a = R(el.dataset.timer), n = +(el.dataset.n || 5), k = lt - a;
+    const num = el.querySelector(".tnum"), ring = el.querySelector(".tring");
+    if (k < 0 || k >= n) { el.style.opacity = k < 0 ? 0 : clamp(1 - (k - n) / 0.3); }
+    else el.style.opacity = 1;
+    num.textContent = k < n ? String(Math.max(1, Math.ceil(n - k))) : "0";
+    ring.style.strokeDashoffset = String(clamp(k / n));
+  }
+  if (window.HOOKS && HOOKS[sc.id]) HOOKS[sc.id](lt, R, cur.el, sc);
+
+  // 잠깐 멈추세요 배지
+  const pb = document.getElementById("pausebadge");
+  let pbo = 0, pbp = 0;
+  for (const ln of sc.lines) if (ln.pause) {
+    const k = lt - ln.t1;
+    if (k >= 0 && k < ln.pause + 0.3) { pbp = clamp(k / 0.45); pbo = Math.min(clamp(k / 0.2), clamp((ln.pause + 0.3 - k) / 0.3)); }
+  }
+  pb.style.opacity = pbo;
+  pb.style.transform = `scale(${(0.6 + 0.4 * eBack(pbp)).toFixed(3)})`;
+
+  // 자막
+  let li = -1;
+  sc.lines.forEach((ln, i) => { if (lt >= ln.t0 - 0.05) li = i; });
+  const sub = document.getElementById("sub");
+  if (li >= 0) {
+    const ln = sc.lines[li];
+    const show = lt < ln.t1 + 0.42 + (ln.pause || 0) || li === sc.lines.length - 1;
+    sub.style.opacity = show ? clamp((lt - ln.t0 + 0.05) / 0.15) : 0;
+    const who = document.getElementById("who");
+    who.className = ln.spk; who.textContent = NAMES[ln.spk];
+    document.getElementById("txt").textContent = ln.sub;
+  } else sub.style.opacity = 0;
+
+  // 캐릭터
+  const env = TL.env[Math.min(frame, TL.env.length - 1)] || 0;
+  for (const k of ["T", "S"]) {
+    const av = document.getElementById("av" + k);
+    let speaking = false;
+    if (li >= 0) { const ln = sc.lines[li]; speaking = ln.spk === k && lt >= ln.t0 && lt <= ln.t1; }
+    const active = li >= 0 && sc.lines[li].spk === k;
+    av.style.opacity = active ? 1 : 0.55;
+    const bob = speaking ? Math.sin(t * 9) * 2.2 * Math.min(1, env * 1.5) : 0;
+    av.querySelector(".avhead").setAttribute("transform", `translate(0 ${bob.toFixed(2)})`);
+    av.style.transform = `scale(${active ? 1.0 : 0.9})`;
+    av.style.transformOrigin = "50% 100%";
+    const m = av.querySelector(".mouth");
+    const open = speaking ? 2 + 15 * Math.min(1, env) : 3;
+    m.setAttribute("ry", open.toFixed(1)); m.setAttribute("rx", speaking ? (11 - open * 0.15).toFixed(1) : "11");
+    const blinkPhase = (t + (k === "T" ? 0 : 1.7)) % 3.9;
+    av.querySelector(".eyes").setAttribute("transform", blinkPhase < 0.13 ? "translate(0 80) scale(1 0.15) translate(0 -80)" : "");
+  }
+  return frame;
+}
+</script>
+<script></script>
+<script>
+const TLD = {"fps":30,"scenes":[{"id":"s1","start":0.0,"dur":11.5333,"lines":[{"spk":"T","sub":"살면서 예상하지 못한 일이 생긴 적이 있나요?","t0":1.1,"t1":3.441,"pause":0.0},{"spk":"S","sub":"작년에 휴대전화 액정이 깨져서 정말 당황했어요.","t0":3.861,"t1":6.882,"pause":0.0},{"spk":"T","sub":"오늘은 그런 위험에 대비하는 금융 상품, 보험을 배워요.","t0":7.302,"t1":10.548,"pause":0.0}]},{"id":"s2","start":11.5333,"dur":22.8333,"lines":[{"spk":"T","sub":"이런 일이 생긴다면 어떨까요? 휴대전화가 부서지면, 수리비가 수십만 원이 들 수 있어요.","t0":0.7,"t1":5.886,"pause":0.0},{"spk":"T","sub":"갑자기 입원하면 병원비가 걱정되고, 가족이 교통사고를 당하면 치료비와 생활비가 필요해요.","t0":6.306,"t1":11.98,"pause":0.0},{"spk":"S","sub":"그 돈을 혼자 마련해야 한다면, 너무 막막하겠어요.","t0":12.4,"t1":15.134,"pause":0.0},{"spk":"T","sub":"위험은 누구에게나 생길 수 있지만, 언제 생길지는 몰라요. 혼자보다 함께 대비하면 덜 무섭겠죠?","t0":15.554,"t1":21.817,"pause":0.0}]},{"id":"s3","start":34.3666,"dur":26.0,"lines":[{"spk":"T","sub":"보험은 많은 사람이 조금씩 돈을 모아서, 사고를 당한 사람을 돕는 제도예요.","t0":0.7,"t1":5.283,"pause":0.0},{"spk":"T","sub":"가입자들이 보험료를 조금씩 내면, 보험 회사나 국가가 그 돈으로 큰 기금을 만들어요.","t0":5.703,"t1":10.794,"pause":0.0},{"spk":"T","sub":"그리고 사고가 난 사람에게, 정해진 보험금을 줘요.","t0":11.214,"t1":14.136,"pause":0.0},{"spk":"S","sub":"내는 돈은 보험료, 받는 돈은 보험금이군요!","t0":14.556,"t1":17.08,"pause":0.0},{"spk":"T","sub":"맞아요. 보험은 나의 금전적 위험을 보험 회사에 넘기는 수단이에요. 불안이 줄어서 공부나 일에 집중할 수 있어요.","t0":17.5,"t1":24.998,"pause":0.0}]},{"id":"s4","start":60.3666,"dur":26.5333,"lines":[{"spk":"T","sub":"보험은 크게 민영 보험과 사회 보험으로 나뉘어요.","t0":0.7,"t1":3.371,"pause":0.0},{"spk":"T","sub":"민영 보험은 필요한 사람이 골라서 보험 회사와 계약해요. 생명 보험, 손해 보험, 제3보험이 있어요.","t0":3.791,"t1":10.188,"pause":0.0},{"spk":"T","sub":"자동차 보험이나 실손 보험이 민영 보험이에요.","t0":10.608,"t1":13.348,"pause":0.0},{"spk":"T","sub":"사회 보험은 국가가 운영하고, 법에 따라 국민 모두 가입해야 해요. 보험료와 보험금도 법으로 정해요.","t0":13.768,"t1":20.065,"pause":0.0},{"spk":"S","sub":"국민 건강 보험이 바로 사회 보험이죠?","t0":20.485,"t1":22.616,"pause":0.0},{"spk":"T","sub":"맞아요. 사회 보험에는 다섯 가지가 있어요.","t0":23.036,"t1":25.543,"pause":0.0}]},{"id":"s5","start":86.8999,"dur":22.3,"lines":[{"spk":"T","sub":"국민 건강 보험은, 아프거나 다쳤을 때 병원비 부담을 덜어 줘요.","t0":0.7,"t1":4.563,"pause":0.0},{"spk":"T","sub":"국민 연금은, 은퇴하거나 소득이 줄어들 때를 대비해요.","t0":4.983,"t1":8.082,"pause":0.0},{"spk":"T","sub":"고용 보험은 일자리를 잃었을 때, 산재 보험은 일하다 다쳤을 때 도와줘요.","t0":8.502,"t1":12.644,"pause":0.0},{"spk":"T","sub":"노인 장기 요양 보험은, 노후 돌봄을 도와서 가족의 부양 부담을 줄여 줘요.","t0":13.064,"t1":17.641,"pause":0.0},{"spk":"S","sub":"다섯 가지 모두, 나라가 운영하고 법으로 정하는 거네요.","t0":18.061,"t1":21.287,"pause":0.0}]},{"id":"s6","start":109.1999,"dur":28.5,"lines":[{"spk":"T","sub":"건강 보험료는 얼마나 낼까요? 2026년에는 월급의 7.19%를 건강 보험료로 내요.","t0":0.7,"t1":7.358,"pause":0.0},{"spk":"T","sub":"회사와 내가 반씩 나누어 내요. 월급이 300만 원이라면, 내가 내는 돈은 10만 7,850원이에요.","t0":7.778,"t1":14.221,"pause":0.0},{"spk":"S","sub":"내년에는 오르나요?","t0":14.641,"t1":15.719,"pause":0.0},{"spk":"T","sub":"2026년 9월에 정해졌는데, 2027년에도 7.19%로 똑같아요.","t0":16.139,"t1":21.256,"pause":0.0},{"spk":"T","sub":"아프지 않아도 매달 내요. 모두가 조금씩 내서, 아픈 사람의 병원비를 함께 부담하는 거예요.","t0":21.676,"t1":27.504,"pause":0.0}]},{"id":"s7","start":137.6999,"dur":23.0667,"lines":[{"spk":"T","sub":"보험에 등장하는 사람들을 알아볼까요? 엄마가 나를 위해 상해 보험에 가입했다고 해 봐요.","t0":0.7,"t1":6.368,"pause":0.0},{"spk":"T","sub":"보험금을 주는 보험 회사를 보험자라고 해요. 사람이 아니라 회사예요.","t0":6.788,"t1":10.796,"pause":0.0},{"spk":"T","sub":"계약하고 보험료를 내는 엄마는 보험 계약자, 보장을 받는 나는 피보험자예요.","t0":11.216,"t1":15.944,"pause":0.0},{"spk":"T","sub":"사고가 났을 때 보험금을 받는 사람은 보험 수익자예요.","t0":16.364,"t1":19.56,"pause":0.0},{"spk":"S","sub":"보험자가 회사라니, 헷갈리기 쉽겠어요!","t0":19.98,"t1":22.072,"pause":0.0}]},{"id":"s8","start":160.7666,"dur":23.3667,"lines":[{"spk":"T","sub":"잠깐 퀴즈! 국민 연금, 고용 보험, 자동차 보험, 산재 보험 중에서, 사회 보험이 아닌 것은 무엇일까요?","t0":0.7,"t1":8.079,"pause":5.4},{"spk":"S","sub":"자동차 보험이요! 보험 회사와 계약하는 민영 보험이에요.","t0":13.899,"t1":18.016,"pause":0.0},{"spk":"T","sub":"정답! 자동차 보험은 민영 보험 가운데 손해 보험이에요.","t0":18.436,"t1":22.36,"pause":0.0}]},{"id":"s9","start":184.1333,"dur":30.9,"lines":[{"spk":"T","sub":"보험에 가입할 때 주의할 점이에요. 먼저 상품 이름에서 어떤 보험인지 확인하고, 보장 기간과 납입 기간을 구분해요.","t0":0.7,"t1":7.928,"pause":0.0},{"spk":"T","sub":"20년 납 100세 만기는, 20년 동안 보험료를 내고 100세까지 보장받는다는 뜻이에요.","t0":8.348,"t1":13.717,"pause":0.0},{"spk":"T","sub":"청약서에는 반드시 본인이 직접 서명하고, 받을 돈보다 낼 보험료를 먼저 따져요.","t0":14.137,"t1":19.172,"pause":0.0},{"spk":"T","sub":"약관과 설계서, 보험 증권은 꼼꼼히 읽고 보관하세요.","t0":19.592,"t1":22.797,"pause":0.0},{"spk":"S","sub":"보험으로 돈을 불릴 수도 있어요?","t0":23.217,"t1":24.824,"pause":0.0},{"spk":"T","sub":"보험의 목적은 수익이 아니라 보장이에요. 경제적, 심리적 안정을 위한 거예요.","t0":25.244,"t1":29.915,"pause":0.0}]},{"id":"s10","start":215.0333,"dur":24.7667,"lines":[{"spk":"T","sub":"오늘 배운 내용을 정리해요. 보험은 많은 사람이 조금씩 모아, 사고 난 사람을 돕는 위험 대비 수단이에요.","t0":0.7,"t1":7.215,"pause":0.0},{"spk":"T","sub":"민영 보험은 개인이 골라 계약하고, 사회 보험은 나라가 법으로 운영해요.","t0":7.635,"t1":11.991,"pause":0.0},{"spk":"T","sub":"가입할 때는 낼 돈을 먼저 따지고, 수익이 아닌 보장을 봐요.","t0":12.411,"t1":15.813,"pause":0.0},{"spk":"S","sub":"다음 시간에는 무엇을 해요?","t0":16.233,"t1":17.556,"pause":0.0},{"spk":"T","sub":"우리 주변의 위험을 찾아서, 직접 보험 상품을 만들어 볼 거예요. 이제 학습지를 풀어 봅시다!","t0":17.976,"t1":23.753,"pause":0.0}]}],"env":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.05,0.18,0.11,0.22,0.83,0.66,0.72,0.88,0.88,0.81,0.67,0.55,0.23,1.0,1.0,0.8,1.0,1.0,1.0,0.33,0.67,0.99,0.57,0.65,1.0,0.61,0.18,0.63,0.67,0.69,0.85,0.52,0.04,0.15,0.44,0.84,0.66,0.69,0.63,0.38,0.79,0.42,0.11,0.47,0.67,0.72,0.5,0.64,0.64,0.67,0.31,0.84,0.74,0.15,0.19,0.38,0.33,0.26,0.28,0.3,0.35,0.41,0.52,0.58,0.8,0.82,0.65,0.08,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.1,0.15,0.83,0.85,1.0,0.98,0.92,1.0,0.95,0.95,0.93,1.0,0.57,0.19,0.1,0.73,0.24,1.0,1.0,0.95,0.21,0.98,1.0,1.0,0.95,0.91,0.84,0.69,0.85,0.24,0.03,0.02,0.19,0.86,0.84,0.82,0.79,0.51,0.03,0.01,0.38,0.97,0.95,0.55,0.37,1.0,0.98,0.46,0.2,0.31,0.74,0.8,0.62,0.12,0.12,0.22,0.37,0.74,0.85,0.85,1.0,1.0,1.0,0.62,0.04,0.22,0.23,0.63,0.93,1.0,1.0,1.0,1.0,1.0,1.0,0.87,0.35,0.13,0.11,0.13,0.36,0.46,0.41,0.32,0.31,0.28,0.19,0.1,0.01,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.3,0.65,0.68,0.7,0.7,0.76,0.47,1.0,0.92,0.57,0.52,0.58,0.57,0.19,0.08,0.92,0.88,0.86,0.7,0.56,0.64,0.57,0.61,0.81,1.0,0.99,0.96,0.62,0.63,0.71,0.78,0.25,0.47,0.82,0.97,0.76,0.23,0.75,1.0,1.0,1.0,0.82,0.63,0.83,0.67,0.59,0.64,0.25,0.12,0.87,0.95,0.99,0.97,0.84,0.76,0.74,0.34,0.44,0.61,0.47,0.39,0.03,0.06,0.09,0.53,0.46,0.51,0.5,0.14,0.31,1.0,1.0,0.96,0.83,0.56,0.66,0.77,0.57,0.13,0.53,1.0,0.89,0.95,0.83,0.8,0.7,0.73,0.69,0.69,0.74,0.64,0.56,0.44,0.36,0.15,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.05,0.53,0.71,1.0,0.9,0.7,0.46,0.53,0.57,0.68,0.66,0.47,0.81,0.72,0.31,0.32,0.85,0.66,0.57,0.87,0.9,0.82,0.91,1.0,0.6,0.48,0.8,0.68,0.9,0.69,0.05,0.05,1.0,1.0,0.55,0.05,0.44,0.87,0.87,0.89,1.0,1.0,0.88,0.58,0.25,0.01,0.01,0.0,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.05,0.07,0.46,0.37,1.0,1.0,0.44,0.46,1.0,0.78,0.58,0.84,0.92,0.51,0.31,0.98,0.8,0.2,0.1,0.42,0.52,0.21,0.91,1.0,0.79,0.22,0.28,0.56,0.77,0.72,0.74,0.84,0.71,0.62,0.56,0.57,0.52,0.44,0.08,0.12,0.11,0.66,0.47,0.78,0.7,0.32,0.8,0.94,0.39,0.79,1.0,0.88,0.93,0.9,0.41,0.14,0.13,0.47,0.85,0.44,0.38,0.81,0.8,0.85,1.0,1.0,0.97,0.65,0.82,0.95,0.81,0.83,0.79,0.54,0.09,0.98,1.0,0.67,0.12,0.1,0.1,0.51,0.71,0.44,0.1,0.09,0.08,0.4,0.63,0.49,0.45,0.55,0.44,0.31,0.34,0.49,0.29,0.01,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.05,0.14,0.58,0.52,0.07,0.02,0.2,1.0,0.77,0.46,0.33,0.74,0.52,0.54,0.73,0.33,1.0,1.0,0.82,0.83,0.76,0.7,0.64,0.69,0.81,0.79,0.68,0.57,0.49,0.56,0.24,0.08,0.75,0.68,0.67,0.82,0.64,0.69,0.49,0.76,0.42,0.81,0.69,0.17,0.13,0.47,0.2,0.03,0.02,0.31,0.61,0.4,0.52,0.44,0.56,1.0,0.83,0.08,0.36,0.69,0.73,0.72,0.72,0.68,0.38,0.12,0.01,0.01,0.01,0.01,0.02,0.14,0.38,0.86,0.5,0.54,0.99,0.59,0.24,0.59,0.32,0.08,0.1,0.72,0.48,0.03,0.12,0.52,0.57,0.64,0.42,0.29,0.71,0.63,0.16,0.62,0.57,0.54,0.75,0.58,0.14,0.42,0.46,0.3,0.38,0.65,0.61,0.45,0.48,0.61,0.62,0.61,0.56,0.45,0.49,0.53,0.25,0.02,0.03,0.29,0.34,0.68,0.44,0.82,1.0,0.9,0.25,0.55,0.69,1.0,1.0,0.99,0.88,0.45,0.16,0.1,0.56,0.59,0.69,0.91,0.87,0.91,0.3,0.53,0.8,0.13,0.92,0.87,0.14,0.02,0.17,0.09,0.57,0.3,0.98,1.0,0.89,1.0,1.0,0.75,0.88,0.65,0.47,0.42,0.44,0.38,0.5,0.26,0.01,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.17,0.16,1.0,0.83,0.17,0.79,1.0,0.98,0.96,1.0,1.0,0.91,0.64,0.35,0.9,1.0,0.89,0.43,1.0,1.0,0.69,0.62,0.95,0.8,0.76,0.56,0.88,0.86,0.72,0.84,0.79,0.77,0.77,0.76,0.79,0.67,0.78,0.62,0.38,0.68,0.51,0.53,0.49,0.5,0.42,0.33,0.36,0.39,0.51,0.71,0.73,0.84,0.8,0.67,0.7,0.66,0.57,0.47,0.51,0.61,0.61,0.11,0.02,0.13,0.32,0.49,0.22,0.45,0.35,0.1,0.12,0.11,0.14,0.38,0.38,0.32,0.26,0.2,0.15,0.06,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.28,0.65,0.75,0.98,0.73,0.64,0.54,0.59,0.64,0.71,0.77,0.84,0.84,0.67,1.0,1.0,0.32,0.38,1.0,1.0,1.0,1.0,0.17,0.85,1.0,0.57,0.8,0.88,0.63,0.13,0.2,0.73,0.74,0.67,0.83,1.0,0.79,0.14,0.1,0.11,0.53,0.67,0.53,0.09,0.02,0.04,0.13,0.37,0.49,0.53,0.75,0.71,0.63,0.55,0.47,0.44,0.43,0.51,0.17,0.01,0.01,0.01,0.01,0.01,0.01,0.83,0.82,0.68,0.76,0.79,0.33,1.0,0.82,0.6,0.21,0.15,0.51,0.53,0.56,0.42,0.78,0.75,0.3,0.03,0.19,0.35,0.39,0.5,0.56,0.56,0.59,0.55,0.76,0.61,0.65,0.64,0.8,0.86,0.69,0.54,0.57,0.55,0.45,0.3,0.31,0.19,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.03,0.68,0.59,0.64,0.41,1.0,0.78,0.54,0.48,1.0,0.5,0.78,0.82,0.61,0.25,0.51,0.65,0.58,0.47,0.09,0.37,1.0,1.0,0.22,0.95,1.0,1.0,0.53,0.52,1.0,1.0,1.0,0.76,0.57,0.62,0.78,0.79,0.71,0.52,0.65,0.67,0.19,0.11,0.1,0.97,1.0,0.99,0.63,0.28,0.46,0.54,0.18,0.75,1.0,0.18,0.04,0.01,0.14,0.67,0.65,0.04,0.01,0.01,0.07,0.35,0.77,0.8,0.8,0.55,0.3,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.06,0.06,1.0,1.0,1.0,0.91,0.91,0.68,0.55,0.79,0.81,0.83,0.69,0.74,0.74,1.0,1.0,0.95,1.0,0.75,0.88,0.82,0.78,0.83,0.28,0.87,1.0,1.0,1.0,1.0,0.71,0.85,0.91,0.95,0.41,0.22,0.14,1.0,1.0,0.21,1.0,0.95,1.0,0.62,0.42,0.37,0.72,0.14,0.02,0.03,0.17,0.91,0.88,1.0,0.94,0.96,0.91,0.96,1.0,0.94,1.0,1.0,0.9,0.81,0.58,0.17,0.07,0.59,0.84,0.91,0.91,0.91,0.73,0.49,0.19,0.02,0.01,0.02,0.11,0.07,0.17,0.85,1.0,0.37,0.26,1.0,1.0,1.0,1.0,1.0,0.33,1.0,0.98,0.56,0.66,0.92,0.98,0.84,0.49,0.15,0.56,0.72,0.97,0.99,0.66,0.78,0.95,0.59,0.14,0.28,0.72,0.73,0.71,0.7,0.7,0.69,0.64,0.32,0.1,0.81,0.81,0.58,0.11,1.0,1.0,1.0,0.7,0.69,0.39,0.41,0.34,0.36,0.26,0.35,0.2,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.03,0.15,0.64,0.86,0.79,0.93,0.75,0.35,0.03,0.01,0.28,1.0,1.0,0.7,0.31,1.0,0.44,0.84,0.89,0.37,0.09,0.76,1.0,1.0,1.0,0.6,0.7,0.76,0.74,0.8,0.79,1.0,1.0,0.66,0.11,0.16,0.94,0.61,0.24,0.82,0.63,0.48,0.26,0.24,0.42,0.51,0.64,0.62,0.8,0.71,0.52,0.58,0.74,0.73,0.63,0.52,0.51,0.52,0.1,0.06,1.0,1.0,1.0,1.0,0.95,0.59,0.58,0.58,0.69,0.71,0.83,0.28,0.14,0.44,0.55,0.49,0.48,0.61,0.67,0.68,0.36,0.09,0.06,0.46,0.19,0.02,0.04,0.68,0.83,0.72,0.23,0.52,0.88,0.8,0.22,0.06,0.21,0.49,0.84,0.18,1.0,0.92,0.63,0.69,0.67,0.47,0.6,0.91,0.94,0.96,0.74,0.11,0.02,0.02,0.17,0.11,0.11,0.85,0.64,0.67,0.73,0.29,0.09,0.62,0.61,0.15,0.87,0.78,0.65,0.73,0.75,0.45,0.34,0.53,0.4,0.29,0.36,0.23,0.65,0.6,0.56,0.57,0.45,0.42,0.33,0.43,0.48,0.43,0.39,0.46,0.04,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.22,0.79,0.56,1.0,0.56,0.69,1.0,0.54,0.21,0.09,0.16,0.77,0.68,0.22,1.0,1.0,0.23,1.0,1.0,0.58,0.69,1.0,1.0,0.88,0.88,0.49,0.46,0.93,0.97,0.91,0.97,0.75,0.6,0.7,0.73,0.6,0.06,0.56,0.84,0.67,0.72,0.47,0.15,0.21,0.38,0.73,0.64,0.69,0.8,0.86,0.32,0.22,0.43,0.46,0.53,0.55,0.56,0.33,0.08,0.76,1.0,1.0,0.81,0.64,0.65,0.68,0.27,0.73,0.64,0.45,0.47,0.51,0.47,0.14,0.13,0.6,0.42,0.46,0.5,0.46,0.52,0.49,0.4,0.37,0.08,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.26,0.79,1.0,1.0,1.0,1.0,1.0,1.0,0.76,0.17,0.7,0.96,0.9,1.0,1.0,0.89,0.85,0.51,0.07,0.06,0.78,1.0,1.0,1.0,1.0,0.69,0.78,0.79,0.72,0.83,0.97,0.62,0.11,0.48,0.78,0.73,0.84,0.87,0.86,0.77,0.7,0.28,0.59,0.62,0.59,0.59,0.53,0.36,0.03,0.08,0.41,0.77,0.81,0.94,0.9,0.91,0.96,0.7,0.62,0.92,0.83,0.9,0.81,0.45,0.33,0.62,0.45,0.43,0.33,0.32,0.29,0.2,0.11,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.11,0.63,0.65,0.66,0.47,0.19,0.65,0.89,0.75,0.73,0.71,0.74,0.8,0.82,0.76,0.64,0.59,0.24,0.03,0.02,0.08,0.37,1.0,1.0,0.85,1.0,0.94,0.89,0.53,0.55,0.59,0.63,0.67,0.65,0.57,0.46,0.48,0.44,0.32,0.14,0.09,0.08,0.36,1.0,0.78,0.61,0.94,0.9,0.72,0.19,0.02,0.26,0.36,0.74,0.78,0.79,0.79,0.4,1.0,0.74,0.52,0.62,0.52,0.3,1.0,0.77,0.1,0.05,0.27,0.45,0.67,1.0,0.99,0.81,0.55,0.6,0.64,0.78,0.76,0.77,0.74,0.7,0.44,0.04,0.07,0.03,0.62,1.0,0.95,0.96,0.81,0.49,0.63,0.58,0.55,0.55,0.51,0.22,0.1,0.73,0.81,0.93,0.84,0.46,0.55,0.72,0.42,0.46,0.52,0.42,0.31,0.63,0.45,0.52,0.55,0.5,0.33,0.14,0.11,0.08,0.08,0.96,0.72,0.55,0.48,0.44,0.4,0.38,0.34,0.34,0.29,0.31,0.36,0.42,0.48,0.52,0.48,0.53,0.21,0.01,0.0,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.1,0.32,1.0,1.0,1.0,1.0,0.6,0.78,0.91,0.86,0.39,0.33,0.16,1.0,0.78,1.0,1.0,1.0,0.27,0.17,1.0,1.0,0.32,0.17,0.05,0.64,0.9,1.0,1.0,0.69,0.51,0.78,0.82,0.99,0.84,0.63,0.6,0.69,0.73,0.72,1.0,1.0,0.16,0.18,0.16,0.07,0.01,0.02,0.18,0.47,0.49,0.52,0.68,0.61,0.32,0.1,0.09,0.11,0.3,0.34,0.15,0.1,0.11,0.09,0.5,0.57,0.49,0.51,0.56,0.47,0.45,0.42,0.48,0.05,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.03,0.03,1.0,1.0,1.0,0.92,0.7,0.65,0.79,0.8,0.71,0.56,0.33,0.21,0.45,0.56,0.38,0.89,0.9,0.56,0.69,0.84,0.8,0.76,0.78,0.74,0.67,0.7,0.67,0.34,1.0,0.83,1.0,0.7,0.53,0.55,0.38,0.65,1.0,1.0,0.64,0.16,0.1,0.15,0.75,0.91,0.91,0.92,0.72,0.22,0.2,0.81,0.99,1.0,0.75,0.52,0.51,0.52,0.86,0.97,0.43,0.42,0.54,0.5,0.42,0.39,0.47,0.5,0.46,0.35,0.38,0.35,0.35,0.42,0.47,0.51,0.47,0.07,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.28,0.61,0.68,0.66,0.73,0.8,0.53,0.36,0.48,0.47,0.51,1.0,1.0,0.78,0.71,0.71,0.54,0.59,0.66,0.51,0.47,0.46,0.09,0.13,0.42,0.42,0.44,0.95,1.0,0.76,0.69,0.53,0.51,0.39,0.09,0.65,0.63,0.89,0.82,0.62,0.57,0.57,0.52,0.1,0.09,0.72,0.79,0.88,0.82,0.95,0.94,0.92,0.5,0.18,0.47,1.0,1.0,0.65,0.09,0.09,0.13,1.0,1.0,1.0,1.0,0.96,0.65,0.97,0.9,0.89,1.0,0.42,0.16,0.56,0.72,0.68,0.73,0.74,0.81,0.57,0.3,0.1,0.05,0.31,0.8,1.0,0.73,0.79,0.45,0.05,0.02,0.17,0.23,0.92,1.0,1.0,0.8,0.85,0.81,0.71,0.56,0.38,0.06,0.01,0.01,0.01,0.01,0.03,0.05,0.06,0.57,0.6,0.68,0.81,0.78,0.79,0.79,0.56,0.62,0.66,0.15,0.45,0.89,0.93,1.0,0.87,0.74,0.69,0.47,0.43,0.37,0.35,0.21,0.16,0.11,0.42,0.92,0.78,0.83,0.69,0.77,0.39,0.1,0.93,0.78,0.86,0.85,0.77,0.69,0.55,0.41,0.39,0.39,0.31,0.09,0.12,0.14,0.68,1.0,0.48,0.31,0.81,0.9,0.88,0.88,0.39,0.69,0.87,1.0,0.78,0.65,0.35,0.34,0.31,0.29,0.31,0.15,0.11,0.11,0.05,0.49,0.41,0.4,0.4,0.36,0.31,0.22,0.34,0.24,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.12,0.42,0.91,0.28,1.0,0.75,0.86,0.62,0.33,0.9,1.0,0.75,0.4,1.0,1.0,0.94,1.0,0.77,0.73,0.69,0.65,0.66,1.0,0.84,0.8,0.24,0.3,0.37,0.97,0.85,0.52,0.16,0.78,1.0,0.72,0.79,0.79,0.2,0.66,1.0,0.87,1.0,0.87,0.53,0.39,0.43,0.51,0.58,0.6,0.3,0.39,0.64,0.52,0.47,0.68,0.77,0.68,0.66,0.61,0.1,0.61,1.0,1.0,0.73,0.59,0.36,0.33,0.32,0.35,0.37,0.4,0.38,0.27,0.26,0.32,0.26,0.33,0.37,0.23,0.01,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.03,0.12,0.09,0.49,0.72,0.76,0.99,1.0,0.71,0.11,0.74,1.0,1.0,0.8,0.77,0.55,0.68,0.7,0.63,0.65,0.74,0.13,0.13,0.42,0.34,0.02,0.01,0.76,1.0,0.95,0.25,0.81,1.0,1.0,0.91,0.62,0.61,0.61,0.87,1.0,0.81,0.63,0.67,0.77,0.77,0.7,0.27,0.05,0.49,0.76,0.76,0.73,0.69,0.63,0.59,0.18,0.03,0.01,0.09,0.73,1.0,0.26,0.88,0.94,0.6,0.03,0.01,0.8,0.9,0.82,0.46,0.81,0.81,0.68,0.17,0.09,0.1,0.48,0.94,0.84,0.76,0.75,0.82,0.75,0.84,0.76,1.0,1.0,0.87,0.11,0.97,0.74,0.2,0.22,0.45,0.76,0.78,0.84,0.4,0.03,0.13,0.55,0.92,1.0,0.96,0.89,0.6,0.39,0.45,0.51,0.4,0.35,0.29,0.23,0.29,0.34,0.25,0.03,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.03,0.84,0.93,0.72,0.76,0.43,0.47,0.5,0.48,0.49,0.5,0.69,0.65,0.72,0.37,0.08,0.07,0.46,0.92,0.83,0.84,0.8,0.53,0.47,0.55,0.36,0.6,0.37,0.48,0.5,0.33,0.57,0.67,0.31,0.07,0.05,0.67,1.0,0.64,0.18,0.72,0.45,0.87,0.94,0.33,0.27,0.09,0.44,0.39,0.45,0.49,0.54,0.45,0.32,0.3,0.26,0.24,0.4,0.42,0.06,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.01,0.12,0.49,0.99,1.0,1.0,1.0,1.0,1.0,1.0,0.9,0.24,0.86,0.94,0.78,0.91,0.49,0.97,0.93,0.92,0.94,0.61,0.42,0.85,1.0,0.89,0.8,0.65,0.73,0.67,0.65,0.13,0.23,0.46,0.53,0.35,0.46,0.33,0.19,0.14,0.09,0.46,0.87,0.98,1.0,0.93,0.3,0.16,0.71,0.81,0.73,0.74,0.56,0.51,0.44,0.31,0.1,0.19,0.54,0.65,0.47,0.18,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.13,0.53,0.78,0.74,0.68,0.2,0.64,0.96,0.82,0.71,0.76,0.75,0.83,0.77,0.76,0.67,0.52,0.25,0.21,0.1,0.16,0.78,0.89,0.95,1.0,1.0,0.86,0.13,0.75,1.0,0.98,0.84,0.82,0.59,0.6,0.9,0.82,0.59,0.64,0.72,0.63,0.7,0.32,0.24,0.23,0.64,0.36,0.54,1.0,0.15,0.03,0.35,1.0,1.0,0.4,0.23,0.62,0.17,0.92,0.74,0.59,0.25,0.1,0.1,0.07,0.44,0.43,0.37,0.32,0.3,0.36,0.4,0.2,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.09,0.08,0.68,0.93,0.95,0.94,0.94,0.96,0.87,0.88,0.72,0.34,0.85,0.69,0.7,0.68,0.77,1.0,0.57,0.65,0.82,0.37,0.76,1.0,0.93,0.73,0.89,0.56,0.69,0.65,0.76,0.82,0.59,0.51,0.46,0.49,0.71,0.43,0.06,0.01,0.14,0.31,0.62,0.44,1.0,0.81,0.57,0.79,0.76,0.26,0.24,0.39,0.55,0.04,0.18,0.11,0.75,0.48,0.15,0.11,0.09,0.5,0.57,0.46,0.04,0.01,0.04,0.85,0.97,0.86,0.81,0.48,0.06,0.11,0.48,0.61,0.52,0.66,0.73,0.62,0.5,0.58,0.59,0.11,0.07,0.24,0.52,0.83,0.99,0.65,0.56,0.59,0.8,0.75,0.2,0.33,0.61,0.77,0.57,0.86,0.82,0.6,0.13,0.82,0.58,0.63,0.57,0.4,0.48,0.37,0.32,0.34,0.35,0.05,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.11,0.55,0.85,0.85,0.81,0.89,0.91,0.79,0.78,0.7,0.84,0.86,0.82,0.91,0.65,1.0,0.95,0.81,0.85,0.9,0.81,0.73,0.66,0.39,0.31,0.75,0.88,0.89,0.47,0.14,0.14,0.88,1.0,1.0,0.98,0.36,0.36,0.98,0.71,0.63,0.76,0.73,0.54,0.23,0.12,0.58,1.0,0.31,0.66,0.67,0.21,0.66,0.61,0.16,0.27,0.17,0.16,0.4,1.0,1.0,0.57,0.43,0.91,0.86,0.21,0.02,0.51,0.8,0.35,0.77,0.81,0.57,0.14,0.28,0.8,0.7,0.15,0.44,0.74,0.77,0.96,1.0,0.59,0.52,0.54,0.34,0.39,0.34,0.46,0.24,0.01,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.05,0.19,1.0,1.0,1.0,1.0,0.69,0.64,0.82,0.78,0.35,1.0,1.0,1.0,0.84,0.92,0.73,0.84,0.77,0.78,0.64,0.59,0.53,0.54,0.72,0.58,0.14,0.14,0.72,1.0,1.0,0.36,0.96,0.77,0.77,0.91,0.9,0.81,0.7,0.9,1.0,0.54,0.14,0.13,0.1,0.68,0.56,0.1,0.02,0.17,1.0,1.0,1.0,1.0,0.91,0.31,0.24,0.14,0.46,0.79,0.91,0.87,0.42,1.0,1.0,0.76,0.17,0.52,1.0,1.0,1.0,0.97,0.64,0.71,0.72,0.67,0.53,0.21,0.39,0.84,0.57,1.0,0.99,0.64,0.52,1.0,0.87,0.13,0.18,0.32,0.39,0.03,0.17,0.46,0.71,0.16,0.15,0.3,0.64,0.31,0.03,0.47,1.0,0.53,0.12,0.07,0.53,0.82,0.71,0.71,0.33,0.15,0.37,0.47,0.43,0.41,0.39,0.45,0.46,0.49,0.54,0.18,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.13,0.59,0.82,0.84,0.67,0.64,0.66,0.6,0.64,0.46,0.21,0.11,0.47,0.44,0.57,0.69,0.51,0.24,0.52,0.61,0.71,1.0,0.76,0.66,0.78,0.68,0.39,0.4,0.54,0.43,0.18,0.61,0.82,0.89,0.7,0.62,0.34,0.35,0.52,0.58,0.54,0.45,0.39,0.37,0.43,0.3,0.04,0.02,0.01,0.01,0.01,0.02,0.42,0.9,0.97,0.91,0.54,0.23,0.66,0.6,0.47,0.31,1.0,0.85,0.97,0.36,0.59,0.92,0.55,0.53,0.61,0.63,0.54,0.13,0.22,0.61,0.9,0.86,0.7,0.61,0.27,0.16,0.42,0.67,0.7,0.5,0.05,0.29,0.22,0.4,0.8,0.32,0.19,0.72,0.5,0.19,0.85,0.9,0.13,0.07,0.06,0.79,1.0,0.83,0.59,0.5,0.58,0.19,0.56,0.49,0.73,0.88,0.62,0.47,0.58,0.63,0.27,0.24,0.1,0.44,0.28,1.0,0.89,0.75,0.14,0.6,0.72,0.59,0.47,0.5,0.44,0.39,0.42,0.47,0.11,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.1,0.2,0.9,0.8,0.45,0.27,1.0,0.66,0.08,0.03,0.56,1.0,1.0,0.59,0.32,0.83,1.0,1.0,0.9,1.0,1.0,1.0,0.78,0.22,0.83,0.99,0.99,0.94,0.55,0.19,0.02,0.01,0.13,0.49,0.68,0.86,0.76,1.0,0.91,0.54,0.63,0.99,0.93,0.84,0.66,0.6,0.69,0.74,0.85,0.89,0.91,0.75,0.69,0.72,0.68,0.4,0.16,0.72,0.58,0.09,0.02,0.07,0.45,0.77,0.65,0.2,0.41,0.67,0.7,0.89,0.66,0.06,0.37,0.18,0.55,0.58,0.63,0.75,0.72,0.7,0.63,0.64,0.48,0.26,0.55,0.49,0.43,0.4,0.39,0.32,0.26,0.28,0.24,0.16,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.14,0.23,1.0,0.84,0.62,0.7,0.74,1.0,0.68,0.52,0.79,0.71,1.0,1.0,1.0,0.97,0.61,0.72,0.73,0.68,0.7,0.66,0.6,0.63,0.65,0.5,0.66,0.74,0.65,0.65,0.54,0.61,0.85,0.62,0.63,0.73,0.59,0.51,0.7,0.64,0.73,0.45,0.03,0.05,0.67,0.88,0.89,0.77,0.9,0.97,0.91,0.56,0.1,0.02,0.01,0.01,0.0,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.29,0.59,0.28,0.03,0.3,0.32,0.71,0.47,0.48,0.5,0.56,0.36,0.25,0.48,0.59,0.7,0.66,0.6,0.57,0.61,0.6,0.5,0.73,0.59,0.53,0.66,0.6,0.45,0.53,0.69,0.8,0.8,0.71,0.51,0.39,0.24,0.1,0.06,0.01,0.1,0.85,1.0,1.0,1.0,1.0,0.34,0.59,1.0,0.33,1.0,1.0,1.0,0.18,0.11,0.35,0.29,0.54,0.95,0.68,0.29,0.02,0.26,1.0,0.84,0.53,0.59,0.4,0.69,0.94,1.0,0.75,0.18,1.0,0.53,0.05,0.07,0.45,0.93,0.27,0.18,0.73,0.58,0.58,0.31,0.09,0.06,0.66,0.27,0.84,0.99,0.9,0.83,0.65,0.14,0.02,0.14,0.08,0.75,0.7,0.69,0.68,0.53,1.0,1.0,0.66,0.69,0.87,0.39,0.14,0.85,1.0,1.0,0.61,0.63,0.65,0.63,0.68,0.81,0.36,0.76,0.6,0.36,0.43,0.57,0.39,0.32,0.32,0.31,0.32,0.34,0.33,0.31,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.02,0.6,1.0,1.0,0.18,0.52,1.0,1.0,1.0,0.97,0.74,0.53,0.79,1.0,0.5,0.78,0.89,0.56,0.1,0.25,0.26,0.53,0.55,0.6,0.25,0.27,0.31,0.49,0.63,0.65,0.6,0.74,0.72,0.62,0.56,0.62,0.69,0.71,0.48,0.52,0.61,0.51,0.51,0.53,0.54,0.44,0.38,0.17,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.29,0.91,1.0,0.89,0.65,0.13,1.0,0.56,0.25,0.42,0.33,0.27,0.16,0.25,0.46,0.49,0.47,0.82,0.89,0.36,0.48,0.58,0.76,0.59,0.42,0.55,0.59,0.52,0.46,0.44,0.39,0.63,0.7,0.52,0.31,0.25,0.39,0.48,0.53,0.52,0.46,0.38,0.4,0.37,0.36,0.14,0.01,0.01,0.01,0.02,0.4,0.92,1.0,0.3,1.0,0.87,0.52,0.52,0.63,0.63,0.47,0.64,0.61,0.65,0.51,0.42,0.8,0.72,0.48,0.58,0.64,0.63,0.52,0.49,0.54,0.32,0.26,0.3,0.22,0.47,0.72,0.83,0.77,1.0,0.93,0.61,0.62,0.41,0.2,0.19,0.5,0.86,0.45,0.06,0.21,0.61,0.79,0.69,0.33,0.1,0.22,0.71,0.99,0.43,0.72,1.0,0.85,0.09,0.27,0.76,0.95,0.6,0.5,0.43,0.72,0.41,0.62,1.0,0.75,0.42,0.36,0.31,0.34,0.34,0.31,0.25,0.22,0.18,0.22,0.23,0.29,0.43,0.23,0.03,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.02,0.32,0.95,0.99,0.95,1.0,1.0,1.0,0.97,1.0,1.0,0.92,0.9,0.95,0.81,0.79,0.72,0.55,0.59,0.65,0.66,0.69,0.61,0.55,0.49,0.46,0.56,0.59,0.6,0.33,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03,0.59,0.58,0.2,0.17,0.26,1.0,1.0,0.51,0.57,0.73,0.82,0.33,0.31,0.79,0.75,0.78,0.72,0.85,0.83,0.91,0.88,0.83,0.91,0.95,0.71,0.8,0.4,0.06,0.4,1.0,1.0,1.0,1.0,0.8,1.0,0.75,0.18,0.23,0.73,0.59,0.6,0.82,0.67,0.15,0.86,0.82,0.63,0.65,0.58,0.56,0.48,0.51,0.39,0.47,1.0,0.88,0.83,0.79,0.82,0.59,0.23,0.04,0.11,0.4,0.55,0.22,0.11,0.28,0.84,0.79,0.52,0.55,0.56,0.57,0.37,0.35,0.39,0.09,0.02,0.19,0.13,0.55,0.47,0.53,0.89,1.0,0.85,0.68,0.78,0.83,0.86,0.22,0.96,1.0,1.0,1.0,0.15,0.12,0.25,0.24,0.89,0.57,0.15,0.17,1.0,1.0,0.54,0.46,0.34,0.58,0.78,0.62,0.19,0.95,0.68,0.08,0.07,0.16,0.82,0.39,0.1,0.69,0.73,0.74,0.45,0.1,0.08,0.44,0.87,1.0,0.09,0.03,0.93,0.59,0.03,0.43,1.0,0.5,0.05,0.13,0.17,0.72,0.78,0.74,0.68,0.77,0.62,0.47,0.45,0.33,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.01,0.64,0.66,0.48,0.08,0.02,0.12,0.58,0.81,0.17,0.51,1.0,0.77,0.79,0.67,0.74,1.0,0.97,0.29,0.68,0.64,0.64,0.84,1.0,1.0,0.35,1.0,1.0,0.89,0.82,0.51,0.42,0.6,0.56,0.4,0.42,0.39,0.36,0.35,0.3,0.43,0.36,0.06,0.01,0.01,0.01,0.01,0.01,0.0,0.01,0.01,0.01,0.39,0.95,0.98,0.94,0.4,0.42,0.57,0.18,1.0,0.83,0.63,0.09,0.2,1.0,0.94,0.15,1.0,0.79,0.86,0.56,0.36,0.39,0.66,0.71,0.77,0.83,0.83,1.0,1.0,0.93,0.36,0.13,0.76,0.95,0.94,0.92,1.0,0.83,0.58,0.17,0.03,0.02,0.54,1.0,0.76,0.14,0.06,0.08,0.58,0.87,0.76,0.67,0.24,0.68,1.0,0.84,1.0,0.9,0.78,0.88,1.0,0.49,0.11,0.1,0.75,0.81,0.63,0.67,0.95,0.91,0.75,0.73,0.38,0.89,1.0,0.32,1.0,1.0,1.0,0.41,0.21,0.15,0.56,0.63,0.5,0.08,0.02,0.48,0.74,0.56,0.06,0.07,0.16,0.56,0.22,1.0,0.71,0.52,0.67,0.75,0.64,0.43,0.59,0.5,0.54,0.37,0.56,0.7,0.65,0.58,0.53,0.51,0.44,0.46,0.37,0.41,0.45,0.44,0.51,0.33,0.11,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.06,0.06,1.0,1.0,0.92,0.87,0.58,0.63,0.76,0.64,0.16,0.45,0.65,0.75,0.73,0.35,0.84,0.95,0.49,0.43,0.69,0.63,0.52,0.64,0.54,0.53,0.14,0.32,0.7,0.42,0.69,0.49,0.53,0.56,0.35,0.75,0.39,1.0,1.0,1.0,0.93,0.79,0.79,0.49,0.92,0.99,0.54,0.16,0.72,0.73,0.48,0.04,0.01,0.27,0.89,0.85,0.79,0.85,0.91,1.0,0.79,0.51,0.1,0.01,0.01,0.0,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.41,0.72,0.87,0.92,0.89,0.81,0.66,0.48,0.26,0.73,0.55,0.34,0.31,0.5,0.5,0.56,0.42,0.36,0.58,0.57,0.51,0.34,0.25,0.28,0.31,0.38,0.62,0.6,0.83,0.84,0.82,0.78,0.23,0.17,0.13,0.26,0.61,0.49,0.49,0.7,0.77,0.45,0.16,0.29,0.94,0.91,0.91,0.89,0.68,0.54,0.83,0.75,0.71,0.15,0.2,0.15,0.54,0.62,0.63,0.63,0.49,0.03,0.13,0.39,0.79,0.15,0.02,0.01,0.65,0.75,0.54,0.07,0.45,0.88,0.79,0.72,0.97,0.87,0.15,0.58,0.7,0.6,0.62,0.59,0.6,0.58,0.52,0.44,0.49,0.5,0.57,0.4,0.06,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.04,0.37,1.0,0.99,0.7,0.71,0.55,0.62,0.66,0.34,1.0,0.69,0.75,0.72,0.7,0.47,0.22,0.21,0.48,0.52,0.57,0.59,0.51,0.58,0.44,0.08,0.03,0.86,1.0,0.95,0.89,0.68,0.58,0.57,0.49,0.63,0.83,0.33,0.09,0.62,0.72,0.51,0.9,0.51,0.08,0.06,0.46,0.84,1.0,0.81,0.48,0.5,0.5,0.17,0.86,0.68,0.54,0.66,0.58,0.4,0.06,0.36,0.65,0.37,0.25,0.41,0.33,0.32,0.23,0.29,0.23,0.3,0.17,0.02,0.01,0.01,0.01,0.01,0.11,0.11,0.13,0.99,1.0,1.0,1.0,0.94,0.85,0.98,0.89,1.0,1.0,0.78,0.71,0.77,0.63,1.0,0.97,0.61,0.21,0.58,0.86,0.83,0.3,0.2,0.92,0.96,0.86,0.82,0.77,0.64,0.64,0.58,0.67,0.63,0.64,0.57,0.46,0.05,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.01,0.15,0.73,1.0,0.8,1.0,0.73,0.36,0.06,0.27,0.16,0.58,0.6,0.11,1.0,1.0,0.33,0.12,0.06,1.0,1.0,0.97,0.82,0.53,0.71,0.78,0.76,0.71,0.77,0.82,0.42,1.0,1.0,1.0,0.57,0.34,0.95,0.77,0.6,0.49,0.61,0.64,0.51,0.44,0.31,0.33,0.48,0.42,0.51,0.48,0.54,0.66,0.53,0.45,0.43,0.43,0.43,0.47,0.13,0.05,0.73,0.86,1.0,0.85,0.54,0.67,0.68,0.16,0.59,0.93,0.69,0.62,0.31,0.04,0.02,0.01,0.12,0.77,0.75,0.73,0.54,0.22,0.21,0.02,0.01,0.01,0.04,0.7,1.0,0.33,0.67,1.0,0.69,0.61,0.7,0.89,0.52,0.1,0.57,0.55,0.44,0.54,0.48,0.48,0.43,0.48,0.41,0.54,0.48,0.39,0.4,0.37,0.37,0.03,0.17,0.16,0.08,0.72,0.33,0.83,1.0,0.92,1.0,0.59,0.61,0.61,0.32,0.26,0.58,0.4,0.34,0.28,0.3,0.28,0.32,0.24,0.2,0.25,0.37,0.15,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.06,0.2,0.19,0.37,0.9,0.46,0.11,0.97,1.0,0.2,1.0,1.0,0.75,0.63,1.0,1.0,0.65,0.24,0.3,0.23,1.0,1.0,0.19,0.02,0.92,0.96,0.76,0.22,0.1,0.45,1.0,1.0,0.93,0.67,0.74,0.69,0.52,1.0,0.65,0.73,0.79,0.58,0.09,0.24,0.51,0.44,0.46,0.48,0.53,0.54,0.51,0.36,0.17,0.58,0.7,0.67,0.85,0.66,0.53,0.52,0.48,0.51,0.3,0.07,0.44,0.98,0.91,0.93,0.71,0.49,0.61,0.31,0.2,0.12,0.63,0.7,0.46,0.06,0.02,0.01,0.15,0.56,0.45,0.38,0.41,0.42,0.43,0.36,0.41,0.39,0.33,0.26,0.3,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.01,0.06,1.0,1.0,1.0,1.0,1.0,1.0,0.68,1.0,1.0,0.77,0.89,1.0,0.84,0.97,1.0,0.73,0.3,0.47,1.0,0.97,0.95,0.95,0.73,0.68,0.72,0.69,0.31,0.31,0.53,0.03,0.02,0.64,1.0,1.0,0.99,0.88,0.61,0.3,0.7,0.3,0.27,0.17,0.03,0.02,0.01,0.26,0.92,0.45,0.16,0.12,0.14,0.48,0.55,0.59,0.47,0.42,0.35,0.22,0.08,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.09,0.16,0.68,0.75,0.65,0.66,0.24,0.72,1.0,0.84,0.54,0.63,0.1,0.12,0.21,0.69,1.0,0.9,0.39,0.17,0.51,1.0,0.98,1.0,1.0,0.81,0.44,0.18,0.13,0.02,0.01,0.01,0.08,0.1,0.64,0.73,0.67,0.71,0.71,0.7,0.61,0.61,0.5,0.54,0.65,0.55,0.42,0.45,0.48,0.24,0.35,0.77,0.98,0.9,0.43,0.42,0.35,0.39,0.37,0.16,0.04,0.01,0.09,0.04,0.64,1.0,1.0,1.0,1.0,0.87,0.78,0.63,0.71,0.73,0.8,0.29,0.07,0.53,0.91,0.84,0.27,0.34,0.79,0.6,0.52,0.18,0.19,0.17,0.19,0.14,0.01,0.16,0.07,0.54,0.81,0.28,0.75,0.63,0.58,0.57,0.25,0.25,0.11,0.69,0.76,0.33,0.09,0.3,0.83,0.98,1.0,1.0,0.76,0.53,0.38,0.17,0.18,0.17,0.21,0.06,0.01,0.08,0.1,0.13,0.72,0.72,0.89,0.94,0.59,0.78,1.0,1.0,0.36,0.15,0.61,1.0,1.0,1.0,1.0,0.77,0.91,0.74,0.27,0.41,0.66,0.7,0.82,0.9,0.81,0.31,0.2,0.28,0.75,0.95,0.9,0.85,0.82,0.81,0.63,0.1,0.07,0.15,0.87,0.81,0.93,1.0,1.0,1.0,0.22,0.08,0.9,1.0,0.93,1.0,0.96,0.56,0.54,0.61,0.64,0.7,0.66,0.55,0.41,0.5,0.48,0.53,0.39,0.8,0.89,0.49,0.12,0.05,0.37,0.52,0.48,0.44,0.27,0.48,0.76,1.0,0.93,0.67,0.24,0.22,0.32,0.57,0.34,0.02,0.12,0.43,0.67,0.65,0.66,0.81,1.0,1.0,0.79,0.53,0.13,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.09,0.15,0.41,0.87,0.91,0.18,0.81,0.93,1.0,1.0,0.14,0.18,0.26,0.49,1.0,1.0,0.29,0.1,0.33,0.9,0.98,0.95,1.0,0.93,0.82,0.93,0.75,0.59,0.59,0.55,0.49,0.36,0.17,0.03,0.01,0.0,0.0,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.09,0.61,0.89,0.85,0.9,1.0,1.0,1.0,1.0,0.71,0.74,1.0,1.0,0.49,0.27,0.63,0.87,0.89,0.95,0.93,0.86,0.65,0.13,0.05,0.14,0.36,0.79,0.85,0.82,0.76,0.37,0.04,0.12,0.13,0.44,0.81,0.79,0.75,0.67,0.53,0.59,0.49,0.3,0.23,0.17,0.75,0.99,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.79,0.13,0.68,1.0,0.96,0.97,0.81,0.78,0.68,0.65,0.57,0.45,0.39,0.35,0.31,0.27,0.27,0.24,0.21,0.18,0.09,0.03,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.06,0.16,0.54,0.78,0.74,0.94,0.95,0.9,0.95,1.0,0.6,0.4,0.22,0.03,0.02,0.01,0.01,0.0,0.0,0.01,0.01,0.01,0.01,0.14,0.42,0.98,0.67,0.71,0.58,0.55,0.55,0.15,0.22,0.81,0.73,0.57,0.13,0.59,1.0,1.0,1.0,1.0,0.79,0.51,0.62,0.67,0.72,0.6,0.43,0.41,0.36,0.24,0.2,0.57,0.69,0.69,0.71,0.75,0.98,0.68,0.65,0.6,0.09,0.85,0.86,0.77,0.84,0.63,0.43,0.5,0.35,0.5,0.7,0.73,0.58,0.43,0.38,0.42,0.25,0.92,1.0,1.0,0.76,0.28,0.11,0.04,0.72,0.75,0.74,0.83,0.78,0.88,0.39,0.07,0.73,0.89,0.93,1.0,0.89,0.69,0.61,0.53,0.45,0.36,0.54,0.49,0.41,0.35,0.35,0.25,0.3,0.33,0.29,0.47,0.41,0.03,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.05,0.03,1.0,1.0,1.0,0.96,0.53,0.74,0.87,0.55,0.1,0.25,0.62,0.73,0.82,0.65,0.09,0.06,0.23,0.79,0.78,0.41,0.02,0.01,0.62,1.0,0.95,0.53,0.06,0.21,0.12,0.35,0.64,0.58,0.8,0.97,0.84,0.72,0.71,0.19,0.02,0.17,0.71,0.55,0.28,0.3,0.29,0.25,0.31,0.34,0.35,0.3,0.32,0.29,0.35,0.4,0.25,0.46,0.19,0.02,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.36,0.78,0.63,0.6,0.31,0.66,0.67,0.34,0.18,0.22,0.48,0.55,0.34,0.07,0.34,0.86,0.69,0.65,0.65,0.61,0.33,0.85,0.5,0.59,0.69,0.69,0.5,0.2,0.2,0.55,0.72,0.78,0.85,0.85,0.64,0.75,1.0,0.62,0.04,0.03,0.85,0.89,0.73,0.89,1.0,0.52,0.68,1.0,1.0,1.0,0.98,0.62,0.7,0.66,0.65,0.65,0.29,0.3,0.73,0.37,0.22,0.47,0.77,0.36,0.19,0.53,0.58,0.59,0.54,0.6,0.5,0.1,0.06,0.53,0.67,0.66,0.68,0.73,0.73,0.5,0.31,0.07,0.01,0.01,0.01,0.01,0.05,0.29,1.0,1.0,0.3,0.63,0.88,0.51,0.57,0.66,0.26,0.56,0.5,0.3,0.87,0.58,0.43,0.47,0.26,0.72,0.83,0.39,0.59,0.63,0.66,0.48,0.21,0.49,0.4,0.03,0.01,0.01,0.13,0.5,0.19,0.53,0.75,0.54,0.37,0.51,0.55,0.31,0.09,0.08,0.06,0.47,0.15,0.21,0.56,0.46,0.47,0.45,0.34,0.23,0.25,0.21,0.27,0.3,0.4,0.31,0.03,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.01,0.32,0.68,0.68,0.42,0.3,0.61,0.7,0.73,0.76,0.74,0.85,0.91,0.64,0.76,0.82,1.0,0.93,0.49,0.06,0.02,0.18,0.32,1.0,0.23,0.16,0.22,0.25,0.63,0.94,0.61,0.6,0.8,0.64,0.46,0.58,0.59,0.29,0.53,0.7,0.44,0.57,0.62,0.65,0.56,0.49,0.25,0.13,0.36,0.67,0.7,0.35,0.29,0.57,0.67,0.65,0.64,0.82,0.68,0.59,0.07,0.01,0.62,0.61,0.4,0.66,0.8,0.77,0.53,0.5,0.6,0.29,0.06,0.54,1.0,1.0,1.0,0.98,0.68,0.74,0.75,0.73,0.83,0.78,0.49,0.95,0.93,0.69,0.23,1.0,0.86,0.78,0.07,0.19,0.8,0.81,0.85,0.6,0.05,0.06,0.12,0.72,0.53,0.15,0.16,0.2,0.83,0.77,0.09,0.02,0.13,1.0,0.98,0.61,0.15,0.58,0.82,0.13,0.06,0.61,0.92,0.24,0.53,0.57,0.5,0.59,0.45,0.75,0.49,0.56,0.57,0.58,0.59,0.56,0.42,0.8,0.61,0.45,0.5,0.49,0.5,0.06,0.1,0.76,0.6,0.27,0.26,0.39,0.68,0.69,0.44,0.44,0.33,0.46,0.4,0.42,0.43,0.5,0.34,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.19,0.38,0.71,0.43,0.62,0.8,0.63,0.09,0.15,0.25,0.22,1.0,0.91,0.93,0.81,0.74,0.66,0.7,0.7,0.75,0.77,0.55,0.25,0.28,0.79,0.68,0.88,0.74,0.71,1.0,0.41,0.35,0.57,0.75,0.18,0.09,0.5,0.9,0.81,0.86,0.91,0.82,0.79,0.81,0.8,0.35,0.17,0.29,0.51,0.04,0.02,0.07,0.63,1.0,0.53,0.08,0.21,0.1,0.35,0.91,0.86,0.95,0.85,1.0,0.83,0.78,0.8,0.76,0.62,0.3,0.04,0.44,0.7,0.64,0.72,0.75,0.44,0.18,0.08,0.01,0.01,0.02,0.16,0.45,0.82,0.25,0.84,0.93,0.73,0.18,0.02,0.8,0.57,0.63,0.61,0.44,0.74,0.48,0.79,0.78,0.53,0.42,0.65,0.81,0.91,0.84,0.35,0.11,0.04,0.49,0.9,1.0,0.91,0.51,0.59,0.58,0.6,0.75,0.58,0.63,0.86,0.53,0.23,0.51,0.64,0.42,0.45,0.2,0.85,0.57,0.04,0.02,0.45,0.65,0.55,0.52,0.1,0.11,0.46,0.33,0.35,0.33,0.33,0.41,0.36,0.37,0.45,0.16,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.42,1.0,0.7,0.06,0.03,0.91,1.0,0.75,0.48,0.39,1.0,1.0,0.9,0.29,0.14,0.39,1.0,1.0,0.73,0.24,1.0,0.9,0.39,0.2,0.71,0.98,0.9,0.96,1.0,0.88,0.19,0.1,0.78,1.0,1.0,1.0,0.88,0.81,0.84,0.39,0.4,0.54,0.6,0.28,0.16,1.0,1.0,0.64,0.64,0.63,0.5,0.4,0.05,0.75,0.93,0.62,0.67,0.15,0.21,1.0,0.79,0.88,0.88,0.8,0.66,0.66,0.7,0.16,0.01,0.13,1.0,0.92,0.21,0.07,1.0,0.76,0.36,1.0,1.0,0.61,0.78,0.78,0.63,0.24,0.11,0.35,0.42,0.42,0.49,0.39,0.36,0.38,0.43,0.04,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.01,0.06,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.78,1.0,0.94,0.1,0.18,0.63,0.9,0.91,0.99,0.88,0.37,0.03,0.09,0.61,0.84,0.67,1.0,1.0,0.57,0.24,0.23,0.15,0.03,0.37,0.84,0.72,0.38,0.15,0.13,0.14,0.41,0.57,0.64,0.8,0.87,0.64,0.03,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.01,0.04,1.0,1.0,1.0,1.0,0.87,0.6,0.81,0.75,0.7,1.0,1.0,0.83,0.12,0.03,0.03,0.52,1.0,0.65,0.15,0.79,0.73,0.72,0.33,0.33,0.21,0.83,0.9,0.94,0.95,0.37,0.09,0.77,1.0,0.82,0.71,0.55,0.55,0.61,0.64,1.0,1.0,0.59,0.07,0.1,0.12,1.0,0.91,0.23,1.0,0.91,0.76,0.71,0.74,0.61,0.58,0.51,0.41,0.35,0.29,0.3,0.32,0.27,0.26,0.31,0.39,0.12,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.09,0.47,0.71,0.64,0.74,0.53,0.68,0.7,0.38,0.29,0.75,0.33,0.08,0.19,0.2,0.31,0.57,0.64,0.65,0.66,0.66,0.42,0.18,1.0,0.75,0.2,0.58,0.7,0.54,0.62,0.68,0.32,0.85,0.69,0.53,0.57,0.64,0.59,0.37,0.44,0.57,0.63,0.49,0.35,0.3,0.32,0.2,0.38,0.5,0.41,0.32,0.33,0.31,0.25,0.24,0.26,0.31,0.24,0.36,0.55,0.25,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.14,0.81,0.83,0.73,0.62,0.63,0.54,0.76,0.24,0.39,1.0,1.0,1.0,1.0,1.0,0.69,0.67,0.66,0.9,0.84,0.91,0.82,0.72,0.71,0.52,0.58,0.59,0.54,0.19,0.2,0.38,0.47,0.4,0.47,0.55,0.56,0.54,0.57,0.63,0.65,0.54,0.49,0.56,0.63,0.61,0.6,0.59,0.46,0.35,0.04,0.01,0.01,0.01,0.01,0.08,0.75,1.0,0.8,0.53,0.81,0.74,0.55,0.42,0.58,0.6,0.5,0.53,0.48,0.7,0.63,0.55,0.42,0.64,0.58,0.64,0.26,0.46,0.72,0.71,0.75,0.68,0.49,0.54,0.59,0.55,0.37,0.11,0.23,0.38,0.77,0.21,0.73,0.65,0.85,0.41,0.29,0.25,0.42,0.66,0.79,0.76,0.63,0.76,0.96,1.0,0.83,0.83,0.81,0.78,0.64,0.42,0.27,0.21,0.03,0.01,0.06,0.13,0.12,0.27,1.0,0.68,0.12,1.0,1.0,0.66,0.68,0.97,0.92,0.67,0.67,0.26,0.36,0.92,1.0,0.79,1.0,0.88,0.93,0.99,0.94,0.81,0.16,0.27,0.83,0.65,0.73,0.77,0.81,0.79,0.82,0.81,0.71,0.62,0.52,0.37,0.61,0.78,1.0,1.0,0.86,0.64,0.68,0.68,0.3,0.91,1.0,0.41,0.08,0.47,0.53,0.41,0.23,0.13,0.11,0.09,0.03,1.0,0.74,0.56,0.43,0.38,0.29,0.28,0.28,0.24,0.25,0.27,0.26,0.29,0.33,0.33,0.39,0.24,0.01,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.11,0.65,0.67,0.6,0.6,0.72,0.58,0.44,0.44,0.49,0.56,1.0,1.0,0.98,0.83,0.7,0.57,0.73,0.66,0.66,0.64,0.64,0.68,0.4,0.09,0.67,0.76,0.77,0.67,0.63,0.64,0.61,0.63,0.2,0.11,0.93,0.75,0.83,0.84,1.0,0.83,0.68,0.14,0.13,0.84,1.0,1.0,0.88,0.16,0.05,0.27,0.16,0.66,0.54,0.09,0.19,0.79,0.89,0.98,1.0,0.94,0.31,0.2,0.25,0.69,0.92,0.89,0.99,1.0,0.77,0.17,0.44,1.0,0.99,0.88,1.0,1.0,0.65,0.56,0.69,0.74,0.5,0.5,0.47,1.0,1.0,0.98,0.64,0.93,0.91,0.7,0.08,0.73,0.96,0.98,0.58,0.08,0.08,0.1,1.0,1.0,0.35,0.26,1.0,0.73,0.95,0.95,0.86,0.8,0.6,0.51,0.5,0.63,0.74,0.89,0.67,0.63,0.69,0.46,0.29,0.39,0.27,0.23,0.27,0.3,0.24,0.36,0.26,0.03,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.01,0.18,0.61,0.89,0.85,0.69,0.48,0.03,0.24,0.91,1.0,0.56,0.05,0.24,0.92,0.93,0.63,0.81,0.76,0.74,0.8,0.7,1.0,1.0,1.0,1.0,0.39,0.03,0.11,1.0,0.75,0.67,0.83,0.83,0.78,0.62,0.67,0.7,0.66,0.57,0.66,0.29,0.78,1.0,0.08,0.02,0.57,0.71,0.71,0.39,0.09,0.22,0.54,0.07,0.26,0.7,0.69,0.65,0.38,0.1,0.15,0.12,0.42,0.68,0.67,0.62,0.3,0.21,1.0,1.0,0.79,0.68,0.37,0.48,0.51,0.56,0.65,0.27,0.08,0.73,0.53,0.18,0.95,0.67,0.43,0.45,0.56,0.71,0.29,0.08,0.39,0.53,0.44,0.44,0.36,0.48,0.31,0.41,0.39,0.12,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.08,0.42,1.0,1.0,1.0,1.0,1.0,0.33,0.26,0.33,0.63,0.99,1.0,0.95,1.0,0.88,0.89,0.89,0.85,0.92,0.68,0.44,0.82,1.0,1.0,0.98,0.28,0.26,0.4,0.56,0.72,0.71,0.67,0.71,0.75,0.67,0.27,0.03,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.42,0.81,0.66,0.72,0.55,0.2,0.25,0.25,0.63,0.53,0.65,1.0,0.87,0.71,0.82,0.86,0.94,0.78,0.61,0.77,1.0,1.0,0.96,0.8,0.72,0.79,0.84,0.43,0.25,0.18,0.26,0.97,0.19,0.89,1.0,0.92,0.19,0.09,0.85,1.0,1.0,1.0,0.95,0.72,0.5,0.24,0.02,0.01,0.01,0.18,0.24,0.53,0.14,0.01,0.01,0.01,0.37,1.0,0.72,0.53,0.04,0.01,0.01,0.01,0.05,0.04,0.91,1.0,1.0,0.96,0.73,0.46,0.64,0.49,0.39,0.67,0.6,0.72,0.3,0.09,0.44,0.67,0.72,0.7,0.78,0.64,0.49,0.7,0.73,0.49,0.48,0.5,0.6,0.8,1.0,0.92,0.19,0.68,0.72,0.5,0.04,0.01,0.57,0.8,0.8,0.74,0.67,0.64,0.63,0.66,0.68,0.61,0.4,0.2,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.21,0.38,0.16,0.36,0.63,0.29,0.18,0.38,0.08,0.14,0.2,0.22,0.44,0.04,0.01,0.15,0.39,0.75,0.38,0.96,0.74,0.11,0.06,0.08,0.42,0.88,0.75,0.61,0.27,0.78,0.61,0.14,0.21,0.2,0.34,0.18,0.18,0.41,0.68,0.52,0.41,0.41,0.46,0.28,0.03,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"total":239.8};
+(function(){
+const A = new Audio(); A.preload = "auto";
+const $ = id => document.getElementById(id), frame = $("frame");
+const TOTAL = TLD.total;
+setup(TLD);
+// 화면 맞추기
+function fit(){ const s = Math.min(innerWidth/1920, innerHeight/1080); frame.style.transform = `scale(${s})`;
+  frame.style.left = ((innerWidth-1920*s)/2)+"px"; frame.style.top = ((innerHeight-1080*s)/2)+"px"; }
+addEventListener("resize", fit); fit();
+// 퀴즈 멈춤 지점
+const QP = []; TLD.scenes.forEach(s => s.lines.forEach(l => { if (l.pause) QP.push(s.start + l.t1 + 0.45); }));
+// 시크바 표시
+const marks = $("marks");
+TLD.scenes.forEach((s,i) => { if (i) marks.insertAdjacentHTML("beforeend", `<div class="mk" style="left:${s.start/TOTAL*100}%"></div>`); });
+QP.forEach(p => marks.insertAdjacentHTML("beforeend", `<div class="mk q" style="left:${p/TOTAL*100}%" title="퀴즈"></div>`));
+const fmt = t => { t = Math.max(0, Math.floor(t)); return Math.floor(t/60)+":"+String(t%60).padStart(2,"0"); };
+// 시계: 오디오 시간에 맞춰 부드럽게
+let baseT = 0, baseNow = 0, playing = false, lastT = -1, autoQ = true, done = new Set();
+const now = () => performance.now();
+function curT(){ if (!playing) return A.currentTime; const t = baseT + (now()-baseNow)/1000*A.playbackRate;
+  if (Math.abs(t - A.currentTime) > 0.25) { baseT = A.currentTime; baseNow = now(); return baseT; } return t; }
+function draw(t){ t = Math.min(Math.max(t,0), TOTAL-0.001); render(t); lastT = t;
+  $("seekfill").style.width = (t/TOTAL*100)+"%"; $("seekknob").style.left = (t/TOTAL*100)+"%";
+  $("time").textContent = fmt(t)+" / "+fmt(TOTAL); }
+function loop(){ if (playing) { const t = curT();
+    if (autoQ) for (const p of QP) if (!done.has(p) && lastT < p && t >= p) { done.add(p); A.pause(); A.currentTime = p; draw(p); $("quiz").style.display = "flex"; break; }
+    if (playing) draw(t); }
+  requestAnimationFrame(loop); }
+A.addEventListener("playing", () => { playing = true; baseT = A.currentTime; baseNow = now(); $("pp").textContent = "⏸ 일시정지"; poke(); });
+A.addEventListener("pause", () => { playing = false; $("pp").textContent = "▶ 재생"; showUI(); draw(A.currentTime); });
+A.addEventListener("ended", () => { playing = false; $("pp").textContent = "↺ 다시 보기"; showUI(); draw(TOTAL); });
+function play(){ $("quiz").style.display = "none"; if (A.ended || A.currentTime >= TOTAL - 0.05) { A.currentTime = 0; done.clear(); } A.play(); }
+function toggle(){ if (playing) A.pause(); else play(); }
+function seek(t){ t = Math.min(Math.max(t,0), TOTAL-0.05); A.currentTime = t; baseT = t; baseNow = now();
+  done = new Set(QP.filter(p => p <= t + 0.01)); $("quiz").style.display = "none"; draw(t); }
+// 준비: 글꼴 4종 + 오디오
+const fontsReady = Promise.all(["400","500","700","900"].map(w => document.fonts.load(`${w} 40px VidKR`, "가")));
+// 음성은 통째로 받아 두기(서버 사정과 관계없이 앞뒤로 옮겨 보기 가능)
+const audioReady = fetch("ch24.m4a?v=234da41c").then(r => { if (!r.ok) throw new Error(r.status); return r.blob(); })
+  .then(b => new Promise(res => { A.src = URL.createObjectURL(b); if (A.readyState >= 3) res(); A.addEventListener("canplaythrough", res, { once:true }); setTimeout(res, 5000); }))
+  .catch(() => { A.src = "ch24.m4a?v=234da41c"; });
+fontsReady.then(() => draw(0.9));
+Promise.all([fontsReady, audioReady]).then(() => { $("start").disabled = false;
+  $("ctext").innerHTML = "재생<small>24차시 · 보험의 의미, 종류, 목적</small>"; });
+$("start").onclick = () => { $("cover").style.display = "none"; showUI(); seek(0); play(); };
+$("qgo").onclick = play;
+$("pp").onclick = toggle;
+$("bq").onclick = () => { autoQ = !autoQ; $("bq").classList.toggle("on", autoQ); };
+$("bc").onclick = () => { const on = $("bc").classList.toggle("on"); $("sub").style.visibility = on ? "" : "hidden"; };
+const SP = [1, 1.25, 0.8]; let si = 0;
+$("bs").onclick = () => { si = (si+1)%SP.length; A.playbackRate = SP[si]; $("bs").textContent = SP[si]+"×"; baseT = A.currentTime; baseNow = now(); };
+$("bf").onclick = () => { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen(); };
+// 시크바
+const sw = $("seekwrap"); let drag = false;
+const posT = e => { const r = sw.getBoundingClientRect(); return (Math.min(Math.max(e.clientX - r.left, 0), r.width)/r.width)*TOTAL; };
+sw.addEventListener("pointerdown", e => { drag = true; sw.setPointerCapture(e.pointerId); seek(posT(e)); });
+sw.addEventListener("pointermove", e => { const t = posT(e), tip = $("tip"); tip.style.display = "block"; tip.style.left = (t/TOTAL*100)+"%";
+  let k = 0; TLD.scenes.forEach((s,i) => { if (t >= s.start) k = i; }); tip.textContent = fmt(t)+" · 장면 "+(k+1); if (drag) seek(t); });
+sw.addEventListener("pointerup", () => drag = false);
+sw.addEventListener("pointerleave", () => $("tip").style.display = "none");
+// 조작판 자동 숨김
+let hideTimer; function showUI(){ $("ui").classList.remove("hide"); document.body.style.cursor = ""; }
+function poke(){ showUI(); clearTimeout(hideTimer); hideTimer = setTimeout(() => { if (playing) { $("ui").classList.add("hide"); document.body.style.cursor = "none"; } }, 2500); }
+addEventListener("pointermove", poke);
+frame.addEventListener("click", e => { if ($("cover").style.display !== "none" || e.target.closest("#qgo")) return; toggle(); });
+addEventListener("keydown", e => {
+  if (e.code === "Space" || e.key === "k") { e.preventDefault(); if ($("cover").style.display !== "none") $("start").click(); else toggle(); }
+  else if (e.key === "ArrowRight") seek(A.currentTime + 5); else if (e.key === "ArrowLeft") seek(A.currentTime - 5);
+  else if (e.key === "f" || e.key === "F") $("bf").click(); else if (e.key === "c" || e.key === "C") $("bc").click();
+  poke(); });
+window.PLAYER = { A, seek, play, toggle };
+requestAnimationFrame(loop);
+})();
+</script>
+</body></html>
