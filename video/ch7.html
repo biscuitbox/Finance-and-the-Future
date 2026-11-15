@@ -1,0 +1,412 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>7차시 영상 · 디지털 시대의 금융 서비스 | 금융과 미래</title>
+<style>
+@font-face{font-family:"VidKR";src:url("fonts/ch7-Regular.woff2?v=93c5beec") format("woff2");font-weight:100 450;font-display:block}
+@font-face{font-family:"VidKR";src:url("fonts/ch7-Medium.woff2?v=ae3621ee") format("woff2");font-weight:451 550;font-display:block}
+@font-face{font-family:"VidKR";src:url("fonts/ch7-Bold.woff2?v=b0fd34a4") format("woff2");font-weight:551 750;font-display:block}
+@font-face{font-family:"VidKR";src:url("fonts/ch7-Black.woff2?v=67a64864") format("woff2");font-weight:751 1000;font-display:block}
+
+:root{--pine:#10403B;--teal:#127475;--steel:#1C6E8C;--amber:#E08E0B;--amberdk:#A96A08;--brick:#8C3A3A;--brickbg:#F5EFEF;--tealbg:#E9F2F0;--amberbg:#FCF4E4;--steelbg:#E8F1F5;--ink:#17302D;--grey:#5C6B68;--line:#D5E1DE}
+*{box-sizing:border-box;margin:0;padding:0}
+#frame{width:1920px;height:1080px;overflow:hidden;background:#fff;font-family:"VidKR","Malgun Gothic","Noto Sans CJK KR","Noto Sans KR",sans-serif;color:var(--ink);word-break:keep-all}
+#stage{position:absolute;inset:0;background:#fff}
+.scene{position:absolute;left:0;top:0;width:1920px;height:910px;display:none;background:#fff}
+.scene.dark{background:var(--pine);color:#fff}
+.hdr{position:absolute;left:90px;top:44px;right:90px;display:flex;align-items:center;gap:22px}
+.hdr .tag{background:var(--pine);color:#fff;font-weight:800;font-size:34px;padding:10px 28px;border-radius:40px}
+.hdr .ttl{font-size:46px;font-weight:800;color:var(--pine)}
+.hdr .lesson{margin-left:auto;font-size:26px;color:var(--grey);font-weight:600}
+.body{position:absolute;left:90px;right:90px;top:140px;bottom:30px}
+.card{background:var(--tealbg);border-radius:28px;padding:30px 38px}
+.card.am{background:var(--amberbg)}.card.st{background:var(--steelbg)}.card.br{background:var(--brickbg)}.card.wh{background:#fff;border:3px solid var(--line)}
+.card h3{font-size:44px;font-weight:800;color:var(--pine);margin-bottom:12px}
+.card p{font-size:34px;line-height:1.45;font-weight:600}
+.big{font-size:84px;font-weight:900;letter-spacing:-1px}
+.mid{font-size:50px;font-weight:800}
+.teal{color:var(--teal)}.steel{color:var(--steel)}.amber{color:var(--amber)}.amberdk{color:var(--amberdk)}.brick{color:var(--brick)}.pine{color:var(--pine)}.grey{color:var(--grey)}
+.pill{display:inline-block;border-radius:999px;padding:10px 28px;font-weight:800;font-size:34px;background:var(--pine);color:#fff}
+.pill.teal{background:var(--teal);color:#fff}.pill.steel{background:var(--steel);color:#fff}.pill.amber{background:var(--amberdk);color:#fff}.pill.brick{background:var(--brick);color:#fff}.pill.light{background:var(--tealbg);color:var(--pine)}
+.row{display:flex;align-items:center;gap:24px}
+.col{display:flex;flex-direction:column;gap:24px}
+.src{position:absolute;left:90px;right:90px;bottom:6px;font-size:22px;color:var(--grey);font-weight:600}
+.hl{outline:6px solid var(--amber);outline-offset:6px;box-shadow:0 0 0 14px rgba(224,142,11,.18)}
+.stamp{border:6px solid var(--brick);color:var(--brick);font-weight:900;font-size:40px;padding:6px 22px;border-radius:14px;background:rgba(255,255,255,.92)}
+svg text{font-family:"VidKR","Malgun Gothic","Noto Sans CJK KR",sans-serif}
+.ico{width:120px;height:120px}
+/* 자막 */
+#bar{position:absolute;left:0;right:0;bottom:0;height:170px;background:var(--pine);border-top:6px solid var(--amber)}
+#sub{position:absolute;left:250px;right:250px;top:14px;bottom:10px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+#who{font-size:26px;font-weight:800;padding:3px 18px;border-radius:20px;margin-bottom:6px}
+#who.T{background:var(--teal);color:#fff}#who.S{background:var(--amber);color:#10302c}
+#txt{font-size:44px;line-height:1.3;font-weight:700;color:#fff}
+.av{position:absolute;bottom:8px;width:190px;height:200px}
+#avT{left:34px}#avS{right:34px}
+.avname{position:absolute;bottom:-2px;left:0;right:0;text-align:center;font-size:22px;font-weight:800;color:#cfe3df}
+#pausebadge{position:absolute;right:70px;bottom:196px;transform-origin:100% 50%;opacity:0;z-index:5;display:flex;align-items:center;gap:22px;background:var(--brick);color:#fff;border-radius:999px;padding:16px 40px 16px 20px;font-size:38px;font-weight:700;white-space:nowrap;box-shadow:0 10px 28px rgba(0,0,0,.25);pointer-events:none}
+#pausebadge b{font-weight:900;color:#FFE8A8;margin-right:8px}
+#pausebadge .pb-ico{width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;gap:9px}
+#pausebadge .pb-ico i{display:block;width:11px;height:30px;background:var(--brick);border-radius:3px}
+
+
+.sumi{display:flex;align-items:center;gap:30px;background:rgba(255,255,255,.08);border-radius:26px;padding:20px 36px;font-size:40px;font-weight:800;color:#fff}
+.sumi .n{min-width:70px;height:70px;border-radius:50%;background:var(--amber);color:#10302c;display:flex;align-items:center;justify-content:center;font-weight:900}
+.hk{border-radius:30px;padding:26px 28px;height:400px;position:relative;text-align:center}
+.hk h3{font-size:44px;font-weight:900;margin-top:10px} .hk p{font-size:32px;font-weight:700;line-height:1.4;margin-top:12px}
+.bub{background:#FFF7D6;border:4px solid #e2c766;border-radius:30px 30px 30px 6px;padding:16px 30px;font-size:34px;font-weight:900}
+.band{border-radius:28px;overflow:hidden;background:#fff;border:4px solid var(--line);height:420px;text-align:center;position:relative}
+.band .bh{padding:18px;color:#fff;font-size:46px;font-weight:900} .band .bh small{display:block;font-size:29px;font-weight:700;opacity:.9}
+.band p{font-size:32px;font-weight:700;line-height:1.45;padding:24px 26px}
+.col2{border-radius:30px;padding:26px 36px;position:relative}
+.col2 h3{font-size:44px;font-weight:900;color:#fff;border-radius:18px;padding:8px 26px;display:inline-block}
+.col2 li{font-size:34px;font-weight:700;margin:16px 0 0 40px;line-height:1.35}
+.eqb{background:#fff;border:4px solid var(--line);border-radius:26px;padding:16px 28px;text-align:center}
+.eqb small{display:block;font-size:27px;font-weight:800;color:var(--grey)} .eqb b{font-size:56px;font-weight:900}
+.step{position:absolute;top:0;border-radius:26px;background:var(--tealbg);padding:24px;text-align:center;height:260px}
+.step .sn{width:72px;height:72px;margin:0 auto;border-radius:50%;background:var(--pine);color:#fff;font-size:42px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.step .st{font-size:40px;font-weight:900;color:var(--pine);margin-top:18px} .step .sd{font-size:30px;font-weight:700;margin-top:12px;line-height:1.35}
+.trow{display:grid;align-items:center;min-height:84px;border-bottom:3px solid var(--line);font-size:34px;font-weight:800;padding:0 30px;background:#fff}
+.trow .tl{font-size:36px;font-weight:900;color:var(--pine)}
+.opt{position:absolute;border-radius:24px;background:#fff;border:4px solid var(--line);display:flex;align-items:center;font-weight:900}
+.fbox{position:absolute;border-radius:26px;padding:18px;text-align:center;background:#fff;border:4px solid var(--line)}
+.fbox b{display:block;font-size:40px;font-weight:900} .fbox span{font-size:28px;font-weight:700;color:var(--grey)}
+.up{color:#D23B3B} .dn{color:#2F6FD1}
+
+html,body{margin:0;width:100%;height:100%;background:#0b1f1c;overflow:hidden}
+#frame{position:absolute;left:0;top:0;transform-origin:0 0;box-shadow:0 0 0 1px #000}
+/* 플레이어 */
+#ui{position:fixed;left:0;right:0;bottom:0;padding:14px 18px 12px;background:linear-gradient(transparent,rgba(5,20,18,.92));color:#fff;font:600 15px/1.2 "VidKR","Malgun Gothic",sans-serif;transition:opacity .3s;z-index:20}
+#ui.hide{opacity:0;pointer-events:none}
+#seekwrap{position:relative;height:22px;cursor:pointer;margin-bottom:8px}
+#seekbg{position:absolute;left:0;right:0;top:9px;height:5px;border-radius:3px;background:rgba(255,255,255,.28)}
+#seekfill{position:absolute;left:0;top:9px;height:5px;border-radius:3px;background:#E08E0B}
+#seekknob{position:absolute;top:4px;width:15px;height:15px;margin-left:-7px;border-radius:50%;background:#fff}
+.mk{position:absolute;top:7px;width:2px;height:9px;background:rgba(255,255,255,.55)}
+.mk.q{width:8px;height:8px;top:-3px;margin-left:-4px;border-radius:50%;background:#E05555}
+#tip{position:absolute;bottom:24px;transform:translateX(-50%);background:#10403B;padding:4px 9px;border-radius:6px;white-space:nowrap;display:none;font-size:13px}
+#row{display:flex;align-items:center;gap:10px}
+#ui button{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}
+#ui button:hover{background:rgba(255,255,255,.25)}
+#ui button.on{background:#127475}
+#time{font-variant-numeric:tabular-nums;min-width:110px}
+#sp{flex:1}
+#cover{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:30;color:#fff;font-family:"VidKR","Malgun Gothic",sans-serif;text-align:center}
+#cover{background:rgba(8,30,27,.55)}
+#quiz{position:absolute;right:70px;bottom:300px;z-index:6;display:none}
+.big{width:120px;height:120px;border-radius:50%;border:0;background:#E08E0B;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.big:disabled{background:#6b7b78;cursor:wait}
+.big i{display:block;width:0;height:0;border-left:42px solid #10302c;border-top:26px solid transparent;border-bottom:26px solid transparent;margin-left:12px}
+.cap{font-size:22px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.cap small{display:block;font-size:15px;font-weight:600;opacity:.85;margin-top:6px}
+#qgo{background:#fff;color:#8C3A3A;border:6px solid #8C3A3A;border-radius:999px;padding:18px 44px;font:900 40px "VidKR",sans-serif;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.25)}
+#qgo small{font-size:26px;font-weight:700;opacity:.7}
+#ui a.rel{color:#10302c;background:#E08E0B;border-radius:8px;padding:7px 12px;text-decoration:none;font-weight:800}
+#cover a.rel{color:#fff;font:700 17px "VidKR",sans-serif;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:9px 20px;text-decoration:none}
+#cover a.rel:hover,#ui a.rel:hover{filter:brightness(1.1)}
+</style></head><body>
+<div id="frame">
+
+<svg width="0" height="0" style="position:absolute">
+ <symbol id="i-bank" viewBox="0 0 120 120"><path d="M60 8 L112 36 L8 36 Z" fill="currentColor"/><rect x="14" y="40" width="92" height="8" fill="currentColor"/><g fill="currentColor"><rect x="20" y="52" width="12" height="44"/><rect x="42" y="52" width="12" height="44"/><rect x="66" y="52" width="12" height="44"/><rect x="88" y="52" width="12" height="44"/></g><rect x="8" y="100" width="104" height="12" rx="3" fill="currentColor"/></symbol>
+ <symbol id="i-money" viewBox="0 0 120 120"><g><rect x="10" y="52" width="100" height="52" rx="8" fill="#0e5c4f"/><rect x="16" y="40" width="100" height="52" rx="8" fill="#127475" transform="translate(-6 0)"/><rect x="10" y="28" width="100" height="52" rx="8" fill="#1a8a7c"/><circle cx="60" cy="54" r="15" fill="none" stroke="#fff" stroke-width="5"/><text x="60" y="61" font-size="20" text-anchor="middle" fill="#fff" font-weight="900">₩</text></g></symbol>
+ <symbol id="i-shield" viewBox="0 0 120 120"><path d="M60 6 L106 22 L106 58 Q106 96 60 114 Q14 96 14 58 L14 22 Z" fill="currentColor"/><path d="M38 60 L54 76 L84 44" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-person" viewBox="0 0 120 120"><circle cx="60" cy="34" r="22" fill="currentColor"/><path d="M18 116 Q18 66 60 64 Q102 66 102 116 Z" fill="currentColor"/></symbol>
+ <symbol id="i-coin" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="#E08E0B"/><circle cx="60" cy="60" r="40" fill="none" stroke="#fff" stroke-width="6" opacity=".7"/><text x="60" y="76" font-size="46" text-anchor="middle" fill="#fff" font-weight="900">₩</text></symbol>
+ <symbol id="i-receipt" viewBox="0 0 120 120"><path d="M22 8 H98 V112 L86 104 L74 112 L62 104 L50 112 L38 104 L22 112 Z" fill="currentColor"/><g stroke="#fff" stroke-width="7" stroke-linecap="round"><path d="M38 34 H82"/><path d="M38 54 H82"/><path d="M38 74 H66"/></g></symbol>
+ <symbol id="i-snow" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="#e9f2f0" stroke="#127475" stroke-width="6"/><circle cx="44" cy="44" r="9" fill="#fff"/><path d="M30 80 Q60 96 90 76" stroke="#127475" stroke-width="5" fill="none" opacity=".4"/></symbol>
+ <symbol id="i-check" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="currentColor"/><path d="M34 62 L52 80 L88 42" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-x" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="currentColor"/><path d="M38 38 L82 82 M82 38 L38 82" stroke="#fff" stroke-width="12" stroke-linecap="round"/></symbol>
+ <symbol id="i-scale" viewBox="0 0 120 120"><path d="M60 14 V100 M30 104 H90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/><path d="M18 34 H102" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M18 34 L6 66 H30 Z M102 34 L90 66 H114 Z" fill="currentColor"/><circle cx="60" cy="14" r="8" fill="currentColor"/></symbol>
+ <symbol id="i-tv" viewBox="0 0 120 120"><rect x="6" y="14" width="108" height="78" rx="10" fill="currentColor"/><path d="M40 108 H80 M60 92 V108" stroke="currentColor" stroke-width="8" stroke-linecap="round"/></symbol>
+</svg>
+
+<div id="stage">
+<section class="scene dark" id="s1">
+ <div style="position:absolute;left:150px;top:170px;width:1120px">
+  <div data-at="t0.1" style="font-size:38px;font-weight:700;color:#bfe0da">금융과 미래 · Ⅰ. 합리적 선택과 금융 환경의 변화</div>
+  <div data-at="t0.3" style="margin-top:30px"><span class="pill" style="background:var(--amber);color:#10302c;font-size:44px">7차시</span></div>
+  <div data-at="t0.5" style="font-size:104px;font-weight:900;margin-top:26px;line-height:1.15">디지털 시대의<br>금융 서비스</div>
+  <div data-at="t0.8" style="font-size:48px;font-weight:800;color:var(--amber);margin-top:20px">손안의 은행, 편리한 만큼 지킬 것도 많다</div>
+  <div data-at="t1.2" class="row" style="margin-top:44px;gap:18px;flex-wrap:wrap"><span class="pill light">모바일 뱅킹</span><span class="pill light">보이스피싱</span><span class="pill light">파밍</span><span class="pill light">스미싱</span></div>
+ </div>
+ <div data-at="t0.7" data-fx="pop" style="position:absolute;left:1330px;top:190px"><svg width="300" height="420" viewBox="0 0 300 420"><rect x="40" y="10" width="220" height="400" rx="34" fill="#bfe0da"/><rect x="58" y="50" width="184" height="310" rx="10" fill="#10403B"/><path d="M150 90 L210 120 H90Z" fill="#E08E0B"/><rect x="100" y="128" width="16" height="70" fill="#E08E0B"/><rect x="142" y="128" width="16" height="70" fill="#E08E0B"/><rect x="184" y="128" width="16" height="70" fill="#E08E0B"/><rect x="88" y="204" width="124" height="14" fill="#E08E0B"/><rect x="80" y="250" width="140" height="40" rx="20" fill="#127475"/><text x="150" y="278" font-size="24" font-weight="900" fill="#fff" text-anchor="middle">송금</text><circle cx="150" cy="385" r="12" fill="#10403B"/></svg></div></section>
+<section class="scene" id="s2"><div class="hdr"><span class="tag">생각 열기</span><span class="ttl">오늘, 돈을 어떻게 썼나요?</span><span class="lesson">금융과 미래 · 7차시</span></div><div class="body"><div class="row" style="position:absolute;left:0;right:0;top:0px;gap:30px;align-items:stretch"><div data-at="0@0.1" class="hk" style="flex:1;background:var(--tealbg)"><svg width="110" height="110" viewBox="0 0 120 120"><rect x="8" y="26" width="104" height="68" rx="10" fill="#127475"/><rect x="8" y="40" width="104" height="12" fill="#10403B"/><rect x="20" y="66" width="30" height="14" rx="3" fill="#E08E0B"/></svg><h3 class="teal">카드로 결제</h3><p>편의점에서<br>체크카드 한 번</p></div><div data-at="0@0.35" class="hk" style="flex:1;background:var(--steelbg)"><svg width="110" height="110" viewBox="0 0 120 120"><rect x="34" y="8" width="52" height="104" rx="10" fill="#1C6E8C"/><rect x="40" y="20" width="40" height="72" fill="#E9F2F0"/><path d="M48 56 H72 M64 48 L72 56 L64 64" stroke="#1C6E8C" stroke-width="5" fill="none" stroke-linecap="round"/></svg><h3 class="steel">휴대 전화로 송금</h3><p>친구에게 앱으로<br>바로 보내기</p></div><div data-at="0@0.65" class="hk" style="flex:1;background:var(--amberbg)"><svg width="110" height="110" viewBox="0 0 120 120"><rect x="16" y="10" width="88" height="100" rx="10" fill="#A96A08"/><rect x="28" y="22" width="64" height="40" rx="4" fill="#FDF3E1"/><rect x="34" y="74" width="52" height="8" rx="4" fill="#10403B"/><rect x="44" y="82" width="32" height="20" fill="#5BC0A8"/></svg><h3 class="amberdk">현금 인출기에서 출금</h3><p>은행 창구 없이<br>돈을 찾기</p></div></div><div data-at="1" data-fx="pop" class="card" style="position:absolute;left:0;right:0;top:400px;background:var(--pine);color:#fff;padding:18px 36px;text-align:center"><p style="font-size:36px;font-weight:800">모두 <span style="color:var(--amber)">디지털 금융</span> — 현금을 만지지 않고도 돈이 오간다</p></div></div></section>
+<section class="scene" id="s3"><div class="hdr"><span class="tag">실생활 자료</span><span class="ttl">은행 일은 이제 휴대 전화로</span><span class="lesson">금융과 미래 · 7차시</span></div><div class="body"><div data-at="0" class="card" style="position:absolute;left:0;top:0;width:620px;height:560px;background:var(--pine);color:#fff"><div style="font-size:30px;font-weight:800;color:#bfe0da">인터넷뱅킹 이용 건수 중 모바일뱅킹</div><div style="font-size:120px;font-weight:900;color:var(--amber);line-height:1.15;margin-top:18px"><span data-count="89.9" data-dec="1" data-cat="0@0.3" data-cd="1.2">0</span>%</div><div style="font-size:30px;font-weight:700;line-height:1.5;margin-top:12px">열 번 가운데<br><b style="color:var(--amber)">아홉 번</b>은 휴대 전화로<br>(2025년 한 해)</div></div><div data-at="0" class="card wh" style="position:absolute;left:670px;top:0;width:1070px;height:560px;padding:0"><div style="position:absolute;left:30px;top:18px;font-size:30px;font-weight:900" class="pine">인터넷뱅킹 이용 건수 비중 (%)</div><div style="position:absolute;left:205px;bottom:70px;width:170px;text-align:center"><div data-at="0@0.4" style="font-size:34px;font-weight:900;color:#E08E0B;margin-bottom:6px;white-space:nowrap">89.9%</div><div data-at="0@0.4" data-fx="growy" data-d="0.7" style="height:297px;background:#E08E0B;border-radius:12px 12px 0 0"></div></div><div style="position:absolute;left:165px;bottom:20px;width:250px;text-align:center;font-size:25px;font-weight:800" class="grey">모바일뱅킹</div><div style="position:absolute;left:705px;bottom:70px;width:170px;text-align:center"><div data-at="0@0.6" style="font-size:34px;font-weight:900;color:#9aa5a3;margin-bottom:6px;white-space:nowrap">10.1%</div><div data-at="0@0.6" data-fx="growy" data-d="0.7" style="height:33px;background:#9aa5a3;border-radius:12px 12px 0 0"></div></div><div style="position:absolute;left:665px;bottom:20px;width:250px;text-align:center;font-size:25px;font-weight:800" class="grey">그 밖 (PC 등)</div></div><div class="src" data-at="0">출처: 한국은행 「2025년중 국내 지급결제동향」(2026. 3. 30. 발표)</div></div></section>
+<section class="scene" id="s4"><div class="hdr"><span class="tag">디지털 금융의 특징</span><span class="ttl">편리함과 위험은 함께 온다</span><span class="lesson">금융과 미래 · 7차시</span></div><div class="body"><div data-at="0" class="col2" style="position:absolute;left:0px;top:0px;width:840px;height:420px;background:var(--tealbg)"><h3 style="background:var(--teal)">👍 좋은 점</h3><ul><li><b>비대면</b> — 직원을 안 만나도 된다</li><li>시간 · 장소 상관없이 <b>24시간</b></li><li><b>거래 비용</b>이 줄어든다</li></ul><div data-at="0+0.8" data-fx="pop" style="position:absolute;left:0;right:0;bottom:24px;text-align:center"><span class="pill" style="background:var(--teal);font-size:34px">편리함</span></div></div><div data-at="1" class="col2" style="position:absolute;left:900px;top:0px;width:840px;height:420px;background:var(--brickbg)"><h3 style="background:var(--brick)">⚠ 조심할 점</h3><ul><li><b>조작 실수</b> — 잘못 누르면 바로 이체</li><li><b>보안 위험</b> — 해킹 · 전산 장애</li><li>얼굴을 안 보니 <b>속이기도 쉽다</b></li></ul><div data-at="1+0.8" data-fx="pop" style="position:absolute;left:0;right:0;bottom:24px;text-align:center"><span class="pill" style="background:var(--brick);font-size:34px">위험</span></div></div><div data-at="2" data-fx="pop" class="card" style="position:absolute;left:0;right:0;top:450px;background:var(--pine);color:#fff;padding:18px 36px;text-align:center"><p style="font-size:36px;font-weight:800">얼굴을 보지 않는 편리함이 그대로 <span style="color:var(--amber)">사기의 통로</span>가 된다</p></div></div></section>
+<section class="scene" id="s5"><div class="hdr"><span class="tag">실생활 자료</span><span class="ttl">보이스피싱 피해, 늘다가 줄기 시작</span><span class="lesson">금융과 미래 · 7차시</span></div><div class="body"><div data-at="0" class="card" style="position:absolute;left:0;top:0;width:620px;height:560px;background:var(--pine);color:#fff"><div style="font-size:30px;font-weight:800;color:#bfe0da">2025년 보이스피싱 피해액</div><div style="font-size:88px;font-weight:900;color:var(--amber);line-height:1.15;margin-top:18px">1조<br>2,578억 원</div><div style="font-size:30px;font-weight:700;line-height:1.5;margin-top:12px">2년 새 <b style="color:var(--amber)">2.6배</b>로 늘었다</div></div><div data-at="0" class="card wh" style="position:absolute;left:670px;top:0;width:1070px;height:560px;padding:0"><div style="position:absolute;left:30px;top:18px;font-size:30px;font-weight:900" class="pine">보이스피싱 연간 피해액 (억 원)</div><div style="position:absolute;left:122px;bottom:70px;width:170px;text-align:center"><div data-at="0@0.3" style="font-size:34px;font-weight:900;color:#1C6E8C;margin-bottom:6px;white-space:nowrap">4,782</div><div data-at="0@0.3" data-fx="growy" data-d="0.7" style="height:113px;background:#1C6E8C;border-radius:12px 12px 0 0"></div></div><div style="position:absolute;left:82px;bottom:20px;width:250px;text-align:center;font-size:25px;font-weight:800" class="grey">2023년</div><div style="position:absolute;left:455px;bottom:70px;width:170px;text-align:center"><div data-at="0@0.5" style="font-size:34px;font-weight:900;color:#1C6E8C;margin-bottom:6px;white-space:nowrap">8,545</div><div data-at="0@0.5" data-fx="growy" data-d="0.7" style="height:201px;background:#1C6E8C;border-radius:12px 12px 0 0"></div></div><div style="position:absolute;left:415px;bottom:20px;width:250px;text-align:center;font-size:25px;font-weight:800" class="grey">2024년</div><div style="position:absolute;left:788px;bottom:70px;width:170px;text-align:center"><div data-at="0@0.7" style="font-size:34px;font-weight:900;color:#8C3A3A;margin-bottom:6px;white-space:nowrap">12,578</div><div data-at="0@0.7" data-fx="growy" data-d="0.7" style="height:296px;background:#8C3A3A;border-radius:12px 12px 0 0"></div></div><div style="position:absolute;left:748px;bottom:20px;width:250px;text-align:center;font-size:25px;font-weight:800" class="grey">2025년</div></div><div data-at="1" class="card am" style="position:absolute;left:0;right:0;top:590px;padding:14px 30px;text-align:center"><p style="font-size:31px">범정부 대응 뒤 최근 10개월(2025. 10.~2026. 7.) 피해액 <b class="teal">43.2% ↓</b> · 발생 건수 <b class="teal">39.9% ↓</b></p></div><div class="src" data-at="0">출처: 경찰청 통계 (헤럴드경제 2026. 1. 24.) · 국무조정실 보이스피싱 대응 범정부 TF (2026. 9. 2.)</div></div></section>
+<section class="scene" id="s6"><div class="hdr"><span class="tag">사기 수법 3가지</span><span class="ttl">보이스피싱 · 파밍 · 스미싱</span><span class="lesson">금융과 미래 · 7차시</span></div><div class="body"><div class="row" style="position:absolute;left:0;right:0;top:0px;gap:30px;align-items:stretch"><div data-at="0@0.2" class="band" style="flex:1;height:440px"><div class="bh" style="background:var(--brick)">보이스피싱<small>📞 전화</small></div><p>검찰 · 은행인 척 전화해<br>돈이나 개인 정보를<br>빼낸다</p></div><div data-at="1@0.1" class="band" style="flex:1;height:440px"><div class="bh" style="background:var(--amberdk)">파밍<small>🖥 가짜 사이트</small></div><p>악성 코드로<br>가짜 은행 사이트에 접속시켜<br>금융 정보를 훔친다</p></div><div data-at="2@0.1" class="band" style="flex:1;height:440px"><div class="bh" style="background:var(--steel)">스미싱<small>✉ 문자</small></div><p>문자 속 주소를 누르게 해<br>악성 앱을 깔고<br>정보를 빼낸다</p></div></div></div></section>
+<section class="scene" id="s7"><div class="hdr"><span class="tag">최신 수법</span><span class="ttl">요즘 이런 수법이 늘고 있어요</span><span class="lesson">금융과 미래 · 7차시</span></div><div class="body"><div data-at="0" class="card" style="position:absolute;left:0px;top:0px;width:850px;height:300px;background:var(--brickbg);border:4px solid var(--brick);padding:22px 30px"><div style="font-size:40px;font-weight:900" class="brick">기관 사칭 · 셀프 감금</div><div style="font-size:24px;font-weight:700" class="grey">경찰청 국가수사본부, 2025. 9. 18.</div><div style="font-size:31px;font-weight:700;line-height:1.5;margin-top:12px">검사 · 경찰이라며 ‘수사 중이니<br>혼자 숙소에 머물라’고 고립시킨 뒤<br>돈을 옮기게 한다</div></div><div data-at="1" class="card" style="position:absolute;left:890px;top:0px;width:850px;height:300px;background:var(--amberbg);border:4px solid var(--amberdk);padding:22px 30px"><div style="font-size:40px;font-weight:900" class="amberdk">상품권 대출 사기</div><div style="font-size:24px;font-weight:700" class="grey">금융감독원 소비자경보, 2026. 8. 10.</div><div style="font-size:31px;font-weight:700;line-height:1.5;margin-top:12px">‘상품권을 사면 대출이 나온다’며<br>통장 · 체크카드를 받아<br>범죄에 쓴다</div></div><div data-at="2" data-fx="pop" class="card" style="position:absolute;left:0;right:0;top:340px;background:var(--pine);color:#fff;padding:18px 36px;text-align:center"><p style="font-size:36px;font-weight:800">기관 사칭형이 피해액의 <span style="color:var(--amber)">76.2%</span> · 피해자의 <span style="color:var(--amber)">52%</span>가 20~30대</p></div><div class="src" data-at="2">출처: 경찰청 국가수사본부 (2025. 9. 18. 발표, 2025년 1~8월 기준)</div></div></section>
+<section class="scene" id="s8"><div class="hdr"><span class="tag">나를 지키는 법</span><span class="ttl">금융 사기 대처법 5가지</span><span class="lesson">금융과 미래 · 7차시</span></div><div class="body"><div data-at="0@0.2" class="step" style="left:0px;top:0px;width:328px;height:300px"><div class="sn">1</div><div class="st">일단 끊기</div><div class="sd">돈 달라는<br>기관은 가짜</div></div><div data-at="0@0.7" class="step" style="left:358px;top:0px;width:328px;height:300px"><div class="sn">2</div><div class="st">누르지 않기</div><div class="sd">문자 속<br>링크 금지</div></div><div data-at="1@0.1" class="step" style="left:716px;top:0px;width:328px;height:300px"><div class="sn">3</div><div class="st">빌려주지 않기</div><div class="sd">통장 · 카드는<br>나만 쓴다</div></div><div data-at="2@0.1" class="step" style="left:1074px;top:0px;width:328px;height:300px"><div class="sn">4</div><div class="st">혼자 결정 않기</div><div class="sd">가족과<br>먼저 상의</div></div><div data-at="2@0.6" class="step" style="left:1432px;top:0px;width:328px;height:300px"><div class="sn">5</div><div class="st">바로 신고</div><div class="sd">☎ 112<br>지급 정지 요청</div></div><div data-at="3" data-fx="pop" class="card" style="position:absolute;left:0;right:0;top:360px;background:var(--pine);color:#fff;padding:18px 36px;text-align:center"><p style="font-size:36px;font-weight:800">스마트폰 <span style="color:var(--amber)">‘출처를 알 수 없는 앱 설치 차단’</span>도 오늘 바로 켜 보기</p></div></div></section>
+<section class="scene" id="s9"><div class="hdr"><span class="tag" style="background:var(--amberdk)">잠깐 퀴즈</span><span class="ttl">이 수법은 무엇일까?</span><span class="lesson">금융과 미래 · 7차시</span></div><div class="body"><div data-at="0" class="card am" style="position:absolute;left:0;right:0;top:0;padding:20px 36px"><p style="font-size:38px;font-weight:900;line-height:1.45">문자: “[택배] 주소가 잘못되어 배송이 멈췄습니다. <span class="brick">아래 링크에서 확인</span>하세요.”</p></div><div style="position:absolute;left:0;top:160px;width:1000px;height:360px"><div data-at="0@0.35" data-fx="pop" class="opt" style="left:0px;top:0;width:300px;height:200px;justify-content:center;text-align:center;font-size:44px;line-height:1.3">①<br>보이스피싱</div><div data-at="0@0.45" data-fx="pop" class="opt" style="left:330px;top:0;width:300px;height:200px;justify-content:center;text-align:center;font-size:44px;line-height:1.3">②<br>파밍</div><div data-at="0@0.55" data-fx="pop" data-hl="1@0.1" class="opt" style="left:660px;top:0;width:300px;height:200px;justify-content:center;text-align:center;font-size:44px;line-height:1.3">③<br>스미싱</div></div><div data-timer="e0+0.3" data-n="5" style="position:absolute;left:1080px;top:160px;width:240px;height:240px;opacity:0">
+<svg width="240" height="240"><circle cx="120" cy="120" r="100" stroke="#E9F2F0" stroke-width="22" fill="none"/><circle class="tring" cx="120" cy="120" r="100" stroke="#E08E0B" stroke-width="22" fill="none" pathLength="1" stroke-dasharray="1" transform="rotate(-90 120 120)"/></svg>
+<div class="tnum" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:100px;font-weight:900;color:var(--pine)">5</div></div><div data-at="1@0.3" data-fx="pop" class="card" style="position:absolute;left:1030px;top:160px;width:710px;padding:22px 28px"><p style="font-size:34px;font-weight:900">정답: <span class="steel">③ 스미싱</span><br><span style="font-size:30px">문자(SMS) + 피싱</span></p></div><div data-at="2" class="card st" style="position:absolute;left:0;right:0;top:400px;padding:16px 30px;text-align:center"><p style="font-size:32px">링크는 누르지 말고, 택배 회사 공식 앱에서 직접 확인하기</p></div></div></section>
+<section class="scene dark" id="s10"><div class="hdr"><span class="tag" style="background:var(--amber);color:#10302c">오늘의 정리</span><span class="ttl" style="color:#fff">디지털 시대의 금융 서비스</span><span class="lesson" style="color:#bfe0da">금융과 미래 · 7차시</span></div>
+ <div class="body col" style="gap:22px"><div data-at="0" class="sumi"><span class="n">1</span><span>인터넷뱅킹 열 번 중 아홉 번은 <span style="color:var(--amber)">휴대 전화</span>로</span></div><div data-at="1" class="sumi"><span class="n">2</span><span><span style="color:var(--amber)">보이스피싱 · 파밍 · 스미싱</span> — 수법은 계속 바뀐다</span></div><div data-at="2" class="sumi"><span class="n">3</span><span>끊고, 누르지 않고, 빌려주지 않고, <span style="color:var(--amber)">혼자 결정하지 않기</span></span></div>
+  <div data-at="3" class="row" style="justify-content:space-between;margin-top:10px">
+   <span style="font-size:30px;font-weight:800;color:#bfe0da">다음 시간 · 8차시 자산과 부채 (Ⅱ단원 시작)</span>
+   <span class="pill" style="background:var(--amber);color:#10302c;font-size:34px">학습지 풀기 →</span></div></div></section>
+
+</div>
+<div id="bar"><div id="sub"><div id="who" class="T">선생님</div><div id="txt"></div></div><div class="av" id="avT"></div><div class="av" id="avS"></div></div>
+
+<div id="quiz"><button id="qgo">▶ 다 풀었으면 계속하기 <small>(Space)</small></button></div>
+</div>
+<div id="cover"><button class="big" id="start" disabled aria-label="재생"><i></i></button><div class="cap" id="ctext">불러오는 중…<small>7차시 · 디지털 시대의 금융 서비스</small></div></div>
+<div id="ui" class="hide">
+ <div id="seekwrap"><div id="seekbg"></div><div id="marks"></div><div id="seekfill"></div><div id="seekknob"></div><div id="tip"></div></div>
+ <div id="row"><button id="pp">▶ 재생</button><span id="time">0:00 / 0:00</span><span id="sp"></span>
+  <button id="bq" class="on" title="퀴즈에서 자동으로 멈추기">퀴즈 멈춤</button><button id="bc" class="on" title="자막 (C)">자막</button><button id="bs" title="속도">1×</button><button id="bf" title="전체 화면 (F)">전체 화면</button></div>
+</div>
+<script>// 모션그래픽 엔진: render(t) 한 번에 한 프레임을 결정적으로 그림
+let TL = null, SCN = [], NAMES = { T: "선생님", S: "준서" };
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const eOut = p => 1 - Math.pow(1 - p, 3);
+const eBack = p => { const c = 1.70158, q = p - 1; return 1 + (c + 1) * q * q * q + c * q * q; };
+const eIO = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+
+function avatarSVG(kind) {
+  const T = kind === "T";
+  const skin = "#F4D3B5", hair = T ? "#3A2A22" : "#2B2B33", shirt = T ? "#127475" : "#E08E0B";
+  return `<svg viewBox="0 0 190 200" width="190" height="200">
+   <g class="avbody">
+    <path d="M30 200 Q30 140 95 136 Q160 140 160 200 Z" fill="${shirt}"/>
+    ${T ? '<path d="M80 138 L95 160 L110 138 Z" fill="#fff"/>' : '<path d="M70 140 Q95 165 120 140" stroke="#fff" stroke-width="6" fill="none"/>'}
+    <rect x="83" y="112" width="24" height="30" rx="8" fill="${skin}"/>
+    <g class="avhead">
+     ${T ? `<circle cx="95" cy="22" r="20" fill="${hair}"/>` : ""}
+     <ellipse cx="95" cy="75" rx="52" ry="56" fill="${skin}"/>
+     ${T ? `<path d="M43 78 Q40 22 95 20 Q150 22 147 78 Q140 44 95 40 Q52 44 43 78Z" fill="${hair}"/>`
+         : `<path d="M42 70 Q40 18 95 18 Q152 18 148 70 Q132 40 112 46 Q90 36 70 46 Q52 46 42 70Z" fill="${hair}"/>`}
+     <g class="eyes"><ellipse cx="75" cy="80" rx="6" ry="7" fill="#222"/><ellipse cx="115" cy="80" rx="6" ry="7" fill="#222"/></g>
+     ${T ? '<g fill="none" stroke="#3A2A22" stroke-width="3.5"><circle cx="75" cy="80" r="15"/><circle cx="115" cy="80" r="15"/><path d="M90 80 L100 80"/></g>' : ""}
+     <ellipse cx="62" cy="98" rx="9" ry="5" fill="#F2A9A0" opacity=".55"/><ellipse cx="128" cy="98" rx="9" ry="5" fill="#F2A9A0" opacity=".55"/>
+     <ellipse class="mouth" cx="95" cy="104" rx="11" ry="3" fill="#8B3A3A"/>
+    </g>
+   </g></svg><div class="avname">${NAMES[kind]}</div>`;
+}
+
+function setup(tl) {
+  TL = tl;
+  document.getElementById("avT").innerHTML = avatarSVG("T");
+  document.getElementById("avS").innerHTML = avatarSVG("S");
+  SCN = tl.scenes.map(sc => ({ sc, el: document.getElementById(sc.id) }));
+  // 퀴즈 '잠깐 멈추세요' 표시 (멈춤이 있는 대사가 끝난 직후, 카운트다운 동안)
+  if (!document.getElementById("pausebadge")) {
+    const b = document.createElement("div"); b.id = "pausebadge";
+    b.innerHTML = '<span class="pb-ico"><i></i><i></i></span><span><b>잠깐 멈추세요!</b> 영상을 멈추고 직접 풀어 보세요</span>';
+    document.getElementById("stage").appendChild(b);
+  }
+  for (const { el } of SCN) if (!el) throw new Error("scene missing");
+  return SCN.length;
+}
+
+function resolve(spec, sc) {
+  spec = String(spec).trim();
+  let m;
+  if ((m = spec.match(/^t([\d.]+)$/))) return +m[1];
+  if ((m = spec.match(/^end([+-][\d.]+)?$/))) return sc.dur + (m[1] ? +m[1] : 0);
+  m = spec.match(/^(e?)(\d+)(?:@([\d.]+))?([+-][\d.]+)?$/);
+  if (!m) throw new Error("bad spec " + spec);
+  const ln = sc.lines[+m[2]];
+  if (!ln) throw new Error("no line " + spec + " in " + sc.id);
+  let t = m[1] ? ln.t1 : ln.t0;
+  if (m[3]) t = ln.t0 + (+m[3]) * (ln.t1 - ln.t0);
+  if (m[4]) t += +m[4];
+  return t;
+}
+
+function korMoney(n) {
+  n = Math.round(n);
+  const eok = Math.floor(n / 1e8), man = Math.floor((n % 1e8) / 1e4), rest = n % 1e4;
+  const f = x => x.toLocaleString("en-US");
+  let s = [];
+  if (eok) s.push(eok + "억");
+  if (man) s.push(f(man) + "만");
+  if (rest) s.push(f(rest));
+  return (s.join(" ") || "0");
+}
+
+function fmtNum(v, el) {
+  const fm = el.dataset.fmt || "comma", dec = +(el.dataset.dec || 0);
+  if (fm === "kor") return korMoney(v);
+  if (dec) return v.toFixed(dec);
+  return Math.round(v).toLocaleString("en-US");
+}
+
+function applyFx(el, p, fx) {
+  const e = eOut(p);
+  let tr = "", op = e;
+  switch (fx) {
+    case "pop": tr = `scale(${0.4 + 0.6 * eBack(p)})`; op = clamp(p * 3); break;
+    case "left": tr = `translateX(${-70 * (1 - e)}px)`; break;
+    case "right": tr = `translateX(${70 * (1 - e)}px)`; break;
+    case "down": tr = `translateY(${-40 * (1 - e)}px)`; break;
+    case "growy": tr = `scaleY(${e})`; op = 1; el.style.transformOrigin = "50% 100%"; if (p <= 0) op = 0; break;
+    case "growx": tr = `scaleX(${e})`; op = 1; el.style.transformOrigin = "0% 50%"; if (p <= 0) op = 0; break;
+    case "fade": break;
+    case "draw": op = p > 0 ? 1 : 0; el.style.strokeDasharray = "1"; el.style.strokeDashoffset = String(1 - eIO(p)); break;
+    case "stamp": tr = `rotate(-8deg) scale(${1 + 1.2 * (1 - eOut(p))})`; op = clamp(p * 2); break;
+    default: tr = `translateY(${40 * (1 - e)}px)`;
+  }
+  return [tr, op];
+}
+
+function render(t) {
+  const frame = Math.round(t * TL.fps);
+  let cur = SCN[SCN.length - 1];
+  for (const s of SCN) if (t >= s.sc.start && t < s.sc.start + s.sc.dur) { cur = s; break; }
+  const sc = cur.sc, lt = t - sc.start, R = spec => resolve(spec, sc);
+  for (const s of SCN) s.el.style.display = s === cur ? "block" : "none";
+  const fin = clamp(lt / 0.35), fout = clamp((sc.dur - lt) / 0.35);
+  cur.el.style.opacity = Math.min(fin, fout);
+
+  for (const el of cur.el.querySelectorAll("[data-at]")) {
+    const a = R(el.dataset.at), d = +(el.dataset.d || 0.55);
+    let p = clamp((lt - a) / d);
+    let [tr, op] = applyFx(el, p, el.dataset.fx || "up");
+    if (el.dataset.out) { const o = R(el.dataset.out); op *= 1 - clamp((lt - o) / 0.4); }
+    if (el.dataset.dim) { const o = R(el.dataset.dim); op *= 1 - 0.6 * clamp((lt - o) / 0.4); }
+    el.style.opacity = op; el.style.transform = tr;
+  }
+  for (const el of cur.el.querySelectorAll("[data-count]")) {
+    const a = R(el.dataset.cat || el.dataset.at || "t0"), d = +(el.dataset.cd || 1.3);
+    const from = +(el.dataset.from || 0), to = +el.dataset.count;
+    const p = eOut(clamp((lt - a) / d));
+    el.textContent = (el.dataset.pre || "") + fmtNum(from + (to - from) * p, el) + (el.dataset.suf || "");
+  }
+  for (const el of cur.el.querySelectorAll("[data-hl]")) {
+    const a = R(el.dataset.hl), b = el.dataset.hlend ? R(el.dataset.hlend) : 1e9;
+    el.classList.toggle("hl", lt >= a && lt < b);
+  }
+  for (const el of cur.el.querySelectorAll("[data-timer]")) {
+    const a = R(el.dataset.timer), n = +(el.dataset.n || 5), k = lt - a;
+    const num = el.querySelector(".tnum"), ring = el.querySelector(".tring");
+    if (k < 0 || k >= n) { el.style.opacity = k < 0 ? 0 : clamp(1 - (k - n) / 0.3); }
+    else el.style.opacity = 1;
+    num.textContent = k < n ? String(Math.max(1, Math.ceil(n - k))) : "0";
+    ring.style.strokeDashoffset = String(clamp(k / n));
+  }
+  if (window.HOOKS && HOOKS[sc.id]) HOOKS[sc.id](lt, R, cur.el, sc);
+
+  // 잠깐 멈추세요 배지
+  const pb = document.getElementById("pausebadge");
+  let pbo = 0, pbp = 0;
+  for (const ln of sc.lines) if (ln.pause) {
+    const k = lt - ln.t1;
+    if (k >= 0 && k < ln.pause + 0.3) { pbp = clamp(k / 0.45); pbo = Math.min(clamp(k / 0.2), clamp((ln.pause + 0.3 - k) / 0.3)); }
+  }
+  pb.style.opacity = pbo;
+  pb.style.transform = `scale(${(0.6 + 0.4 * eBack(pbp)).toFixed(3)})`;
+
+  // 자막
+  let li = -1;
+  sc.lines.forEach((ln, i) => { if (lt >= ln.t0 - 0.05) li = i; });
+  const sub = document.getElementById("sub");
+  if (li >= 0) {
+    const ln = sc.lines[li];
+    const show = lt < ln.t1 + 0.42 + (ln.pause || 0) || li === sc.lines.length - 1;
+    sub.style.opacity = show ? clamp((lt - ln.t0 + 0.05) / 0.15) : 0;
+    const who = document.getElementById("who");
+    who.className = ln.spk; who.textContent = NAMES[ln.spk];
+    document.getElementById("txt").textContent = ln.sub;
+  } else sub.style.opacity = 0;
+
+  // 캐릭터
+  const env = TL.env[Math.min(frame, TL.env.length - 1)] || 0;
+  for (const k of ["T", "S"]) {
+    const av = document.getElementById("av" + k);
+    let speaking = false;
+    if (li >= 0) { const ln = sc.lines[li]; speaking = ln.spk === k && lt >= ln.t0 && lt <= ln.t1; }
+    const active = li >= 0 && sc.lines[li].spk === k;
+    av.style.opacity = active ? 1 : 0.55;
+    const bob = speaking ? Math.sin(t * 9) * 2.2 * Math.min(1, env * 1.5) : 0;
+    av.querySelector(".avhead").setAttribute("transform", `translate(0 ${bob.toFixed(2)})`);
+    av.style.transform = `scale(${active ? 1.0 : 0.9})`;
+    av.style.transformOrigin = "50% 100%";
+    const m = av.querySelector(".mouth");
+    const open = speaking ? 2 + 15 * Math.min(1, env) : 3;
+    m.setAttribute("ry", open.toFixed(1)); m.setAttribute("rx", speaking ? (11 - open * 0.15).toFixed(1) : "11");
+    const blinkPhase = (t + (k === "T" ? 0 : 1.7)) % 3.9;
+    av.querySelector(".eyes").setAttribute("transform", blinkPhase < 0.13 ? "translate(0 80) scale(1 0.15) translate(0 -80)" : "");
+  }
+  return frame;
+}
+</script>
+<script></script>
+<script>
+const TLD = {"fps":30,"scenes":[{"id":"s1","start":0.0,"dur":11.5667,"lines":[{"spk":"T","sub":"이번 주에, 현금을 한 번도 쓰지 않은 사람 있나요?","t0":1.1,"t1":3.69,"pause":0.0},{"spk":"S","sub":"저요! 체크카드랑 휴대 전화로만 썼어요.","t0":4.11,"t1":6.81,"pause":0.0},{"spk":"T","sub":"오늘은 손안의 은행, 디지털 금융 서비스를 알아볼 거예요.","t0":7.23,"t1":10.576,"pause":0.0}]},{"id":"s2","start":11.5667,"dur":12.5667,"lines":[{"spk":"T","sub":"편의점에서 체크카드로 결제하고, 친구에게 앱으로 돈을 보내고, 은행 창구 없이 현금 인출기에서 돈을 찾죠.","t0":0.7,"t1":7.626,"pause":0.0},{"spk":"T","sub":"모두 디지털 금융이에요. 현금을 만지지 않고도 돈이 오가요.","t0":8.046,"t1":11.55,"pause":0.0}]},{"id":"s3","start":24.1334,"dur":9.1,"lines":[{"spk":"T","sub":"작년 한 해, 인터넷 뱅킹 열 번 가운데 아홉 번은, 휴대 전화로 이루어졌어요.","t0":0.7,"t1":5.247,"pause":0.0},{"spk":"T","sub":"은행 일은 이제, 대부분 모바일 뱅킹으로 해요.","t0":5.667,"t1":8.106,"pause":0.0}]},{"id":"s4","start":33.2334,"dur":18.3333,"lines":[{"spk":"T","sub":"디지털 금융은 직원을 만나지 않아도 되고, 하루 종일 언제 어디서나 쓸 수 있어요. 거래 비용도 줄어요.","t0":0.7,"t1":6.819,"pause":0.0},{"spk":"T","sub":"하지만 잘못 누르면 바로 돈이 빠져나가고, 해킹이나 전산 장애 같은 보안 위험도 있어요.","t0":7.239,"t1":12.642,"pause":0.0},{"spk":"T","sub":"얼굴을 보지 않으니, 속이기도 쉬워요. 편리함과 위험은 함께 와요.","t0":13.062,"t1":17.336,"pause":0.0}]},{"id":"s5","start":51.5667,"dur":16.9,"lines":[{"spk":"T","sub":"보이스피싱 피해액은, 작년 한 해 1조 2천억 원이 넘었어요. 2년 사이 두 배 넘게 늘었죠.","t0":0.7,"t1":6.235,"pause":0.0},{"spk":"T","sub":"다행히 정부가 강하게 대응한 뒤로 줄고 있어요. 최근 열 달 동안 피해액은, 1년 전보다 43% 줄었어요.","t0":6.655,"t1":13.517,"pause":0.0},{"spk":"S","sub":"줄고 있어도, 아직 엄청 큰돈이네요.","t0":13.937,"t1":15.888,"pause":0.0}]},{"id":"s6","start":68.4667,"dur":18.0333,"lines":[{"spk":"T","sub":"대표적인 수법은 세 가지예요. 보이스피싱은 검찰이나 은행인 척 전화해서 돈이나 개인 정보를 빼내요.","t0":0.7,"t1":7.048,"pause":0.0},{"spk":"T","sub":"파밍은 악성 코드로 가짜 은행 사이트에 들어가게 해서, 금융 정보를 훔쳐요.","t0":7.468,"t1":12.044,"pause":0.0},{"spk":"T","sub":"스미싱은 문자 속 인터넷 주소를 누르게 해서, 악성 앱을 깔고 정보를 빼내요.","t0":12.464,"t1":17.034,"pause":0.0}]},{"id":"s7","start":86.5,"dur":20.7333,"lines":[{"spk":"T","sub":"요즘은 이런 수법도 늘고 있어요. 검사나 경찰이라며, 수사 중이니 혼자 숙소에 머물라고 고립시킨 뒤 돈을 옮기게 해요.","t0":0.7,"t1":8.261,"pause":0.0},{"spk":"T","sub":"상품권을 사면 대출이 된다며 통장과 체크카드를 받아 가서, 범죄에 쓰기도 해요.","t0":8.681,"t1":13.674,"pause":0.0},{"spk":"T","sub":"기관을 사칭한 수법이 피해액의 4분의 3이 넘고, 피해자의 절반은 20대와 30대였어요.","t0":14.094,"t1":19.75,"pause":0.0}]},{"id":"s8","start":107.2333,"dur":24.8667,"lines":[{"spk":"T","sub":"나를 지키는 법 다섯 가지! 돈을 달라는 기관은 가짜이니, 일단 끊어요. 문자 속 링크는 누르지 않아요.","t0":0.7,"t1":7.533,"pause":0.0},{"spk":"T","sub":"통장과 카드는 절대 빌려주지 않아요. 통장을 넘긴 사람도 처벌받을 수 있어요.","t0":7.953,"t1":12.755,"pause":0.0},{"spk":"T","sub":"혼자 결정하지 말고 가족과 먼저 상의하고, 피해가 생기면 바로 112에 신고하고 지급 정지를 요청해요.","t0":13.175,"t1":19.69,"pause":0.0},{"spk":"S","sub":"휴대 전화에서, 출처를 알 수 없는 앱 설치 차단도 켜 둘게요!","t0":20.11,"t1":23.861,"pause":0.0}]},{"id":"s9","start":132.1,"dur":20.4667,"lines":[{"spk":"T","sub":"잠깐 퀴즈! 택배 주소가 잘못됐다며 링크를 누르라는 문자가 왔어요. 이 수법은 무엇일까요?","t0":0.7,"t1":7.328,"pause":5.4},{"spk":"S","sub":"문자니까, 스미싱이요!","t0":13.148,"t1":14.456,"pause":0.0},{"spk":"T","sub":"정답! 링크는 누르지 말고, 택배 회사 공식 앱에서 직접 확인하세요.","t0":14.876,"t1":19.468,"pause":0.0}]},{"id":"s10","start":152.5667,"dur":18.6667,"lines":[{"spk":"T","sub":"오늘 배운 내용을 정리해요. 인터넷 뱅킹 열 번 중 아홉 번은 휴대 전화로 이루어져요.","t0":0.7,"t1":5.82,"pause":0.0},{"spk":"T","sub":"보이스피싱, 파밍, 스미싱처럼, 금융 사기 수법은 계속 새로 바뀌어요.","t0":6.24,"t1":10.561,"pause":0.0},{"spk":"T","sub":"끊고, 누르지 않고, 빌려주지 않고, 혼자 결정하지 않는 것. 꼭 기억하세요.","t0":10.981,"t1":15.688,"pause":0.0},{"spk":"S","sub":"이제 학습지를 풀어 볼게요!","t0":16.108,"t1":17.682,"pause":0.0}]}],"env":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.17,0.57,0.65,0.24,1.0,0.88,0.62,0.68,0.54,0.09,0.17,0.25,0.5,1.0,1.0,1.0,1.0,1.0,0.98,1.0,0.8,0.16,0.09,0.6,0.71,0.65,0.71,0.47,1.0,0.88,0.76,0.88,0.62,0.32,0.58,0.73,0.54,0.91,0.8,0.71,0.53,0.97,0.35,0.14,0.13,0.74,0.46,0.16,0.85,0.9,0.9,0.66,0.6,0.69,0.66,0.52,0.1,0.35,0.62,0.66,0.68,0.49,0.45,0.48,0.46,0.49,0.5,0.51,0.61,0.57,0.66,0.68,0.99,0.83,0.48,0.03,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.01,0.3,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0.94,0.54,0.18,0.03,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.03,0.32,0.18,1.0,0.47,0.04,0.14,0.61,0.37,0.02,0.19,0.5,1.0,0.7,0.14,0.89,0.65,0.91,0.8,0.75,0.78,0.54,0.08,0.1,0.23,0.81,0.48,1.0,1.0,0.46,0.44,0.98,0.93,0.9,0.99,1.0,0.83,0.83,0.83,0.87,0.91,0.84,0.56,0.14,0.19,0.43,0.63,0.31,0.17,0.11,0.2,0.26,0.49,0.47,0.42,0.37,0.33,0.23,0.12,0.01,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.32,0.73,0.75,0.84,0.9,0.88,0.48,1.0,1.0,0.71,0.64,0.56,0.61,0.42,0.16,0.67,0.79,0.96,1.0,0.94,0.72,0.89,0.78,0.72,0.54,0.62,0.75,0.72,0.64,0.8,0.74,0.72,0.62,0.46,0.45,0.4,0.22,0.03,0.01,0.08,0.1,0.73,0.43,0.45,0.44,0.13,0.12,0.79,0.91,0.87,0.33,0.16,0.51,0.77,0.73,0.74,0.69,0.64,0.43,0.13,0.48,0.94,0.6,0.25,0.79,0.17,0.1,0.08,0.67,0.52,1.0,1.0,0.87,0.93,0.57,0.67,0.81,0.35,0.39,0.93,0.8,0.21,0.04,0.17,0.46,0.55,0.44,0.48,0.47,0.42,0.42,0.29,0.31,0.32,0.23,0.19,0.31,0.1,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.05,0.08,0.78,0.84,0.74,0.94,1.0,0.8,0.32,1.0,0.97,0.73,0.87,0.96,0.52,0.23,0.89,0.77,0.11,0.27,0.23,0.42,0.35,0.03,0.24,0.35,0.21,0.01,0.24,0.66,0.84,0.49,0.4,0.99,0.76,0.88,0.69,0.14,0.38,0.88,0.98,0.48,0.08,0.03,0.13,0.69,0.93,0.81,0.82,0.69,0.33,0.05,0.38,0.71,0.73,0.74,0.68,0.23,0.04,0.2,0.28,0.27,0.62,0.71,0.81,0.53,0.64,1.0,1.0,1.0,1.0,0.82,0.14,1.0,1.0,1.0,1.0,0.41,0.77,1.0,1.0,0.92,0.37,0.65,1.0,0.75,1.0,1.0,1.0,0.65,0.12,0.07,0.56,0.78,0.62,0.73,0.8,0.79,0.87,0.62,0.18,0.14,0.64,0.7,0.59,0.65,0.81,0.8,0.4,0.04,0.33,0.71,0.73,0.73,0.74,0.69,0.41,0.1,0.01,0.01,0.01,0.24,0.73,0.89,0.96,0.8,0.71,0.53,0.44,0.4,0.19,0.15,0.1,0.49,0.4,0.56,0.46,0.54,1.0,1.0,1.0,0.21,0.09,0.24,0.22,0.25,0.25,0.58,0.69,0.64,0.27,0.11,0.13,0.65,0.48,0.46,0.56,0.49,0.92,1.0,0.57,0.53,0.6,0.61,0.73,0.36,0.23,0.12,0.59,0.78,0.54,0.23,0.14,0.63,0.85,0.88,0.95,0.24,0.12,0.78,0.95,0.19,0.12,0.23,0.67,0.66,0.64,0.79,0.65,0.16,0.15,0.08,0.44,0.32,0.03,0.01,0.01,0.12,0.36,0.38,0.46,0.37,0.44,0.52,0.35,0.03,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.44,1.0,1.0,0.8,0.21,0.64,0.61,0.25,0.13,0.14,0.74,0.7,0.31,0.42,0.52,0.2,0.02,0.16,1.0,1.0,1.0,1.0,0.28,0.25,0.8,0.91,0.82,0.83,0.89,0.76,0.73,0.72,0.68,0.65,0.64,0.75,0.75,0.64,0.58,0.66,0.66,0.71,0.65,0.5,0.4,0.23,0.06,0.11,0.87,0.64,0.76,0.63,0.99,1.0,0.65,0.81,0.75,0.64,0.81,0.71,0.53,0.54,0.54,0.3,0.54,0.27,0.17,0.6,1.0,0.74,0.43,0.52,0.39,0.14,0.06,0.6,0.57,0.35,0.91,0.68,0.11,0.12,0.43,0.86,0.77,0.89,0.89,0.79,0.79,0.89,0.76,0.17,0.72,0.91,0.8,0.77,0.85,0.87,0.83,0.69,0.58,0.35,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.1,0.11,0.43,0.58,0.56,0.67,0.75,0.82,0.91,0.64,0.75,0.57,0.59,0.89,0.71,0.77,0.87,0.97,1.0,1.0,1.0,1.0,0.9,0.41,0.13,0.4,0.69,0.83,0.65,0.15,0.6,0.78,0.74,0.92,0.56,0.14,0.03,0.16,0.62,0.51,0.59,0.24,0.11,0.13,0.54,0.53,0.5,0.61,0.91,0.97,0.27,0.04,0.46,0.82,0.55,0.45,0.41,0.44,0.73,0.68,0.5,0.38,0.35,0.37,0.28,0.72,0.86,0.65,0.61,0.6,0.7,0.78,0.89,0.25,0.03,0.01,0.21,0.78,0.55,0.46,0.47,0.61,0.59,0.52,0.44,0.44,0.44,0.51,0.35,0.06,0.08,0.09,0.84,0.45,0.59,1.0,0.9,0.76,0.21,0.58,1.0,0.93,0.87,0.92,0.89,0.8,0.65,0.8,0.71,0.61,0.74,0.33,0.7,1.0,1.0,0.88,0.46,0.17,0.64,0.25,0.12,0.09,0.11,0.06,0.46,0.34,0.33,0.28,0.34,0.37,0.3,0.19,0.36,0.15,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.24,0.58,0.76,0.82,0.7,0.66,0.6,0.66,0.68,0.84,1.0,0.74,1.0,0.75,0.79,0.74,0.77,0.32,0.25,1.0,1.0,1.0,0.9,0.14,0.26,0.92,0.96,0.48,0.95,0.7,0.19,0.46,0.58,0.7,0.63,0.56,0.55,1.0,1.0,0.61,0.67,1.0,0.98,0.9,0.74,0.67,0.24,0.36,0.57,0.4,0.42,0.44,0.16,0.07,0.24,0.38,0.35,0.34,0.49,0.31,0.71,0.62,0.51,0.46,0.52,0.5,0.4,0.32,0.48,0.51,0.11,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.1,0.11,0.91,0.69,0.33,0.56,0.45,0.05,0.13,0.31,1.0,1.0,1.0,0.43,0.23,0.42,0.8,0.7,0.78,0.8,0.75,0.68,0.72,0.79,0.84,0.74,0.72,0.57,0.1,0.15,0.25,0.54,0.45,1.0,1.0,1.0,0.8,0.84,0.89,0.7,0.59,0.76,0.75,0.45,0.48,0.61,0.84,0.83,0.86,0.24,0.18,0.81,0.7,0.75,0.55,0.6,0.83,0.68,0.18,0.7,0.54,0.11,0.46,0.78,0.91,0.37,0.06,0.5,0.72,0.78,0.77,0.73,0.58,0.38,0.04,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.02,0.08,0.57,0.9,0.43,0.59,0.47,0.12,0.43,0.67,0.42,0.43,0.61,0.67,0.55,0.55,0.45,0.55,0.56,0.7,0.65,0.4,0.64,0.71,0.85,0.63,0.6,0.82,0.46,0.18,0.51,0.44,0.22,0.18,0.61,0.6,0.6,0.64,0.48,0.18,0.19,0.49,0.73,0.57,0.24,0.13,0.12,0.35,0.54,0.39,0.09,0.09,0.07,0.08,0.51,0.44,0.41,0.51,0.39,0.33,0.3,0.37,0.09,0.01,0.01,0.01,0.22,0.1,1.0,1.0,1.0,1.0,1.0,0.19,0.28,0.8,0.94,0.85,0.62,0.59,0.55,0.19,0.75,0.46,0.07,0.21,0.08,0.51,0.81,1.0,0.98,0.79,0.53,0.43,0.39,0.29,0.34,0.28,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.04,0.89,0.62,0.18,0.4,0.43,0.79,0.82,0.64,0.66,0.2,0.19,0.35,1.0,0.74,0.88,0.87,0.88,0.78,0.76,0.79,0.93,1.0,0.49,1.0,0.65,0.6,0.7,0.93,1.0,0.66,0.57,0.57,0.13,0.22,0.37,0.81,0.56,0.9,0.84,0.17,0.14,0.07,0.83,0.84,0.75,0.66,0.6,0.37,0.04,0.02,1.0,0.9,0.86,0.39,0.55,0.9,0.71,0.66,0.85,0.75,0.37,0.29,0.79,0.77,0.51,0.08,0.23,0.68,0.66,0.65,0.69,0.52,0.28,0.03,0.01,0.01,0.01,0.01,0.04,1.0,0.6,0.05,0.09,0.14,0.47,0.48,0.5,0.61,0.59,0.59,0.99,0.79,0.83,0.27,0.26,0.18,0.68,0.81,0.52,0.6,0.35,0.67,0.95,0.66,0.79,0.71,0.44,1.0,0.82,0.49,0.61,0.85,0.79,0.27,0.91,0.84,0.11,0.02,0.13,0.31,0.54,0.57,0.63,0.22,0.1,0.39,1.0,1.0,0.93,0.84,0.73,0.71,0.65,0.67,0.74,0.95,0.77,0.64,0.69,0.66,0.41,0.87,0.69,0.72,0.24,0.13,0.14,0.09,0.58,0.94,0.86,0.76,0.69,0.77,0.68,0.53,0.36,0.38,0.12,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.6,1.0,1.0,1.0,0.69,0.19,1.0,0.89,0.94,1.0,1.0,0.31,0.08,0.6,1.0,1.0,0.19,0.21,0.95,1.0,0.89,0.78,0.6,0.51,0.55,0.6,0.53,0.52,0.53,0.52,0.54,0.54,0.55,0.29,0.21,0.1,0.31,1.0,0.41,0.35,0.73,0.56,0.26,0.58,0.63,0.17,0.93,0.83,0.26,0.21,0.18,0.14,0.32,0.56,0.73,0.93,0.71,0.67,0.62,0.7,0.77,0.66,0.6,0.4,0.37,0.38,0.29,0.04,0.01,0.01,0.01,0.01,0.01,0.06,0.08,0.64,0.71,0.83,0.49,0.48,0.85,0.88,0.65,0.65,0.56,0.55,0.54,0.29,1.0,0.89,0.85,0.39,0.52,0.66,0.91,0.97,0.66,0.54,0.55,0.56,0.53,0.43,0.58,0.13,0.14,0.44,0.52,0.52,0.21,0.02,0.43,1.0,0.94,0.69,1.0,0.56,0.47,0.38,0.35,0.35,0.33,0.32,0.31,0.35,0.44,0.13,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.06,0.07,1.0,1.0,0.77,0.66,0.41,0.35,0.22,0.09,0.01,0.1,0.85,0.76,0.28,0.23,0.22,0.68,0.51,0.63,0.6,0.07,0.21,0.14,0.67,0.75,1.0,1.0,1.0,1.0,1.0,0.73,0.19,0.52,0.97,1.0,0.79,0.56,0.55,0.58,0.47,0.12,0.18,0.45,0.71,0.91,0.98,0.97,1.0,1.0,0.99,1.0,0.71,0.96,0.84,0.82,0.89,0.92,0.85,0.59,0.29,0.76,0.83,0.61,0.17,0.02,0.3,1.0,0.92,0.62,0.3,0.49,0.55,0.16,0.03,0.27,0.09,0.76,0.72,0.84,0.91,0.78,0.12,0.81,0.77,0.53,0.54,0.46,0.37,0.67,0.84,0.61,0.45,0.68,0.65,0.16,0.15,0.12,0.08,0.44,0.37,0.31,0.33,0.32,0.34,0.29,0.36,0.12,0.01,0.01,0.01,0.01,0.01,0.32,0.73,0.77,0.79,0.87,0.87,0.58,0.65,0.3,0.49,0.84,0.95,0.79,0.78,0.57,0.08,0.15,0.1,0.35,0.63,0.37,1.0,1.0,0.9,0.55,0.75,0.67,0.47,0.45,0.11,0.12,0.7,0.81,0.38,0.4,0.74,0.4,0.76,0.83,0.53,0.04,0.01,0.01,0.1,0.27,0.4,0.45,0.44,0.35,0.55,0.11,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.11,0.39,0.82,0.72,0.79,0.87,0.82,0.69,0.66,0.7,0.73,0.59,0.27,0.13,0.86,0.73,0.94,0.94,0.58,0.86,0.22,1.0,1.0,0.75,0.13,0.32,0.34,0.64,0.72,0.79,0.89,0.85,0.48,0.56,0.81,0.46,0.1,0.73,0.91,0.86,0.67,0.59,0.59,0.67,0.65,0.71,0.32,0.1,0.59,0.62,0.83,1.0,0.14,0.18,0.16,0.84,0.93,0.58,0.3,0.94,0.82,0.84,0.27,0.12,0.09,0.06,0.5,0.46,0.46,0.46,0.51,0.41,0.38,0.25,0.02,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.04,0.34,0.25,0.96,0.61,0.1,0.74,0.68,0.56,0.57,0.97,0.99,0.74,0.46,0.04,0.75,0.99,1.0,0.73,0.04,0.18,1.0,0.47,0.52,0.76,0.67,0.56,0.36,0.11,0.32,0.09,0.68,0.68,1.0,1.0,0.8,0.84,0.84,0.77,0.24,0.12,0.73,0.93,0.91,0.7,0.64,0.59,0.44,0.23,0.08,0.01,0.01,0.27,0.74,0.86,0.88,0.83,1.0,1.0,0.79,0.83,0.45,0.6,0.92,0.59,0.63,0.33,0.73,0.64,0.32,1.0,0.91,0.74,0.18,0.13,0.16,0.51,0.6,0.23,0.2,0.51,0.1,0.1,0.15,0.12,0.26,0.59,0.72,0.38,0.09,0.65,0.97,0.28,0.17,0.82,0.75,0.53,0.11,0.43,0.4,0.21,0.35,0.2,0.44,1.0,0.88,0.55,0.14,0.1,0.09,0.06,0.51,0.39,0.35,0.4,0.44,0.39,0.42,0.52,0.24,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.04,0.17,0.18,1.0,1.0,1.0,0.47,1.0,1.0,1.0,0.38,0.19,0.25,0.72,1.0,0.58,0.6,1.0,1.0,1.0,0.89,0.16,0.42,0.68,0.13,0.72,0.89,0.83,0.91,0.8,0.07,0.35,0.55,0.94,0.79,0.25,0.19,0.12,0.52,1.0,0.81,0.57,0.97,0.85,0.97,0.73,0.67,0.53,0.52,0.45,0.44,0.43,0.38,0.35,0.24,0.1,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.12,0.39,1.0,0.62,0.04,0.16,1.0,0.54,0.3,1.0,0.57,0.29,0.71,0.69,0.29,0.13,0.39,0.08,0.01,1.0,0.96,0.73,0.31,0.67,0.65,0.42,0.09,0.79,1.0,0.76,0.47,1.0,1.0,0.78,0.13,0.17,0.69,0.97,1.0,1.0,1.0,0.94,0.72,0.71,0.69,0.64,0.45,0.38,0.02,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.05,0.81,1.0,0.76,0.6,0.56,0.38,0.17,0.2,0.09,0.01,0.07,0.8,0.49,0.2,0.19,0.17,0.57,0.63,0.46,0.62,0.66,0.56,0.65,0.44,0.3,0.61,0.86,0.54,0.66,0.33,0.17,0.42,0.93,0.75,0.53,0.85,0.66,0.72,1.0,0.88,0.67,0.66,0.68,0.7,0.66,0.67,0.59,0.51,0.56,0.53,0.39,0.18,0.16,0.7,0.2,0.03,0.08,0.22,0.39,0.78,0.74,0.83,1.0,0.95,0.79,0.78,0.73,0.79,0.27,0.13,0.29,0.78,0.84,0.82,0.76,0.78,0.69,0.7,0.08,0.14,0.06,0.91,0.88,0.85,0.79,0.81,0.72,0.82,0.8,0.65,0.25,0.12,0.13,0.73,0.71,0.68,0.69,0.71,0.79,0.42,0.46,0.7,0.48,0.6,0.53,0.43,0.91,0.81,0.62,0.88,0.57,0.09,0.06,0.81,0.82,0.78,0.6,0.66,0.69,0.68,0.53,0.43,0.35,0.26,0.28,0.35,0.43,0.19,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.09,0.21,0.2,0.74,0.67,0.51,0.56,0.61,0.55,0.42,0.67,1.0,0.83,0.54,0.53,0.56,0.86,0.37,0.22,0.19,0.19,0.95,0.82,0.83,0.72,0.2,0.08,1.0,1.0,0.14,0.71,0.81,0.61,0.89,1.0,0.87,0.13,0.2,0.21,0.58,0.47,0.06,0.02,0.12,0.73,1.0,1.0,0.92,0.82,0.82,0.81,0.92,0.94,0.75,0.79,0.29,0.14,0.8,0.78,0.79,0.75,0.44,0.02,0.11,0.66,0.87,0.94,0.25,0.15,0.7,1.0,1.0,0.82,0.68,1.0,0.82,0.32,0.33,1.0,1.0,1.0,1.0,0.57,0.12,0.06,0.75,1.0,0.98,0.96,0.79,0.53,0.36,0.03,0.01,0.01,0.01,0.01,0.18,0.12,1.0,1.0,1.0,0.91,0.83,0.95,0.84,0.52,0.62,0.7,0.45,0.59,0.38,0.55,0.74,0.34,0.65,0.53,0.35,0.7,0.65,0.65,0.42,0.19,0.15,0.08,0.55,0.58,0.63,0.62,0.49,0.38,0.29,0.35,0.34,0.12,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.04,0.11,0.18,0.45,0.62,0.63,0.76,0.74,0.24,0.18,0.19,0.67,0.58,0.62,0.9,0.84,0.84,0.87,0.82,0.97,0.92,0.89,0.46,0.32,1.0,1.0,0.26,0.16,0.59,1.0,0.55,0.17,0.63,0.88,1.0,0.82,0.22,0.88,0.99,1.0,0.99,0.75,0.17,0.17,0.19,0.48,0.49,0.15,0.73,1.0,0.66,1.0,0.98,0.56,0.31,0.69,1.0,0.74,0.91,1.0,0.29,0.55,0.87,1.0,1.0,1.0,1.0,0.3,0.12,0.06,0.69,0.9,0.91,0.92,0.71,0.41,0.04,0.03,0.01,0.6,0.94,0.38,0.05,0.21,0.21,0.16,1.0,1.0,0.83,0.76,0.77,1.0,1.0,0.4,0.46,0.85,0.81,0.32,0.02,0.19,0.89,0.82,0.74,0.76,0.54,0.08,0.39,0.76,0.77,0.54,0.19,0.17,0.44,0.66,0.89,0.95,0.77,1.0,0.64,0.9,0.52,0.04,0.43,1.0,0.57,0.29,0.33,0.32,0.29,0.25,0.21,0.22,0.33,0.34,0.05,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.24,0.86,1.0,0.64,0.21,0.43,0.88,0.76,0.91,1.0,0.83,0.61,0.42,0.34,0.71,0.64,0.94,0.97,0.74,0.7,0.47,0.21,0.28,0.22,0.01,0.66,1.0,0.41,0.06,0.02,0.24,1.0,0.54,0.69,1.0,1.0,0.81,0.16,1.0,0.9,0.92,0.36,0.16,0.12,0.07,0.65,0.59,0.6,0.61,0.61,0.67,0.68,0.59,0.55,0.47,0.29,0.06,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.1,0.07,0.73,0.63,0.71,0.7,0.56,0.65,0.83,0.68,0.64,0.82,0.61,0.15,0.13,0.48,0.65,0.52,0.51,0.25,0.17,0.47,0.84,0.67,0.55,0.86,0.58,0.75,0.9,0.8,0.49,0.45,0.48,0.61,0.73,0.72,0.75,0.71,0.53,0.36,0.09,0.08,0.14,0.25,0.55,0.18,1.0,1.0,1.0,0.25,0.29,0.8,0.81,0.83,0.86,0.79,0.96,0.91,0.77,0.73,0.73,0.72,0.66,0.11,0.05,0.87,0.81,0.87,0.5,1.0,1.0,0.56,0.2,0.08,0.32,0.07,0.11,0.12,0.84,1.0,1.0,0.9,0.71,0.78,1.0,1.0,0.9,0.98,0.99,1.0,1.0,1.0,1.0,1.0,0.75,0.12,0.79,0.96,0.45,0.04,0.25,0.16,1.0,0.52,0.9,0.55,0.09,0.33,0.27,0.17,0.02,0.07,0.09,0.59,0.85,0.83,0.61,0.14,0.53,0.74,0.77,0.71,0.43,0.39,0.3,0.07,0.01,0.01,0.1,0.04,0.68,0.75,0.85,0.81,0.74,0.74,0.9,0.71,0.58,0.67,0.76,0.37,0.49,0.6,0.11,0.58,0.96,0.66,0.17,0.42,0.6,0.49,0.44,0.35,0.22,0.25,0.29,0.24,0.05,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.11,0.11,0.25,0.77,0.64,0.54,0.05,0.3,0.77,0.78,0.49,0.09,1.0,0.84,0.62,0.77,0.95,1.0,0.95,0.31,0.13,0.63,0.83,0.72,0.82,0.81,1.0,0.96,0.68,0.7,0.27,0.47,1.0,0.53,0.07,0.28,0.15,0.49,0.55,0.96,0.56,0.18,0.88,0.84,0.59,0.61,0.47,0.96,0.94,0.67,0.57,0.7,0.79,0.77,0.77,0.79,0.71,0.19,0.03,0.19,0.2,0.7,0.77,0.78,0.39,1.0,1.0,0.61,0.59,0.47,0.84,1.0,1.0,0.15,0.23,0.1,0.58,0.31,0.06,0.16,0.39,0.04,0.27,0.1,0.96,1.0,0.26,0.91,1.0,0.94,1.0,0.48,0.18,0.46,0.59,0.13,0.83,0.9,0.59,0.18,0.84,0.84,0.42,0.14,0.12,0.9,0.97,0.94,0.88,0.72,0.51,0.14,0.02,0.14,0.67,1.0,0.85,1.0,1.0,0.55,1.0,0.97,0.95,0.99,0.5,0.17,0.21,0.21,0.81,0.32,0.44,0.76,0.19,0.62,0.78,0.67,0.52,0.84,0.99,0.79,0.6,0.55,0.51,0.44,0.42,0.37,0.14,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.07,0.07,0.79,0.55,0.66,1.0,0.89,0.57,0.79,0.8,0.98,0.45,0.14,0.61,1.0,0.13,0.11,0.32,0.68,0.68,0.99,1.0,1.0,0.84,0.29,0.31,0.3,0.02,0.05,1.0,1.0,0.74,0.17,0.6,0.73,0.78,0.77,0.41,0.03,0.07,0.21,0.18,0.76,0.8,1.0,1.0,1.0,1.0,1.0,0.37,0.29,1.0,0.88,0.55,0.23,0.09,0.13,0.92,0.88,0.23,0.51,0.79,0.84,0.72,0.75,0.62,0.25,0.11,0.16,0.14,0.79,0.62,0.67,0.79,0.83,0.81,1.0,0.84,0.46,0.5,0.4,0.05,0.02,0.02,0.44,0.91,1.0,1.0,0.97,0.73,0.31,0.04,0.01,0.01,0.01,0.01,0.01,0.01,0.14,0.12,0.63,0.67,1.0,1.0,0.31,0.33,0.9,1.0,1.0,0.87,0.51,0.22,0.09,0.56,0.87,0.82,0.39,0.56,0.73,0.55,0.39,0.5,0.58,0.49,0.42,0.21,0.28,0.71,0.81,0.31,0.23,0.54,0.08,0.01,0.01,0.78,1.0,1.0,0.97,0.84,0.73,0.2,0.1,0.41,0.62,0.67,0.52,0.23,0.03,0.01,0.01,0.35,0.82,0.98,0.78,0.44,0.11,0.07,0.08,0.25,0.26,0.25,0.27,0.27,0.26,0.34,0.24,0.01,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.14,0.84,0.85,0.91,0.79,0.5,1.0,0.96,0.76,0.44,0.19,0.35,0.51,0.44,0.04,0.27,0.15,1.0,0.75,0.95,0.74,0.89,0.83,1.0,1.0,1.0,0.22,0.07,0.04,0.01,0.01,0.12,0.2,0.78,0.53,0.19,0.82,1.0,0.18,0.03,0.02,0.51,1.0,1.0,0.74,0.14,0.14,0.15,0.28,0.28,0.28,0.29,0.39,0.31,0.02,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.12,0.34,1.0,0.95,0.94,0.92,0.84,0.9,0.58,0.23,0.62,0.69,0.61,0.73,0.71,0.74,0.55,0.42,0.47,0.48,0.57,0.31,0.07,0.27,0.59,0.11,0.57,0.67,0.54,0.43,0.49,0.47,0.45,0.43,0.16,0.27,0.29,0.87,0.37,0.03,0.01,0.6,1.0,1.0,1.0,0.94,0.94,0.96,0.9,0.9,0.93,0.92,0.87,0.66,0.32,0.31,1.0,0.95,0.32,0.04,0.8,0.92,0.54,0.5,0.14,0.01,0.83,0.81,0.77,0.96,0.9,0.68,0.5,0.41,0.33,0.34,0.37,0.3,0.02,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.19,0.65,0.98,1.0,0.5,0.2,0.96,0.97,0.44,0.17,0.14,0.53,0.4,0.49,0.51,0.51,0.45,0.43,0.31,0.21,0.06,0.47,0.51,0.54,0.55,0.66,0.59,0.53,0.78,0.6,0.89,1.0,0.79,0.16,0.2,0.95,0.82,0.58,0.46,0.25,0.31,0.5,0.44,0.41,0.35,0.35,0.33,0.39,0.36,0.49,0.45,0.06,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.14,0.06,0.66,0.43,0.5,0.71,0.29,1.0,0.99,0.63,0.64,0.55,1.0,1.0,0.59,0.08,0.32,0.23,0.43,1.0,0.79,0.26,0.96,0.76,0.82,1.0,1.0,0.96,0.92,0.95,0.19,0.52,1.0,0.99,0.22,0.03,1.0,0.97,0.26,0.07,0.14,0.53,0.67,0.75,0.74,1.0,1.0,0.97,0.2,0.38,0.44,0.2,0.23,1.0,1.0,0.92,0.82,0.69,0.44,0.56,0.73,0.74,0.66,0.66,0.67,0.69,0.71,0.65,0.62,0.48,0.26,0.02,0.01,0.01,0.01,0.07,0.08,0.72,0.75,0.75,0.41,1.0,0.87,0.42,0.72,0.82,0.67,0.92,0.95,0.6,0.62,0.54,0.39,0.63,0.56,0.53,0.22,0.4,0.72,0.64,0.76,0.67,0.65,0.6,0.37,0.74,0.69,0.09,0.25,0.1,0.15,0.81,0.2,1.0,1.0,1.0,0.23,0.98,0.9,0.19,0.54,0.66,0.3,0.09,0.08,0.1,0.29,0.26,0.1,0.08,0.08,0.05,0.34,0.4,0.34,0.41,0.37,0.34,0.31,0.38,0.22,0.01,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.02,0.78,0.68,0.78,0.37,1.0,1.0,0.85,0.16,0.53,1.0,0.94,0.26,0.06,0.61,0.85,0.56,0.6,1.0,0.92,0.2,0.32,0.43,0.51,0.83,0.73,0.73,0.74,0.75,0.26,0.07,0.58,0.75,0.79,0.79,0.82,0.21,0.21,0.2,0.21,0.82,0.44,0.28,0.88,0.16,0.02,0.6,0.99,0.77,0.36,0.77,0.68,0.57,0.59,0.23,1.0,0.76,0.14,0.1,0.21,0.52,0.55,0.7,0.84,0.92,0.87,0.83,0.84,0.44,0.07,0.35,0.77,0.76,0.77,0.74,0.68,0.65,0.12,0.03,0.01,0.09,0.34,0.42,0.66,1.0,1.0,0.99,0.34,1.0,1.0,0.3,0.1,0.48,0.6,0.61,0.61,0.31,0.57,0.62,0.65,0.65,0.77,0.82,0.72,0.52,0.55,0.62,0.18,0.15,0.33,0.86,0.64,0.66,0.91,0.76,0.4,0.58,0.75,0.66,0.51,0.56,0.73,0.79,0.68,0.49,0.75,0.79,1.0,1.0,1.0,0.51,0.26,0.26,0.36,0.66,0.74,0.71,0.39,1.0,1.0,1.0,0.93,0.87,0.79,0.41,0.05,0.24,0.69,0.73,0.7,0.66,0.3,0.04,0.17,0.32,0.56,0.72,0.39,1.0,0.27,0.03,0.01,0.23,0.79,0.51,0.79,0.77,0.45,0.42,1.0,0.36,0.9,0.86,0.54,0.78,0.7,0.29,0.03,0.22,0.1,0.56,0.5,0.43,0.33,0.4,0.4,0.36,0.32,0.28,0.34,0.42,0.57,0.34,0.03,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.02,0.08,0.15,1.0,0.72,0.87,1.0,1.0,0.9,0.21,0.79,0.97,0.95,0.95,1.0,0.97,0.82,0.78,0.59,0.28,0.16,0.09,0.49,0.6,0.55,0.4,0.21,0.02,0.01,0.22,0.16,0.25,1.0,0.89,0.14,0.21,0.31,0.6,1.0,0.73,0.9,1.0,0.94,0.83,0.76,0.74,0.8,0.51,0.16,0.15,0.16,0.33,1.0,1.0,0.96,1.0,1.0,1.0,1.0,0.83,0.85,0.73,0.63,0.07,0.09,0.22,0.12,0.38,1.0,0.87,0.08,0.19,0.32,0.36,0.26,0.03,0.23,0.14,0.41,0.91,0.26,0.74,1.0,1.0,1.0,0.96,0.58,0.96,0.28,0.04,0.16,0.11,0.13,0.97,0.86,0.08,0.95,1.0,0.84,0.12,0.03,0.07,0.52,0.66,0.5,0.38,0.31,0.25,0.19,0.11,0.03,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.05,0.18,0.24,0.65,0.87,0.68,0.72,0.24,0.03,0.25,1.0,0.73,0.6,0.52,0.67,0.24,0.11,0.12,0.19,0.22,0.76,1.0,1.0,0.25,0.25,0.4,1.0,1.0,0.99,1.0,0.95,0.58,0.38,0.35,0.29,0.02,0.01,0.01,0.01,0.01,0.01,0.01,0.12,0.19,0.54,0.03,0.02,0.01,0.72,0.68,0.6,0.11,0.25,0.48,0.36,0.19,0.65,0.9,0.36,0.61,0.89,0.69,0.13,0.24,0.19,0.66,0.81,0.59,0.69,0.78,0.68,0.07,0.01,0.73,0.76,0.42,0.02,0.01,0.63,0.98,0.79,0.53,0.59,0.73,0.87,0.89,0.86,0.81,0.37,0.82,0.94,0.95,1.0,0.66,0.31,0.14,1.0,0.37,1.0,1.0,0.92,0.56,0.54,1.0,1.0,0.65,1.0,1.0,0.4,1.0,0.83,0.65,0.64,0.64,0.63,0.61,0.52,0.45,0.53,0.62,0.36,0.08,0.5,0.97,0.52,0.25,0.83,0.83,0.75,0.73,0.59,0.21,0.09,0.07,0.07,0.46,0.6,0.59,0.5,0.55,0.53,0.5,0.47,0.36,0.32,0.3,0.01,0.0,0.01,0.01,0.01,0.01,0.01,0.01,0.0,0.01,0.01,0.01,0.24,0.57,0.65,0.5,0.23,0.24,0.12,0.56,0.21,0.02,0.34,0.89,0.73,0.15,0.46,0.67,0.61,0.62,0.6,0.59,0.69,0.89,1.0,1.0,0.53,0.29,0.28,0.65,0.34,0.02,0.15,0.54,0.44,0.51,0.74,0.82,0.87,0.49,0.04,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.01,0.53,1.0,1.0,1.0,1.0,0.55,1.0,1.0,0.93,0.86,0.77,0.12,0.02,0.39,0.96,0.78,0.26,0.17,0.22,0.43,1.0,1.0,1.0,0.68,0.31,0.32,0.26,0.74,0.81,0.89,0.94,0.8,0.73,0.63,0.42,0.21,0.03,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.2,0.54,0.87,0.79,0.91,1.0,0.6,1.0,0.53,0.33,0.33,0.04,0.02,0.01,0.01,0.0,0.0,0.0,0.0,0.01,0.01,0.01,0.01,0.31,0.77,0.58,0.58,0.67,0.3,0.22,0.5,0.73,0.56,0.63,0.64,0.87,0.87,0.91,0.76,1.0,1.0,0.57,0.25,0.58,0.63,0.71,0.89,0.8,0.73,0.81,0.56,0.05,0.43,0.76,0.81,0.77,0.81,0.82,0.63,0.36,0.08,0.02,0.01,0.01,0.09,0.51,0.57,0.03,0.01,0.28,0.87,1.0,0.63,0.77,1.0,0.96,0.15,0.52,0.85,0.69,0.34,0.11,0.44,0.74,0.7,0.7,0.54,0.36,0.64,0.57,0.27,1.0,1.0,0.65,0.47,1.0,1.0,0.55,0.16,0.53,0.91,0.89,0.9,0.16,0.15,0.18,0.42,0.05,0.02,0.01,0.29,1.0,0.68,0.13,0.04,0.05,0.34,0.64,0.26,0.52,0.6,0.66,0.66,0.57,0.47,0.12,0.22,0.51,0.45,0.48,0.44,0.32,0.49,0.43,0.05,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.28,0.75,0.7,0.91,0.8,0.74,0.74,0.23,1.0,1.0,1.0,1.0,1.0,0.76,0.8,0.8,0.85,0.88,1.0,0.97,0.74,0.66,0.71,0.86,0.67,0.27,0.09,0.49,0.47,0.5,0.53,0.54,0.49,0.54,0.53,0.59,0.61,0.48,0.43,0.46,0.43,0.43,0.43,0.33,0.36,0.37,0.2,0.02,0.01,0.01,0.01,0.01,0.01,0.28,0.52,0.59,0.6,0.28,0.26,0.7,0.7,0.74,0.69,0.5,0.09,0.02,0.56,0.59,0.48,0.52,0.17,0.12,0.26,0.54,0.61,0.58,0.55,0.84,0.82,0.88,0.47,0.05,0.02,0.94,0.62,0.46,0.51,0.47,0.19,0.24,0.67,0.55,0.43,0.3,0.2,0.41,0.96,0.89,0.57,0.71,0.96,0.18,0.02,0.01,0.88,0.78,0.57,0.72,0.68,0.64,0.53,0.57,0.61,0.19,0.14,0.62,0.59,0.38,1.0,1.0,0.72,0.27,0.88,1.0,0.87,1.0,1.0,0.93,0.93,0.96,0.91,0.85,0.9,0.57,0.8,1.0,1.0,1.0,1.0,0.13,0.42,0.91,0.9,0.89,0.87,0.95,1.0,0.94,0.76,0.62,0.35,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.05,0.97,1.0,1.0,0.64,0.36,0.27,0.14,0.04,0.0,0.13,0.44,0.54,0.21,0.21,0.18,0.16,0.63,0.73,0.73,0.63,0.6,0.6,0.62,0.3,0.06,0.14,0.18,0.86,0.87,0.54,0.65,0.69,0.68,0.6,0.59,0.65,0.48,0.18,0.11,0.76,0.8,0.83,0.79,0.27,0.22,0.41,0.43,0.55,0.47,0.24,0.36,0.79,0.6,0.75,0.87,0.83,0.69,0.46,0.38,0.29,0.11,0.12,0.01,0.11,0.14,0.91,0.91,1.0,1.0,0.97,1.0,0.96,0.32,1.0,0.89,0.34,0.89,0.74,0.22,0.11,0.27,0.04,0.1,1.0,0.93,0.16,0.74,0.57,0.55,0.37,0.19,0.24,0.84,0.69,0.16,0.36,0.53,0.07,0.12,0.13,0.26,0.87,0.66,1.0,0.94,0.26,0.59,0.67,0.24,0.03,0.01,0.01,0.08,0.63,0.85,0.66,0.54,0.46,0.41,0.4,0.44,0.32,0.35,0.47,0.33,0.03,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.01,0.5,1.0,0.56,0.65,0.66,0.58,0.06,0.02,0.14,0.08,0.38,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.54,0.64,0.73,1.0,1.0,1.0,1.0,1.0,0.29,0.22,1.0,1.0,0.86,0.64,0.68,0.56,0.06,0.15,0.07,0.52,1.0,0.9,0.91,0.51,0.04,0.1,0.42,0.69,0.67,0.67,1.0,1.0,0.96,0.22,0.28,0.61,0.27,0.18,0.4,0.9,0.73,0.45,0.27,0.3,0.07,0.14,0.05,0.1,0.62,0.67,0.68,0.57,0.12,0.05,0.2,0.94,0.84,0.97,0.57,0.96,1.0,0.74,0.13,0.54,0.94,1.0,0.48,0.05,0.16,0.89,0.58,0.49,0.68,0.82,0.56,0.12,0.56,1.0,0.62,0.34,0.29,0.31,0.34,0.4,0.39,0.37,0.25,0.41,0.52,0.32,0.03,0.01,0.01,0.01,0.02,1.0,1.0,0.55,0.07,0.02,0.07,0.12,1.0,1.0,1.0,0.36,0.03,0.22,0.26,0.69,0.34,0.17,0.44,0.57,0.58,0.49,0.44,0.41,0.41,0.33,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.02,0.83,0.79,0.34,1.0,1.0,0.84,0.74,0.76,0.08,0.22,0.23,0.85,0.18,0.03,0.06,0.23,1.0,0.74,0.95,1.0,0.7,0.04,0.05,0.13,0.26,0.7,1.0,1.0,0.76,0.34,0.91,0.83,0.44,0.04,0.02,0.09,0.54,0.56,0.46,0.4,0.38,0.35,0.24,0.09,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"total":171.233};
+(function(){
+const A = new Audio(); A.preload = "auto";
+const $ = id => document.getElementById(id), frame = $("frame");
+const TOTAL = TLD.total;
+setup(TLD);
+// 화면 맞추기
+function fit(){ const s = Math.min(innerWidth/1920, innerHeight/1080); frame.style.transform = `scale(${s})`;
+  frame.style.left = ((innerWidth-1920*s)/2)+"px"; frame.style.top = ((innerHeight-1080*s)/2)+"px"; }
+addEventListener("resize", fit); fit();
+// 퀴즈 멈춤 지점
+const QP = []; TLD.scenes.forEach(s => s.lines.forEach(l => { if (l.pause) QP.push(s.start + l.t1 + 0.45); }));
+// 시크바 표시
+const marks = $("marks");
+TLD.scenes.forEach((s,i) => { if (i) marks.insertAdjacentHTML("beforeend", `<div class="mk" style="left:${s.start/TOTAL*100}%"></div>`); });
+QP.forEach(p => marks.insertAdjacentHTML("beforeend", `<div class="mk q" style="left:${p/TOTAL*100}%" title="퀴즈"></div>`));
+const fmt = t => { t = Math.max(0, Math.floor(t)); return Math.floor(t/60)+":"+String(t%60).padStart(2,"0"); };
+// 시계: 오디오 시간에 맞춰 부드럽게
+let baseT = 0, baseNow = 0, playing = false, lastT = -1, autoQ = true, done = new Set();
+const now = () => performance.now();
+function curT(){ if (!playing) return A.currentTime; const t = baseT + (now()-baseNow)/1000*A.playbackRate;
+  if (Math.abs(t - A.currentTime) > 0.25) { baseT = A.currentTime; baseNow = now(); return baseT; } return t; }
+function draw(t){ t = Math.min(Math.max(t,0), TOTAL-0.001); render(t); lastT = t;
+  $("seekfill").style.width = (t/TOTAL*100)+"%"; $("seekknob").style.left = (t/TOTAL*100)+"%";
+  $("time").textContent = fmt(t)+" / "+fmt(TOTAL); }
+function loop(){ if (playing) { const t = curT();
+    if (autoQ) for (const p of QP) if (!done.has(p) && lastT < p && t >= p) { done.add(p); A.pause(); A.currentTime = p; draw(p); $("quiz").style.display = "flex"; break; }
+    if (playing) draw(t); }
+  requestAnimationFrame(loop); }
+A.addEventListener("playing", () => { playing = true; baseT = A.currentTime; baseNow = now(); $("pp").textContent = "⏸ 일시정지"; poke(); });
+A.addEventListener("pause", () => { playing = false; $("pp").textContent = "▶ 재생"; showUI(); draw(A.currentTime); });
+A.addEventListener("ended", () => { playing = false; $("pp").textContent = "↺ 다시 보기"; showUI(); draw(TOTAL); });
+function play(){ $("quiz").style.display = "none"; if (A.ended || A.currentTime >= TOTAL - 0.05) { A.currentTime = 0; done.clear(); } A.play(); }
+function toggle(){ if (playing) A.pause(); else play(); }
+function seek(t){ t = Math.min(Math.max(t,0), TOTAL-0.05); A.currentTime = t; baseT = t; baseNow = now();
+  done = new Set(QP.filter(p => p <= t + 0.01)); $("quiz").style.display = "none"; draw(t); }
+// 준비: 글꼴 4종 + 오디오
+const fontsReady = Promise.all(["400","500","700","900"].map(w => document.fonts.load(`${w} 40px VidKR`, "가")));
+// 음성은 통째로 받아 두기(서버 사정과 관계없이 앞뒤로 옮겨 보기 가능)
+const audioReady = fetch("ch7.m4a?v=77c3e572").then(r => { if (!r.ok) throw new Error(r.status); return r.blob(); })
+  .then(b => new Promise(res => { A.src = URL.createObjectURL(b); if (A.readyState >= 3) res(); A.addEventListener("canplaythrough", res, { once:true }); setTimeout(res, 5000); }))
+  .catch(() => { A.src = "ch7.m4a?v=77c3e572"; });
+fontsReady.then(() => draw(0.9));
+Promise.all([fontsReady, audioReady]).then(() => { $("start").disabled = false;
+  $("ctext").innerHTML = "재생<small>7차시 · 디지털 시대의 금융 서비스</small>"; });
+$("start").onclick = () => { $("cover").style.display = "none"; showUI(); seek(0); play(); };
+$("qgo").onclick = play;
+$("pp").onclick = toggle;
+$("bq").onclick = () => { autoQ = !autoQ; $("bq").classList.toggle("on", autoQ); };
+$("bc").onclick = () => { const on = $("bc").classList.toggle("on"); $("sub").style.visibility = on ? "" : "hidden"; };
+const SP = [1, 1.25, 0.8]; let si = 0;
+$("bs").onclick = () => { si = (si+1)%SP.length; A.playbackRate = SP[si]; $("bs").textContent = SP[si]+"×"; baseT = A.currentTime; baseNow = now(); };
+$("bf").onclick = () => { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen(); };
+// 시크바
+const sw = $("seekwrap"); let drag = false;
+const posT = e => { const r = sw.getBoundingClientRect(); return (Math.min(Math.max(e.clientX - r.left, 0), r.width)/r.width)*TOTAL; };
+sw.addEventListener("pointerdown", e => { drag = true; sw.setPointerCapture(e.pointerId); seek(posT(e)); });
+sw.addEventListener("pointermove", e => { const t = posT(e), tip = $("tip"); tip.style.display = "block"; tip.style.left = (t/TOTAL*100)+"%";
+  let k = 0; TLD.scenes.forEach((s,i) => { if (t >= s.start) k = i; }); tip.textContent = fmt(t)+" · 장면 "+(k+1); if (drag) seek(t); });
+sw.addEventListener("pointerup", () => drag = false);
+sw.addEventListener("pointerleave", () => $("tip").style.display = "none");
+// 조작판 자동 숨김
+let hideTimer; function showUI(){ $("ui").classList.remove("hide"); document.body.style.cursor = ""; }
+function poke(){ showUI(); clearTimeout(hideTimer); hideTimer = setTimeout(() => { if (playing) { $("ui").classList.add("hide"); document.body.style.cursor = "none"; } }, 2500); }
+addEventListener("pointermove", poke);
+frame.addEventListener("click", e => { if ($("cover").style.display !== "none" || e.target.closest("#qgo")) return; toggle(); });
+addEventListener("keydown", e => {
+  if (e.code === "Space" || e.key === "k") { e.preventDefault(); if ($("cover").style.display !== "none") $("start").click(); else toggle(); }
+  else if (e.key === "ArrowRight") seek(A.currentTime + 5); else if (e.key === "ArrowLeft") seek(A.currentTime - 5);
+  else if (e.key === "f" || e.key === "F") $("bf").click(); else if (e.key === "c" || e.key === "C") $("bc").click();
+  poke(); });
+window.PLAYER = { A, seek, play, toggle };
+requestAnimationFrame(loop);
+})();
+</script>
+</body></html>
