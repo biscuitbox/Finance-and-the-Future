@@ -1,0 +1,550 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>21차시 영상 · 모의 주식 투자 되짚기 | 금융과 미래</title>
+<style>
+@font-face{font-family:"VidKR";src:url("fonts/ch21b-Regular.woff2?v=3d5fde83") format("woff2");font-weight:100 450;font-display:block}
+@font-face{font-family:"VidKR";src:url("fonts/ch21b-Medium.woff2?v=f968bc73") format("woff2");font-weight:451 550;font-display:block}
+@font-face{font-family:"VidKR";src:url("fonts/ch21b-Bold.woff2?v=05c86a58") format("woff2");font-weight:551 750;font-display:block}
+@font-face{font-family:"VidKR";src:url("fonts/ch21b-Black.woff2?v=b0e68c82") format("woff2");font-weight:751 1000;font-display:block}
+
+:root{--pine:#10403B;--teal:#127475;--steel:#1C6E8C;--amber:#E08E0B;--amberdk:#A96A08;--brick:#8C3A3A;--brickbg:#F5EFEF;--tealbg:#E9F2F0;--amberbg:#FCF4E4;--steelbg:#E8F1F5;--ink:#17302D;--grey:#5C6B68;--line:#D5E1DE}
+*{box-sizing:border-box;margin:0;padding:0}
+#frame{width:1920px;height:1080px;overflow:hidden;background:#fff;font-family:"VidKR","Malgun Gothic","Noto Sans CJK KR","Noto Sans KR",sans-serif;color:var(--ink);word-break:keep-all}
+#stage{position:absolute;inset:0;background:#fff}
+.scene{position:absolute;left:0;top:0;width:1920px;height:910px;display:none;background:#fff}
+.scene.dark{background:var(--pine);color:#fff}
+.hdr{position:absolute;left:90px;top:44px;right:90px;display:flex;align-items:center;gap:22px}
+.hdr .tag{background:var(--pine);color:#fff;font-weight:800;font-size:34px;padding:10px 28px;border-radius:40px}
+.hdr .ttl{font-size:46px;font-weight:800;color:var(--pine)}
+.hdr .lesson{margin-left:auto;font-size:26px;color:var(--grey);font-weight:600}
+.body{position:absolute;left:90px;right:90px;top:140px;bottom:30px}
+.card{background:var(--tealbg);border-radius:28px;padding:30px 38px}
+.card.am{background:var(--amberbg)}.card.st{background:var(--steelbg)}.card.br{background:var(--brickbg)}.card.wh{background:#fff;border:3px solid var(--line)}
+.card h3{font-size:44px;font-weight:800;color:var(--pine);margin-bottom:12px}
+.card p{font-size:34px;line-height:1.45;font-weight:600}
+.big{font-size:84px;font-weight:900;letter-spacing:-1px}
+.mid{font-size:50px;font-weight:800}
+.teal{color:var(--teal)}.steel{color:var(--steel)}.amber{color:var(--amber)}.amberdk{color:var(--amberdk)}.brick{color:var(--brick)}.pine{color:var(--pine)}.grey{color:var(--grey)}
+.pill{display:inline-block;border-radius:999px;padding:10px 28px;font-weight:800;font-size:34px;background:var(--pine);color:#fff}
+.pill.teal{background:var(--teal);color:#fff}.pill.steel{background:var(--steel);color:#fff}.pill.amber{background:var(--amberdk);color:#fff}.pill.brick{background:var(--brick);color:#fff}.pill.light{background:var(--tealbg);color:var(--pine)}
+.row{display:flex;align-items:center;gap:24px}
+.col{display:flex;flex-direction:column;gap:24px}
+.src{position:absolute;left:90px;right:90px;bottom:6px;font-size:22px;color:var(--grey);font-weight:600}
+.hl{outline:6px solid var(--amber);outline-offset:6px;box-shadow:0 0 0 14px rgba(224,142,11,.18)}
+.stamp{border:6px solid var(--brick);color:var(--brick);font-weight:900;font-size:40px;padding:6px 22px;border-radius:14px;background:rgba(255,255,255,.92)}
+svg text{font-family:"VidKR","Malgun Gothic","Noto Sans CJK KR",sans-serif}
+.ico{width:120px;height:120px}
+/* 자막 */
+#bar{position:absolute;left:0;right:0;bottom:0;height:170px;background:var(--pine);border-top:6px solid var(--amber)}
+#sub{position:absolute;left:250px;right:250px;top:14px;bottom:10px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+#who{font-size:26px;font-weight:800;padding:3px 18px;border-radius:20px;margin-bottom:6px}
+#who.T{background:var(--teal);color:#fff}#who.S{background:var(--amber);color:#10302c}
+#txt{font-size:44px;line-height:1.3;font-weight:700;color:#fff}
+.av{position:absolute;bottom:8px;width:190px;height:200px}
+#avT{left:34px}#avS{right:34px}
+.avname{position:absolute;bottom:-2px;left:0;right:0;text-align:center;font-size:22px;font-weight:800;color:#cfe3df}
+#pausebadge{position:absolute;right:70px;bottom:196px;transform-origin:100% 50%;opacity:0;z-index:5;display:flex;align-items:center;gap:22px;background:var(--brick);color:#fff;border-radius:999px;padding:16px 40px 16px 20px;font-size:38px;font-weight:700;white-space:nowrap;box-shadow:0 10px 28px rgba(0,0,0,.25);pointer-events:none}
+#pausebadge b{font-weight:900;color:#FFE8A8;margin-right:8px}
+#pausebadge .pb-ico{width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;gap:9px}
+#pausebadge .pb-ico i{display:block;width:11px;height:30px;background:var(--brick);border-radius:3px}
+
+
+.sumi{display:flex;align-items:center;gap:30px;background:rgba(255,255,255,.08);border-radius:26px;padding:22px 36px;font-size:40px;font-weight:800;color:#fff}
+.sumi .n{min-width:72px;height:72px;border-radius:50%;background:var(--amber);color:#10302c;display:flex;align-items:center;justify-content:center;font-weight:900}
+.up{color:#D23B3B} .dn{color:#2F6FD1}
+.board{position:absolute;left:0;right:0;top:0;height:492px;background:#0d1b19;border-radius:26px;border:6px solid #23403b;overflow:hidden}
+.bcols{display:flex;gap:0} .bcol{flex:1} .bcol+.bcol{border-left:3px solid #23403b}
+.bhead,.brow{display:grid;grid-template-columns:320px 230px 240px;align-items:center;gap:10px;padding:0 24px}
+.bhead{height:52px;background:#17302c;color:#9fb8b3;font-size:26px;font-weight:800}
+.brow{height:61px;border-bottom:2px solid #1d3531;color:#fff;font-size:40px;font-weight:900;font-variant-numeric:tabular-nums}
+.brow .bn{font-size:38px} .brow .bp,.brow .bc{text-align:right;border-radius:10px;padding:0 10px} .brow .bc{font-size:32px}
+.ticker{position:absolute;left:0;right:0;bottom:0;height:56px;background:#B3261E;color:#fff;font-size:29px;font-weight:800;overflow:hidden;white-space:nowrap}
+.ticker span{position:absolute;top:9px}
+.turnbig{position:absolute;left:640px;top:120px;width:460px;height:230px;border-radius:34px;background:var(--amber);color:#10302c;display:flex;align-items:center;justify-content:center;font-size:120px;font-weight:900;box-shadow:0 20px 40px rgba(0,0,0,.35);z-index:3}
+.rrow{display:grid;grid-template-columns:240px 200px 220px 360px 1fr;align-items:center;height:88px;font-size:38px;font-weight:900;border-bottom:3px solid var(--line);padding:0 30px;font-variant-numeric:tabular-nums}
+.rrow.h{font-size:28px;color:var(--grey);font-weight:800;height:56px;background:var(--tealbg);border-radius:16px 16px 0 0;border:0}
+.col2{border-radius:30px;padding:26px 36px;position:relative}
+.col2 h3{font-size:46px;font-weight:900;color:#fff;border-radius:18px;padding:8px 26px;display:inline-block}
+.col2 li{font-size:34px;font-weight:700;margin:16px 0 0 40px;line-height:1.35}
+.vs{width:260px;height:260px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:44px;font-weight:900;color:#fff}
+.bar{height:84px;border-radius:0 18px 18px 0;display:flex;align-items:center;justify-content:flex-end;padding-right:24px;color:#fff;font-size:40px;font-weight:900;font-variant-numeric:tabular-nums}
+.blab{font-size:34px;font-weight:900;margin-bottom:10px}
+
+html,body{margin:0;width:100%;height:100%;background:#0b1f1c;overflow:hidden}
+#frame{position:absolute;left:0;top:0;transform-origin:0 0;box-shadow:0 0 0 1px #000}
+/* 플레이어 */
+#ui{position:fixed;left:0;right:0;bottom:0;padding:14px 18px 12px;background:linear-gradient(transparent,rgba(5,20,18,.92));color:#fff;font:600 15px/1.2 "VidKR","Malgun Gothic",sans-serif;transition:opacity .3s;z-index:20}
+#ui.hide{opacity:0;pointer-events:none}
+#seekwrap{position:relative;height:22px;cursor:pointer;margin-bottom:8px}
+#seekbg{position:absolute;left:0;right:0;top:9px;height:5px;border-radius:3px;background:rgba(255,255,255,.28)}
+#seekfill{position:absolute;left:0;top:9px;height:5px;border-radius:3px;background:#E08E0B}
+#seekknob{position:absolute;top:4px;width:15px;height:15px;margin-left:-7px;border-radius:50%;background:#fff}
+.mk{position:absolute;top:7px;width:2px;height:9px;background:rgba(255,255,255,.55)}
+.mk.q{width:8px;height:8px;top:-3px;margin-left:-4px;border-radius:50%;background:#E05555}
+#tip{position:absolute;bottom:24px;transform:translateX(-50%);background:#10403B;padding:4px 9px;border-radius:6px;white-space:nowrap;display:none;font-size:13px}
+#row{display:flex;align-items:center;gap:10px}
+#ui button{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}
+#ui button:hover{background:rgba(255,255,255,.25)}
+#ui button.on{background:#127475}
+#time{font-variant-numeric:tabular-nums;min-width:110px}
+#sp{flex:1}
+#cover{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:30;color:#fff;font-family:"VidKR","Malgun Gothic",sans-serif;text-align:center}
+#cover{background:rgba(8,30,27,.55)}
+#quiz{position:absolute;right:70px;bottom:300px;z-index:6;display:none}
+.big{width:120px;height:120px;border-radius:50%;border:0;background:#E08E0B;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.big:disabled{background:#6b7b78;cursor:wait}
+.big i{display:block;width:0;height:0;border-left:42px solid #10302c;border-top:26px solid transparent;border-bottom:26px solid transparent;margin-left:12px}
+.cap{font-size:22px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.cap small{display:block;font-size:15px;font-weight:600;opacity:.85;margin-top:6px}
+#qgo{background:#fff;color:#8C3A3A;border:6px solid #8C3A3A;border-radius:999px;padding:18px 44px;font:900 40px "VidKR",sans-serif;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.25)}
+#qgo small{font-size:26px;font-weight:700;opacity:.7}
+#ui a.rel{color:#10302c;background:#E08E0B;border-radius:8px;padding:7px 12px;text-decoration:none;font-weight:800}
+#cover a.rel{color:#fff;font:700 17px "VidKR",sans-serif;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:9px 20px;text-decoration:none}
+#cover a.rel:hover,#ui a.rel:hover{filter:brightness(1.1)}
+</style></head><body>
+<div id="frame">
+
+<svg width="0" height="0" style="position:absolute">
+ <symbol id="i-bank" viewBox="0 0 120 120"><path d="M60 8 L112 36 L8 36 Z" fill="currentColor"/><rect x="14" y="40" width="92" height="8" fill="currentColor"/><g fill="currentColor"><rect x="20" y="52" width="12" height="44"/><rect x="42" y="52" width="12" height="44"/><rect x="66" y="52" width="12" height="44"/><rect x="88" y="52" width="12" height="44"/></g><rect x="8" y="100" width="104" height="12" rx="3" fill="currentColor"/></symbol>
+ <symbol id="i-money" viewBox="0 0 120 120"><g><rect x="10" y="52" width="100" height="52" rx="8" fill="#0e5c4f"/><rect x="16" y="40" width="100" height="52" rx="8" fill="#127475" transform="translate(-6 0)"/><rect x="10" y="28" width="100" height="52" rx="8" fill="#1a8a7c"/><circle cx="60" cy="54" r="15" fill="none" stroke="#fff" stroke-width="5"/><text x="60" y="61" font-size="20" text-anchor="middle" fill="#fff" font-weight="900">₩</text></g></symbol>
+ <symbol id="i-shield" viewBox="0 0 120 120"><path d="M60 6 L106 22 L106 58 Q106 96 60 114 Q14 96 14 58 L14 22 Z" fill="currentColor"/><path d="M38 60 L54 76 L84 44" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-person" viewBox="0 0 120 120"><circle cx="60" cy="34" r="22" fill="currentColor"/><path d="M18 116 Q18 66 60 64 Q102 66 102 116 Z" fill="currentColor"/></symbol>
+ <symbol id="i-coin" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="#E08E0B"/><circle cx="60" cy="60" r="40" fill="none" stroke="#fff" stroke-width="6" opacity=".7"/><text x="60" y="76" font-size="46" text-anchor="middle" fill="#fff" font-weight="900">₩</text></symbol>
+ <symbol id="i-receipt" viewBox="0 0 120 120"><path d="M22 8 H98 V112 L86 104 L74 112 L62 104 L50 112 L38 104 L22 112 Z" fill="currentColor"/><g stroke="#fff" stroke-width="7" stroke-linecap="round"><path d="M38 34 H82"/><path d="M38 54 H82"/><path d="M38 74 H66"/></g></symbol>
+ <symbol id="i-snow" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="#e9f2f0" stroke="#127475" stroke-width="6"/><circle cx="44" cy="44" r="9" fill="#fff"/><path d="M30 80 Q60 96 90 76" stroke="#127475" stroke-width="5" fill="none" opacity=".4"/></symbol>
+ <symbol id="i-check" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="currentColor"/><path d="M34 62 L52 80 L88 42" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-x" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="currentColor"/><path d="M38 38 L82 82 M82 38 L38 82" stroke="#fff" stroke-width="12" stroke-linecap="round"/></symbol>
+ <symbol id="i-scale" viewBox="0 0 120 120"><path d="M60 14 V100 M30 104 H90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/><path d="M18 34 H102" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M18 34 L6 66 H30 Z M102 34 L90 66 H114 Z" fill="currentColor"/><circle cx="60" cy="14" r="8" fill="currentColor"/></symbol>
+ <symbol id="i-tv" viewBox="0 0 120 120"><rect x="6" y="14" width="108" height="78" rx="10" fill="currentColor"/><path d="M40 108 H80 M60 92 V108" stroke="currentColor" stroke-width="8" stroke-linecap="round"/></symbol>
+</svg>
+
+<div id="stage">
+
+<!-- S1 표지 -->
+<section class="scene dark" id="s1">
+ <div style="position:absolute;left:150px;top:170px;width:1100px">
+  <div data-at="t0.1" style="font-size:38px;font-weight:700;color:#bfe0da">금융과 미래 · Ⅱ. 투자의 종류와 방법</div>
+  <div data-at="t0.3" style="margin-top:30px"><span class="pill" style="background:var(--amber);color:#10302c;font-size:44px">21차시 · 게임 후</span></div>
+  <div data-at="t0.5" style="font-size:100px;font-weight:900;margin-top:26px;line-height:1.15">모의 주식 투자 되짚기</div>
+  <div data-at="t0.8" style="font-size:52px;font-weight:800;color:var(--amber);margin-top:20px">5턴 동안 무슨 일이 있었을까?</div>
+  <div data-at="2" class="row" style="margin-top:44px;gap:18px">
+   <span class="pill light">3~5턴 주가판</span><span class="pill light">K테크의 교훈</span><span class="pill light">최종 자산</span><span class="pill light">투자 vs 투기</span>
+  </div>
+ </div>
+ <svg style="position:absolute;right:120px;top:210px" width="560" height="420" viewBox="0 0 560 420">
+  <line x1="20" x2="540" y1="380" y2="380" stroke="#bfe0da" stroke-width="3"/>
+  <text x="60" y="412" font-size="26" font-weight="800" fill="#bfe0da" text-anchor="middle">1턴</text><text x="170" y="412" font-size="26" font-weight="800" fill="#bfe0da" text-anchor="middle">2턴</text><text x="280" y="412" font-size="26" font-weight="800" fill="#bfe0da" text-anchor="middle">3턴</text><text x="390" y="412" font-size="26" font-weight="800" fill="#bfe0da" text-anchor="middle">4턴</text><text x="500" y="412" font-size="26" font-weight="800" fill="#bfe0da" text-anchor="middle">5턴</text>
+  <path data-at="t0.6" data-fx="draw" data-d="1.6" pathLength="1" d="M60 370 L170 40 L280 340 L390 370 L500 370" fill="none" stroke="#E08E0B" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/>
+  <text data-at="t1.4" x="190" y="34" font-size="34" font-weight="900" fill="#FF8A8A">K테크 50배!</text>
+  <text data-at="t2.0" x="410" y="340" font-size="34" font-weight="900" fill="#8CC4FF">제자리</text>
+ </svg>
+</section>
+
+<section class="scene" id="s2">
+ <div class="hdr"><span class="tag" style="background:var(--amberdk)">되짚기 · 3턴</span><span class="ttl">3턴 주가판</span><span class="lesson">금융과 미래 · 21차시 되짚기</span></div>
+ <div class="body">
+  <div data-at="t0"><div class="board"><div class="bcols"><div class="bcol"><div class="bhead"><span>회사 (가상)</span><span style="text-align:right">주가(원)</span><span style="text-align:right">지난 턴 대비</span></div><div class="brow" id="bs2r0"><span class="bn">A전자</span><span class="bp" id="bs2p0">37,000</span><span class="bc" id="bs2c0"></span></div><div class="brow" id="bs2r1"><span class="bn">B자동차</span><span class="bp" id="bs2p1">160,000</span><span class="bc" id="bs2c1"></span></div><div class="brow" id="bs2r2"><span class="bn">C화장품</span><span class="bp" id="bs2p2">440,000</span><span class="bc" id="bs2c2"></span></div><div class="brow" id="bs2r3"><span class="bn">D엔터</span><span class="bp" id="bs2p3">48,000</span><span class="bc" id="bs2c3"></span></div><div class="brow" id="bs2r4"><span class="bn">E소프트</span><span class="bp" id="bs2p4">300,000</span><span class="bc" id="bs2c4"></span></div><div class="brow" id="bs2r5"><span class="bn">F바이오</span><span class="bp" id="bs2p5">110,000</span><span class="bc" id="bs2c5"></span></div></div><div class="bcol"><div class="bhead"><span>회사 (가상)</span><span style="text-align:right">주가(원)</span><span style="text-align:right">지난 턴 대비</span></div><div class="brow" id="bs2r6"><span class="bn">G식품</span><span class="bp" id="bs2p6">56,000</span><span class="bc" id="bs2c6"></span></div><div class="brow" id="bs2r7"><span class="bn">H화학</span><span class="bp" id="bs2p7">340,000</span><span class="bc" id="bs2c7"></span></div><div class="brow" id="bs2r8"><span class="bn">I조선</span><span class="bp" id="bs2p8">9,000</span><span class="bc" id="bs2c8"></span></div><div class="brow" id="bs2r9"><span class="bn">J항공</span><span class="bp" id="bs2p9">21,000</span><span class="bc" id="bs2c9"></span></div><div class="brow" id="bs2r10"><span class="bn">K테크</span><span class="bp" id="bs2p10">280,000</span><span class="bc" id="bs2c10"></span></div></div></div><div class="ticker"><span id="bs2tick">(가상 뉴스) K테크 신기술 소문 ‘사실 아님’ · F바이오 신약 시험 성공 · (가상 뉴스) K테크 신기술 소문 ‘사실 아님’ · F바이오 신약 시험 성공 · (가상 뉴스) K테크 신기술 소문 ‘사실 아님’ · F바이오 신약 시험 성공 · (가상 뉴스) K테크 신기술 소문 ‘사실 아님’ · F바이오 신약 시험 성공 · </span></div></div></div>
+  <div data-at="t0.15" data-fx="pop" data-out="0@0.2" class="turnbig">3턴</div>
+  <div data-at="1" data-fx="fade" data-d="0.25" data-out="e2+0.3" style="position:absolute;left:871px;top:302px;width:860px;height:61px;border:6px solid #4EA3FF;border-radius:12px"></div><div data-at="3" data-fx="fade" data-d="0.25" data-out="end" style="position:absolute;left:6px;top:363px;width:860px;height:61px;border:6px solid #FF5A5A;border-radius:12px"></div>
+  <div data-at="1" data-fx="pop" data-out="3" class="card" style="position:absolute;left:0;right:0;top:520px;background:#EAF0FA;display:flex;align-items:center;gap:28px;padding:18px 34px;flex-wrap:wrap"><span style="font-size:44px;font-weight:900" class="amberdk">K테크</span><span style="font-size:44px;font-weight:900">280,000원 → <span class="dn">30,000원</span></span><span class="pill" style="background:#2F6FD1;font-size:36px">소문 ‘사실 아님’ ▼</span><span data-at="2" style="font-size:34px;font-weight:900;margin-left:auto" class="brick">2턴에 1주 샀다면 → 250,000원 손실</span></div><div data-at="3" data-fx="pop" class="card" style="position:absolute;left:0;right:0;top:520px;background:#FBEDED;display:flex;align-items:center;gap:28px;padding:18px 34px;flex-wrap:wrap"><span style="font-size:44px;font-weight:900" class="steel">F바이오</span><span style="font-size:44px;font-weight:900">110,000원 → <span class="up">340,000원</span></span><span class="pill" style="background:#D23B3B;font-size:36px">신약 시험 성공 ▲</span><span style="font-size:32px;font-weight:900;margin-left:auto" class="teal">소문이 아니라 실제 성과!</span></div>
+  <div data-at="0" class="src" style="left:0;right:0;bottom:0">※ 회사·주가·뉴스는 모두 수업용으로 꾸며 낸 것이에요 (실제 회사·사건과 관계없음) · 게임 속 주가는 실제보다 훨씬 크게 움직여요</div>
+ </div>
+</section>
+<section class="scene" id="s3">
+ <div class="hdr"><span class="tag" style="background:var(--amberdk)">되짚기 · 4턴</span><span class="ttl">4턴 주가판</span><span class="lesson">금융과 미래 · 21차시 되짚기</span></div>
+ <div class="body">
+  <div data-at="t0"><div class="board"><div class="bcols"><div class="bcol"><div class="bhead"><span>회사 (가상)</span><span style="text-align:right">주가(원)</span><span style="text-align:right">지난 턴 대비</span></div><div class="brow" id="bs3r0"><span class="bn">A전자</span><span class="bp" id="bs3p0">54,000</span><span class="bc" id="bs3c0"></span></div><div class="brow" id="bs3r1"><span class="bn">B자동차</span><span class="bp" id="bs3p1">170,000</span><span class="bc" id="bs3c1"></span></div><div class="brow" id="bs3r2"><span class="bn">C화장품</span><span class="bp" id="bs3p2">360,000</span><span class="bc" id="bs3c2"></span></div><div class="brow" id="bs3r3"><span class="bn">D엔터</span><span class="bp" id="bs3p3">57,000</span><span class="bc" id="bs3c3"></span></div><div class="brow" id="bs3r4"><span class="bn">E소프트</span><span class="bp" id="bs3p4">520,000</span><span class="bc" id="bs3c4"></span></div><div class="brow" id="bs3r5"><span class="bn">F바이오</span><span class="bp" id="bs3p5">340,000</span><span class="bc" id="bs3c5"></span></div></div><div class="bcol"><div class="bhead"><span>회사 (가상)</span><span style="text-align:right">주가(원)</span><span style="text-align:right">지난 턴 대비</span></div><div class="brow" id="bs3r6"><span class="bn">G식품</span><span class="bp" id="bs3p6">120,000</span><span class="bc" id="bs3c6"></span></div><div class="brow" id="bs3r7"><span class="bn">H화학</span><span class="bp" id="bs3p7">430,000</span><span class="bc" id="bs3c7"></span></div><div class="brow" id="bs3r8"><span class="bn">I조선</span><span class="bp" id="bs3p8">8,000</span><span class="bc" id="bs3c8"></span></div><div class="brow" id="bs3r9"><span class="bn">J항공</span><span class="bp" id="bs3p9">26,000</span><span class="bc" id="bs3c9"></span></div><div class="brow" id="bs3r10"><span class="bn">K테크</span><span class="bp" id="bs3p10">30,000</span><span class="bc" id="bs3c10"></span></div></div></div><div class="ticker"><span id="bs3tick">(가상 뉴스) E소프트 새 서비스 이용자 급증 · C화장품 수출 주문 감소 · (가상 뉴스) E소프트 새 서비스 이용자 급증 · C화장품 수출 주문 감소 · (가상 뉴스) E소프트 새 서비스 이용자 급증 · C화장품 수출 주문 감소 · (가상 뉴스) E소프트 새 서비스 이용자 급증 · C화장품 수출 주문 감소 · </span></div></div></div>
+  <div data-at="t0.15" data-fx="pop" data-out="0@0.2" class="turnbig">4턴</div>
+  <div data-at="0@0.3" data-fx="fade" data-d="0.25" data-out="2" style="position:absolute;left:6px;top:302px;width:860px;height:61px;border:6px solid #FF5A5A;border-radius:12px"></div><div data-at="2" data-fx="fade" data-d="0.25" data-out="end" style="position:absolute;left:6px;top:180px;width:860px;height:61px;border:6px solid #4EA3FF;border-radius:12px"></div><div data-at="2@0.5" data-fx="fade" data-d="0.25" data-out="end" style="position:absolute;left:871px;top:302px;width:860px;height:61px;border:6px solid #4EA3FF;border-radius:12px"></div>
+  <div data-at="0@0.5" data-fx="pop" data-out="2" class="card" style="position:absolute;left:0;right:0;top:520px;background:#FBEDED;display:flex;align-items:center;gap:28px;padding:18px 34px;flex-wrap:wrap"><span style="font-size:44px;font-weight:900" class="steel">E소프트</span><span style="font-size:44px;font-weight:900">520,000원 → <span class="up">1,000,000원</span></span><span class="pill" style="background:#D23B3B;font-size:36px">게임 최고가 ▲</span><span data-at="1@0.4" style="font-size:34px;font-weight:900;margin-left:auto" class="amberdk">“이때 팔았어야 했나?”</span></div><div data-at="2" data-fx="pop" class="card" style="position:absolute;left:0;right:0;top:520px;background:#EAF0FA;display:flex;align-items:center;gap:28px;padding:18px 34px;flex-wrap:wrap"><span style="font-size:40px;font-weight:900" class="dn">C화장품 360,000 → 240,000 ▼</span><span style="font-size:40px;font-weight:900" class="dn">K테크 30,000 → 5,500 (처음 값)</span></div>
+  <div data-at="0" class="src" style="left:0;right:0;bottom:0">※ 회사·주가·뉴스는 모두 수업용으로 꾸며 낸 것이에요 (실제 회사·사건과 관계없음) · 게임 속 주가는 실제보다 훨씬 크게 움직여요</div>
+ </div>
+</section>
+<section class="scene" id="s4">
+ <div class="hdr"><span class="tag" style="background:var(--amberdk)">되짚기 · 5턴</span><span class="ttl">5턴 주가판</span><span class="lesson">금융과 미래 · 21차시 되짚기</span></div>
+ <div class="body">
+  <div data-at="t0"><div class="board"><div class="bcols"><div class="bcol"><div class="bhead"><span>회사 (가상)</span><span style="text-align:right">주가(원)</span><span style="text-align:right">지난 턴 대비</span></div><div class="brow" id="bs4r0"><span class="bn">A전자</span><span class="bp" id="bs4p0">90,000</span><span class="bc" id="bs4c0"></span></div><div class="brow" id="bs4r1"><span class="bn">B자동차</span><span class="bp" id="bs4p1">200,000</span><span class="bc" id="bs4c1"></span></div><div class="brow" id="bs4r2"><span class="bn">C화장품</span><span class="bp" id="bs4p2">240,000</span><span class="bc" id="bs4c2"></span></div><div class="brow" id="bs4r3"><span class="bn">D엔터</span><span class="bp" id="bs4p3">40,000</span><span class="bc" id="bs4c3"></span></div><div class="brow" id="bs4r4"><span class="bn">E소프트</span><span class="bp" id="bs4p4">1,000,000</span><span class="bc" id="bs4c4"></span></div><div class="brow" id="bs4r5"><span class="bn">F바이오</span><span class="bp" id="bs4p5">370,000</span><span class="bc" id="bs4c5"></span></div></div><div class="bcol"><div class="bhead"><span>회사 (가상)</span><span style="text-align:right">주가(원)</span><span style="text-align:right">지난 턴 대비</span></div><div class="brow" id="bs4r6"><span class="bn">G식품</span><span class="bp" id="bs4p6">140,000</span><span class="bc" id="bs4c6"></span></div><div class="brow" id="bs4r7"><span class="bn">H화학</span><span class="bp" id="bs4p7">860,000</span><span class="bc" id="bs4c7"></span></div><div class="brow" id="bs4r8"><span class="bn">I조선</span><span class="bp" id="bs4p8">7,000</span><span class="bc" id="bs4c8"></span></div><div class="brow" id="bs4r9"><span class="bn">J항공</span><span class="bp" id="bs4p9">23,000</span><span class="bc" id="bs4c9"></span></div><div class="brow" id="bs4r10"><span class="bn">K테크</span><span class="bp" id="bs4p10">5,500</span><span class="bc" id="bs4c10"></span></div></div></div><div class="ticker"><span id="bs4tick">(가상 뉴스) 여행객 늘며 J항공 예약 증가 · D엔터 신인 그룹 인기 · (가상 뉴스) 여행객 늘며 J항공 예약 증가 · D엔터 신인 그룹 인기 · (가상 뉴스) 여행객 늘며 J항공 예약 증가 · D엔터 신인 그룹 인기 · (가상 뉴스) 여행객 늘며 J항공 예약 증가 · D엔터 신인 그룹 인기 · </span></div></div></div>
+  <div data-at="t0.15" data-fx="pop" data-out="0@0.2" class="turnbig">5턴</div>
+  <div data-at="0@0.3" data-fx="fade" data-d="0.25" data-out="end" style="position:absolute;left:871px;top:241px;width:860px;height:61px;border:6px solid #FF5A5A;border-radius:12px"></div><div data-at="0@0.6" data-fx="fade" data-d="0.25" data-out="end" style="position:absolute;left:6px;top:241px;width:860px;height:61px;border:6px solid #FF5A5A;border-radius:12px"></div><div data-at="1" data-fx="fade" data-d="0.25" data-out="end" style="position:absolute;left:6px;top:302px;width:860px;height:61px;border:6px solid #4EA3FF;border-radius:12px"></div>
+  <div data-at="0@0.5" data-fx="pop" data-out="1" class="card" style="position:absolute;left:0;right:0;top:520px;background:#FBEDED;display:flex;align-items:center;gap:28px;padding:18px 34px;flex-wrap:wrap"><span style="font-size:40px;font-weight:900" class="up">J항공 23,000 → 32,000 ▲</span><span style="font-size:40px;font-weight:900" class="up">D엔터 40,000 → 90,000 ▲</span></div><div data-at="1" data-fx="pop" class="card" style="position:absolute;left:0;right:0;top:520px;background:#EAF0FA;display:flex;align-items:center;gap:28px;padding:18px 34px;flex-wrap:wrap"><span style="font-size:42px;font-weight:900" class="dn">E소프트 1,000,000 → 690,000 ▼</span><span data-at="2" style="font-size:34px;font-weight:900;margin-left:auto" class="pine">가장 높을 때는 미리 알 수 없어요</span></div>
+  <div data-at="0" class="src" style="left:0;right:0;bottom:0">※ 회사·주가·뉴스는 모두 수업용으로 꾸며 낸 것이에요 (실제 회사·사건과 관계없음) · 게임 속 주가는 실제보다 훨씬 크게 움직여요</div>
+ </div>
+</section>
+
+<!-- S5 1턴 vs 5턴 -->
+<section class="scene" id="s5">
+ <div class="hdr"><span class="tag">결과 정리</span><span class="ttl">5턴 동안 주가는 어떻게 변했나?</span><span class="lesson">금융과 미래 · 21차시 되짚기</span></div>
+ <div class="body">
+  <div class="rrow h" data-at="0"><span>회사</span><span>1턴</span><span>5턴</span><span>변화</span><span>1턴 → 5턴 흐름</span></div>
+  <div data-at="0" class="rrow"><span class="cn">A전자</span><span class="grey">30,000</span><span>80,000</span><span style="color:#D23B3B">약 2.7배 ▲</span><svg width="320" height="66"><path data-at="0+0.3" data-fx="draw" data-d="0.9" pathLength="1" d="M20,58.0 L90,52.4 L160,38.8 L230,10.0 L300,18.0" fill="none" stroke="#D23B3B" stroke-width="5" stroke-linejoin="round"/><circle cx="20" cy="58.0" r="5" fill="#D23B3B"/><circle cx="90" cy="52.4" r="5" fill="#D23B3B"/><circle cx="160" cy="38.8" r="5" fill="#D23B3B"/><circle cx="230" cy="10.0" r="5" fill="#D23B3B"/><circle cx="300" cy="18.0" r="5" fill="#D23B3B"/></svg></div><div data-at="0@0.6" class="rrow"><span class="cn">E소프트</span><span class="grey">480,000</span><span>690,000</span><span style="color:#D23B3B">약 1.4배 ▲</span><svg width="320" height="66"><path data-at="0@0.6+0.3" data-fx="draw" data-d="0.9" pathLength="1" d="M20,45.7 L90,58.0 L160,42.9 L230,10.0 L300,31.3" fill="none" stroke="#D23B3B" stroke-width="5" stroke-linejoin="round"/><circle cx="20" cy="45.7" r="5" fill="#D23B3B"/><circle cx="90" cy="58.0" r="5" fill="#D23B3B"/><circle cx="160" cy="42.9" r="5" fill="#D23B3B"/><circle cx="230" cy="10.0" r="5" fill="#D23B3B"/><circle cx="300" cy="31.3" r="5" fill="#D23B3B"/></svg></div><div data-at="1" class="rrow"><span class="cn">C화장품</span><span class="grey">260,000</span><span>190,000</span><span style="color:#2F6FD1">약 27% ▼</span><svg width="320" height="66"><path data-at="1+0.3" data-fx="draw" data-d="0.9" pathLength="1" d="M20,44.6 L90,10.0 L160,25.4 L230,48.4 L300,58.0" fill="none" stroke="#2F6FD1" stroke-width="5" stroke-linejoin="round"/><circle cx="20" cy="44.6" r="5" fill="#2F6FD1"/><circle cx="90" cy="10.0" r="5" fill="#2F6FD1"/><circle cx="160" cy="25.4" r="5" fill="#2F6FD1"/><circle cx="230" cy="48.4" r="5" fill="#2F6FD1"/><circle cx="300" cy="58.0" r="5" fill="#2F6FD1"/></svg></div><div data-at="1@0.3" class="rrow"><span class="cn">I조선</span><span class="grey">7,000</span><span>6,000</span><span style="color:#2F6FD1">약 14% ▼</span><svg width="320" height="66"><path data-at="1@0.3+0.3" data-fx="draw" data-d="0.9" pathLength="1" d="M20,42.0 L90,10.0 L160,26.0 L230,42.0 L300,58.0" fill="none" stroke="#2F6FD1" stroke-width="5" stroke-linejoin="round"/><circle cx="20" cy="42.0" r="5" fill="#2F6FD1"/><circle cx="90" cy="10.0" r="5" fill="#2F6FD1"/><circle cx="160" cy="26.0" r="5" fill="#2F6FD1"/><circle cx="230" cy="42.0" r="5" fill="#2F6FD1"/><circle cx="300" cy="58.0" r="5" fill="#2F6FD1"/></svg></div><div data-at="1@0.55" class="rrow"><span class="cn">K테크</span><span class="grey">5,500</span><span>5,500</span><span style="color:#A96A08">50배 올랐다 제자리</span><svg width="320" height="66"><path data-at="1@0.55+0.3" data-fx="draw" data-d="0.9" pathLength="1" d="M20,58.0 L90,10.0 L160,53.7 L230,58.0 L300,58.0" fill="none" stroke="#A96A08" stroke-width="5" stroke-linejoin="round"/><circle cx="20" cy="58.0" r="5" fill="#A96A08"/><circle cx="90" cy="10.0" r="5" fill="#A96A08"/><circle cx="160" cy="53.7" r="5" fill="#A96A08"/><circle cx="230" cy="58.0" r="5" fill="#A96A08"/><circle cx="300" cy="58.0" r="5" fill="#A96A08"/></svg></div>
+  <div data-at="3" class="card am" style="position:absolute;left:0;right:0;top:530px;padding:16px 30px;text-align:center"><p style="font-size:34px">C화장품을 <b>2턴 440,000원</b>에 샀다면 → 5턴 190,000원 · <b class="dn">한 주에 250,000원 손실</b></p></div>
+  <div data-at="2" data-fx="pop" class="card" style="position:absolute;left:0;right:0;top:620px;background:var(--pine);color:#fff;padding:14px 30px;text-align:center"><p style="font-size:34px;font-weight:800">같은 회사도 <span style="color:var(--amber)">언제 사고 언제 팔았는지</span>에 따라 결과가 달라져요</p></div>
+ </div>
+</section>
+
+<!-- S6 최종 자산 비교 -->
+<section class="scene" id="s6">
+ <div class="hdr"><span class="tag">최종 자산</span><span class="ttl">준서네 조의 결과는?</span><span class="lesson">금융과 미래 · 21차시 되짚기</span></div>
+ <div class="body">
+  <div data-at="0" class="card" style="position:absolute;left:0;right:0;top:0;background:var(--pine);color:#fff;padding:16px 36px;text-align:center"><p style="font-size:38px;font-weight:900">최종 자산 = <span style="color:#9fe0d4">남은 돈</span> + (<span style="color:#9fe0d4">가진 주식 수</span> × <span style="color:var(--amber)">5턴 주가</span>)</p></div>
+  <div data-at="1" style="position:absolute;left:0;top:110px;width:1740px">
+   <div class="blab teal">준서네 조 · 처음 산 주식을 5턴까지 보유</div>
+   <div class="row" style="gap:0">
+    <div data-at="1@0.15" data-fx="growx" class="bar" style="width:409px;background:#1C6E8C;border-radius:18px 0 0 18px;font-size:30px">A전자 80만</div>
+    <div data-at="1@0.3" data-fx="growx" class="bar" style="width:665px;background:#127475;border-radius:0;font-size:30px">G식품 130만</div>
+    <div data-at="1@0.45" data-fx="growx" class="bar" style="width:164px;background:#4E9A8F;border-radius:0;font-size:26px;padding-right:10px">J항공 32만</div>
+    <div data-at="1@0.6" data-fx="growx" class="bar" style="width:61px;background:#9fb8b3;font-size:22px;padding-right:8px">현금</div>
+    <div data-at="1@0.8" style="font-size:50px;font-weight:900;margin-left:24px" class="teal"><span data-count="2540000" data-cat="1@0.8" data-cd="0.9">0</span>원</div>
+   </div>
+  </div>
+  <div data-at="2" style="position:absolute;left:0;top:300px;width:1740px">
+   <div class="blab brick">만약 · 2턴에 J항공을 팔고 K테크 1주를 따라 샀다면</div>
+   <div class="row" style="gap:0">
+    <div data-at="3" data-fx="growx" class="bar" style="width:409px;background:#1C6E8C;border-radius:18px 0 0 18px;font-size:30px">A전자 80만</div>
+    <div data-at="3@0.15" data-fx="growx" class="bar" style="width:665px;background:#127475;border-radius:0;font-size:30px">G식품 130만</div>
+    <div data-at="3@0.3" data-fx="growx" class="bar" style="width:28px;background:#8C3A3A;padding:0"></div>
+    <div data-at="3@0.4" style="font-size:50px;font-weight:900;margin-left:24px" class="brick"><span data-count="2155500" data-cat="3@0.4" data-cd="0.9">0</span>원</div>
+   </div>
+   <div data-at="3@0.3" style="font-size:26px;font-weight:800;margin-top:10px" class="grey">K테크 1주 5,500원 + 현금 5만 원 (280,000원에 산 1주가 5,500원이 됨)</div>
+  </div>
+  <div data-at="3@0.6" data-fx="pop" class="card br" style="position:absolute;left:0;right:0;top:540px;padding:16px 34px;text-align:center"><p style="font-size:38px;font-weight:900">따라 산 한 주 때문에 <span class="brick">384,500원</span> 차이!</p></div>
+  <div data-at="0" class="src" style="left:0;right:0;bottom:0">※ 시범 조의 예시 계산이에요 · 게임 속 주가는 실제보다 훨씬 크게 움직이도록 꾸몄어요</div>
+ </div>
+</section>
+
+<!-- S7 투자 vs 투기 -->
+<section class="scene" id="s7">
+ <div class="hdr"><span class="tag">되짚기</span><span class="ttl">우리 조는 투자했나, 투기했나?</span><span class="lesson">금융과 미래 · 21차시 되짚기</span></div>
+ <div class="body">
+  <div data-at="0" class="col2" style="position:absolute;left:0;top:0;width:840px;height:440px;background:var(--tealbg)">
+   <h3 style="background:var(--teal)">투자처럼 했다면</h3>
+   <ul><li data-at="0@0.3">뉴스가 <b class="teal">회사 가치</b>에 주는 영향을 따졌다</li><li data-at="0@0.6">여러 회사에 <b class="teal">나누어</b> 샀다</li><li data-at="0@0.8">한 턴 결과에 <b>흔들리지 않았다</b></li></ul>
+   <div data-at="0@0.9" data-fx="pop" style="position:absolute;left:0;right:0;bottom:24px;text-align:center"><span class="pill teal" style="font-size:36px">차분한 결정</span></div></div>
+  <div data-at="1" class="col2" style="position:absolute;left:900px;top:0;width:840px;height:440px;background:var(--brickbg)">
+   <h3 style="background:var(--brick)">투기처럼 했다면</h3>
+   <ul><li data-at="1@0.25">급등하는 주식을 <b class="brick">무작정 따라</b> 샀다</li><li data-at="1@0.5">한 회사에 <b class="brick">모든 돈</b>을 걸었다</li><li data-at="1@0.75">소문을 <b>확인하지 않았다</b></li></ul>
+   <div data-at="1@0.9" data-fx="pop" style="position:absolute;left:0;right:0;bottom:24px;text-align:center"><span class="pill brick" style="font-size:36px">K테크의 교훈</span></div></div>
+  <div data-at="3" class="card am" style="position:absolute;left:0;right:0;top:470px;padding:18px 34px;display:flex;align-items:center;gap:26px">
+   <span class="pill" style="background:var(--amberdk);font-size:34px;white-space:nowrap">1등 = 투자 잘함?</span>
+   <p style="font-size:34px;font-weight:900">운이 좋았을 수도 있어요 → <span class="amberdk">결과보다 결정한 이유</span>를 돌아봐요</p></div>
+  <div data-at="0" class="src" style="left:0;right:0;bottom:30px;font-size:26px">학습지 과제 2와 연결: 게임 속 결정이 투자인지 투기인지 판단해 보기</div>
+ </div>
+</section>
+
+<!-- S8 퀴즈 -->
+<section class="scene" id="s8">
+ <div class="hdr"><span class="tag" style="background:var(--amberdk)">잠깐 퀴즈</span><span class="ttl">최고가에 따라 사면?</span><span class="lesson">금융과 미래 · 21차시 되짚기</span></div>
+ <div class="body">
+  <div data-at="0" class="card am" style="position:absolute;left:0;right:0;top:0;padding:22px 36px"><p style="font-size:40px;font-weight:900;line-height:1.45">4턴에 E소프트가 <span class="up">1,000,000원</span>까지 오르자 <span class="amberdk">1주</span>를 샀어요.<br>5턴에 <span class="dn">690,000원</span>에 팔면, 손실은 얼마일까요?</p></div>
+  <div data-at="0@0.5" class="row" style="position:absolute;left:30px;top:240px;gap:30px">
+   <div class="vs" style="background:#D23B3B"><span style="font-size:30px">4턴 매수</span>1,000,000</div>
+   <span style="font-size:70px;font-weight:900" class="dn">→</span>
+   <div class="vs" style="background:#2F6FD1"><span style="font-size:30px">5턴 매도</span>690,000</div></div>
+  <div data-timer="e0+0.3" data-n="5" style="position:absolute;left:880px;top:250px;width:240px;height:240px;opacity:0">
+   <svg width="240" height="240"><circle cx="120" cy="120" r="100" stroke="#E9F2F0" stroke-width="22" fill="none"/><circle class="tring" cx="120" cy="120" r="100" stroke="#E08E0B" stroke-width="22" fill="none" pathLength="1" stroke-dasharray="1" transform="rotate(-90 120 120)"/></svg>
+   <div class="tnum" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:100px;font-weight:900;color:var(--pine)">5</div></div>
+  <div class="col" style="position:absolute;left:1180px;top:240px;width:560px;gap:16px">
+   <div data-at="1@0.4" data-fx="pop" class="card" style="padding:22px 28px;background:#EAF0FA;border:4px solid #2F6FD1"><p style="font-size:34px;font-weight:900">1,000,000 − 690,000<br>= <span class="dn" style="font-size:48px">310,000원 손실</span></p></div>
+  </div>
+  <div data-at="2@0.3" class="card br" style="position:absolute;left:0;right:0;top:560px;padding:16px 30px;text-align:center"><p style="font-size:34px">이미 <b class="brick">많이 오른 뒤에 따라 사면</b> 크게 잃을 수 있어요</p></div>
+ </div>
+</section>
+
+<!-- S9 정리 -->
+<section class="scene dark" id="s9">
+ <div class="hdr"><span class="tag" style="background:var(--amber);color:#10302c">오늘의 정리</span><span class="ttl" style="color:#fff">모의 주식 투자 되짚기</span><span class="lesson" style="color:#bfe0da">금융과 미래 · 21차시 되짚기</span></div>
+ <div class="body col" style="gap:20px">
+  <div data-at="0" class="sumi"><span class="n">1</span><span><span style="color:var(--amber)">소문</span>으로 오른 주가는 사실이 밝혀지면 크게 떨어질 수 있다</span></div>
+  <div data-at="1" class="sumi"><span class="n">2</span><span><span style="color:var(--amber)">나누어 담고</span> · <span style="color:var(--amber)">이유를 기록</span>하면 흔들리지 않는다</span></div>
+  <div data-at="1@0.7" class="sumi"><span class="n">3</span><span>이미 <span style="color:var(--amber)">많이 오른 뒤 따라 사면</span> 크게 잃을 수 있다</span></div>
+  <div data-at="2" class="card am" style="color:var(--ink);padding:18px 36px"><p style="font-size:34px;font-weight:900">실제 투자에서 잃은 돈은 <span class="brick">게임처럼 다시 시작할 수 없어요</span></p></div>
+  <div data-at="3" class="row" style="justify-content:space-between">
+   <span style="font-size:30px;font-weight:800;color:#bfe0da">다음 시간 · 22차시 채권의 의미와 특징</span>
+   <span class="pill" style="background:var(--amber);color:#10302c;font-size:36px">학습지에 기록과 느낀 점 쓰기 →</span></div>
+ </div>
+</section>
+
+</div>
+<div id="bar"><div id="sub"><div id="who" class="T">선생님</div><div id="txt"></div></div><div class="av" id="avT"></div><div class="av" id="avS"></div></div>
+
+<div id="quiz"><button id="qgo">▶ 다 풀었으면 계속하기 <small>(Space)</small></button></div>
+</div>
+<div id="cover"><button class="big" id="start" disabled aria-label="재생"><i></i></button><div class="cap" id="ctext">불러오는 중…<small>21차시 · 모의 주식 투자 되짚기</small></div><a class="rel" href="ch21.html">← 게임 전 안내 영상 보기</a></div>
+<div id="ui" class="hide">
+ <div id="seekwrap"><div id="seekbg"></div><div id="marks"></div><div id="seekfill"></div><div id="seekknob"></div><div id="tip"></div></div>
+ <div id="row"><button id="pp">▶ 재생</button><span id="time">0:00 / 0:00</span><span id="sp"></span><a class="rel" href="ch21.html">← 게임 전 안내 영상</a>
+  <button id="bq" class="on" title="퀴즈에서 자동으로 멈추기">퀴즈 멈춤</button><button id="bc" class="on" title="자막 (C)">자막</button><button id="bs" title="속도">1×</button><button id="bf" title="전체 화면 (F)">전체 화면</button></div>
+</div>
+<script>// 모션그래픽 엔진: render(t) 한 번에 한 프레임을 결정적으로 그림
+let TL = null, SCN = [], NAMES = { T: "선생님", S: "준서" };
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const eOut = p => 1 - Math.pow(1 - p, 3);
+const eBack = p => { const c = 1.70158, q = p - 1; return 1 + (c + 1) * q * q * q + c * q * q; };
+const eIO = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+
+function avatarSVG(kind) {
+  const T = kind === "T";
+  const skin = "#F4D3B5", hair = T ? "#3A2A22" : "#2B2B33", shirt = T ? "#127475" : "#E08E0B";
+  return `<svg viewBox="0 0 190 200" width="190" height="200">
+   <g class="avbody">
+    <path d="M30 200 Q30 140 95 136 Q160 140 160 200 Z" fill="${shirt}"/>
+    ${T ? '<path d="M80 138 L95 160 L110 138 Z" fill="#fff"/>' : '<path d="M70 140 Q95 165 120 140" stroke="#fff" stroke-width="6" fill="none"/>'}
+    <rect x="83" y="112" width="24" height="30" rx="8" fill="${skin}"/>
+    <g class="avhead">
+     ${T ? `<circle cx="95" cy="22" r="20" fill="${hair}"/>` : ""}
+     <ellipse cx="95" cy="75" rx="52" ry="56" fill="${skin}"/>
+     ${T ? `<path d="M43 78 Q40 22 95 20 Q150 22 147 78 Q140 44 95 40 Q52 44 43 78Z" fill="${hair}"/>`
+         : `<path d="M42 70 Q40 18 95 18 Q152 18 148 70 Q132 40 112 46 Q90 36 70 46 Q52 46 42 70Z" fill="${hair}"/>`}
+     <g class="eyes"><ellipse cx="75" cy="80" rx="6" ry="7" fill="#222"/><ellipse cx="115" cy="80" rx="6" ry="7" fill="#222"/></g>
+     ${T ? '<g fill="none" stroke="#3A2A22" stroke-width="3.5"><circle cx="75" cy="80" r="15"/><circle cx="115" cy="80" r="15"/><path d="M90 80 L100 80"/></g>' : ""}
+     <ellipse cx="62" cy="98" rx="9" ry="5" fill="#F2A9A0" opacity=".55"/><ellipse cx="128" cy="98" rx="9" ry="5" fill="#F2A9A0" opacity=".55"/>
+     <ellipse class="mouth" cx="95" cy="104" rx="11" ry="3" fill="#8B3A3A"/>
+    </g>
+   </g></svg><div class="avname">${NAMES[kind]}</div>`;
+}
+
+function setup(tl) {
+  TL = tl;
+  document.getElementById("avT").innerHTML = avatarSVG("T");
+  document.getElementById("avS").innerHTML = avatarSVG("S");
+  SCN = tl.scenes.map(sc => ({ sc, el: document.getElementById(sc.id) }));
+  // 퀴즈 '잠깐 멈추세요' 표시 (멈춤이 있는 대사가 끝난 직후, 카운트다운 동안)
+  if (!document.getElementById("pausebadge")) {
+    const b = document.createElement("div"); b.id = "pausebadge";
+    b.innerHTML = '<span class="pb-ico"><i></i><i></i></span><span><b>잠깐 멈추세요!</b> 영상을 멈추고 직접 풀어 보세요</span>';
+    document.getElementById("stage").appendChild(b);
+  }
+  for (const { el } of SCN) if (!el) throw new Error("scene missing");
+  return SCN.length;
+}
+
+function resolve(spec, sc) {
+  spec = String(spec).trim();
+  let m;
+  if ((m = spec.match(/^t([\d.]+)$/))) return +m[1];
+  if ((m = spec.match(/^end([+-][\d.]+)?$/))) return sc.dur + (m[1] ? +m[1] : 0);
+  m = spec.match(/^(e?)(\d+)(?:@([\d.]+))?([+-][\d.]+)?$/);
+  if (!m) throw new Error("bad spec " + spec);
+  const ln = sc.lines[+m[2]];
+  if (!ln) throw new Error("no line " + spec + " in " + sc.id);
+  let t = m[1] ? ln.t1 : ln.t0;
+  if (m[3]) t = ln.t0 + (+m[3]) * (ln.t1 - ln.t0);
+  if (m[4]) t += +m[4];
+  return t;
+}
+
+function korMoney(n) {
+  n = Math.round(n);
+  const eok = Math.floor(n / 1e8), man = Math.floor((n % 1e8) / 1e4), rest = n % 1e4;
+  const f = x => x.toLocaleString("en-US");
+  let s = [];
+  if (eok) s.push(eok + "억");
+  if (man) s.push(f(man) + "만");
+  if (rest) s.push(f(rest));
+  return (s.join(" ") || "0");
+}
+
+function fmtNum(v, el) {
+  const fm = el.dataset.fmt || "comma", dec = +(el.dataset.dec || 0);
+  if (fm === "kor") return korMoney(v);
+  if (dec) return v.toFixed(dec);
+  return Math.round(v).toLocaleString("en-US");
+}
+
+function applyFx(el, p, fx) {
+  const e = eOut(p);
+  let tr = "", op = e;
+  switch (fx) {
+    case "pop": tr = `scale(${0.4 + 0.6 * eBack(p)})`; op = clamp(p * 3); break;
+    case "left": tr = `translateX(${-70 * (1 - e)}px)`; break;
+    case "right": tr = `translateX(${70 * (1 - e)}px)`; break;
+    case "down": tr = `translateY(${-40 * (1 - e)}px)`; break;
+    case "growy": tr = `scaleY(${e})`; op = 1; el.style.transformOrigin = "50% 100%"; if (p <= 0) op = 0; break;
+    case "growx": tr = `scaleX(${e})`; op = 1; el.style.transformOrigin = "0% 50%"; if (p <= 0) op = 0; break;
+    case "fade": break;
+    case "draw": op = p > 0 ? 1 : 0; el.style.strokeDasharray = "1"; el.style.strokeDashoffset = String(1 - eIO(p)); break;
+    case "stamp": tr = `rotate(-8deg) scale(${1 + 1.2 * (1 - eOut(p))})`; op = clamp(p * 2); break;
+    default: tr = `translateY(${40 * (1 - e)}px)`;
+  }
+  return [tr, op];
+}
+
+function render(t) {
+  const frame = Math.round(t * TL.fps);
+  let cur = SCN[SCN.length - 1];
+  for (const s of SCN) if (t >= s.sc.start && t < s.sc.start + s.sc.dur) { cur = s; break; }
+  const sc = cur.sc, lt = t - sc.start, R = spec => resolve(spec, sc);
+  for (const s of SCN) s.el.style.display = s === cur ? "block" : "none";
+  const fin = clamp(lt / 0.35), fout = clamp((sc.dur - lt) / 0.35);
+  cur.el.style.opacity = Math.min(fin, fout);
+
+  for (const el of cur.el.querySelectorAll("[data-at]")) {
+    const a = R(el.dataset.at), d = +(el.dataset.d || 0.55);
+    let p = clamp((lt - a) / d);
+    let [tr, op] = applyFx(el, p, el.dataset.fx || "up");
+    if (el.dataset.out) { const o = R(el.dataset.out); op *= 1 - clamp((lt - o) / 0.4); }
+    if (el.dataset.dim) { const o = R(el.dataset.dim); op *= 1 - 0.6 * clamp((lt - o) / 0.4); }
+    el.style.opacity = op; el.style.transform = tr;
+  }
+  for (const el of cur.el.querySelectorAll("[data-count]")) {
+    const a = R(el.dataset.cat || el.dataset.at || "t0"), d = +(el.dataset.cd || 1.3);
+    const from = +(el.dataset.from || 0), to = +el.dataset.count;
+    const p = eOut(clamp((lt - a) / d));
+    el.textContent = (el.dataset.pre || "") + fmtNum(from + (to - from) * p, el) + (el.dataset.suf || "");
+  }
+  for (const el of cur.el.querySelectorAll("[data-hl]")) {
+    const a = R(el.dataset.hl), b = el.dataset.hlend ? R(el.dataset.hlend) : 1e9;
+    el.classList.toggle("hl", lt >= a && lt < b);
+  }
+  for (const el of cur.el.querySelectorAll("[data-timer]")) {
+    const a = R(el.dataset.timer), n = +(el.dataset.n || 5), k = lt - a;
+    const num = el.querySelector(".tnum"), ring = el.querySelector(".tring");
+    if (k < 0 || k >= n) { el.style.opacity = k < 0 ? 0 : clamp(1 - (k - n) / 0.3); }
+    else el.style.opacity = 1;
+    num.textContent = k < n ? String(Math.max(1, Math.ceil(n - k))) : "0";
+    ring.style.strokeDashoffset = String(clamp(k / n));
+  }
+  if (window.HOOKS && HOOKS[sc.id]) HOOKS[sc.id](lt, R, cur.el, sc);
+
+  // 잠깐 멈추세요 배지
+  const pb = document.getElementById("pausebadge");
+  let pbo = 0, pbp = 0;
+  for (const ln of sc.lines) if (ln.pause) {
+    const k = lt - ln.t1;
+    if (k >= 0 && k < ln.pause + 0.3) { pbp = clamp(k / 0.45); pbo = Math.min(clamp(k / 0.2), clamp((ln.pause + 0.3 - k) / 0.3)); }
+  }
+  pb.style.opacity = pbo;
+  pb.style.transform = `scale(${(0.6 + 0.4 * eBack(pbp)).toFixed(3)})`;
+
+  // 자막
+  let li = -1;
+  sc.lines.forEach((ln, i) => { if (lt >= ln.t0 - 0.05) li = i; });
+  const sub = document.getElementById("sub");
+  if (li >= 0) {
+    const ln = sc.lines[li];
+    const show = lt < ln.t1 + 0.42 + (ln.pause || 0) || li === sc.lines.length - 1;
+    sub.style.opacity = show ? clamp((lt - ln.t0 + 0.05) / 0.15) : 0;
+    const who = document.getElementById("who");
+    who.className = ln.spk; who.textContent = NAMES[ln.spk];
+    document.getElementById("txt").textContent = ln.sub;
+  } else sub.style.opacity = 0;
+
+  // 캐릭터
+  const env = TL.env[Math.min(frame, TL.env.length - 1)] || 0;
+  for (const k of ["T", "S"]) {
+    const av = document.getElementById("av" + k);
+    let speaking = false;
+    if (li >= 0) { const ln = sc.lines[li]; speaking = ln.spk === k && lt >= ln.t0 && lt <= ln.t1; }
+    const active = li >= 0 && sc.lines[li].spk === k;
+    av.style.opacity = active ? 1 : 0.55;
+    const bob = speaking ? Math.sin(t * 9) * 2.2 * Math.min(1, env * 1.5) : 0;
+    av.querySelector(".avhead").setAttribute("transform", `translate(0 ${bob.toFixed(2)})`);
+    av.style.transform = `scale(${active ? 1.0 : 0.9})`;
+    av.style.transformOrigin = "50% 100%";
+    const m = av.querySelector(".mouth");
+    const open = speaking ? 2 + 15 * Math.min(1, env) : 3;
+    m.setAttribute("ry", open.toFixed(1)); m.setAttribute("rx", speaking ? (11 - open * 0.15).toFixed(1) : "11");
+    const blinkPhase = (t + (k === "T" ? 0 : 1.7)) % 3.9;
+    av.querySelector(".eyes").setAttribute("transform", blinkPhase < 0.13 ? "translate(0 80) scale(1 0.15) translate(0 -80)" : "");
+  }
+  return frame;
+}
+</script>
+<script>
+const PT = [[30000, 200000, 260000, 160000, 480000, 180000, 33000, 860000, 7000, 25000, 5500], [37000, 160000, 440000, 48000, 300000, 110000, 56000, 340000, 9000, 21000, 280000], [54000, 170000, 360000, 57000, 520000, 340000, 120000, 430000, 8000, 26000, 30000], [90000, 200000, 240000, 40000, 1000000, 370000, 140000, 860000, 7000, 23000, 5500], [80000, 220000, 190000, 90000, 690000, 210000, 130000, 770000, 6000, 32000, 5500]];
+const eo = p => 1 - Math.pow(1 - p, 3);
+function turnHook(pre, k) { // k: 0-based 이번 턴 (2=3턴 …)
+  const A = PT[k-1], Bv = PT[k];
+  return (lt, R, el, sc) => {
+   const T0 = R("0@0.25");
+   for (let i = 0; i < 11; i++) {
+     const a = T0 + i*0.08, p = Math.max(0, Math.min(1, (lt - a)/0.9)), v = Math.round((A[i] + (Bv[i]-A[i])*eo(p))/100)*100;
+     const d = Bv[i] - A[i], col = p <= 0 ? "#fff" : (d > 0 ? "#FF5A5A" : d < 0 ? "#4EA3FF" : "#fff");
+     const pe = el.querySelector("#"+pre+"p"+i), ce = el.querySelector("#"+pre+"c"+i);
+     pe.textContent = (p >= 1 ? Bv[i] : v).toLocaleString("en-US"); pe.style.color = col;
+     ce.textContent = p <= 0 ? "" : d === 0 ? "–" : (d > 0 ? "▲" : "▼") + Math.abs(d).toLocaleString("en-US"); ce.style.color = col; ce.style.opacity = Math.min(1, p*2);
+     const fl = p > 0 && p < 1 ? 1 : Math.max(0, 1 - (lt - a - 0.9)/0.5);
+     pe.style.background = (p > 0 && fl > 0 && d !== 0) ? (d > 0 ? `rgba(255,90,90,${0.35*fl})` : `rgba(78,163,255,${0.35*fl})`) : "transparent";
+   }
+   el.querySelector("#"+pre+"tick").style.left = (1740 - ((lt*150) % (3800 + 1740))) + "px";
+  };
+}
+window.HOOKS = { s2: turnHook("bs2", 2), s3: turnHook("bs3", 3), s4: turnHook("bs4", 4) };
+</script>
+<script>
+const TLD = {"fps":30,"scenes":[{"id":"s1","start":0.0,"dur":16.3333,"lines":[{"spk":"T","sub":"모의 주식 투자 게임, 재미있었나요? 이제 5턴 동안 무슨 일이 있었는지 함께 되짚어 봐요.","t0":1.1,"t1":6.868,"pause":0.0},{"spk":"S","sub":"저희 조는 K테크 때문에 정말 고민 많이 했어요!","t0":7.288,"t1":10.304,"pause":0.0},{"spk":"T","sub":"주가판을 한 턴씩 다시 넘겨 보면서, 투자와 투기의 차이를 정리해 볼게요.","t0":10.724,"t1":15.34,"pause":0.0}]},{"id":"s2","start":16.3333,"dur":24.7333,"lines":[{"spk":"T","sub":"3턴 뉴스는 두 가지였어요. K테크의 신기술 소문은 사실이 아니었고, F바이오는 신약 시험에 성공했어요.","t0":0.7,"t1":7.929,"pause":0.0},{"spk":"S","sub":"K테크가 28만 원에서 3만 원으로 떨어졌어요!","t0":8.349,"t1":11.959,"pause":0.0},{"spk":"T","sub":"2턴에 따라서 한 주를 샀다면, 한 턴 만에 25만 원을 잃은 거예요.","t0":12.379,"t1":16.543,"pause":0.0},{"spk":"T","sub":"반대로 F바이오는 11만 원에서 34만 원으로 올랐어요. 소문이 아니라, 실제 성과 때문에 오른 거예요.","t0":16.963,"t1":23.739,"pause":0.0}]},{"id":"s3","start":41.0666,"dur":18.1667,"lines":[{"spk":"T","sub":"4턴에는 E소프트의 새 서비스 이용자가 크게 늘면서, 주가가 100만 원까지 올랐어요.","t0":0.7,"t1":6.136,"pause":0.0},{"spk":"S","sub":"와, 게임에서 가장 비싼 값이에요! 이때 팔았어야 했나?","t0":6.556,"t1":10.383,"pause":0.0},{"spk":"T","sub":"C화장품은 수출 주문이 줄어서 내렸어요. 그리고 K테크는 처음 값인 5,500원으로 돌아왔어요.","t0":10.803,"t1":17.163,"pause":0.0}]},{"id":"s4","start":59.2333,"dur":16.9333,"lines":[{"spk":"T","sub":"마지막 5턴이에요. J항공은 여행객이 늘어서, D엔터는 신인 그룹이 인기를 끌어서 올랐어요.","t0":0.7,"t1":6.702,"pause":0.0},{"spk":"S","sub":"그런데 E소프트는 69만 원으로 내려갔네요.","t0":7.122,"t1":9.783,"pause":0.0},{"spk":"T","sub":"가장 높을 때를 미리 알 수는 없어요. 그래서 언제 사고 언제 파는지가 정말 어려운 결정이에요.","t0":10.203,"t1":15.929,"pause":0.0}]},{"id":"s5","start":76.1666,"dur":25.5667,"lines":[{"spk":"T","sub":"1턴과 5턴을 비교해 볼까요? A전자는 3만 원에서 8만 원으로, 약 2.7배가 됐어요.","t0":0.7,"t1":6.769,"pause":0.0},{"spk":"T","sub":"C화장품은 약 27% 내렸고, K테크는 50배까지 올랐다가 결국 제자리로 돌아왔어요.","t0":7.189,"t1":13.575,"pause":0.0},{"spk":"S","sub":"같은 회사라도 언제 샀는지에 따라 결과가 완전히 달라지겠네요.","t0":13.995,"t1":17.94,"pause":0.0},{"spk":"T","sub":"맞아요. C화장품을 2턴에 44만 원에 샀다면, 5턴에는 19만 원이라 큰 손실이에요.","t0":18.36,"t1":24.561,"pause":0.0}]},{"id":"s6","start":101.7333,"dur":25.7667,"lines":[{"spk":"T","sub":"시범으로 했던 준서네 조는, 결국 K테크를 사지 않고 처음 산 주식을 5턴까지 들고 있었어요.","t0":0.7,"t1":6.513,"pause":0.0},{"spk":"T","sub":"최종 자산은 A전자 80만 원, G식품 130만 원, J항공 32만 원에 남은 돈 12만 원, 모두 254만 원이에요.","t0":6.933,"t1":15.207,"pause":0.0},{"spk":"S","sub":"만약 J항공을 팔고 K테크를 따라 샀다면요?","t0":15.627,"t1":18.552,"pause":0.0},{"spk":"T","sub":"그러면 215만 5,500원이에요. 따라 산 한 주 때문에 38만 원 넘게 차이가 나요.","t0":18.972,"t1":24.771,"pause":0.0}]},{"id":"s7","start":127.5,"dur":28.5,"lines":[{"spk":"T","sub":"우리 조의 결정을 돌아볼까요? 투자처럼 했다면, 뉴스가 회사 가치에 주는 영향을 따지고, 여러 회사에 나누어 사고, 한 턴 결과에 흔들리지 않았을 거예요.","t0":0.7,"t1":10.235,"pause":0.0},{"spk":"T","sub":"투기처럼 했다면, 급등하는 주식을 무작정 따라 사고, 한 회사에 모든 돈을 걸고, 소문을 확인하지 않았을 거예요.","t0":10.655,"t1":17.346,"pause":0.0},{"spk":"S","sub":"그럼 1등 한 조는 모두 투자를 잘한 거예요?","t0":17.766,"t1":19.995,"pause":0.0},{"spk":"T","sub":"꼭 그렇지는 않아요. 투기처럼 했는데 운이 좋아서 이겼을 수도 있어요. 결과보다, 결정한 이유를 돌아보는 게 중요해요.","t0":20.415,"t1":27.492,"pause":0.0}]},{"id":"s8","start":156.0,"dur":25.0667,"lines":[{"spk":"T","sub":"잠깐 퀴즈! 4턴에 E소프트가 100만 원까지 오르자 한 주를 샀어요. 5턴에 69만 원에 팔면, 손실은 얼마일까요?","t0":0.7,"t1":9.024,"pause":5.4},{"spk":"S","sub":"100만 원에서 69만 원을 빼면, 31만 원 손실이에요!","t0":14.844,"t1":18.906,"pause":0.0},{"spk":"T","sub":"정답! 이미 많이 오른 뒤에 따라 사면, 이렇게 크게 잃을 수도 있어요.","t0":19.326,"t1":24.067,"pause":0.0}]},{"id":"s9","start":181.0667,"dur":23.2667,"lines":[{"spk":"T","sub":"오늘 되짚은 내용을 정리해요. 소문으로 오른 주가는, 사실이 밝혀지면 크게 떨어질 수 있어요.","t0":0.7,"t1":6.285,"pause":0.0},{"spk":"T","sub":"여러 회사에 나누어 담고 결정한 이유를 기록하면, 흔들리지 않고 판단할 수 있어요.","t0":6.705,"t1":11.412,"pause":0.0},{"spk":"S","sub":"그리고 실제 투자에서 잃은 돈은, 게임처럼 다시 시작할 수 없어요!","t0":11.832,"t1":15.949,"pause":0.0},{"spk":"T","sub":"맞아요. 이제 학습지에 우리 조의 기록과 느낀 점을 정리해 봅시다. 다음 시간에는 채권을 배워요.","t0":16.369,"t1":22.269,"pause":0.0}]}],"env":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.18,0.76,1.0,1.0,1.0,1.0,0.96,1.0,0.37,0.2,0.24,0.69,0.61,0.47,0.65,0.35,0.05,0.01,0.09,0.12,0.65,0.31,0.75,1.0,0.85,0.11,0.03,0.19,0.99,0.8,0.71,0.62,0.63,0.59,0.42,0.43,0.58,0.56,0.17,0.04,0.01,0.01,0.01,0.03,0.14,0.36,0.88,0.68,0.66,0.71,0.66,0.65,0.41,0.21,0.13,0.51,0.54,0.37,0.32,0.38,0.45,0.43,0.44,0.61,0.7,0.54,0.08,0.01,0.01,0.0,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.1,0.54,0.24,0.74,0.95,0.53,0.14,0.19,0.32,0.64,0.36,0.51,0.89,0.5,0.04,0.12,0.53,0.82,0.68,0.44,0.04,0.51,0.74,0.53,0.51,0.74,0.83,0.54,0.58,0.61,0.44,0.55,0.6,0.25,0.3,0.82,0.84,0.82,0.85,0.91,0.3,0.74,0.8,0.92,0.5,0.12,0.1,0.39,0.84,0.57,0.58,0.51,0.46,0.43,0.45,0.4,0.12,0.11,0.63,0.68,0.78,0.47,0.21,0.6,0.62,0.59,0.3,0.12,0.68,0.83,0.18,0.23,0.8,1.0,0.36,0.25,0.4,0.07,0.02,0.08,0.44,0.8,0.25,0.4,0.74,0.53,0.43,0.33,0.42,0.34,0.38,0.37,0.09,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.01,0.16,0.17,1.0,1.0,1.0,1.0,1.0,0.36,0.19,0.96,0.91,0.91,0.97,0.85,0.76,0.2,0.16,0.12,0.74,1.0,1.0,0.96,0.11,0.04,0.15,0.96,0.33,0.04,0.23,0.86,0.24,0.02,0.05,0.86,0.93,0.8,0.92,0.86,0.66,0.72,0.61,0.52,0.42,0.09,0.24,0.13,0.57,0.71,0.81,0.93,1.0,1.0,0.78,0.23,0.07,0.21,0.06,0.91,0.95,1.0,1.0,1.0,1.0,1.0,0.96,0.93,0.8,1.0,1.0,1.0,1.0,1.0,0.9,0.74,0.77,0.42,0.18,0.2,0.12,0.12,0.48,0.45,0.45,0.47,0.45,0.39,0.26,0.06,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.1,0.18,0.63,0.34,1.0,1.0,1.0,0.08,0.11,0.43,1.0,0.83,0.89,0.98,1.0,0.91,0.36,0.94,0.89,1.0,0.24,0.29,1.0,1.0,0.97,0.77,0.32,0.29,0.94,0.51,0.06,0.02,0.13,0.14,0.8,0.74,0.29,0.22,0.67,0.57,0.99,0.86,0.69,0.67,0.69,0.47,1.0,0.96,0.27,0.89,0.87,0.53,0.63,0.62,0.61,0.5,0.45,0.16,0.12,0.7,0.85,0.9,0.91,0.91,0.53,0.05,0.1,0.12,0.46,0.6,0.19,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.63,0.05,0.11,0.11,0.22,0.64,0.22,0.12,0.68,0.87,1.0,1.0,0.66,0.11,0.35,0.11,0.28,0.98,0.92,0.92,1.0,1.0,0.69,1.0,0.99,0.94,0.4,0.23,0.14,0.62,0.53,0.6,0.65,0.64,0.58,0.61,0.7,0.92,1.0,0.16,0.26,0.69,0.58,0.33,0.03,0.01,0.01,0.29,0.4,0.33,0.41,0.52,0.54,0.58,0.51,0.5,0.53,0.17,0.01,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.03,0.1,0.11,0.85,0.66,0.82,0.35,0.15,1.0,0.78,0.9,0.95,0.83,0.87,0.71,0.36,0.3,0.27,0.83,0.94,0.87,0.86,0.94,0.94,0.81,0.75,0.71,0.64,0.33,0.03,0.1,0.08,0.66,0.75,0.28,1.0,1.0,0.99,0.29,0.13,0.38,0.93,1.0,0.78,0.17,0.13,0.1,0.08,0.36,0.34,0.35,0.33,0.36,0.37,0.38,0.37,0.26,0.02,0.01,0.0,0.0,0.01,0.01,0.01,0.01,0.01,0.01,0.17,0.08,0.85,0.74,0.68,0.68,0.06,0.11,0.49,0.7,0.07,0.18,0.07,0.79,0.81,0.73,0.26,0.24,0.57,0.73,0.64,0.36,0.67,0.45,0.13,0.63,1.0,0.93,0.41,0.1,0.72,0.92,0.72,0.76,0.73,0.71,0.78,0.85,0.79,0.7,0.53,0.1,0.19,0.87,0.86,0.49,0.18,0.18,0.89,0.4,1.0,0.87,0.72,0.68,0.47,0.47,0.52,0.64,0.68,0.68,0.37,0.02,0.01,0.01,0.24,0.76,0.94,0.96,0.94,0.86,0.52,0.15,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.43,0.77,0.35,0.04,0.08,0.32,0.92,0.22,1.0,0.77,0.6,0.72,0.75,0.85,0.72,0.66,0.52,0.55,0.6,0.56,0.54,0.41,0.3,0.31,0.32,0.65,0.73,0.85,0.56,0.08,0.27,0.32,0.41,0.45,0.97,0.94,0.68,0.52,0.65,0.75,0.48,0.09,0.14,0.65,0.6,0.56,0.38,0.88,0.63,0.39,0.45,0.46,0.16,0.08,0.06,0.05,0.22,0.38,0.26,0.25,0.24,0.2,0.27,0.24,0.29,0.34,0.05,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.11,0.12,0.61,0.96,1.0,1.0,1.0,0.63,0.06,0.09,0.1,0.91,0.77,0.05,0.04,0.16,0.44,1.0,0.3,0.41,1.0,0.88,0.86,0.61,0.39,0.1,0.03,0.01,0.34,0.76,0.89,0.71,0.56,0.45,0.83,0.26,0.03,0.01,0.01,0.2,0.2,0.91,0.8,0.81,0.91,1.0,1.0,0.98,0.95,0.98,0.98,0.94,0.84,0.92,0.83,0.48,0.18,0.17,0.77,0.84,0.76,0.57,0.28,0.13,0.14,0.16,0.23,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.79,0.76,0.79,0.31,0.03,0.09,0.85,0.81,0.59,0.89,0.78,0.24,0.55,0.66,0.42,0.15,0.12,0.12,0.08,0.38,0.45,0.41,0.37,0.33,0.26,0.15,0.03,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.01,0.42,0.69,0.59,0.36,0.03,0.13,0.1,0.73,0.81,0.64,0.75,0.8,0.54,0.04,0.57,1.0,0.97,0.71,1.0,0.92,0.42,0.15,0.57,0.88,0.4,0.23,0.83,0.92,1.0,0.95,0.51,0.52,0.85,0.69,1.0,1.0,1.0,0.36,0.19,0.73,0.58,0.04,0.02,0.01,1.0,1.0,0.8,0.9,0.9,0.94,1.0,1.0,0.95,0.7,0.64,0.67,0.46,0.13,0.38,0.68,0.83,0.26,0.16,0.88,0.75,0.75,0.79,0.98,1.0,0.76,0.83,0.79,0.7,0.48,0.34,0.43,0.58,0.51,0.32,0.28,0.68,0.48,0.64,1.0,0.91,0.72,0.85,0.95,0.84,0.6,0.5,0.57,0.56,0.54,0.57,0.6,0.47,0.36,0.38,0.52,0.27,0.57,0.64,0.61,0.56,0.4,0.68,0.71,0.52,0.45,0.4,0.33,0.38,0.28,0.37,0.33,0.28,0.26,0.3,0.28,0.45,0.16,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.07,0.18,0.61,0.62,0.64,0.76,0.53,0.83,1.0,0.63,0.78,1.0,1.0,0.75,0.77,1.0,0.36,0.04,0.08,0.36,1.0,0.31,0.51,0.91,0.88,0.82,0.78,0.74,0.78,0.77,0.7,0.62,0.49,0.56,0.62,0.58,0.55,0.53,0.52,0.44,0.39,0.41,0.18,0.19,0.23,0.37,0.66,0.31,0.75,0.84,0.92,0.66,0.74,0.77,0.66,0.45,0.56,0.6,0.48,0.42,0.51,0.57,0.33,0.11,0.06,0.7,0.79,0.8,0.86,0.7,0.29,0.16,0.17,0.49,0.74,0.91,0.81,0.33,0.64,0.22,0.13,0.21,0.15,0.27,0.74,0.63,0.69,0.8,0.65,0.58,0.68,0.66,0.53,0.53,0.61,0.35,0.84,0.81,0.56,0.79,0.7,0.95,0.73,1.0,0.48,0.14,0.11,0.11,0.13,0.73,0.52,0.45,0.51,0.47,0.53,0.48,0.18,0.13,0.07,0.74,1.0,1.0,1.0,1.0,0.93,0.89,0.84,0.69,0.67,0.59,0.56,0.47,0.52,0.51,0.65,0.37,1.0,0.98,0.97,0.8,0.59,0.43,0.33,0.28,0.05,0.01,0.01,0.04,0.11,0.23,0.75,0.93,0.57,0.09,0.14,1.0,1.0,0.96,0.25,0.11,0.52,0.58,0.61,0.35,1.0,1.0,0.44,0.04,0.02,1.0,0.94,0.62,0.68,0.82,0.73,0.93,0.85,0.88,0.96,0.92,0.82,0.47,0.79,0.65,0.65,0.54,0.32,0.73,0.73,0.61,0.56,0.49,0.45,0.47,0.56,0.49,0.51,0.52,0.47,0.45,0.13,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.05,0.15,0.1,0.65,0.91,0.55,0.03,0.16,0.72,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.93,0.52,0.32,0.85,1.0,0.67,0.23,0.15,0.63,1.0,0.44,0.04,0.11,0.57,0.45,0.02,0.07,0.13,0.8,1.0,1.0,1.0,1.0,0.3,0.18,0.66,1.0,1.0,0.45,0.22,0.19,1.0,1.0,0.63,0.47,0.84,0.43,0.26,0.22,0.17,0.76,0.7,0.62,0.73,1.0,0.83,0.79,0.73,0.71,0.32,0.56,1.0,0.77,0.06,0.77,0.99,0.95,0.53,0.06,0.21,0.18,0.09,0.54,0.12,1.0,1.0,0.97,0.82,0.89,0.8,0.74,0.73,0.8,0.87,0.7,0.64,0.61,0.35,0.11,0.42,0.75,0.84,0.8,0.62,0.44,0.43,0.05,0.01,0.01,0.01,0.01,0.11,0.18,0.55,0.15,0.03,0.61,0.97,0.66,0.15,0.71,0.68,0.19,0.11,0.17,0.5,0.53,0.63,0.77,0.81,0.96,0.8,0.6,0.78,0.68,0.57,0.28,0.09,0.75,0.86,0.58,0.15,0.54,0.68,0.78,0.6,0.59,0.54,0.76,0.42,0.07,0.07,0.06,0.07,0.38,0.26,0.39,0.31,0.35,0.27,0.32,0.42,0.11,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.39,0.93,1.0,1.0,1.0,1.0,0.93,0.61,0.37,0.19,0.06,0.02,0.01,0.01,0.01,0.01,0.1,0.6,1.0,1.0,1.0,1.0,1.0,0.94,1.0,0.88,0.27,0.22,0.75,0.63,0.14,0.25,0.23,0.26,0.93,0.45,0.26,1.0,1.0,1.0,0.91,0.14,0.22,0.25,0.28,0.17,0.14,0.18,0.55,0.89,0.81,0.83,0.59,0.75,1.0,0.69,0.08,0.18,0.24,0.22,0.3,0.53,0.6,0.46,0.36,0.33,0.24,0.22,0.17,0.08,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.56,0.8,0.09,0.02,0.22,1.0,0.78,0.06,0.01,0.19,0.15,0.52,0.55,0.86,0.87,0.62,0.18,0.15,0.24,0.59,0.83,0.86,0.85,0.82,0.55,0.45,0.52,0.58,0.61,0.55,0.64,0.76,0.85,0.71,0.34,0.03,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.02,0.11,0.19,0.25,0.63,0.85,0.93,0.36,1.0,1.0,0.78,0.81,1.0,0.66,0.76,0.36,0.09,0.21,0.82,0.86,1.0,1.0,0.99,0.82,0.76,0.23,0.27,0.18,0.65,0.05,0.12,0.36,1.0,1.0,1.0,0.66,0.26,0.55,0.65,0.87,0.83,0.88,0.84,0.93,0.84,0.43,0.23,0.13,0.61,0.51,1.0,1.0,0.36,0.28,0.84,0.52,0.64,0.73,0.66,0.74,0.93,0.58,0.16,0.09,0.08,0.06,0.48,0.43,0.39,0.39,0.48,0.43,0.39,0.24,0.34,0.14,0.01,0.01,0.01,0.0,0.0,0.01,0.01,0.01,0.01,0.0,0.0,0.08,0.16,0.68,0.85,0.7,0.27,0.71,0.66,0.16,0.09,0.13,0.11,0.73,0.52,0.54,0.39,0.02,0.09,0.82,0.59,0.05,0.16,0.16,0.98,0.73,0.74,0.69,0.67,0.37,0.27,0.08,0.83,0.91,0.85,0.57,0.67,0.4,0.6,1.0,0.77,0.08,0.2,0.24,0.32,0.73,0.83,0.71,0.59,0.34,0.24,0.97,1.0,0.57,0.04,0.36,0.14,0.99,0.77,0.83,0.81,0.85,0.49,0.96,1.0,0.72,0.22,0.92,0.72,0.56,0.47,0.53,0.5,0.47,0.91,0.87,0.53,0.11,0.19,0.69,0.54,0.92,0.82,0.83,0.83,0.75,0.4,0.13,0.09,0.09,0.07,0.38,0.5,0.42,0.41,0.34,0.44,0.39,0.36,0.34,0.54,0.43,0.07,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.22,0.9,0.67,0.7,0.55,0.2,0.46,0.74,0.91,0.99,0.83,0.28,0.22,0.86,0.97,0.66,0.05,0.19,0.07,0.83,0.76,0.61,0.64,0.57,0.55,0.62,0.61,0.54,0.49,0.56,0.56,0.45,0.38,0.3,0.38,0.42,0.1,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.09,0.14,0.83,0.92,0.65,0.56,0.76,0.81,0.65,0.53,0.51,0.49,0.93,1.0,0.44,0.51,0.47,0.54,0.6,0.53,0.91,1.0,0.89,0.92,0.77,0.57,0.57,0.4,0.88,0.68,0.28,0.3,0.83,0.38,0.3,0.74,0.85,0.87,0.96,0.83,0.78,0.18,0.07,0.52,0.76,0.8,0.78,0.75,0.54,0.43,0.26,0.07,0.01,0.01,0.05,0.07,0.56,1.0,1.0,0.94,0.58,0.56,0.39,0.15,0.53,0.79,0.58,0.65,0.55,0.5,0.31,0.24,0.26,0.44,0.48,0.64,0.75,0.7,0.75,0.91,0.78,0.31,1.0,0.55,1.0,0.86,0.14,0.49,0.55,0.51,0.47,0.47,0.53,0.17,0.15,0.71,0.55,0.65,0.78,0.4,0.02,0.15,0.95,0.77,1.0,1.0,0.81,0.18,0.38,1.0,1.0,0.86,0.63,0.74,0.68,0.83,0.25,0.07,0.06,0.05,0.29,0.31,0.34,0.28,0.31,0.29,0.31,0.4,0.49,0.08,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.01,0.12,0.24,0.9,1.0,1.0,0.98,0.99,0.42,1.0,1.0,0.8,0.83,0.75,0.19,0.18,0.17,0.71,1.0,0.47,0.08,0.06,0.16,0.34,0.02,0.13,0.11,0.75,0.86,0.97,1.0,0.97,0.96,0.88,0.75,1.0,0.8,0.11,0.36,0.46,0.56,0.57,0.04,0.02,0.03,0.06,0.72,0.82,0.93,1.0,0.98,0.81,0.85,0.92,0.76,0.64,0.88,0.71,0.62,0.78,0.87,0.7,0.78,0.85,0.62,0.26,0.59,0.57,0.44,0.41,0.4,0.33,0.29,0.3,0.3,0.24,0.24,0.14,0.04,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.15,0.19,0.3,0.99,0.56,0.36,1.0,0.69,0.58,0.77,0.92,1.0,0.59,0.07,0.08,0.72,0.91,0.52,0.1,0.05,1.0,1.0,0.7,1.0,1.0,0.72,0.53,0.57,0.76,0.75,0.74,0.34,0.79,1.0,0.86,0.87,0.72,0.79,0.73,0.17,0.1,0.1,0.08,0.26,0.48,0.51,0.52,0.4,0.33,0.41,0.37,0.06,0.06,0.06,0.09,0.18,0.44,0.32,0.31,0.33,0.32,0.37,0.29,0.22,0.31,0.18,0.01,0.01,0.0,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.1,0.65,0.77,0.71,0.57,0.21,0.4,0.68,0.6,0.46,0.43,0.48,0.57,0.56,0.29,0.93,0.78,0.36,0.12,0.67,0.86,0.69,0.18,0.16,1.0,1.0,1.0,0.79,0.97,0.98,0.85,1.0,0.85,0.46,1.0,0.68,0.09,0.09,0.15,0.76,0.58,0.68,0.68,0.72,0.72,0.38,0.24,0.64,0.08,0.94,0.81,0.29,0.15,0.36,0.61,0.65,0.82,0.75,0.4,0.72,0.89,1.0,0.63,1.0,0.99,1.0,0.76,0.61,0.64,0.65,0.18,0.69,0.93,0.78,0.23,0.03,0.11,0.62,0.42,0.36,0.3,0.28,0.29,0.26,0.24,0.26,0.23,0.25,0.24,0.3,0.26,0.34,0.31,0.05,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.12,0.55,0.57,0.56,0.39,0.08,0.13,0.22,0.89,0.73,0.66,0.77,0.56,1.0,1.0,1.0,0.61,0.98,1.0,0.88,0.08,0.19,0.14,0.81,0.64,0.72,0.66,0.85,0.21,0.28,0.69,0.56,0.17,0.7,0.9,0.91,0.79,0.14,0.45,0.65,0.62,0.12,0.02,0.24,0.86,0.78,0.77,0.76,0.91,0.98,0.9,0.69,0.44,0.1,0.02,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.39,0.91,0.82,0.89,0.78,0.62,0.49,0.28,0.3,0.82,0.56,0.47,0.55,0.4,0.53,0.84,0.68,0.47,0.48,0.65,0.65,0.58,0.52,0.32,0.16,0.15,0.54,0.45,0.51,0.45,0.82,0.8,0.57,0.65,0.77,0.8,0.7,0.84,0.84,0.67,0.26,1.0,1.0,0.22,0.15,0.28,0.2,0.94,0.88,0.78,0.85,1.0,1.0,1.0,0.94,1.0,1.0,0.96,0.98,0.85,0.7,0.79,1.0,1.0,1.0,1.0,1.0,0.78,0.18,0.21,0.97,0.89,0.61,0.18,0.09,0.21,0.53,0.32,0.04,0.07,0.7,1.0,0.6,0.65,0.41,0.22,0.29,0.14,0.77,0.76,0.38,0.78,1.0,1.0,0.33,1.0,0.96,0.21,0.94,1.0,0.31,0.14,0.13,0.09,0.22,0.85,0.75,0.62,0.56,0.4,0.44,0.27,0.47,0.3,0.06,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.06,0.13,0.14,0.48,0.75,0.8,0.2,0.42,1.0,1.0,0.21,1.0,0.64,0.52,0.4,0.06,0.05,0.83,0.71,0.75,0.83,0.88,0.8,0.77,0.73,0.74,1.0,1.0,0.49,0.1,0.18,0.47,0.72,0.72,0.31,0.47,0.42,0.04,0.03,0.27,0.33,1.0,0.87,0.09,0.07,0.87,1.0,0.33,0.4,0.84,0.75,0.63,0.12,0.34,0.64,0.6,1.0,1.0,0.61,1.0,0.76,0.07,0.02,0.01,0.09,0.7,1.0,1.0,1.0,1.0,0.82,0.56,0.08,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.12,0.27,1.0,0.72,0.64,0.44,0.06,0.1,0.71,0.65,0.03,0.16,0.54,0.77,0.72,0.66,0.58,0.55,0.52,0.82,0.97,0.48,0.36,0.46,0.23,0.02,0.01,0.96,0.73,0.09,0.03,0.52,1.0,1.0,0.23,0.33,0.94,0.76,0.77,0.71,0.82,0.73,0.88,0.49,0.05,0.03,0.66,0.96,0.63,0.06,0.75,0.98,0.85,0.56,0.09,0.15,0.28,1.0,1.0,0.81,0.18,0.73,0.81,0.2,0.03,0.07,0.19,0.45,1.0,0.68,0.22,1.0,1.0,1.0,0.61,1.0,0.9,0.45,0.82,0.8,0.33,0.14,0.44,0.96,0.62,1.0,0.94,0.88,0.93,0.87,0.44,0.1,0.11,0.1,0.07,0.49,0.61,0.53,0.42,0.38,0.39,0.37,0.27,0.41,0.41,0.1,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.09,0.15,0.87,0.92,0.11,0.05,0.17,1.0,1.0,1.0,1.0,1.0,0.72,0.21,0.24,1.0,1.0,0.7,1.0,1.0,0.63,0.18,0.92,0.92,0.95,0.87,0.68,0.69,0.87,0.81,0.92,0.81,0.22,1.0,1.0,0.61,0.21,0.11,0.41,0.71,0.71,0.76,0.67,0.76,0.72,0.75,0.65,0.17,0.23,0.74,0.88,0.94,0.2,0.03,0.05,0.65,0.81,0.75,0.75,0.98,1.0,0.82,0.45,0.11,0.02,0.09,0.09,0.77,0.98,0.88,0.47,0.22,1.0,1.0,0.66,0.37,1.0,1.0,0.9,0.73,0.72,0.63,0.6,0.81,0.63,0.36,0.76,0.66,0.73,0.71,0.51,0.04,0.16,0.32,0.43,0.57,0.52,0.69,0.74,0.43,0.14,0.36,0.2,0.37,0.56,0.51,0.47,0.44,0.37,0.31,0.25,0.25,0.27,0.25,0.21,0.12,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.22,0.7,0.77,0.9,0.65,0.2,0.94,1.0,0.88,0.87,0.87,0.93,0.8,0.79,0.61,0.51,0.43,0.13,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.02,0.1,0.18,0.23,0.36,0.56,0.74,0.43,0.52,0.85,0.54,0.39,0.68,0.37,0.48,0.23,0.08,0.41,0.57,0.68,0.7,0.71,0.41,0.39,0.55,0.61,0.08,0.03,0.16,0.39,0.85,0.67,0.64,0.84,0.77,0.81,0.24,0.12,0.28,0.69,0.67,0.3,0.29,0.58,0.17,0.08,0.14,0.17,0.85,0.87,0.56,0.92,0.99,0.74,0.65,0.85,0.78,0.57,0.72,0.82,0.55,0.18,0.24,0.68,0.28,0.02,0.01,0.48,0.96,0.7,0.59,0.61,0.81,0.77,0.77,0.69,0.58,0.6,0.6,0.24,0.02,0.02,0.01,0.01,0.64,1.0,1.0,0.07,0.07,0.16,0.69,0.68,0.63,0.76,0.76,0.55,0.61,0.62,0.54,0.44,0.29,0.29,0.21,0.38,0.02,0.01,0.01,0.55,0.7,0.9,1.0,1.0,1.0,0.67,1.0,1.0,0.9,0.75,0.69,0.63,1.0,1.0,0.93,0.11,0.04,0.1,0.33,0.17,0.91,0.92,0.91,0.81,0.28,0.22,0.96,0.86,1.0,1.0,0.38,0.18,0.67,1.0,0.17,0.6,0.75,0.7,0.55,0.45,0.49,0.34,0.47,0.42,0.51,0.36,0.03,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.04,0.15,0.2,0.64,0.34,0.53,1.0,1.0,0.72,0.45,0.56,0.88,0.61,1.0,1.0,0.81,1.0,1.0,0.12,0.05,0.26,1.0,0.7,0.67,0.76,0.48,0.18,0.1,0.75,0.88,0.91,0.65,0.4,1.0,1.0,0.78,0.93,1.0,0.73,0.36,0.17,0.44,0.65,0.53,0.52,0.58,0.64,0.7,0.64,0.5,0.46,0.48,0.48,0.29,0.03,0.01,0.01,0.01,0.1,0.49,1.0,0.99,0.78,0.14,0.75,0.92,0.12,0.02,0.01,0.16,0.09,0.65,0.6,0.63,0.63,0.05,0.07,0.17,0.79,0.05,0.13,0.23,0.95,0.58,1.0,1.0,0.41,0.11,0.63,0.9,0.59,0.14,0.25,0.92,0.9,0.7,0.56,0.43,0.43,0.04,0.21,0.09,1.0,0.9,0.53,0.06,0.18,0.12,0.7,0.96,0.95,0.81,0.99,0.64,0.88,1.0,0.82,1.0,0.69,0.24,0.59,0.47,0.48,0.58,0.74,0.1,1.0,1.0,0.79,0.46,0.79,0.91,0.21,0.03,0.21,0.73,0.84,0.62,0.2,0.57,1.0,0.84,0.18,0.33,0.59,0.19,0.13,0.73,0.91,0.5,0.33,0.84,0.77,0.64,0.14,0.1,0.4,0.55,0.12,0.1,0.09,0.06,0.41,0.42,0.38,0.43,0.45,0.42,0.41,0.3,0.43,0.22,0.01,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.13,0.22,0.14,0.92,0.44,0.23,0.8,0.67,0.76,0.91,0.72,1.0,1.0,1.0,0.42,0.21,0.95,1.0,0.86,0.91,0.95,0.97,0.9,0.82,0.57,0.38,0.66,1.0,0.98,0.96,0.93,0.56,0.21,0.75,0.91,0.71,0.72,0.3,0.96,0.75,0.12,0.07,0.17,0.78,0.69,0.27,0.33,0.24,0.37,0.48,0.41,0.57,0.67,0.55,0.35,0.59,0.6,0.5,0.58,0.34,0.4,0.49,0.36,0.07,0.01,0.01,0.01,0.01,0.01,0.1,0.24,0.37,0.61,0.49,0.34,0.33,0.39,0.31,0.03,0.01,0.03,0.08,0.9,0.54,0.55,0.72,0.38,0.68,0.97,0.18,0.09,0.2,0.17,0.94,0.59,0.61,0.51,0.32,0.47,0.72,0.8,0.78,0.98,0.79,0.63,0.58,0.7,0.73,0.64,0.44,0.25,0.23,0.15,0.09,0.01,0.05,0.24,0.88,1.0,1.0,0.96,0.84,1.0,1.0,1.0,0.67,0.59,0.6,1.0,1.0,0.64,0.6,0.16,0.16,0.48,0.57,0.74,0.66,0.28,0.44,0.43,0.37,0.54,0.64,0.74,0.81,0.79,0.65,0.52,0.71,0.77,0.64,0.53,0.72,0.71,0.5,0.5,0.67,0.72,0.57,0.48,0.5,0.52,0.55,0.54,0.21,0.65,0.62,0.64,0.66,0.4,0.25,0.23,0.46,0.32,0.44,0.71,0.75,0.75,0.9,0.82,0.62,0.39,0.46,0.57,0.62,0.66,0.5,0.42,0.44,0.45,0.09,0.01,0.01,0.01,0.03,0.72,1.0,1.0,0.24,0.51,0.64,0.41,0.35,0.52,0.6,0.17,1.0,1.0,0.64,0.1,0.55,0.92,0.88,0.43,0.42,0.4,0.13,0.14,0.23,0.12,0.55,0.69,0.76,0.92,0.92,0.67,0.78,0.65,0.53,0.54,0.44,0.41,0.44,0.42,0.44,0.47,0.44,0.4,0.36,0.39,0.38,0.41,0.4,0.45,0.13,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.4,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.2,0.07,0.04,0.38,0.53,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.61,1.0,0.99,0.95,0.94,0.64,0.12,0.12,0.2,0.96,0.85,0.94,0.57,0.17,0.91,0.88,0.7,0.54,0.26,0.04,0.02,0.16,0.13,0.58,1.0,1.0,1.0,0.76,0.05,0.25,0.55,0.59,0.03,0.22,0.33,0.67,1.0,0.71,0.08,0.31,0.89,0.97,0.59,0.81,0.47,0.16,0.3,0.58,0.08,0.02,0.1,0.78,0.65,0.98,0.69,0.5,0.53,0.52,0.6,0.65,0.8,0.61,0.33,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.05,0.12,1.0,0.98,0.95,0.75,0.7,0.81,0.83,0.81,0.65,0.4,0.28,0.64,0.85,0.84,0.41,1.0,1.0,0.65,0.14,0.26,0.28,0.21,0.69,0.49,1.0,1.0,1.0,0.76,1.0,1.0,1.0,0.69,0.42,0.51,1.0,1.0,0.46,0.03,0.26,0.19,0.81,0.91,0.86,0.91,0.73,0.97,0.5,0.37,1.0,1.0,0.49,0.52,1.0,0.71,0.5,0.37,0.35,0.35,0.4,0.4,0.41,0.35,0.39,0.33,0.38,0.43,0.4,0.43,0.35,0.09,0.01,0.01,0.01,0.0,0.01,0.01,0.01,0.67,0.69,0.65,0.32,0.53,0.48,0.43,0.27,0.09,0.32,0.47,0.32,0.38,0.29,0.36,0.67,0.63,0.75,0.38,0.53,0.32,0.04,0.02,1.0,0.93,0.75,0.57,0.67,0.62,0.56,0.5,0.69,0.62,0.66,0.71,0.64,0.52,0.15,0.11,0.17,0.51,0.57,0.57,0.27,0.38,0.09,0.02,0.01,0.21,0.2,0.62,0.47,0.54,0.68,0.84,0.73,0.79,0.89,0.76,0.73,0.75,0.86,0.78,0.52,0.57,0.29,0.04,0.53,1.0,0.6,0.11,0.22,0.12,0.21,0.71,0.76,0.87,0.55,0.51,1.0,0.77,0.6,0.6,0.7,0.68,0.61,0.61,0.65,0.71,0.73,0.73,0.64,0.09,0.01,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.18,0.8,0.81,0.7,0.86,0.77,0.26,0.35,0.81,1.0,1.0,1.0,1.0,1.0,0.26,0.3,1.0,1.0,0.82,0.1,0.22,0.84,0.67,0.53,0.72,0.87,0.37,0.26,0.72,0.79,1.0,1.0,0.55,0.5,0.79,0.62,0.05,0.01,0.15,0.69,0.68,0.58,0.66,0.67,0.71,0.69,0.55,0.3,0.02,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.11,0.12,0.37,0.3,0.26,0.9,0.81,0.47,0.07,0.34,0.14,0.92,0.99,0.74,0.9,0.76,1.0,0.95,0.84,0.55,0.04,0.01,0.27,1.0,0.96,0.66,0.79,0.77,0.93,0.9,0.94,0.76,0.74,0.84,0.82,0.79,0.98,0.72,0.25,0.23,0.21,0.4,1.0,0.39,1.0,1.0,1.0,0.33,0.13,0.94,1.0,0.71,0.19,0.91,1.0,0.75,0.11,0.46,0.93,0.92,0.08,0.12,0.38,0.34,0.77,1.0,1.0,1.0,0.27,0.45,0.6,0.76,0.93,0.96,0.91,0.97,0.9,0.98,1.0,0.83,0.77,0.96,0.9,0.68,0.6,0.66,0.9,0.66,0.12,0.1,0.96,0.79,0.82,0.4,0.14,0.24,0.63,0.23,0.06,0.65,0.8,0.84,0.93,0.97,0.64,0.23,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.62,1.0,1.0,1.0,0.94,1.0,0.72,0.26,0.44,0.66,0.53,0.2,0.13,0.6,0.62,0.71,0.64,0.45,0.34,0.51,0.45,0.4,0.34,0.43,0.44,0.54,0.5,0.45,0.43,0.15,0.07,0.21,0.55,0.52,0.19,0.04,0.55,0.71,0.75,0.67,0.59,0.35,0.23,0.05,0.08,0.13,0.59,0.57,0.67,0.17,0.49,1.0,0.85,0.85,0.9,0.42,0.76,1.0,1.0,1.0,0.3,0.91,1.0,1.0,0.96,0.96,0.9,0.4,0.09,0.77,1.0,0.8,0.76,0.92,0.65,0.87,1.0,0.64,0.2,0.57,1.0,0.66,0.73,0.43,0.74,0.81,0.5,0.25,0.16,0.45,0.83,0.38,0.02,0.14,0.73,0.86,0.83,0.76,0.59,0.38,0.35,0.36,0.36,0.42,0.46,0.34,0.38,0.09,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.15,0.11,0.81,0.44,0.44,0.94,0.27,0.16,0.25,0.73,0.94,0.82,0.87,0.74,1.0,0.85,0.6,0.06,0.01,0.98,0.97,0.6,0.49,0.6,0.79,0.75,0.72,0.59,0.45,0.44,0.36,0.34,0.25,0.02,0.12,0.07,0.91,0.19,0.02,0.01,0.97,0.71,0.59,0.83,0.89,0.67,0.69,0.62,0.85,0.3,0.26,0.57,0.44,0.42,0.37,0.71,0.14,0.68,0.88,0.87,0.5,0.35,0.38,0.62,0.43,0.53,1.0,0.48,0.03,0.01,0.13,0.75,0.5,0.58,0.38,0.03,0.74,0.93,0.72,0.67,0.88,0.89,0.56,0.19,0.09,0.15,0.69,0.63,0.23,0.05,0.67,0.92,0.81,0.76,0.75,0.65,0.31,0.03,0.01,0.01,0.01,0.01,0.01,0.04,0.09,0.68,0.53,0.62,0.74,0.71,0.75,0.41,0.25,0.74,0.87,0.92,0.76,0.85,0.51,0.54,0.78,0.94,1.0,0.27,0.73,0.93,0.69,0.82,0.8,0.62,0.76,0.67,0.71,0.69,0.76,0.75,0.39,0.11,0.7,0.74,0.89,0.72,0.23,0.05,0.72,0.78,0.69,0.38,0.09,0.07,0.15,1.0,0.75,0.8,0.88,0.76,0.76,0.77,0.78,0.48,0.22,0.56,0.65,0.21,0.53,0.54,0.68,0.7,0.73,0.2,0.17,0.81,0.66,0.62,0.42,0.45,0.66,0.37,0.09,0.09,0.43,0.73,0.31,0.03,0.2,0.47,0.53,0.43,0.4,0.38,0.37,0.34,0.41,0.39,0.34,0.36,0.41,0.17,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.08,0.58,0.84,1.0,1.0,0.76,0.56,0.39,0.6,1.0,0.97,0.23,0.02,0.15,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.4,0.96,1.0,1.0,1.0,1.0,1.0,0.84,0.53,0.84,0.9,0.85,0.23,0.68,0.43,0.03,0.19,0.09,0.09,0.27,1.0,0.96,0.52,0.99,0.77,0.19,0.37,0.62,0.67,0.64,0.66,0.62,0.51,0.38,0.48,0.59,0.51,0.48,0.45,0.46,0.55,0.49,0.3,0.04,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.77,1.0,0.66,0.08,0.07,0.15,0.79,0.73,1.0,0.48,0.06,0.24,0.12,0.6,0.66,0.78,0.55,0.64,0.61,0.65,0.42,0.61,0.74,0.62,0.56,0.59,0.59,0.64,0.67,0.55,0.52,0.28,0.02,0.01,0.01,0.01,0.01,0.01,0.05,0.11,0.29,0.57,0.24,0.71,0.31,0.11,0.23,0.65,0.97,0.6,0.68,0.56,0.79,0.69,0.68,0.53,0.56,0.65,0.56,0.65,0.64,0.38,0.84,1.0,1.0,1.0,1.0,0.84,0.44,0.36,0.58,0.79,0.85,0.98,0.89,0.79,0.48,0.32,0.18,0.9,1.0,1.0,0.92,0.96,0.66,0.22,0.3,0.84,0.75,0.62,0.62,0.45,0.16,1.0,1.0,0.5,0.11,0.08,0.54,0.8,0.34,0.11,0.09,0.07,0.01,0.35,0.5,0.35,0.37,0.15,0.08,0.09,0.07,0.4,0.52,0.46,0.37,0.41,0.39,0.32,0.32,0.43,0.09,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.08,0.57,1.0,1.0,0.75,0.73,1.0,0.95,0.4,0.29,0.74,0.45,0.14,0.88,0.81,0.72,0.81,0.77,0.84,0.81,0.45,0.11,0.18,0.27,1.0,0.99,0.47,0.04,0.32,1.0,0.69,0.72,0.94,0.74,0.81,0.83,0.94,1.0,1.0,0.47,1.0,1.0,0.6,0.14,0.21,0.69,0.74,1.0,1.0,0.32,0.44,0.69,0.55,0.55,0.45,0.48,0.24,0.7,0.57,0.04,0.19,0.13,0.2,0.54,0.61,0.59,0.64,0.5,0.47,0.39,0.32,0.36,0.25,0.3,0.23,0.32,0.36,0.37,0.04,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.13,0.16,0.45,0.84,0.64,0.79,0.74,0.22,0.03,0.98,1.0,0.82,0.52,0.69,0.61,0.03,0.24,0.34,0.2,1.0,1.0,0.19,0.23,0.93,1.0,0.97,1.0,0.84,0.63,0.33,0.38,0.13,0.01,0.01,0.0,0.01,0.0,0.01,0.01,0.01,0.01,0.05,0.14,0.21,0.79,0.91,0.37,0.05,0.11,0.16,0.88,0.96,0.69,0.61,0.94,0.84,0.68,0.62,0.55,0.63,0.3,0.31,0.19,0.52,0.45,0.11,0.01,0.06,0.52,0.03,0.01,0.13,0.32,0.77,0.11,1.0,1.0,1.0,0.81,0.11,0.27,0.66,0.74,0.79,0.89,1.0,1.0,1.0,1.0,0.85,1.0,0.88,0.7,0.4,0.15,1.0,1.0,1.0,0.24,0.51,1.0,0.95,0.96,0.93,0.52,1.0,0.83,0.11,0.38,1.0,0.88,0.85,0.36,0.19,0.2,0.78,0.95,0.95,0.47,0.37,1.0,0.64,1.0,1.0,0.78,0.23,0.11,0.3,0.4,0.11,0.13,0.12,0.08,0.41,0.33,0.27,0.32,0.36,0.31,0.28,0.26,0.34,0.06,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.47,1.0,0.97,0.17,0.06,0.21,0.88,0.72,0.54,0.72,0.69,0.75,0.59,0.69,0.96,0.22,0.33,0.43,0.34,0.6,0.12,0.01,0.01,0.36,0.86,0.78,0.95,0.89,0.7,0.49,0.87,0.82,0.59,0.57,0.89,0.65,0.06,0.08,0.17,0.29,0.81,0.72,0.57,0.58,0.57,0.7,0.78,0.83,0.7,0.53,0.43,0.4,0.33,0.21,0.14,0.05,0.02,0.07,0.15,0.04,1.0,0.83,0.84,0.71,0.31,0.15,0.96,0.38,1.0,0.93,0.61,0.71,0.79,0.72,0.78,0.64,0.62,0.79,0.82,0.7,0.68,0.73,0.56,0.06,0.01,0.41,0.65,0.58,0.65,0.69,0.89,0.73,0.29,0.03,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.02,0.15,0.85,0.83,0.81,0.85,0.96,1.0,1.0,1.0,0.95,1.0,1.0,0.86,0.84,0.86,0.59,0.2,0.16,0.89,0.83,0.8,0.59,0.53,0.73,0.79,0.17,0.12,0.34,0.44,0.23,0.82,0.11,0.03,0.02,0.04,0.06,0.64,0.89,0.84,0.88,0.86,0.77,0.59,0.84,0.88,0.75,0.8,0.79,0.72,0.18,0.02,0.08,0.77,0.62,0.62,0.52,0.55,0.56,0.58,0.54,0.47,0.33,0.23,0.15,0.03,0.01,0.01,0.01,0.01,0.01,0.01,0.04,0.08,0.06,0.15,0.38,0.74,0.86,0.85,0.52,0.33,0.24,0.84,0.3,0.5,0.83,0.87,0.75,0.84,0.98,0.91,0.75,0.7,0.86,0.91,0.78,0.59,0.21,0.12,0.29,0.86,0.78,0.76,0.42,0.25,0.2,0.44,0.62,0.16,0.55,0.48,0.48,0.45,0.32,0.25,0.24,0.2,0.14,0.07,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.11,0.12,0.77,0.93,0.95,1.0,1.0,1.0,0.98,0.64,0.43,0.49,0.28,0.03,0.01,0.01,0.01,0.0,0.0,0.0,0.01,0.01,0.01,0.01,0.01,0.28,0.64,0.68,0.69,0.67,0.66,0.6,0.49,0.43,0.66,0.5,0.51,0.57,0.56,0.54,0.55,0.47,0.58,0.71,0.81,0.97,0.87,0.59,0.98,0.67,0.53,0.64,0.45,0.15,0.14,0.49,0.86,0.99,0.81,0.17,0.02,0.7,1.0,0.99,0.68,0.89,0.92,0.79,0.3,0.11,0.42,0.73,0.63,0.58,0.62,0.69,0.7,0.71,0.7,0.51,0.44,0.44,0.58,0.41,0.04,0.02,0.01,0.01,0.01,0.01,0.01,0.01,0.06,0.46,0.48,0.86,0.92,0.23,0.02,0.16,0.42,0.42,0.02,0.01,0.23,0.09,0.57,0.2,0.39,0.83,0.94,0.61,0.85,0.47,0.77,0.8,0.65,0.16,0.12,0.12,0.02,0.12,0.52,0.39,0.37,0.22,0.09,0.07,0.07,0.08,0.4,0.42,0.4,0.44,0.43,0.46,0.32,0.35,0.38,0.08,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.24,0.77,0.78,0.72,0.8,0.77,0.73,0.83,0.54,0.25,0.12,0.52,1.0,0.89,0.25,0.43,0.15,0.03,0.07,0.74,0.62,0.77,0.75,0.7,0.88,0.99,0.72,0.54,0.63,0.74,0.32,0.24,0.25,0.52,0.42,0.47,0.47,0.52,0.54,0.55,0.56,0.63,0.56,0.44,0.45,0.48,0.52,0.58,0.58,0.44,0.32,0.24,0.02,0.01,0.02,0.07,0.07,0.65,0.92,0.76,0.87,0.95,0.86,0.79,0.94,1.0,0.74,1.0,1.0,1.0,1.0,0.98,0.86,0.79,0.91,0.73,0.77,0.61,0.26,0.21,0.37,0.09,0.02,0.26,1.0,0.81,0.7,0.55,0.54,0.64,0.67,0.67,0.58,0.56,0.49,0.15,0.09,0.13,1.0,0.93,0.48,0.21,0.47,0.61,0.69,1.0,0.34,0.25,0.68,0.96,0.68,0.12,0.14,0.68,0.91,0.37,0.13,0.43,0.58,0.67,0.71,0.77,0.76,0.61,0.6,0.48,0.06,0.21,0.11,0.38,0.32,0.52,1.0,0.78,0.07,0.7,1.0,1.0,0.78,1.0,0.99,0.27,0.5,0.91,0.74,0.23,0.14,0.14,0.17,0.48,0.49,0.19,0.11,0.09,0.04,0.53,0.44,0.4,0.39,0.41,0.33,0.33,0.31,0.5,0.29,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.05,0.7,0.9,0.95,0.78,0.74,0.73,0.78,0.35,0.62,1.0,0.97,0.31,0.16,0.84,0.98,1.0,0.88,0.69,0.55,0.79,0.83,0.74,0.56,0.8,0.91,1.0,1.0,1.0,0.72,0.5,1.0,0.75,0.59,0.55,0.34,0.03,0.02,0.32,1.0,1.0,0.99,0.69,0.14,0.1,0.17,1.0,0.99,0.35,0.06,0.2,0.91,0.64,0.6,0.89,0.67,0.51,0.51,0.65,0.79,0.96,0.76,0.84,1.0,0.75,0.13,0.07,0.57,0.77,0.97,0.16,0.04,0.26,0.22,0.52,0.41,0.46,0.56,0.52,0.55,0.46,0.39,0.3,0.28,0.28,0.1,0.64,0.67,0.72,0.6,1.0,0.65,0.6,0.67,1.0,0.48,0.16,0.26,0.88,0.83,0.57,0.41,0.55,0.2,0.15,0.13,0.96,0.28,0.1,0.22,0.33,0.6,0.75,0.58,0.98,0.87,0.53,0.74,0.73,0.79,0.56,0.17,0.16,0.12,0.35,0.42,0.22,0.16,0.12,0.1,0.35,0.4,0.32,0.35,0.33,0.28,0.2,0.37,0.17,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.15,0.28,1.0,0.72,1.0,0.92,0.28,0.83,1.0,1.0,0.63,0.25,0.28,0.18,0.95,0.94,0.38,0.04,0.25,1.0,1.0,0.66,0.08,0.02,0.26,0.13,0.85,0.53,0.24,1.0,1.0,1.0,1.0,1.0,0.41,0.24,0.67,1.0,0.92,0.55,0.59,0.79,0.92,0.39,0.91,0.84,0.87,0.82,0.44,0.24,0.5,0.57,0.46,0.6,0.67,0.66,0.59,0.5,0.43,0.27,0.11,0.02,0.01,0.01,0.01,0.06,0.49,0.92,1.0,1.0,1.0,1.0,0.82,0.07,0.29,0.11,0.64,0.67,0.84,0.75,0.77,0.56,0.05,0.15,0.4,0.62,0.46,0.29,0.29,0.54,0.28,0.28,0.2,0.09,0.35,0.91,0.33,0.06,0.12,0.59,0.97,0.56,0.13,0.12,0.1,0.67,0.63,0.45,0.1,0.07,0.11,0.13,0.17,0.61,0.75,0.68,0.67,0.55,0.46,0.34,0.14,0.02,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.09,0.56,0.85,0.76,0.66,0.17,0.52,1.0,0.91,0.82,0.76,0.8,0.79,0.85,0.85,0.89,0.88,0.79,0.52,0.31,0.11,0.02,0.36,0.6,0.22,0.19,0.79,0.95,1.0,0.74,0.25,0.23,0.59,0.15,0.11,0.15,0.13,0.6,0.21,0.02,0.01,0.03,0.15,0.38,0.81,1.0,1.0,0.97,0.91,0.72,0.86,0.86,0.7,0.8,0.49,0.32,0.11,0.66,1.0,1.0,0.97,0.96,0.42,0.1,0.35,0.78,0.64,0.79,0.16,0.02,0.3,0.86,0.69,0.4,0.67,0.73,0.1,0.01,0.02,0.26,0.73,0.72,0.76,0.63,0.24,1.0,0.93,0.62,0.4,0.45,0.56,0.64,0.38,0.17,0.31,0.59,0.54,0.55,0.51,0.49,0.59,0.86,0.26,0.18,0.64,0.29,0.04,0.13,0.18,0.14,0.02,0.3,0.42,0.39,0.36,0.29,0.27,0.14,0.02,0.01,0.01,0.01,0.01,0.01,0.01,0.11,0.9,0.77,0.77,0.71,0.68,0.64,0.35,0.39,0.57,0.28,0.8,0.86,0.51,0.68,0.75,0.54,0.55,0.55,0.48,0.25,0.19,0.08,0.49,0.44,0.01,0.04,0.91,0.78,0.68,0.64,0.64,0.78,0.49,0.15,0.68,1.0,0.95,0.99,0.88,0.89,0.71,0.79,0.8,0.74,0.76,0.72,0.49,0.35,0.06,0.01,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"total":204.333};
+(function(){
+const A = new Audio(); A.preload = "auto";
+const $ = id => document.getElementById(id), frame = $("frame");
+const TOTAL = TLD.total;
+setup(TLD);
+// 화면 맞추기
+function fit(){ const s = Math.min(innerWidth/1920, innerHeight/1080); frame.style.transform = `scale(${s})`;
+  frame.style.left = ((innerWidth-1920*s)/2)+"px"; frame.style.top = ((innerHeight-1080*s)/2)+"px"; }
+addEventListener("resize", fit); fit();
+// 퀴즈 멈춤 지점
+const QP = []; TLD.scenes.forEach(s => s.lines.forEach(l => { if (l.pause) QP.push(s.start + l.t1 + 0.45); }));
+// 시크바 표시
+const marks = $("marks");
+TLD.scenes.forEach((s,i) => { if (i) marks.insertAdjacentHTML("beforeend", `<div class="mk" style="left:${s.start/TOTAL*100}%"></div>`); });
+QP.forEach(p => marks.insertAdjacentHTML("beforeend", `<div class="mk q" style="left:${p/TOTAL*100}%" title="퀴즈"></div>`));
+const fmt = t => { t = Math.max(0, Math.floor(t)); return Math.floor(t/60)+":"+String(t%60).padStart(2,"0"); };
+// 시계: 오디오 시간에 맞춰 부드럽게
+let baseT = 0, baseNow = 0, playing = false, lastT = -1, autoQ = true, done = new Set();
+const now = () => performance.now();
+function curT(){ if (!playing) return A.currentTime; const t = baseT + (now()-baseNow)/1000*A.playbackRate;
+  if (Math.abs(t - A.currentTime) > 0.25) { baseT = A.currentTime; baseNow = now(); return baseT; } return t; }
+function draw(t){ t = Math.min(Math.max(t,0), TOTAL-0.001); render(t); lastT = t;
+  $("seekfill").style.width = (t/TOTAL*100)+"%"; $("seekknob").style.left = (t/TOTAL*100)+"%";
+  $("time").textContent = fmt(t)+" / "+fmt(TOTAL); }
+function loop(){ if (playing) { const t = curT();
+    if (autoQ) for (const p of QP) if (!done.has(p) && lastT < p && t >= p) { done.add(p); A.pause(); A.currentTime = p; draw(p); $("quiz").style.display = "flex"; break; }
+    if (playing) draw(t); }
+  requestAnimationFrame(loop); }
+A.addEventListener("playing", () => { playing = true; baseT = A.currentTime; baseNow = now(); $("pp").textContent = "⏸ 일시정지"; poke(); });
+A.addEventListener("pause", () => { playing = false; $("pp").textContent = "▶ 재생"; showUI(); draw(A.currentTime); });
+A.addEventListener("ended", () => { playing = false; $("pp").textContent = "↺ 다시 보기"; showUI(); draw(TOTAL); });
+function play(){ $("quiz").style.display = "none"; if (A.ended || A.currentTime >= TOTAL - 0.05) { A.currentTime = 0; done.clear(); } A.play(); }
+function toggle(){ if (playing) A.pause(); else play(); }
+function seek(t){ t = Math.min(Math.max(t,0), TOTAL-0.05); A.currentTime = t; baseT = t; baseNow = now();
+  done = new Set(QP.filter(p => p <= t + 0.01)); $("quiz").style.display = "none"; draw(t); }
+// 준비: 글꼴 4종 + 오디오
+const fontsReady = Promise.all(["400","500","700","900"].map(w => document.fonts.load(`${w} 40px VidKR`, "가")));
+// 음성은 통째로 받아 두기(서버 사정과 관계없이 앞뒤로 옮겨 보기 가능)
+const audioReady = fetch("ch21b.m4a?v=b92b007f").then(r => { if (!r.ok) throw new Error(r.status); return r.blob(); })
+  .then(b => new Promise(res => { A.src = URL.createObjectURL(b); if (A.readyState >= 3) res(); A.addEventListener("canplaythrough", res, { once:true }); setTimeout(res, 5000); }))
+  .catch(() => { A.src = "ch21b.m4a?v=b92b007f"; });
+fontsReady.then(() => draw(0.9));
+Promise.all([fontsReady, audioReady]).then(() => { $("start").disabled = false;
+  $("ctext").innerHTML = "재생<small>21차시 · 모의 주식 투자 되짚기</small>"; });
+$("start").onclick = () => { $("cover").style.display = "none"; showUI(); seek(0); play(); };
+$("qgo").onclick = play;
+$("pp").onclick = toggle;
+$("bq").onclick = () => { autoQ = !autoQ; $("bq").classList.toggle("on", autoQ); };
+$("bc").onclick = () => { const on = $("bc").classList.toggle("on"); $("sub").style.visibility = on ? "" : "hidden"; };
+const SP = [1, 1.25, 0.8]; let si = 0;
+$("bs").onclick = () => { si = (si+1)%SP.length; A.playbackRate = SP[si]; $("bs").textContent = SP[si]+"×"; baseT = A.currentTime; baseNow = now(); };
+$("bf").onclick = () => { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen(); };
+// 시크바
+const sw = $("seekwrap"); let drag = false;
+const posT = e => { const r = sw.getBoundingClientRect(); return (Math.min(Math.max(e.clientX - r.left, 0), r.width)/r.width)*TOTAL; };
+sw.addEventListener("pointerdown", e => { drag = true; sw.setPointerCapture(e.pointerId); seek(posT(e)); });
+sw.addEventListener("pointermove", e => { const t = posT(e), tip = $("tip"); tip.style.display = "block"; tip.style.left = (t/TOTAL*100)+"%";
+  let k = 0; TLD.scenes.forEach((s,i) => { if (t >= s.start) k = i; }); tip.textContent = fmt(t)+" · 장면 "+(k+1); if (drag) seek(t); });
+sw.addEventListener("pointerup", () => drag = false);
+sw.addEventListener("pointerleave", () => $("tip").style.display = "none");
+// 조작판 자동 숨김
+let hideTimer; function showUI(){ $("ui").classList.remove("hide"); document.body.style.cursor = ""; }
+function poke(){ showUI(); clearTimeout(hideTimer); hideTimer = setTimeout(() => { if (playing) { $("ui").classList.add("hide"); document.body.style.cursor = "none"; } }, 2500); }
+addEventListener("pointermove", poke);
+frame.addEventListener("click", e => { if ($("cover").style.display !== "none" || e.target.closest("#qgo")) return; toggle(); });
+addEventListener("keydown", e => {
+  if (e.code === "Space" || e.key === "k") { e.preventDefault(); if ($("cover").style.display !== "none") $("start").click(); else toggle(); }
+  else if (e.key === "ArrowRight") seek(A.currentTime + 5); else if (e.key === "ArrowLeft") seek(A.currentTime - 5);
+  else if (e.key === "f" || e.key === "F") $("bf").click(); else if (e.key === "c" || e.key === "C") $("bc").click();
+  poke(); });
+window.PLAYER = { A, seek, play, toggle };
+requestAnimationFrame(loop);
+})();
+</script>
+</body></html>

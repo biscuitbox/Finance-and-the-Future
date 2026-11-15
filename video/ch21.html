@@ -2,10 +2,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>21차시 영상 · 모의 주식 투자 | 금융과 미래</title>
 <style>
-@font-face{font-family:"VidKR";src:url("fonts/ch21-Regular.woff2?v=696b5be3") format("woff2");font-weight:100 450;font-display:block}
-@font-face{font-family:"VidKR";src:url("fonts/ch21-Medium.woff2?v=906f9bd8") format("woff2");font-weight:451 550;font-display:block}
-@font-face{font-family:"VidKR";src:url("fonts/ch21-Bold.woff2?v=3b0ce9ce") format("woff2");font-weight:551 750;font-display:block}
-@font-face{font-family:"VidKR";src:url("fonts/ch21-Black.woff2?v=9fe14113") format("woff2");font-weight:751 1000;font-display:block}
+@font-face{font-family:"VidKR";src:url("fonts/ch21-Regular.woff2?v=b9d9cefe") format("woff2");font-weight:100 450;font-display:block}
+@font-face{font-family:"VidKR";src:url("fonts/ch21-Medium.woff2?v=c95aa940") format("woff2");font-weight:451 550;font-display:block}
+@font-face{font-family:"VidKR";src:url("fonts/ch21-Bold.woff2?v=ef8aa0df") format("woff2");font-weight:551 750;font-display:block}
+@font-face{font-family:"VidKR";src:url("fonts/ch21-Black.woff2?v=5727ef30") format("woff2");font-weight:751 1000;font-display:block}
 
 :root{--pine:#10403B;--teal:#127475;--steel:#1C6E8C;--amber:#E08E0B;--amberdk:#A96A08;--brick:#8C3A3A;--brickbg:#F5EFEF;--tealbg:#E9F2F0;--amberbg:#FCF4E4;--steelbg:#E8F1F5;--ink:#17302D;--grey:#5C6B68;--line:#D5E1DE}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -114,6 +114,9 @@ html,body{margin:0;width:100%;height:100%;background:#0b1f1c;overflow:hidden}
 .cap small{display:block;font-size:15px;font-weight:600;opacity:.85;margin-top:6px}
 #qgo{background:#fff;color:#8C3A3A;border:6px solid #8C3A3A;border-radius:999px;padding:18px 44px;font:900 40px "VidKR",sans-serif;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.25)}
 #qgo small{font-size:26px;font-weight:700;opacity:.7}
+#ui a.rel{color:#10302c;background:#E08E0B;border-radius:8px;padding:7px 12px;text-decoration:none;font-weight:800}
+#cover a.rel{color:#fff;font:700 17px "VidKR",sans-serif;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:9px 20px;text-decoration:none}
+#cover a.rel:hover,#ui a.rel:hover{filter:brightness(1.1)}
 </style></head><body>
 <div id="frame">
 
@@ -350,10 +353,10 @@ html,body{margin:0;width:100%;height:100%;background:#0b1f1c;overflow:hidden}
 
 <div id="quiz"><button id="qgo">▶ 다 풀었으면 계속하기 <small>(Space)</small></button></div>
 </div>
-<div id="cover"><button class="big" id="start" disabled aria-label="재생"><i></i></button><div class="cap" id="ctext">불러오는 중…<small>21차시 · 모의 주식 투자</small></div></div>
+<div id="cover"><button class="big" id="start" disabled aria-label="재생"><i></i></button><div class="cap" id="ctext">불러오는 중…<small>21차시 · 모의 주식 투자</small></div><a class="rel" href="ch21b.html">게임을 마쳤나요? 되짚기 영상 보기 →</a></div>
 <div id="ui" class="hide">
  <div id="seekwrap"><div id="seekbg"></div><div id="marks"></div><div id="seekfill"></div><div id="seekknob"></div><div id="tip"></div></div>
- <div id="row"><button id="pp">▶ 재생</button><span id="time">0:00 / 0:00</span><span id="sp"></span>
+ <div id="row"><button id="pp">▶ 재생</button><span id="time">0:00 / 0:00</span><span id="sp"></span><a class="rel" href="ch21b.html">게임 후 되짚기 영상 →</a>
   <button id="bq" class="on" title="퀴즈에서 자동으로 멈추기">퀴즈 멈춤</button><button id="bc" class="on" title="자막 (C)">자막</button><button id="bs" title="속도">1×</button><button id="bf" title="전체 화면 (F)">전체 화면</button></div>
 </div>
 <script>// 모션그래픽 엔진: render(t) 한 번에 한 프레임을 결정적으로 그림
