@@ -31,7 +31,7 @@ h2{font-size:22px;margin:0 0 4px}
 .unit{margin-top:22px}
 .unit h2 small{display:block;font-size:14px;color:var(--gray);font-weight:500;margin-top:2px}
 .rows{margin-top:10px;display:flex;flex-direction:column;gap:6px}
-.row{display:grid;grid-template-columns:62px 1fr auto auto;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.row{display:grid;grid-template-columns:62px 1fr auto auto auto;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px}
 .row .n{font-weight:900;color:var(--teal)}
 .row .t{font-weight:700;min-width:0}
 .row .t small{display:block;font-weight:400;color:var(--gray);font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -39,6 +39,9 @@ h2{font-size:22px;margin:0 0 4px}
 .btn.s{background:var(--ink);color:#fff}
 .btn.w{background:#fff;border:2px solid var(--teal);color:var(--teal)}
 .btn:hover{filter:brightness(1.1)}
+.btn.v{background:var(--amber-dk);color:#fff}
+.btn.v::before{content:"▶ ";font-size:12px}
+.btn.off{visibility:hidden}
 .tag{display:inline-block;background:var(--amber-dk);color:#fff;border-radius:999px;padding:1px 9px;font-size:12px;font-weight:700;margin-left:6px;vertical-align:2px}
 footer{color:var(--gray);font-size:13.5px;text-align:center;padding:20px}
 @media (max-width:680px){.flow{grid-template-columns:1fr}.row{grid-template-columns:48px 1fr}.row .btn{grid-column:auto}}
@@ -4100,6 +4103,14 @@ LESSON({
 });
 
 LESSONS.sort((a,b)=>a.n-b.n);
+// 모션그래픽 영상이 있는 차시 (video/chNN.html) — 영상을 추가하면 번호만 넣는다
+const VIDEOS = [17, 18, 19, 20];
+function openVideo(url){
+  const w = Math.min(1280, screen.availWidth - 40), h = Math.round(w * 9 / 16) + 40;
+  const win = window.open(url, "fatf_video", `popup,width=${w},height=${h}`);
+  if (win) { win.focus(); return false; }
+  return true; // 팝업이 막히면 새 탭으로
+}
 const UNITS = {1:["Ⅰ. 합리적 선택과 금융 환경의 변화","1~7차시 · 8~9월"],2:["Ⅱ. 투자의 종류와 방법","8~28차시 · 9~11월 · 수행평가 ‘투자 성향 테스트’ · ‘투자 포트폴리오 구성’"],3:["Ⅲ. 금융과 나의 미래","29~34차시 · 12~1월"]};
 const esc = s => String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 document.getElementById("cnt").textContent = `전 ${LESSONS.length}차시`;
@@ -4108,6 +4119,7 @@ document.getElementById("units").innerHTML = [1,2,3].map(u=>{
   return `<section class="unit"><h2>${esc(UNITS[u][0])}<small>${esc(UNITS[u][1])}</small></h2><div class="rows">${ls.map(l=>`
     <div class="row"><span class="n">${l.n}차시</span><span class="t">${esc(l.title)}${l.assess?`<span class="tag">수행평가</span>`:""}<small>${esc((l.words||[]).join(" · "))}</small></span>
       <a class="btn s" href="slides.html#ch${l.n}" target="_blank" rel="noopener">슬라이드</a>
+      ${VIDEOS.includes(l.n)?`<a class="btn v" href="video/ch${l.n}.html" target="_blank" rel="noopener" onclick="return openVideo(this.href)" title="${l.n}차시 모션그래픽 영상 (새 창)">동영상</a>`:`<span class="btn v off" aria-hidden="true">동영상</span>`}
       <a class="btn w" href="worksheet.html#ch${l.n}" target="_blank" rel="noopener">학습지</a></div>`).join("")}</div></section>`;
 }).join("");
 </script>
