@@ -79,7 +79,7 @@ tr.none td{color:#a3b0ad}
 </style>
 </head>
 <body>
-<div class="top"><div class="logo">금고 탈출 · <b>교사 화면</b></div><div class="sp"></div><a class="btn small ghost" href="guide.html" target="_blank" rel="noopener" style="color:#fff;text-decoration:none">📖 사용 설명서</a><span id="who" class="muted" style="color:#cfe6e2"></span><button class="btn small ghost hide" id="out">로그아웃</button></div>
+<div class="top"><div class="logo">금고 탈출 · <b>교사 화면</b></div><div class="sp"></div><a class="btn small ghost" href="index.html#preview" target="_blank" rel="noopener" style="color:#fff;text-decoration:none" title="모든 금고·보스전·스토리 게임을 순서 없이 해 보기 (기록 안 남음)">🎮 게임 미리 하기</a><a class="btn small ghost" href="guide.html" target="_blank" rel="noopener" style="color:#fff;text-decoration:none">📖 사용 설명서</a><span id="who" class="muted" style="color:#cfe6e2"></span><button class="btn small ghost hide" id="out">로그아웃</button></div>
 <div id="app"></div>
 <script src="firebase-config.js"></script>
 <script src="chapters.js"></script>
@@ -137,6 +137,7 @@ function render() {
     <h4>학생 입장 주소</h4><div class="muted" style="word-break:break-all">${esc(gameURL())}</div>
     <button class="btn small ghost" id="cp" style="margin-top:6px;color:var(--teal)">주소 복사</button>
     ${DB.mode === "demo" ? `<h4>체험 모드</h4><button class="btn small ghost" style="color:var(--brick)" id="rs">체험 기록 초기화</button>` : ""}
+    <h4>수업 준비</h4><a class="btn small ghost" href="index.html#preview" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:none;display:inline-block">🎮 게임 미리 하기</a><p class="muted" style="font-size:13px;margin:6px 0 14px">모든 금고·보스전·스토리 게임이 순서 없이 열려요. 기록은 남지 않아요.</p>
     <h4>도움말</h4><a class="btn small ghost" href="guide.html" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:none;display:inline-block">📖 사용 설명서</a>
     </div><div class="main">${DB.LS.get("fg_t_guide_hide", false) ? "" : `<div class="card welcome" id="welcome"><div style="font-size:40px">📖</div>
       <div style="flex:1"><b style="color:var(--pine);font-size:18px">처음 쓰시나요? 그림으로 보는 사용 설명서가 있어요.</b>
@@ -180,7 +181,7 @@ function viewClass() {
         <button class="btn small red" id="dc">반 삭제</button></div></div>
     <div class="card"><div class="row" style="margin-bottom:12px"><label>차시 <select id="chs">${READY.map(n => `<option value="${n}" ${n === curCh ? "selected" : ""}>${n}차시 · ${esc(CHAPTERS[n - 1].t)}</option>`).join("")}<optgroup label="단원 보스전">${BOSSES.map(b => `<option value="${b.n}" ${b.n === curCh ? "selected" : ""}>👾 ${esc(b.t)} · ${esc(b.name)}</option>`).join("")}</optgroup><optgroup label="스토리 게임">${STORIES.map(b => `<option value="${b.n}" ${b.n === curCh ? "selected" : ""}>${b.icon} ${esc(b.t)} (${["", "Ⅰ", "Ⅱ", "Ⅲ"][b.u]}단원)</option>`).join("")}</optgroup></select></label>
       <div class="tabs" style="margin:0 0 0 8px">${[["now", "현황"], ["wall", "마지막 방 글"], ["all", "전 차시 한눈에"]].map(([k, t]) => `<button class="tab ${tab === k ? "on" : ""}" data-t="${k}">${t}</button>`).join("")}</div>
-      <div style="margin-left:auto" class="row"><button class="btn small" id="tvb">📺 TV에 진행판 띄우기</button><button class="btn small ghost" id="csv" style="color:var(--teal)">⬇ 엑셀(CSV)</button></div></div>
+      <div style="margin-left:auto" class="row"><a class="btn small ghost" id="pvb" target="_blank" rel="noopener" href="index.html#preview" style="color:var(--teal);text-decoration:none" title="학생 화면에서 바로 해 보기 (기록 안 남음)">🎮 이 게임 미리 하기</a><button class="btn small" id="tvb">📺 TV에 진행판 띄우기</button><button class="btn small ghost" id="csv" style="color:var(--teal)">⬇ 엑셀(CSV)</button></div></div>
       <div id="body" class="muted">불러오는 중…</div></div>`;
   $("#op").onclick = async () => { await DB.updateClass(c.code, { open: c.open === false }); await loadClasses(); render(); };
   $("#sz").onclick = async () => { const v = prompt("학생 수 (1~60)", c.size); if (!v) return; await DB.updateClass(c.code, { size: Math.max(1, Math.min(60, +v || c.size)) }); await loadClasses(); render(); };
@@ -199,6 +200,7 @@ function viewClass() {
 async function drawBody() {
   const c = classes.find(x => x.code === curCode); if (!c || !$("#body")) return;
   const isBoss = curCh > 34, isStory = STORIES.some(b => b.n === curCh);
+  const pvb = $("#pvb"); if (pvb) { const St = STORIES.find(b => b.n === curCh), Bo = BOSSES.find(b => b.n === curCh); pvb.href = "index.html#preview-" + (St ? "story" + St.u : Bo ? "boss" + Bo.u : "ch" + curCh); }
   let g = null; if (!isBoss) try { g = await loadGame(curCh); } catch (e) {}
   const rs = recs.filter(r => r.ch === curCh);
   const byNum = Object.fromEntries(rs.map(r => [+r.num, r]));

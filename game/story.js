@@ -22,7 +22,7 @@ async function viewStory(u) {
   const m = me();
   $("#app").innerHTML = topbar() + `<div class="wrap" style="color:#fff">이야기를 펼치는 중…</div>`; bindTop();
   await syncDex();
-  const dex = dexLocal(), got = M.chs.filter(n => dex[n]);
+  const dex = dexLocal(), got = M.chs.filter(n => PREVIEW || dex[n]);
   let D; try { D = await loadStory(M); } catch (e) { $("#app").innerHTML = topbar() + `<div class="wrap" style="color:#fff">이야기를 불러오지 못했어요. <a href="#" style="color:#ffd27a">모험 지도로</a></div>`; return; }
   if (got.length < M.need) {
     $("#app").innerHTML = topbar() + `<div class="intro"><span class="qtag">스토리 게임 · ${esc(REGIONS[u].name)}</span><h1>${M.icon} 아직 잠겨 있어요</h1>
@@ -31,9 +31,9 @@ async function viewStory(u) {
     bindTop(); return;
   }
   let rec = null, cls = null, offline = false;
-  try { [cls, rec] = await Promise.all([DB.getClass(m.code), DB.getRecord(m.code, M.n, m.num)]); } catch (e) { offline = true; }
+  if (!PREVIEW) try { [cls, rec] = await Promise.all([DB.getClass(m.code), DB.getRecord(m.code, M.n, m.num)]); } catch (e) { offline = true; }
   if (rec && rec._foreign) return viewBlocked({ n: M.n }, "foreign");
-  if (cls === null && !offline) return viewBlocked({ n: M.n }, "noclass");
+  if (cls === null && !offline && !PREVIEW) return viewBlocked({ n: M.n }, "noclass");
   const closed = cls && cls.open === false, cleared = rec && rec.status === "cleared";
   if (cleared) dexPut(M.n, { term: `${D.title} · ${rec.endingT || "완주"}`, icon: rec.endingIcon || M.icon, line: rec.endingLine || "", stars: rec.stars });
   const q = storyQuizCount(D);
@@ -45,11 +45,12 @@ async function viewStory(u) {
       <li>정답이 없는 선택도 있어요. 즐거움과 저축, 약속 사이에서 <b>균형</b>을 잡아 보세요. 마지막 상태에 따라 <b>엔딩이 5가지</b>로 달라져요.</li>
       <li>대사 상자를 누르거나 Space를 누르면 빨리 넘어가요.</li></ul>
     ${cleared ? `<div class="demo">이미 끝낸 이야기예요 (${esc(rec.endingT || "")} ${"★".repeat(rec.stars || 1)}). 다시 하면 <b>연습</b>이라 기록은 바뀌지 않아요. 다른 선택으로 다른 엔딩을 찾아보세요!</div>` : ""}
+    ${PREVIEW ? PV_NOTE : ""}
     ${closed && !cleared ? `<div class="demo">선생님이 지금은 기록을 닫아 두었어요. <b>연습</b>으로만 할 수 있어요.</div>` : ""}
     ${offline ? `<div class="demo">인터넷 연결이 불안정해요. 게임은 할 수 있고, 연결되면 기록을 다시 보내요.</div>` : ""}
-    <div class="act"><button class="btn big amber" id="start">${cleared || closed ? "연습으로 시작" : "이야기 시작"} ▶</button><a class="btn big ghost" style="color:var(--pine);text-decoration:none" href="#">모험 지도</a></div></div>`;
+    <div class="act"><button class="btn big amber" id="start">${PREVIEW ? "미리 해 보기" : cleared || closed ? "연습으로 시작" : "이야기 시작"} ▶</button><a class="btn big ghost" style="color:var(--pine);text-decoration:none" href="#">모험 지도</a></div></div>`;
   bindTop();
-  $("#start").onclick = () => startStory(M, D, rec, cleared || closed);
+  $("#start").onclick = () => startStory(M, D, rec, cleared || closed || PREVIEW);
 }
 
 /* ---------- 시작 ---------- */
@@ -209,6 +210,7 @@ function storyEnd() {
   const sec = Math.floor((Date.now() - S.startedAt) / 1000);
   S.result = { stars, sec, E };
   if (!S.practice) { dexPut(D.n, { term: `${D.title} · ${E.t}`, icon: E.icon, line: E.line, stars, at: Date.now() }); saveStory(true); }
+  else if (PREVIEW) dexPut(D.n, { term: `${D.title} · ${E.t}`, icon: E.icon, line: E.line, stars, at: Date.now() });
   cleanup(); beep("open");
   $("#app").innerHTML = topbar() + `<div class="send">
     <div style="font-size:18px;color:#b9d3cf">🎒 ${esc(D.title)} · 한 달 결과${S.practice ? '<span class="badge">연습</span>' : ""}</div>
@@ -217,7 +219,7 @@ function storyEnd() {
     <div class="fin"><div><b>${fmt(s.wallet)}원</b><span>💵 남은 지갑</span></div><div><b>${fmt(s.bank)}원</b><span>🏦 통장</span></div><div><b>${s.joy}</b><span>😊 만족</span></div><div><b>${s.trust}</b><span>🤝 신용</span></div></div>
     <div class="path"><h3>📜 준서의 한 달 돌아보기</h3><ol>${S.picks.map(p => { const sc = D.scenes[p.i];
       return `<li>${sc.week}주차 ${esc(sc.day)} ${sc.place} ${esc(sc.where)} — <span class="${p.ok === true ? "o" : p.ok === false ? "x" : ""}">${esc(p.tag)}${p.ok === true ? " ✓" : p.ok === false ? " ✗" : ""}</span></li>`; }).join("")}</ol></div>
-    <p class="saved" id="savedmsg">${S.practice ? "연습이라 기록은 바뀌지 않았어요." : "기록을 보내는 중…"}</p>
+    <p class="saved" id="savedmsg">${PREVIEW ? "교사 미리 보기라 기록은 남지 않아요." : S.practice ? "연습이라 기록은 바뀌지 않았어요." : "기록을 보내는 중…"}</p>
     <p style="color:#b9d3cf">엔딩은 5가지예요. 다른 선택을 하면 다른 결말을 볼 수 있어요.</p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><button class="btn big amber" id="again">다시 해 보기 (연습)</button><a class="btn big" href="#dex" style="text-decoration:none">📒 내 도감</a><a class="btn big" href="#" style="text-decoration:none">🗺️ 모험 지도</a></div></div>`;
   bindTop(); drawSave();

@@ -18,7 +18,7 @@ async function viewBoss(u) {
   $("#app").innerHTML = topbar() + `<div class="wrap" style="color:#fff">보스를 부르는 중…</div>`; bindTop();
   await syncDex();
   const dex = dexLocal();
-  const got = CHAPTERS.filter(c => c.u === u && dex[c.n]).map(c => c.n);
+  const got = CHAPTERS.filter(c => c.u === u && (PREVIEW || dex[c.n])).map(c => c.n);
   if (got.length < B0.need) {
     $("#app").innerHTML = topbar() + `<div class="intro"><span class="qtag">${esc(B0.t)}</span><h1>${B0.icon} 아직 잠겨 있어요</h1>
       <div class="story">${esc(REGIONS[u].name)}의 금고를 <b>${B0.need}개 이상</b> 열면 ${esc(B0.name)}에게 도전할 수 있어요. 지금 <b>${got.length}개</b> 열었어요.</div>
@@ -26,9 +26,9 @@ async function viewBoss(u) {
     bindTop(); return;
   }
   let rec = null, cls = null, offline = false;
-  try { [cls, rec] = await Promise.all([DB.getClass(m.code), DB.getRecord(m.code, B0.n, m.num)]); } catch (e) { offline = true; }
+  if (!PREVIEW) try { [cls, rec] = await Promise.all([DB.getClass(m.code), DB.getRecord(m.code, B0.n, m.num)]); } catch (e) { offline = true; }
   if (rec && rec._foreign) return viewBlocked({ n: B0.n }, "foreign");
-  if (cls === null && !offline) return viewBlocked({ n: B0.n }, "noclass");
+  if (cls === null && !offline && !PREVIEW) return viewBlocked({ n: B0.n }, "noclass");
   const closed = cls && cls.open === false, cleared = rec && rec.status === "cleared";
   if (cleared) dexPut(B0.n, { ...B0.card, stars: rec.stars });
   const games = (await Promise.all(got.map(n => loadGame(n).catch(() => null)))).filter(Boolean);
@@ -37,14 +37,15 @@ async function viewBoss(u) {
     <div class="story">“${esc(B0.intro)}”</div>
     <ul><li>${esc(B0.name)}${iga(B0.name)} 문제를 내요. 맞히면 내 기술로 공격해 <b>보스 체력</b>이 줄어요. <b>${B0.hp}번</b> 맞히면 승리!</li>
       <li>틀리면 보스가 반격해 <b>내 에너지</b>가 줄어요. 에너지는 <b>${B0.lives}칸</b>, 모두 잃으면 처음부터 다시 도전해요.</li>
-      <li>내가 연 금고 <b>${games.length}개</b>(${got.map(n => n + "차시").join(", ")})에서 문제가 섞여 나와요.</li>
+      <li>${PREVIEW ? `이 단원 금고 <b>${games.length}개</b>(${got[0]}~${got[got.length - 1]}차시) 문제가 섞여 나와요. 학생에게는 자기가 연 금고의 문제만 나와요.` : `내가 연 금고 <b>${games.length}개</b>(${got.map(n => n + "차시").join(", ")})에서 문제가 섞여 나와요.`}</li>
       <li>별: 한 번도 안 틀리면 ★★★ · 1번 ★★ · 2번 ★. 이기면 <b>보스 카드</b>를 받아요.</li></ul>
     ${cleared ? `<div class="demo">이미 물리친 보스예요 (${"★".repeat(rec.stars || 1)}). 다시 하면 <b>연습</b>이라 기록은 바뀌지 않아요.</div>` : ""}
+    ${PREVIEW ? PV_NOTE : ""}
     ${closed && !cleared ? `<div class="demo">선생님이 지금은 기록을 닫아 두었어요. <b>연습</b>으로만 할 수 있어요.</div>` : ""}
     ${offline ? `<div class="demo">인터넷 연결이 불안정해요. 게임은 할 수 있고, 연결되면 기록을 다시 보내요.</div>` : ""}
-    <div class="act"><button class="btn big amber" id="start">${cleared || closed ? "연습 전투 시작" : "전투 시작"} ⚔️</button><a class="btn big ghost" style="color:var(--pine);text-decoration:none" href="#">모험 지도</a></div></div>`;
+    <div class="act"><button class="btn big amber" id="start">${PREVIEW ? "미리 해 보기" : cleared || closed ? "연습 전투 시작" : "전투 시작"} ⚔️</button><a class="btn big ghost" style="color:var(--pine);text-decoration:none" href="#">모험 지도</a></div></div>`;
   bindTop();
-  $("#start").onclick = () => startBoss(B0, games, rec, cleared || closed);
+  $("#start").onclick = () => startBoss(B0, games, rec, cleared || closed || PREVIEW);
 }
 
 /* 차시를 돌아가며 자물쇠를 하나씩 뽑아 문제 순서를 만듦 (같은 차시가 몰리지 않게) */
@@ -66,7 +67,7 @@ function startBoss(B0, games, rec, practice) {
     startedAt: Date.now(), firstStart: (rec && rec.startedAt) || (old && old.firstStart) || Date.now(),
     restarts: practice ? 0 : old ? old.restarts + 1 : (rec && rec.status === "playing" ? (rec.restarts || 0) + 1 : (rec && rec.restarts) || 0),
     prevWrong: practice ? 0 : old ? old.prevWrong + old.wrong : (rec && rec.status === "playing" ? rec.wrong || 0 : 0),
-    saveState: practice ? "practice" : "idle", pending: null, pname: `${+me().num}번 탐험가`
+    saveState: practice ? "practice" : "idle", pending: null, pname: PREVIEW ? "선생님" : `${+me().num}번 탐험가`
   };
   const u = B0.u, deco = REGIONS[u].deco, spots = [["44%", "86%"], ["40%", "30%"], ["58%", "56%"], ["4%", "34%"], ["82%", "50%"]];
   $("#app").innerHTML = topbar(`<span class="pill">${esc(B0.t)}${practice ? '<span class="badge">연습</span>' : ""}</span><span class="pill">⏱ <span id="elapsed">0분 0초</span></span><span class="pill" id="sv"></span>`) +
@@ -317,6 +318,7 @@ function finishBoss() {
   const B0 = S.boss, stars = S.wrong === 0 ? 3 : S.wrong === 1 ? 2 : 1, sec = Math.floor((Date.now() - S.startedAt) / 1000);
   S.result = { stars, sec };
   if (!S.practice) { dexPut(B0.n, { ...B0.card, stars, at: Date.now() }); saveBoss(true); }
+  else if (PREVIEW) dexPut(B0.n, { ...B0.card, stars, at: Date.now() });
   cleanup();
   const c = B0.card;
   $("#app").innerHTML = topbar() + `<div class="clear">
@@ -324,7 +326,7 @@ function finishBoss() {
     <h1>${esc(B0.name)}${eul(B0.name)} 물리쳤어요! 🎉</h1><p style="font-size:19px;color:#f2d6d6">“${esc(B0.lose)}”</p><div class="bigstars">${starTxt(stars)}</div>
     <div class="stats"><div class="stat"><b>${S.right}</b><span>맞힌 문제</span></div><div class="stat"><b>${S.wrong}번</b><span>틀림</span></div><div class="stat"><b>${mmss(sec)}</b><span>걸린 시간</span></div></div>
     <div class="flip" id="flip"><div class="in"><div class="f">${B0.icon}</div><div class="b s${stars}" style="border-color:#8C3A3A"><span class="cn">보스 카드</span><span class="ci">${c.icon}</span><span class="ct">${esc(c.term)}</span><span class="cl">${esc(c.line)}</span><span style="color:var(--amber);font-size:24px">${"★".repeat(stars)}</span></div></div></div>
-    <p class="saved" id="savedmsg">${S.practice ? "연습이라 기록은 바뀌지 않았어요." : "기록을 보내는 중…"}</p>
+    <p class="saved" id="savedmsg">${PREVIEW ? "교사 미리 보기라 기록은 남지 않아요." : S.practice ? "연습이라 기록은 바뀌지 않았어요." : "기록을 보내는 중…"}</p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a class="btn big amber" href="#dex" style="text-decoration:none">📒 내 도감 보기</a><a class="btn big" href="#" style="text-decoration:none">🗺️ 모험 지도</a></div></div>`;
   bindTop(); drawSave();
   setTimeout(() => { $("#flip") && $("#flip").classList.add("go"); beep("open"); }, 700);

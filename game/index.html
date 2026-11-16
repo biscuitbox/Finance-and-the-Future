@@ -20,6 +20,7 @@ input,textarea,select{font:inherit}
 .top .logo b{color:var(--amber)}
 .top .sp{flex:1}
 .pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border-radius:99px;padding:6px 14px;font-size:15px;white-space:nowrap}
+.pill.pv{background:var(--amber);color:#2b1d00;font-weight:800}
 .btn{border:0;border-radius:12px;padding:12px 22px;font-size:17px;font-weight:700;background:var(--teal);color:#fff;transition:transform .08s,filter .15s}
 .btn:hover:not(:disabled){filter:brightness(1.08)}
 .btn:active:not(:disabled){transform:translateY(1px)}
@@ -266,15 +267,26 @@ function loadGame(n) {
   });
 }
 /* 내 정보 · 내 도감 (이 기기) */
-const me = () => LS.get("fg_me", null);
-const dexLocal = () => LS.get("fg_dex", {});
-function dexPut(n, v) { const d = dexLocal(); d[n] = { ...(d[n] || {}), ...v }; LS.set("fg_dex", d); }
+/* 교사 미리 보기: index.html#preview 로 들어오면 이 탭에서만 모든 게임이 열리고 기록은 남지 않음 */
+let PREVIEW = (() => { try { return sessionStorage.getItem("fg_pv") === "1"; } catch (e) { return false; } })();
+const PV_ME = { preview: true, code: "", className: "교사 미리 보기", teacher: "", num: "0" };
+const PV_NOTE = `<div class="demo pvnote">👩‍🏫 <b>교사 미리 보기</b>예요. 열리는 조건 없이 바로 해 볼 수 있고, 기록은 남지 않아요.</div>`;
+const me = () => PREVIEW ? PV_ME : LS.get("fg_me", null);
+const dexKey = () => PREVIEW ? "fg_pv_dex" : "fg_dex";
+const dexLocal = () => LS.get(dexKey(), {});
+function dexPut(n, v) { const d = dexLocal(); d[n] = { ...(d[n] || {}), ...v }; LS.set(dexKey(), d); }
 
 /* ============ 화면 전환 ============ */
 let cleanup = () => {};
 function route() {
   cleanup(); cleanup = () => {}; HUBV++;
   const h = location.hash.slice(1);
+  const pm = h.match(/^preview(?:-(ch\d+|boss\d|story\d))?$/);   /* #preview, #preview-ch5 처럼 바로 그 게임으로 */
+  if (pm || h === "exitpv") {
+    PREVIEW = !!pm;
+    try { if (PREVIEW) sessionStorage.setItem("fg_pv", "1"); else sessionStorage.removeItem("fg_pv"); } catch (e) {}
+    history.replaceState(null, "", pm ? "#" + (pm[1] || "") : me() ? "#" : "#join"); return route();
+  }
   const m = me();
   if (!m || h === "join") return viewJoin();
   const g = h.match(/^ch(\d+)$/);
@@ -290,7 +302,7 @@ window.addEventListener("hashchange", route);
 function topbar(extra = "") {
   const m = me();
   return `<div class="top"><div class="logo">금융과 미래 · <b>금고 탈출</b></div>${extra}<div class="sp"></div>
-    ${m ? `<span class="pill">🏫 ${esc(m.className)} · ${+m.num}번</span>` : ""}
+    ${PREVIEW ? `<span class="pill pv">👩‍🏫 교사 미리 보기 · 기록 안 남음</span><a class="btn small ghost" href="#exitpv" style="text-decoration:none">미리 보기 끝내기</a>` : m ? `<span class="pill">🏫 ${esc(m.className)} · ${+m.num}번</span>` : ""}
     <button class="btn small ghost" id="mute" title="효과음">${muted ? "🔇" : "🔊"}</button></div>`;
 }
 function bindTop() {
@@ -340,7 +352,7 @@ function viewJoin() {
 
 /* ============ 허브: 금고 지도 · 도감 ============ */
 async function syncDex() {
-  const m = me(); if (!m) return;
+  const m = me(); if (!m || PREVIEW) return;
   try {
     const recs = await DB.myRecords(m.code);
     for (const r of recs) if (r.status === "cleared" && String(r.num) === DB.pad(m.num)) dexPut(r.ch, { stars: r.stars, firstOk: r.firstOk, at: r.clearedAt });
@@ -350,9 +362,9 @@ let HUBV = 0;
 function viewHub(tab) {
   const m = me();
   $("#app").innerHTML = topbar() + `<div class="wrap"><div class="hubhead"><div><h2>${tab === "dex" ? "내 금융 도감" : "모험 지도"}</h2>
-    <p>${tab === "dex" ? "금고를 열 때마다 낱말 카드를 하나씩 모아요." : "세 지역을 지나며 차시 금고를 열고, 지역 끝의 보스를 물리쳐요. 수업이 끝나면 그 차시 금고에 도전하세요."}</p></div>
+    <p>${PREVIEW ? "👩‍🏫 교사 미리 보기: 모든 금고·보스전·스토리 게임이 순서 없이 열려 있어요. 기록은 남지 않고, 도감은 이 브라우저의 미리 보기용 도감에만 모여요." : tab === "dex" ? "금고를 열 때마다 낱말 카드를 하나씩 모아요." : "세 지역을 지나며 차시 금고를 열고, 지역 끝의 보스를 물리쳐요. 수업이 끝나면 그 차시 금고에 도전하세요."}</p></div>
     <div class="tabs"><button class="tab ${tab === "map" ? "on" : ""}" id="tmap">🗺️ 모험 지도</button><button class="tab ${tab === "dex" ? "on" : ""}" id="tdex">📒 내 도감</button></div></div>
-    <div id="hubbody"></div><p style="text-align:center;margin-top:26px"><a href="#join" style="color:#9fc3bd;font-size:14px">반·번호 바꾸기</a></p></div>`;
+    <div id="hubbody"></div><p style="text-align:center;margin-top:26px">${PREVIEW ? `<a href="#exitpv" style="color:#9fc3bd;font-size:14px">미리 보기 끝내기</a>` : `<a href="#join" style="color:#9fc3bd;font-size:14px">반·번호 바꾸기</a>`}</p></div>`;
   bindTop();
   $("#tmap").onclick = () => location.hash = "";
   $("#tdex").onclick = () => location.hash = "dex";
@@ -396,9 +408,9 @@ async function viewGame(n) {
   let g;
   try { g = await loadGame(n); } catch (e) { $("#app").innerHTML = topbar() + `<div class="wrap" style="color:#fff">${n}차시 금고는 아직 준비 중이에요. <a href="#" style="color:#ffd27a">모험 지도로</a></div>`; return; }
   let rec = null, cls = null, offline = false;
-  try { [cls, rec] = await Promise.all([DB.getClass(m.code), DB.getRecord(m.code, n, m.num)]); } catch (e) { offline = true; }
+  if (!PREVIEW) try { [cls, rec] = await Promise.all([DB.getClass(m.code), DB.getRecord(m.code, n, m.num)]); } catch (e) { offline = true; }
   if (rec && rec._foreign) return viewBlocked(g, "foreign");
-  if (cls === null && !offline) return viewBlocked(g, "noclass");
+  if (cls === null && !offline && !PREVIEW) return viewBlocked(g, "noclass");
   const closed = cls && cls.open === false;
   const cleared = rec && rec.status === "cleared";
   if (cleared) dexPut(n, { ...g.card, stars: rec.stars, firstOk: rec.firstOk });
@@ -410,12 +422,13 @@ async function viewGame(n) {
       <li><b>한 번에 맞힌 자물쇠</b>가 많을수록 별이 늘어요. (5개 ★★★ · 3~4개 ★★)</li>
       <li>금고를 열면 마지막 방에서 <b>1~2줄 쓰기</b>를 하고 도감 카드를 받아요.</li></ul>
     ${cleared ? `<div class="demo">이미 통과한 금고예요 (${"★".repeat(rec.stars || 1)}). 다시 하면 <b>연습</b>이라 기록은 바뀌지 않아요.</div>` : ""}
+    ${PREVIEW ? PV_NOTE : ""}
     ${closed && !cleared ? `<div class="demo">선생님이 지금은 기록을 닫아 두었어요. <b>연습</b>으로만 할 수 있어요.</div>` : ""}
     ${offline ? `<div class="demo">인터넷 연결이 불안정해요. 게임은 할 수 있고, 연결되면 기록을 다시 보내요.</div>` : ""}
     ${rec && rec.status === "playing" && !cleared ? `<div class="demo">하다가 멈춘 기록이 있어요. 처음부터 다시 시작하지만, <b>이미 틀렸던 자물쇠</b>는 '한 번에 맞힘'으로 바뀌지 않아요.</div>` : ""}
-    <div class="act"><button class="btn big amber" id="start">${cleared || closed ? "연습으로 도전" : "금고 도전 시작"} ▶</button><a class="btn big ghost" style="color:var(--pine);text-decoration:none" href="#">모험 지도</a></div></div>`;
+    <div class="act"><button class="btn big amber" id="start">${PREVIEW ? "미리 해 보기" : cleared || closed ? "연습으로 도전" : "금고 도전 시작"} ▶</button><a class="btn big ghost" style="color:var(--pine);text-decoration:none" href="#">모험 지도</a></div></div>`;
   bindTop();
-  $("#start").onclick = () => startGame(g, rec, cleared || closed);
+  $("#start").onclick = () => startGame(g, rec, cleared || closed || PREVIEW);
 }
 function viewBlocked(g, why) {
   const t = why === "foreign"
@@ -555,7 +568,7 @@ function judge(ok, extra = "") {
     st.wrongs++; if (st.firstOk === null) st.firstOk = false;
     beep("bad"); save();
     qp.classList.remove("shake"); void qp.offsetWidth; qp.classList.add("shake");
-    const wait = st.wrongs === 1 ? 8 : 15;
+    const wait = PREVIEW ? 3 : st.wrongs === 1 ? 8 : 15;
     const ov = document.createElement("div"); ov.className = "ov bad";
     ov.innerHTML = `<h2>🚨 경보! 자물쇠가 잠겼어요</h2>${extra ? `<div style="font-size:19px">${esc(extra)}</div>` : ""}
       <div class="hint"><b>힌트</b> ${esc(v.hint || "")}</div>
@@ -625,6 +638,7 @@ function finish() {
   const sec = Math.floor((Date.now() - S.startedAt) / 1000), wrong = S.locks.reduce((a, l) => a + l.prevWrongs + l.wrongs, 0);
   S.result = { firstOk, stars, sec, wrong };
   if (!S.practice) { dexPut(S.g.n, { ...S.g.card, stars, firstOk, at: Date.now() }); save(true); }
+  else if (PREVIEW) dexPut(S.g.n, { ...S.g.card, stars, firstOk, at: Date.now() });
   cleanup();
   const c = S.g.card;
   $("#app").innerHTML = topbar() + `<div class="clear">
@@ -632,7 +646,7 @@ function finish() {
     <h1>금고 탈출 성공! 🎉</h1><div class="bigstars">${starTxt(stars)}</div>
     <div class="stats"><div class="stat"><b>${firstOk} / ${S.locks.length}</b><span>한 번에 연 자물쇠</span></div><div class="stat"><b>${wrong}번</b><span>경보 (오답)</span></div><div class="stat"><b>${mmss(sec)}</b><span>걸린 시간</span></div></div>
     <div class="flip" id="flip"><div class="in"><div class="f">❓</div><div class="b s${stars}"><span class="cn">${S.g.n}차시 도감 카드</span><span class="ci">${c.icon}</span><span class="ct">${esc(c.term)}</span><span class="cl">${esc(c.line)}</span><span style="color:var(--amber);font-size:24px">${"★".repeat(stars)}</span></div></div></div>
-    <p class="saved" id="savedmsg">${S.practice ? "연습이라 기록은 바뀌지 않았어요." : "기록을 보내는 중…"}</p>
+    <p class="saved" id="savedmsg">${PREVIEW ? "교사 미리 보기라 기록은 남지 않아요." : S.practice ? "연습이라 기록은 바뀌지 않았어요." : "기록을 보내는 중…"}</p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a class="btn big amber" href="#dex" style="text-decoration:none">📒 내 도감 보기</a><a class="btn big" href="#" style="text-decoration:none">🗺️ 모험 지도</a></div></div>`;
   bindTop();
   setTimeout(() => { $("#flip") && $("#flip").classList.add("go"); beep("open"); }, 700);

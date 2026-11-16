@@ -28,6 +28,10 @@ function mapLayout() {
   return { st, regions, H: y + 10 };
 }
 function stopState(s, dex) {
+  const st = stopState0(s, dex);
+  return PREVIEW && st === "locked" ? "open" : st;   /* 교사 미리 보기: 잠김 없음 */
+}
+function stopState0(s, dex) {
   if (s.kind === "ch") return dex[s.n] ? "clear" : "open";
   if (s.kind === "boss") {
     const B0 = BOSSES.find(b => b.n === s.n), got = CHAPTERS.filter(c => c.u === s.u && dex[c.n]).length;
