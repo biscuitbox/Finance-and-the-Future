@@ -214,6 +214,7 @@ table.calc td:first-child{text-align:left;font-weight:700}
 </style>
 <link rel="stylesheet" href="map.css">
 <link rel="stylesheet" href="battle.css">
+<link rel="stylesheet" href="story.css">
 </head>
 <body>
 <div id="app"></div>
@@ -222,6 +223,7 @@ table.calc td:first-child{text-align:left;font-weight:700}
 <script src="db.js"></script>
 <script src="map.js"></script>
 <script src="battle.js"></script>
+<script src="story.js"></script>
 <script>
 "use strict";
 /* ============ 도우미 ============ */
@@ -279,6 +281,8 @@ function route() {
   if (g) return viewGame(+g[1]);
   const bm = h.match(/^boss(\d)$/);
   if (bm) return viewBoss(+bm[1]);
+  const sm = h.match(/^story(\d)$/);
+  if (sm) return viewStory(+sm[1]);
   return viewHub(h === "dex" ? "dex" : "map");
 }
 window.addEventListener("hashchange", route);
@@ -362,7 +366,7 @@ async function drawDex(vid) {
   const dex = dexLocal();
   const n = Object.keys(dex).filter(k => +k <= 34).length;
   // 다른 기기에서 통과해 카드 글이 없는 경우 데이터 불러오기 (보스 카드는 BOSSES에서)
-  Object.keys(dex).filter(k => +k > 34 && !dex[k].term).forEach(k => { const B0 = BOSSES.find(b => b.n === +k); if (B0) dexPut(k, B0.card); });
+  Object.keys(dex).filter(k => +k > 34 && !dex[k].term).forEach(k => { const B0 = BOSSES.find(b => b.n === +k); if (B0) dexPut(k, B0.card); const St = STORIES.find(b => b.n === +k); if (St) dexPut(k, { term: St.t, icon: St.icon }); });
   await Promise.all(Object.keys(dex).filter(k => +k <= 34 && !dex[k].term).map(k => loadGame(+k).then(g => dexPut(k, g.card)).catch(() => {})));
   if (vid !== HUBV || !$("#hubbody")) return;
   const d2 = dexLocal();
@@ -376,6 +380,11 @@ async function drawDex(vid) {
     BOSSES.map(b => { const d = d2[b.n];
       if (!d) return `<div class="dcard"><span class="dn">${esc(b.t)}</span><span class="dq">${b.icon}</span><span class="dl" style="color:#93a29f">${esc(b.name)}${eul(b.name)} 물리치면 받아요</span></div>`;
       return `<div class="dcard got boss s${d.stars || 1}"><span class="dn">${esc(b.t)} 격파</span><span class="di">${b.card.icon}</span><span class="dt">${esc(b.card.term)}</span><span class="dl">${esc(b.card.line)}</span><span class="ds">${"★".repeat(d.stars || 1)}</span></div>`;
+    }).join("") + `</div>` +
+    `<h3 style="color:#ffd27a;margin:30px 0 12px">🎒 스토리 카드 <small style="color:#b9d3cf;font-weight:400">${STORIES.filter(b => d2[b.n]).length} / ${STORIES.length}</small></h3><div class="dexgrid">` +
+    STORIES.map(b => { const d = d2[b.n];
+      if (!d) return `<div class="dcard"><span class="dn">스토리 게임</span><span class="dq">${b.icon}</span><span class="dl" style="color:#93a29f">「${esc(b.t)}」를 끝까지 하면 받아요</span></div>`;
+      return `<div class="dcard got s${d.stars || 1}"><span class="dn">스토리 게임 · ${esc(REGIONS[b.u].name)}</span><span class="di">${d.icon || b.icon}</span><span class="dt">${esc(d.term || b.t)}</span><span class="dl">${esc(d.line || "")}</span><span class="ds">${"★".repeat(d.stars || 1)}</span></div>`;
     }).join("") + `</div>`;
 }
 

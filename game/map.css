@@ -20,3 +20,5 @@
 .mapinfo .tx b{display:block;color:var(--pine);font-size:21px;line-height:1.3}
 .mapinfo .tx span{color:var(--amber);font-weight:900}
 @media (max-width:700px){.mapinfo{flex-wrap:wrap}.mapinfo .btn{width:100%}}
+.advmap .glowb{animation:mglowb 1.4s ease-in-out infinite alternate}
+@keyframes mglowb{from{filter:drop-shadow(0 0 2px #5fb3ff)}to{filter:drop-shadow(0 0 14px #2d8cff)}}

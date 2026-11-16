@@ -44,12 +44,17 @@ window.BOSSES = [
     lose: "계획 앞에서는 사라질 수밖에… 미래를 준비하는 너를 응원할게…",
     card: { term: "미래 설계도", icon: "🗺️", line: "생애 주기에 맞춰 예산·저축·재무 계획·은퇴 설계를 세우는 힘. Ⅲ단원 보스 '될대로 유령'을 물리쳤어요." } }
 ];
-/* 차시·보스 제목 */
-window.chTitle = n => n <= 34 ? CHAPTERS[n - 1].t : (BOSSES.find(b => b.n === n) || {}).t || "";
+/* 스토리 RPG — 기록은 번호 38(Ⅱ편)·39(Ⅲ편). 관련 금고(chs)를 need개 이상 열면 열림. 이야기 내용은 data/storyN.js */
+window.STORIES = [
+  { n: 38, u: 2, id: "story2", file: "story2", t: "준서의 한 달", icon: "🎒", chs: [16, 17, 18, 19], need: 2,
+    card: { icon: "🎒" } }
+];
+/* 차시·보스·스토리 제목 */
+window.chTitle = n => n <= 34 ? CHAPTERS[n - 1].t : ((BOSSES.find(b => b.n === n) || STORIES.find(b => b.n === n)) || {}).t || "";
 /* 단원 끝 특별 스테이지 (준비되면 ready: true) */
 window.SPECIAL = {
   1: [{ id: "boss1", kind: "boss", n: 35, t: "Ⅰ단원 보스전", ready: true }],
-  2: [{ id: "rpg2", kind: "rpg", t: "준서의 한 달 (용돈 생존)", ready: false }, { id: "boss2", kind: "boss", n: 36, t: "Ⅱ단원 보스전", ready: true }],
+  2: [{ id: "rpg2", kind: "rpg", n: 38, t: "준서의 한 달 (용돈 생존)", ready: true }, { id: "boss2", kind: "boss", n: 36, t: "Ⅱ단원 보스전", ready: true }],
   3: [{ id: "rpg3", kind: "rpg", t: "준서의 인생 설계", ready: false }, { id: "boss3", kind: "boss", n: 37, t: "Ⅲ단원 보스전", ready: true }]
 };
 /* 보스전 기술 — 문제가 나온 차시에 맞춰 고름 (보스의 반응 대사는 battle.js가 실제 문제·답으로 만듦)

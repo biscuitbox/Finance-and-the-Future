@@ -34,6 +34,11 @@ function stopState(s, dex) {
     s.got = got; s.need = B0.need; s.B0 = B0;
     return dex[s.n] ? "clear" : got >= B0.need ? "open" : "locked";
   }
+  if (s.kind === "rpg" && s.ready) {
+    const M = STORIES.find(x => x.n === s.n); if (!M) return "soon";
+    s.got = M.chs.filter(n => dex[n]).length; s.need = M.need; s.M = M;
+    return dex[s.n] ? "clear" : s.got >= M.need ? "open" : "locked";
+  }
   return "soon";
 }
 
@@ -86,6 +91,12 @@ function drawMap() {
         <text x="${s.x}" y="${s.y + 17}" text-anchor="middle" font-size="46" opacity="${s.state === "locked" ? .45 : 1}">${B0.icon}</text></g>` +
         (s.state === "locked" ? `<text x="${s.x + 32}" y="${s.y - 26}" font-size="26">🔒</text>` : "") +
         `<text x="${s.x}" y="${s.y + 74}" text-anchor="middle" font-size="17" font-weight="900" fill="${s.state === "open" ? "#8C3A3A" : "#4b3605"}" stroke="#fff8e6" stroke-width="5" paint-order="stroke">${s.state === "clear" ? "격파! " + "★".repeat(dex[s.n].stars || 1) : s.state === "open" ? "보스 등장!" : `금고 ${s.got}/${s.need}`}</text>`;
+    } else if (s.kind === "rpg" && s.state !== "soon") {
+      const col = s.state === "clear" ? "url(#gold)" : s.state === "open" ? "#1C6E8C" : "#9a8fb0";
+      g = `<g class="${s.state === "open" ? "glowb" : ""}"><circle class="main" cx="${s.x}" cy="${s.y}" r="44" fill="${col}" stroke="#1d2b4a" stroke-width="5"/>
+        <text x="${s.x}" y="${s.y + 15}" text-anchor="middle" font-size="40" opacity="${s.state === "locked" ? .45 : 1}">${s.M.icon}</text></g>` +
+        (s.state === "locked" ? `<text x="${s.x + 28}" y="${s.y - 22}" font-size="24">🔒</text>` : "") +
+        `<text x="${s.x}" y="${s.y + 70}" text-anchor="middle" font-size="16" font-weight="900" fill="${s.state === "open" ? "#1C6E8C" : "#4b3605"}" stroke="#fff8e6" stroke-width="5" paint-order="stroke">${s.state === "clear" ? "완주! " + "★".repeat(dex[s.n].stars || 1) : s.state === "open" ? "이야기 시작!" : `금고 ${s.got}/${s.need}`}</text>`;
     } else {
       g = `<circle class="main" cx="${s.x}" cy="${s.y}" r="40" fill="#d9cde6" stroke="#8b78a3" stroke-width="5" stroke-dasharray="8 6"/>
         <text x="${s.x}" y="${s.y + 14}" text-anchor="middle" font-size="36" opacity=".6">🎒</text>
@@ -113,9 +124,14 @@ function drawMap() {
       ic = s.B0.icon; sm = `${REGIONS[s.u].name} · 단원 보스`; ti = s.B0.name;
       extra = s.state === "clear" ? `<span>${"★".repeat(dex[s.n].stars || 1)}</span> 쓰러뜨린 보스` : s.state === "open" ? "길을 막고 있어요! 이 지역 금고 문제로 전투해요" : `이 지역 금고를 ${s.need}개 열면 나타나요 (지금 ${s.got}개)`;
       btn = s.state === "locked" ? "" : `<button class="btn big ${s.state === "open" ? "amber" : ""}" id="mgo">${s.state === "open" ? "전투 시작 ⚔️" : "다시 싸우기 ▶"}</button>`;
+    } else if (s.kind === "rpg" && s.state !== "soon") {
+      const d = dex[s.n];
+      ic = s.M.icon; sm = `${REGIONS[s.u].name} · 스토리 게임`; ti = s.M.t;
+      extra = s.state === "clear" ? `<span>${"★".repeat(d.stars || 1)}</span> ${esc((d.term || "").split(" · ")[1] || "완주")} — 다른 엔딩도 찾아보세요` : s.state === "open" ? "준서가 되어 한 달 동안 용돈으로 살아남기!" : `${s.M.chs.map(n => n + "차시").join("·")} 금고를 ${s.need}개 열면 시작해요 (지금 ${s.got}개)`;
+      btn = s.state === "locked" ? "" : `<button class="btn big ${s.state === "open" ? "amber" : ""}" id="mgo">${s.state === "open" ? "이야기 시작 ▶" : "다시 하기 ▶"}</button>`;
     } else { ic = "🎒"; sm = `${REGIONS[s.u].name} · 스토리 게임`; ti = s.t; extra = "준비 중이에요"; }
     $("#mi").innerHTML = `<div class="ic">${ic}</div><div class="tx"><small>${esc(sm)}</small><b>${esc(ti)}</b>${extra}</div>${btn}`;
-    const go = $("#mgo"); if (go) go.onclick = () => location.hash = s.kind === "ch" ? "ch" + s.n : "boss" + s.u;
+    const go = $("#mgo"); if (go) go.onclick = () => location.hash = s.kind === "ch" ? "ch" + s.n : s.kind === "rpg" ? "story" + s.u : "boss" + s.u;
   };
   info();
   document.querySelectorAll(".advmap .node").forEach(g => g.onclick = () => {

@@ -70,6 +70,7 @@ a{color:var(--teal)}
   <a href="#s8"><small>8</small>수업 뒤: 글 모아 보기·엑셀</a>
   <a href="#s9"><small>9</small>반 관리 버튼</a>
   <a href="#s10"><small>10</small>단원 보스전</a>
+  <a href="#s10b"><small>10+</small>스토리 게임「준서의 한 달」</a>
   <a href="#s11"><small>11</small>관리자: 선생님 등록</a>
   <a href="#s12"><small>12</small>이럴 땐 이렇게 (FAQ)</a>
   <a href="#s13"><small>13</small>학생 정보와 기록</a>
@@ -87,7 +88,7 @@ a{color:var(--teal)}
   </div>
   <table class="t">
     <tr><th>주소</th><th>누가</th><th>무엇을</th></tr>
-    <tr><td><b>…/game/</b></td><td>학생</td><td>반 코드 + 번호로 입장 → 모험 지도 · 차시 금고 · 내 도감 · 단원 보스전</td></tr>
+    <tr><td><b>…/game/</b></td><td>학생</td><td>반 코드 + 번호로 입장 → 모험 지도 · 차시 금고 · 내 도감 · 단원 보스전 · 스토리 게임</td></tr>
     <tr><td><b>…/game/teacher.html</b></td><td>선생님</td><td>반 만들기 · 현황 · 마지막 방 글 · 전 차시 한눈에 · TV 진행판 · 엑셀</td></tr>
   </table>
   <div class="tip ok">학생의 이름·이메일·학번은 받지 않습니다. 학생은 <b>반 코드와 번호</b>로만 들어오고, 선생님은 <b>자기가 만든 반의 기록만</b> 볼 수 있어요.</div>
@@ -239,6 +240,23 @@ a{color:var(--teal)}
   </ul>
   <figure><img src="guide/t11_boss.webp" alt="교사 화면 보스전 현황" loading="lazy"><figcaption>교사 화면 차시 고르기 맨 아래 '단원 보스전'을 고르면: 격파 현황, 격파까지 진 횟수, <b>틀린 문제가 많이 나온 차시</b></figcaption></figure>
   <div class="tip">'틀린 문제가 많이 나온 차시'는 단원 정리 시간에 어느 차시를 복습하면 좋을지 알려 줘요. 단원을 마무리하는 시간에 다 같이 보스전에 도전해 보세요.</div>
+</section>
+
+<section id="s10b">
+  <h2><span class="no">10+</span>스토리 게임「준서의 한 달」 (Ⅱ단원 저축)</h2>
+  <p>중학생 준서가 되어 <b>한 달 용돈 10만 원</b>으로 4주를 보내는 이야기예요. 장면마다 고른 선택에 따라 <b>지갑 · 통장 · 만족 · 신용</b>이 바뀌고, 중간중간 나오는 <b>지식 문제 7개</b>(통장 개설·예금·대리입금·과장 광고·투기·예금자 보호 등)를 풀어요. 틀려도 이야기는 이어지고, 그 대신 이야기 속에서 손해와 까닭을 보여 줘요. 약 10분.</p>
+  <figure><img src="guide/s12_story_play.webp" alt="스토리 게임 장면" loading="lazy"><figcaption>장면 화면: 위쪽 지갑·통장·만족·신용이 선택에 따라 바뀌어요 (보험에 들었으면 휴대전화 수리비가 줄어요)</figcaption></figure>
+  <table class="t"><tr><th>열리는 조건</th><th>엔딩 (5가지)</th><th>별</th></tr>
+    <tr><td>16~19차시 금고 가운데 <b>2개</b> 이상 통과<br>(모험 지도 Ⅱ지역의 파란 🎒 칸)</td><td>🏆 균형 잡힌 금융 탐험가 · 🙂 알뜰한 소비자 · 😮‍💨 지친 저축왕 · 🌧️ 흔들린 저축 · 🤝 신용 회복 중</td><td>지식 문제 7개 모두 정답 ★★★<br>2개까지 틀림 ★★ · 그 밖 ★</td></tr></table>
+  <div class="two">
+    <figure><img src="guide/s13_story_end.webp" alt="스토리 게임 엔딩 화면" loading="lazy"><figcaption>엔딩 화면: 남은 돈·통장, 별, 한 달 동안 고른 선택(지식 문제는 ✓ ✗)</figcaption></figure>
+    <figure><img src="guide/t13_story.webp" alt="교사 화면 스토리 게임 현황" loading="lazy"><figcaption>교사 화면 차시 고르기 맨 아래 '스토리 게임': 엔딩 분포, 지식 문제별 정답률, 학생별 엔딩·고른 선택</figcaption></figure>
+  </div>
+  <ul>
+    <li>처음 끝낸 판만 기록돼요. 다시 하면 <b>연습</b>이라 기록은 바뀌지 않으니, 다른 선택으로 다른 엔딩을 찾아보게 해 주세요.</li>
+    <li>엑셀(CSV)에 엔딩과 고른 선택이 함께 들어가요.</li>
+  </ul>
+  <div class="tip">수업 마무리로 "어떤 엔딩이 나왔나요? 왜 그렇게 골랐나요?"를 나누면 좋아요. 정답률이 낮은 지식 문제는 괄호 속 차시를 다시 짚어 주세요.</div>
 </section>
 
 <section id="s11">
