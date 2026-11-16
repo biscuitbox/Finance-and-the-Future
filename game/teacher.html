@@ -240,6 +240,7 @@ async function drawBody() {
     <p class="muted">'기록 풀기'는 그 번호의 이 차시 기록을 지워요. 학생이 번호를 잘못 골랐거나 다른 기기로 바꿔야 할 때 쓰세요.</p>`;
   body.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => { if (!confirm(`${+b.dataset.del.split("_")[1]}번의 ${curCh}차시 기록을 지울까요? 되돌릴 수 없어요.`)) return; await DB.deleteRecord(c.code, b.dataset.del); toast("기록을 지웠어요."); });
 }
+const tMoney = (D, v) => { if (!(D && D.ui && D.ui.money === "man")) return fmt(v) + "원"; const e = Math.floor(v / 10000), r = v % 10000; if (!v) return "0"; return e ? `${e}억${r ? " " + fmt(r) + "만" : ""}` : `${fmt(r)}만`; };
 /* 스토리 게임 현황: 엔딩 분포, 지식 문제별 정답률, 학생별 엔딩·선택 */
 async function drawStoryT(c, rs, byNum, nums) {
   const M = STORIES.find(b => b.n === curCh), body = $("#body");
@@ -250,7 +251,7 @@ async function drawStoryT(c, rs, byNum, nums) {
   const avg = a => a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0;
   const ends = D ? D.endings.map(e => ({ e, k: cl.filter(r => r.ending === e.id).length })) : [];
   const mx = Math.max(1, ...ends.map(x => x.k));
-  body.innerHTML = `<p class="muted">${M.icon} <b>${esc(M.t)}</b> — ${M.chs.map(n => n + "차시").join("·")} 금고를 ${M.need}개 이상 연 학생에게 열려요. 선택에 따라 지갑·통장·만족·신용이 바뀌고 엔딩이 5가지로 갈려요. 별은 지식 문제 ${qs.length}개의 정답 수예요.</p>
+  body.innerHTML = `<p class="muted">${M.icon} <b>${esc(M.t)}</b> — ${M.chs.map(n => n + "차시").join("·")} 금고를 ${M.need}개 이상 연 학생에게 열려요. 선택에 따라 ${D && D.ui && D.ui.lab ? Object.values(D.ui.lab).map(x => esc(x.replace(/^\S+\s/, "").replace(/ \(.*\)$/, ""))).join("·") : "지갑·통장·만족·신용"} 상태가 바뀌고 엔딩이 5가지로 갈려요. 별은 지식 문제 ${qs.length}개의 정답 수예요.</p>
     <div class="sum"><div><b>${cl.length} / ${c.size}</b><span>완주</span></div><div><b>${pl.length}</b><span>하는 중</span></div><div><b>${Math.max(0, c.size - rs.length)}</b><span>아직 시작 안 함</span></div>
       <div><b>${cl.length ? avg(cl.map(r => r.firstOk || 0)).toFixed(1) : "–"} / ${qs.length}</b><span>지식 문제 정답 (평균)</span></div>
       <div><b>${cl.length ? mmss(Math.round(avg(cl.map(r => r.sec || 0)))) : "–"}</b><span>걸린 시간 (평균, 분:초)</span></div></div>
@@ -258,15 +259,15 @@ async function drawStoryT(c, rs, byNum, nums) {
     <div class="bars">${ends.map(({ e, k }) => `<div class="bar"><span>${e.icon} ${esc(e.t)}</span><span class="t"><i style="width:${Math.round(k / mx * 100)}%"></i></span><span>${k}명</span></div>`).join("")}</div>
     <h3 style="color:var(--pine);margin:22px 0 10px;font-size:17px">지식 문제별 정답률 <span class="muted">— 낮은 문제의 개념을 다시 짚어 주세요</span></h3>
     <div class="bars">${qs.map(sc => { const t = rs.filter(r => r.quiz && sc.id in r.quiz), ok = t.filter(r => r.quiz[sc.id]).length, p = t.length ? Math.round(ok / t.length * 100) : 0;
-      return `<div class="bar"><span title="${esc(sc.ask)}">${sc.week}주차 ${sc.place} ${esc(sc.topic || sc.ask)}</span><span class="t"><i class="${p < 60 ? "low" : ""}" style="width:${p}%"></i></span><span>${t.length ? p + "%" : "–"} <span class="muted">(${t.length}명)</span></span></div>`; }).join("")}</div>
+      return `<div class="bar"><span title="${esc(sc.ask)}">${D.ui && D.ui.periods ? esc(sc.day) : sc.week + "주차"} ${sc.place} ${esc(sc.topic || sc.ask)}</span><span class="t"><i class="${p < 60 ? "low" : ""}" style="width:${p}%"></i></span><span>${t.length ? p + "%" : "–"} <span class="muted">(${t.length}명)</span></span></div>`; }).join("")}</div>
     <h3 style="color:var(--pine);margin:22px 0 10px;font-size:17px">학생별 <span class="muted">— 고른 선택을 차례대로 보여 줘요</span></h3>
-    <div style="overflow:auto"><table><tr><th>번호</th><th>상태</th><th>엔딩</th><th>별</th><th>지식</th><th>지갑 · 통장</th><th>시간</th><th>고른 선택</th><th></th></tr>
+    <div style="overflow:auto"><table><tr><th>번호</th><th>상태</th><th>엔딩</th><th>별</th><th>지식</th><th>${D && D.ui && D.ui.money === "man" ? "빚 · 모은 돈" : "지갑 · 통장"}</th><th>시간</th><th>고른 선택</th><th></th></tr>
     ${nums.map(n => { const r = byNum[n];
       if (!r) return `<tr class="none"><td>${n}</td><td><span class="st n">시작 안 함</span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>`;
       const f = r.final || {};
       return `<tr><td><b>${n}</b></td><td><span class="st ${r.status === "cleared" ? "c" : "p"}">${r.status === "cleared" ? "완주" : "하는 중 " + (r.step || "")}</span></td>
         <td>${esc((r.endingIcon || "") + " " + (r.endingT || ""))}</td><td style="color:var(--amber)">${r.stars ? "★".repeat(r.stars) : ""}</td><td>${r.firstOk || 0}/${qs.length}</td>
-        <td>${f.wallet != null ? fmt(f.wallet) + " · " + fmt(f.bank) : ""}</td><td>${mmss(r.sec)}</td>
+        <td>${f.wallet != null ? tMoney(D, f.wallet) + " · " + tMoney(D, f.bank) : ""}</td><td>${mmss(r.sec)}</td>
         <td class="wr">${esc((r.picks || []).join(" → "))}</td><td><button class="btn small ghost" style="color:var(--brick)" data-del="${r.id}">기록 풀기</button></td></tr>`; }).join("")}
     </table></div>
     <p class="muted">'기록 풀기'는 그 번호의 이 스토리 기록을 지워요. 엔딩별로 학생 이야기를 들어 보면 좋은 수업 마무리가 돼요.</p>`;
@@ -300,7 +301,7 @@ function drawBoss(c, rs, byNum, nums) {
 function drawAll(c, nums) {
   const chs = [...CHAPTERS.map(x => x.n), ...BOSSES.map(b => b.n), ...STORIES.map(b => b.n)];
   const m = {}; recs.forEach(r => { m[r.num + "_" + r.ch] = r; });
-  $("#body").innerHTML = `<p class="muted">학생별로 통과한 차시(별 개수)를 한눈에 봐요. 노란 칸은 도전 중.</p><div class="mat"><table><tr><th>번호</th>${chs.map(n => `<th title="${esc(chTitle(n))}">${n > 37 ? "🎒" + ["Ⅰ", "Ⅱ", "Ⅲ"][(STORIES.find(b => b.n === n) || { u: 2 }).u - 1] : n > 34 ? "👾" + ["Ⅰ", "Ⅱ", "Ⅲ"][n - 35] : n}</th>`).join("")}<th>합계</th></tr>
+  $("#body").innerHTML = `<p class="muted">학생별로 통과한 차시(별 개수)를 한눈에 봐요. 노란 칸은 도전 중.</p><div class="mat"><table><tr><th>번호</th>${chs.map(n => `<th title="${esc(chTitle(n))}">${n > 37 ? (STORIES.find(b => b.n === n) || { icon: "🎒" }).icon + ["Ⅰ", "Ⅱ", "Ⅲ"][(STORIES.find(b => b.n === n) || { u: 2 }).u - 1] : n > 34 ? "👾" + ["Ⅰ", "Ⅱ", "Ⅲ"][n - 35] : n}</th>`).join("")}<th>합계</th></tr>
     ${nums.map(n => { let s = 0; const tds = chs.map(ch => { const r = m[DB.pad(n) + "_" + ch]; if (r && r.status === "cleared") { s++; return `<td class="ok">${r.stars || 1}</td>`; } if (r) return `<td class="pl">…</td>`; return `<td></td>`; }).join("");
       return `<tr><td><b>${n}</b></td>${tds}<td><b>${s}</b></td></tr>`; }).join("")}</table></div>`;
 }
@@ -320,7 +321,7 @@ function drawTV() {
   const c = classes.find(x => x.code === curCode); if (!c) return;
   const rs = recs.filter(r => r.ch === curCh), by = Object.fromEntries(rs.map(r => [+r.num, r]));
   const cl = rs.filter(r => r.status === "cleared").length, nL = GAMES[curCh] ? GAMES[curCh].locks.length : 5;
-  d.innerHTML = `<div style="display:flex;align-items:flex-end;gap:30px;flex-wrap:wrap"><div><div style="font-size:22px;color:#b9d3cf">${curCh > 37 ? "🎒 " + esc(chTitle(curCh)) : curCh > 34 ? "👾 " + esc(chTitle(curCh)) : curCh + "차시 금고 · " + esc(CHAPTERS[curCh - 1].t)}</div><h1>금고 탈출 진행판</h1>
+  d.innerHTML = `<div style="display:flex;align-items:flex-end;gap:30px;flex-wrap:wrap"><div><div style="font-size:22px;color:#b9d3cf">${curCh > 37 ? (STORIES.find(b => b.n === curCh) || { icon: "🎒" }).icon + " " + esc(chTitle(curCh)) : curCh > 34 ? "👾 " + esc(chTitle(curCh)) : curCh + "차시 금고 · " + esc(CHAPTERS[curCh - 1].t)}</div><h1>금고 탈출 진행판</h1>
     <div style="font-size:22px;margin-top:8px">반 코드 <b style="color:#ffd27a;letter-spacing:4px">${c.code}</b></div></div>
     <div style="margin-left:auto;text-align:right"><div class="big">${cl}<span style="font-size:50px;color:#fff"> / ${c.size}</span></div><div style="font-size:20px">${curCh > 37 ? "이야기 완주" : curCh > 34 ? "보스 격파" : "탈출 성공"}</div></div></div>
     <div class="grid">${Array.from({ length: c.size }, (_, i) => { const r = by[i + 1]; const k = r ? (r.status === "cleared" ? "c" : "p") : ""; return `<div class="${k}">${i + 1}<small>${k === "c" ? (curCh > 37 ? "완주!" : curCh > 34 ? "격파!" : "탈출!") : k === "p" ? (curCh > 37 ? (r.step ? r.step + "장면" : "하는 중") : curCh > 34 ? "도전 중" : `자물쇠 ${(r.locks || []).filter(l => l.ok).length}/${nL}`) : "&nbsp;"}</small></div>`; }).join("")}</div>

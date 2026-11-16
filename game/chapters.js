@@ -47,7 +47,9 @@ window.BOSSES = [
 /* 스토리 RPG — 기록은 번호 38(Ⅱ편)·39(Ⅲ편). 관련 금고(chs)를 need개 이상 열면 열림. 이야기 내용은 data/storyN.js */
 window.STORIES = [
   { n: 38, u: 2, id: "story2", file: "story2", t: "준서의 한 달", icon: "🎒", chs: [16, 17, 18, 19], need: 2,
-    card: { icon: "🎒" } }
+    card: { icon: "🎒" } },
+  { n: 39, u: 3, id: "story3", file: "story3", t: "준서의 인생 설계", icon: "🧭", chs: [29, 30, 31, 32, 33, 34], need: 3,
+    card: { icon: "🧭" } }
 ];
 /* 차시·보스·스토리 제목 */
 window.chTitle = n => n <= 34 ? CHAPTERS[n - 1].t : ((BOSSES.find(b => b.n === n) || STORIES.find(b => b.n === n)) || {}).t || "";
@@ -55,7 +57,7 @@ window.chTitle = n => n <= 34 ? CHAPTERS[n - 1].t : ((BOSSES.find(b => b.n === n
 window.SPECIAL = {
   1: [{ id: "boss1", kind: "boss", n: 35, t: "Ⅰ단원 보스전", ready: true }],
   2: [{ id: "rpg2", kind: "rpg", n: 38, t: "준서의 한 달 (용돈 생존)", ready: true }, { id: "boss2", kind: "boss", n: 36, t: "Ⅱ단원 보스전", ready: true }],
-  3: [{ id: "rpg3", kind: "rpg", t: "준서의 인생 설계", ready: false }, { id: "boss3", kind: "boss", n: 37, t: "Ⅲ단원 보스전", ready: true }]
+  3: [{ id: "rpg3", kind: "rpg", n: 39, t: "준서의 인생 설계 (생애 주기 여행)", ready: true }, { id: "boss3", kind: "boss", n: 37, t: "Ⅲ단원 보스전", ready: true }]
 };
 /* 보스전 기술 — 문제가 나온 차시에 맞춰 고름 (보스의 반응 대사는 battle.js가 실제 문제·답으로 만듦)
    s: 학생이 맞혔을 때 쓰는 기술 [이름, 효과]

@@ -393,7 +393,7 @@ async function drawDex(vid) {
       if (!d) return `<div class="dcard"><span class="dn">${esc(b.t)}</span><span class="dq">${b.icon}</span><span class="dl" style="color:#93a29f">${esc(b.name)}${eul(b.name)} 물리치면 받아요</span></div>`;
       return `<div class="dcard got boss s${d.stars || 1}"><span class="dn">${esc(b.t)} 격파</span><span class="di">${b.card.icon}</span><span class="dt">${esc(b.card.term)}</span><span class="dl">${esc(b.card.line)}</span><span class="ds">${"★".repeat(d.stars || 1)}</span></div>`;
     }).join("") + `</div>` +
-    `<h3 style="color:#ffd27a;margin:30px 0 12px">🎒 스토리 카드 <small style="color:#b9d3cf;font-weight:400">${STORIES.filter(b => d2[b.n]).length} / ${STORIES.length}</small></h3><div class="dexgrid">` +
+    `<h3 style="color:#ffd27a;margin:30px 0 12px">🧭 스토리 카드 <small style="color:#b9d3cf;font-weight:400">${STORIES.filter(b => d2[b.n]).length} / ${STORIES.length}</small></h3><div class="dexgrid">` +
     STORIES.map(b => { const d = d2[b.n];
       if (!d) return `<div class="dcard"><span class="dn">스토리 게임</span><span class="dq">${b.icon}</span><span class="dl" style="color:#93a29f">「${esc(b.t)}」를 끝까지 하면 받아요</span></div>`;
       return `<div class="dcard got s${d.stars || 1}"><span class="dn">스토리 게임 · ${esc(REGIONS[b.u].name)}</span><span class="di">${d.icon || b.icon}</span><span class="dt">${esc(d.term || b.t)}</span><span class="dl">${esc(d.line || "")}</span><span class="ds">${"★".repeat(d.stars || 1)}</span></div>`;
