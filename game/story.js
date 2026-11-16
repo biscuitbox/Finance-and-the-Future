@@ -118,9 +118,9 @@ async function tell(text, who = "", hold = null) {
   el.innerHTML = `${who ? `<span class="nm">${esc(who)}</span>` : ""}<span class="mtext" id="mtx">${chars.map(c => `<span class="ch">${esc(c)}</span>`).join("")}</span><span class="caret wait">▼</span>`;
   const cs = $("#mtx").children; let i = 0, skip = false;
   tellTap = () => { skip = true; };
-  while (i < cs.length) { if (!salive(sbid)) return; if (skip) { for (; i < cs.length; i++) cs[i].classList.add("on"); break; } cs[i++].classList.add("on"); if (i < cs.length) await sleep(32); }
+  while (i < cs.length) { if (!salive(sbid)) return; if (skip) { for (; i < cs.length; i++) cs[i].classList.add("on"); break; } cs[i++].classList.add("on"); if (i < cs.length) await sleep(SAY_CHAR); }
   const c = el.querySelector(".caret"); if (c) c.classList.remove("wait");
-  const wait = hold == null ? Math.min(4000, 900 + chars.length * 45) : hold;
+  const wait = hold == null ? Math.min(SAY_MAX, SAY_BASE + chars.length * SAY_PER) : hold;   /* 보스전 대사와 같은 속도 */
   await new Promise(r => { const t = setTimeout(r, wait); tellTap = () => { clearTimeout(t); r(); }; });
   tellTap = null;
 }
@@ -149,7 +149,7 @@ async function playScene(sbid, i) {
   for (const [who, t] of lines) {
     const side = who === "준서" ? $("#whoL") : $("#whoR");
     if (side) { side.classList.remove("talk"); void side.offsetWidth; side.classList.add("talk"); }
-    await tell(t, who, 500); if (!salive(sbid)) return;
+    await tell(t, who); if (!salive(sbid)) return;
   }
   if (run) {   /* 사건: 저절로 일어남 */
     const note = applyFx(run.fx);
