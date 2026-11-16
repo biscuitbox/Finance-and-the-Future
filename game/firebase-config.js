@@ -3,7 +3,14 @@
    비워 두면(null) '체험 모드'로 작동합니다. 체험 모드는 기록이 이 브라우저에만 저장됩니다.
    ※ 이 값은 공개되어도 괜찮은 값입니다. 보안은 firestore.rules(보안 규칙)가 지킵니다.
    자세한 방법: SETUP.md */
-window.FIREBASE_CONFIG = null;
+window.FIREBASE_CONFIG = {
+  apiKey: "AIzaSyB9ZhqeFO8nBhiJZ0wMztJS4if81LZ0nbM",
+  authDomain: "finance-vault-20570.firebaseapp.com",
+  projectId: "finance-vault-20570",
+  storageBucket: "finance-vault-20570.firebasestorage.app",
+  messagingSenderId: "377109859782",
+  appId: "1:377109859782:web:97f00819bba5ab0c8236c7"
+};
 /* 예시
 window.FIREBASE_CONFIG = {
   apiKey: "AIza...",
