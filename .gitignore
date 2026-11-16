@@ -2,3 +2,4 @@ qa_out/
 dist/
 *.png
 __pycache__/
+game/guide/raw/

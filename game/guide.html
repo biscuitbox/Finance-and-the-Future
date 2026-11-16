@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>사용 설명서 · 금고 탈출 교사 화면</title>
+<style>
+:root{--pine:#10403B;--teal:#127475;--blue:#1C6E8C;--amber:#E08E0B;--amberdk:#A96A08;--brick:#8C3A3A;--lteal:#E9F2F0;--lamber:#FCF4E4;--ink:#1d2b29;--grey:#5f6f6c;--line:#d5e3e0;--bg:#f3f6f5}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;font-family:"Malgun Gothic","맑은 고딕","Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;font-size:17px}
+.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;padding:12px 22px;background:var(--pine);color:#fff}
+.top .logo{font-weight:900;font-size:19px}.top .logo b{color:var(--amber)}
+.top .sp{flex:1}
+.top a{color:#fff;text-decoration:none;border:2px solid #fff;border-radius:10px;padding:6px 14px;font-weight:700;font-size:14px}
+.top a.pr{border-color:var(--amber);background:var(--amberdk)}
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:28px;max-width:1240px;margin:0 auto;padding:26px 22px 80px}
+nav.toc{position:sticky;top:76px;align-self:start;background:#fff;border-radius:16px;padding:16px 14px;border:1px solid var(--line);font-size:15px;max-height:calc(100vh - 100px);overflow:auto}
+nav.toc b{display:block;color:var(--pine);margin:0 0 8px 6px}
+nav.toc a{display:block;color:var(--ink);text-decoration:none;padding:5px 8px;border-radius:8px;line-height:1.4}
+nav.toc a:hover{background:var(--lteal)}
+nav.toc a small{color:var(--amberdk);font-weight:900;margin-right:6px}
+main section{background:#fff;border-radius:20px;padding:28px 34px;margin-bottom:22px;border:1px solid var(--line)}
+h1{margin:0 0 6px;color:var(--pine);font-size:32px}
+h2{margin:0 0 14px;color:var(--pine);font-size:25px;display:flex;align-items:center;gap:12px}
+h2 .no{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--amber);color:#fff;font-size:20px;flex:none}
+h3{color:var(--teal);margin:22px 0 8px;font-size:19px}
+.lead{color:var(--grey);margin:0 0 6px}
+figure{margin:14px 0 18px}
+figure img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line);box-shadow:0 6px 18px rgba(16,64,59,.12);display:block;background:#eef2f1}
+figcaption{font-size:14px;color:var(--grey);margin-top:6px}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:10px 0}
+ol.steps>li{counter-increment:s;position:relative;padding:4px 0 10px 46px}
+ol.steps>li:before{content:counter(s);position:absolute;left:0;top:4px;width:32px;height:32px;border-radius:50%;background:var(--amber);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:17px}
+ol.steps>li b{color:var(--pine)}
+.tip{background:var(--lamber);border-left:6px solid var(--amber);border-radius:12px;padding:12px 18px;margin:14px 0;color:#4b3605}
+.tip.warn{background:#f6e3e3;border-color:var(--brick);color:#5a2222}
+.tip.ok{background:var(--lteal);border-color:var(--teal);color:#123f3c}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+.flow div{background:var(--lteal);border-radius:14px;padding:14px 16px;font-size:15px;line-height:1.55}
+.flow div b{display:block;color:var(--pine);font-size:17px;margin-bottom:4px}
+.flow div .ic{font-size:30px;display:block}
+table.t{border-collapse:collapse;width:100%;margin:10px 0;font-size:15.5px}
+table.t th{background:var(--pine);color:#fff;padding:9px 12px;text-align:left}
+table.t td{border-bottom:1px solid var(--line);padding:9px 12px;vertical-align:top}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+details{border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin:10px 0;background:#fbfdfc}
+details summary{cursor:pointer;font-weight:900;color:var(--pine)}
+details p{margin:8px 0 2px}
+.key{display:inline-block;background:var(--lteal);border:1px solid var(--line);border-radius:7px;padding:0 8px;font-weight:700;color:var(--pine);font-size:15px}
+.btnlike{display:inline-block;background:var(--teal);color:#fff;border-radius:8px;padding:0 9px;font-weight:700;font-size:15px}
+.btnlike.red{background:var(--brick)}.btnlike.am{background:var(--amberdk)}
+a{color:var(--teal)}
+@media (max-width:900px){.layout{grid-template-columns:1fr}nav.toc{position:static;max-height:none}.flow,.two{grid-template-columns:1fr}main section{padding:22px 18px}}
+@media print{.top,nav.toc{display:none}.layout{display:block;padding:0}main section{break-inside:avoid-page;box-shadow:none;border:0}figure img{box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">금고 탈출 · <b>교사용 사용 설명서</b></div><div class="sp"></div><a class="pr" href="#" onclick="print();return false">🖨 인쇄·PDF</a><a href="teacher.html">교사 화면으로 ▶</a></div>
+<div class="layout">
+<nav class="toc"><b>차례</b>
+  <a href="#s0"><small>0</small>한눈에 보기</a>
+  <a href="#s1"><small>1</small>처음 한 번: 로그인</a>
+  <a href="#s2"><small>2</small>반 만들기</a>
+  <a href="#s3"><small>3</small>교사 화면 둘러보기</a>
+  <a href="#s4"><small>4</small>학생에게 안내하기</a>
+  <a href="#s5"><small>5</small>학생 화면 미리 보기</a>
+  <a href="#s6"><small>6</small>수업 중: 현황 보기</a>
+  <a href="#s7"><small>7</small>TV 진행판</a>
+  <a href="#s8"><small>8</small>수업 뒤: 글 모아 보기·엑셀</a>
+  <a href="#s9"><small>9</small>반 관리 버튼</a>
+  <a href="#s10"><small>10</small>단원 보스전</a>
+  <a href="#s11"><small>11</small>관리자: 선생님 등록</a>
+  <a href="#s12"><small>12</small>이럴 땐 이렇게 (FAQ)</a>
+  <a href="#s13"><small>13</small>학생 정보와 기록</a>
+</nav>
+<main>
+
+<section id="s0">
+  <h1>🔐 금고 탈출 교사 화면 사용 설명서</h1>
+  <p class="lead">「금융과 미래」 수업이 끝난 뒤 학생이 크롬북으로 그 차시 <b>금고</b>(문제 5개 + 1~2줄 쓰기)를 열고, 선생님은 교사 화면에서 누가 통과했는지, 어떤 개념을 많이 틀렸는지 바로 확인합니다. 처음 쓰시는 선생님은 1~4번만 읽으셔도 바로 수업에 쓸 수 있어요.</p>
+  <div class="flow">
+    <div><span class="ic">🔑</span><b>처음 한 번 (5분)</b>구글 로그인 → 반 만들기 → 6자리 반 코드 받기</div>
+    <div><span class="ic">🧑‍🏫</span><b>수업 시간</b>슬라이드 설명 → 영상 시청 → 학생은 그 차시 금고 도전(약 10분)</div>
+    <div><span class="ic">📊</span><b>수업 중·뒤</b>현황·TV 진행판으로 확인 → 많이 틀린 개념은 다음 시간에 다시</div>
+    <div><span class="ic">📦</span><b>학기 말</b>엑셀(CSV)로 내려받아 보관 → 반 삭제로 기록 지우기</div>
+  </div>
+  <table class="t">
+    <tr><th>주소</th><th>누가</th><th>무엇을</th></tr>
+    <tr><td><b>…/game/</b></td><td>학생</td><td>반 코드 + 번호로 입장 → 모험 지도 · 차시 금고 · 내 도감 · 단원 보스전</td></tr>
+    <tr><td><b>…/game/teacher.html</b></td><td>선생님</td><td>반 만들기 · 현황 · 마지막 방 글 · 전 차시 한눈에 · TV 진행판 · 엑셀</td></tr>
+  </table>
+  <div class="tip ok">학생의 이름·이메일·학번은 받지 않습니다. 학생은 <b>반 코드와 번호</b>로만 들어오고, 선생님은 <b>자기가 만든 반의 기록만</b> 볼 수 있어요.</div>
+</section>
+
+<section id="s1">
+  <h2><span class="no">1</span>처음 한 번: 로그인하기</h2>
+  <figure><img src="guide/t01_login.webp" alt="교사 화면 로그인" loading="lazy"><figcaption>교사 화면 첫 화면</figcaption></figure>
+  <ol class="steps">
+    <li><b>교사 화면 주소</b>(…/game/teacher.html)를 엽니다. 수업 키트 홈 위쪽 <span class="key">교사 화면</span> 버튼으로도 들어올 수 있어요.</li>
+    <li><span class="btnlike">구글 계정으로 로그인</span>을 누르고 학교에서 쓰는 구글 계정을 고릅니다.</li>
+    <li>아래처럼 <b>"아직 등록되지 않은 선생님이에요"</b>가 나오면, 화면에 보이는 이메일을 이 사이트 <b>관리자 선생님</b>께 알려 주세요. 관리자가 등록하면 이 화면을 새로고침(<span class="key">F5</span>)하면 됩니다.</li>
+  </ol>
+  <figure><img src="guide/t02_unregistered.webp" alt="등록되지 않은 선생님 화면" loading="lazy"><figcaption>등록 전에는 이 화면이 나와요. 이메일을 관리자에게 알려 주세요. (등록 방법은 11번)</figcaption></figure>
+</section>
+
+<section id="s2">
+  <h2><span class="no">2</span>반 만들기</h2>
+  <figure><img src="guide/t03_newclass.webp" alt="새 반 만들기" loading="lazy"><figcaption>왼쪽 <b>＋ 새 반 만들기</b>를 누르면 나오는 화면</figcaption></figure>
+  <ol class="steps">
+    <li><b>반 이름</b>: 예) 2학년 3반. 학생 화면에 그대로 보여요.</li>
+    <li><b>학교</b>: 처음 등록한 학교 이름이 들어가 있어요. 필요하면 고칩니다.</li>
+    <li><b>학생 수</b>: 학생이 고를 수 있는 <b>번호 칸의 개수</b>예요. 반 학생 수(마지막 번호)를 넣으세요. 나중에 바꿀 수 있어요(9번).</li>
+    <li><span class="btnlike">반 만들고 코드 받기</span>를 누르면 <b>6자리 반 코드</b>(예: K7M3QP)가 자동으로 만들어져요.</li>
+  </ol>
+  <div class="tip">반마다 하나씩 만드세요. 같은 학년 여러 반을 맡으시면 반 수만큼 만들면 되고, 왼쪽 '내 반' 목록에서 골라 가며 봅니다.</div>
+</section>
+
+<section id="s3">
+  <h2><span class="no">3</span>교사 화면 둘러보기</h2>
+  <figure><img src="guide/t04_class_overview.webp" alt="교사 화면 전체" loading="lazy"><figcaption>반을 고르면 나오는 화면. 번호는 아래 설명과 같아요.</figcaption></figure>
+  <ol class="steps">
+    <li><b>＋ 새 반 만들기</b> — 반을 하나 더 만들 때.</li>
+    <li><b>학생 입장 코드</b> — 학생에게 알려 줄 6자리 반 코드. 칠판이나 TV에 크게 띄우세요.</li>
+    <li><b>주소 복사</b> — 학생 입장 주소(…/game/)를 복사해요. 구글 클래스룸 과제·공지에 붙이면 편해요.</li>
+    <li><b>차시 고르기</b> — 오늘 수업한 차시를 고르세요. 맨 아래에 <b>단원 보스전</b>도 있어요. 마지막으로 고른 차시를 기억해요.</li>
+    <li><b>탭</b> — <b>현황</b>(통과·자물쇠별·학생별) · <b>마지막 방 글</b>(학생이 쓴 1~2줄) · <b>전 차시 한눈에</b>(34차시 통과 표).</li>
+  </ol>
+  <div class="tip ok">학생이 문제를 풀면 화면이 <b>실시간으로</b> 바뀌어요. 새로고침하지 않아도 됩니다.</div>
+</section>
+
+<section id="s4">
+  <h2><span class="no">4</span>학생에게 안내하기</h2>
+  <div class="two">
+    <figure><img src="guide/s01_join.webp" alt="학생 입장 화면" loading="lazy"><figcaption>학생 입장 화면 (…/game/)</figcaption></figure>
+    <div>
+      <ol class="steps">
+        <li>학생이 크롬북으로 <b>…/game/</b>을 엽니다. (클래스룸에 주소를 붙여 두면 편해요.)</li>
+        <li><b>반 코드</b> 6자리를 넣으면 반 이름과 선생님 이름이 확인돼요.</li>
+        <li><b>내 번호</b>를 고르고 <span class="btnlike">입장하기</span>.</li>
+      </ol>
+      <div class="tip warn"><b>꼭 말해 주세요.</b> "자기 번호를 정확히 고르세요. 한 번 시작한 번호는 <b>그 크롬북에서만</b> 이어서 할 수 있어요." 다른 사람 번호로 대신 풀지 못하게 막아 둔 장치예요. 잘못 골랐을 때는 12번 FAQ를 보세요.</div>
+      <div class="tip">다음 시간부터는 입장 화면 없이 바로 모험 지도가 열려요(그 크롬북이 기억해요).</div>
+    </div>
+  </div>
+</section>
+
+<section id="s5">
+  <h2><span class="no">5</span>학생 화면 미리 보기</h2>
+  <h3>모험 지도</h3>
+  <figure><img src="guide/s02_map.webp" alt="모험 지도" loading="lazy"><figcaption>세 지역(선택의 마을 → 투자의 숲과 산맥 → 미래의 항구)을 잇는 길에 34차시 금고가 있어요. 🧙가 서 있는 곳이 다음 차시, 금빛 칸은 연 금고예요. 칸을 누르면 아래 안내판에 [도전하기]가 나와요.</figcaption></figure>
+  <h3>차시 금고: 자물쇠 5개</h3>
+  <div class="two">
+    <figure><img src="guide/s03_vault_intro.webp" alt="금고 시작 화면" loading="lazy"><figcaption>금고 시작 화면 — 차시 이야기와 규칙</figcaption></figure>
+    <figure><img src="guide/s04_vault_q.webp" alt="자물쇠 문제" loading="lazy"><figcaption>① 비밀번호 조각 ② 자물쇠 5개 ③ 지금 푸는 자물쇠</figcaption></figure>
+  </div>
+  <ul>
+    <li>문제 형식: 4지선다 · 순서 맞추기 · 분류하기 · 계산하기. 계산 문제는 숫자가 매번 바뀌어요.</li>
+    <li><b>틀리면</b> 경보가 울리고 자물쇠가 <b>8초</b>(두 번째부터 <b>15초</b>) 잠긴 뒤 힌트를 보여 주고 <b>다른 문제</b>가 나와요. 찍어서는 통과하기 어렵게 만든 장치예요.</li>
+    <li>자물쇠 5개를 열면 모은 숫자로 금고 비밀번호를 넣어요.</li>
+  </ul>
+  <figure><img src="guide/s05_vault_wrong.webp" alt="틀렸을 때 화면" loading="lazy"><figcaption>틀렸을 때: 잠김 + 힌트. 잠금이 풀리면 다른 문제가 나와요.</figcaption></figure>
+  <h3>마지막 방: 1~2줄 쓰기 → 도감 카드</h3>
+  <div class="two">
+    <figure><img src="guide/s06_final.webp" alt="마지막 방" loading="lazy"><figcaption>① 오늘 배운 낱말 ② 글자 수·낱말 확인 ③ 제출</figcaption></figure>
+    <figure><img src="guide/s07_clear.webp" alt="금고 탈출 성공" loading="lazy"><figcaption>통과 화면: 별과 도감 카드</figcaption></figure>
+  </div>
+  <ul>
+    <li>마지막 방 글은 <b>20자 이상</b>(띄어쓰기 빼고)이고 <b>오늘 배운 낱말을 1개 이상</b> 넣어야 제출돼요. 학습지 과제 ③(내 생활에 적용)을 대신해요.</li>
+  </ul>
+  <table class="t"><tr><th>별</th><th>기준 (한 번에 연 자물쇠 수)</th></tr>
+    <tr><td style="color:var(--amber)">★★★</td><td>5개 모두 한 번에</td></tr>
+    <tr><td style="color:var(--amber)">★★</td><td>3~4개</td></tr>
+    <tr><td style="color:var(--amber)">★</td><td>0~2개 (그래도 통과)</td></tr></table>
+  <div class="tip">이미 통과한 금고를 다시 하면 <b>연습</b>이라 기록은 바뀌지 않아요. 복습용으로 마음껏 다시 해도 됩니다.</div>
+  <h3>내 도감</h3>
+  <figure><img src="guide/s11_dex.webp" alt="내 도감" loading="lazy"><figcaption>금고를 열 때마다 그 차시 핵심 낱말 카드를 모아요. 보스를 물리치면 보스 카드도 받아요.</figcaption></figure>
+</section>
+
+<section id="s6">
+  <h2><span class="no">6</span>수업 중: 현황 보기</h2>
+  <figure><img src="guide/t06_now_summary.webp" alt="현황 요약과 자물쇠별 비율" loading="lazy"><figcaption>① 요약 ② 자물쇠별 '한 번에 맞힌' 비율</figcaption></figure>
+  <ol class="steps">
+    <li><b>요약</b> — 통과한 학생 수 / 도전 중 / 아직 시작 안 함 / 한 번에 연 자물쇠 평균 / 걸린 시간 평균.</li>
+    <li><b>자물쇠별 비율</b> — 각 자물쇠를 한 번에 맞힌 학생의 비율이에요. <b>60%보다 낮으면 빨간 막대</b>로 보여요. 그 개념을 다음 시간 첫머리에 다시 짚어 주세요.</li>
+  </ol>
+  <figure><img src="guide/t07_now_students.webp" alt="학생별 표" loading="lazy"><figcaption>① 자물쇠 칸 ② 기록 풀기</figcaption></figure>
+  <ol class="steps">
+    <li><b>자물쇠 칸</b> — <b>✓</b> 한 번에 맞힘, <b>숫자</b> 틀린 횟수, <b>·</b> 아직 안 함. 옆에 별·한 번에 맞힌 수·오답·시간·마지막 방 글이 나와요. '다시 시작 1'은 중간에 그만뒀다가 다시 시작한 학생이에요.</li>
+    <li><b>기록 풀기</b> — 그 번호의 <b>이 차시 기록만</b> 지워요. 학생이 번호를 잘못 골랐거나 크롬북을 바꿔 막혔을 때 씁니다(12번).</li>
+  </ol>
+</section>
+
+<section id="s7">
+  <h2><span class="no">7</span>TV 진행판</h2>
+  <figure><img src="guide/t10_tv.webp" alt="TV 진행판" loading="lazy"><figcaption>📺 TV에 진행판 띄우기 — 반 코드와 번호별 '탈출!'만 보여요.</figcaption></figure>
+  <ul>
+    <li><span class="btnlike">📺 TV에 진행판 띄우기</span>를 누르면 전체 화면으로 열려요. 교실 TV에 띄워 두면 학생들이 반 코드를 보고 들어오고, 누가 탈출했는지 함께 볼 수 있어요.</li>
+    <li><b>별과 오답 수는 보이지 않게</b> 해 두었어요(번호와 진행 상태만). 학생끼리 비교하며 위축되지 않게 하려는 것이에요.</li>
+    <li>닫을 때는 아래 <span class="key">닫기</span>를 누르세요.</li>
+  </ul>
+</section>
+
+<section id="s8">
+  <h2><span class="no">8</span>수업 뒤: 글 모아 보기 · 전 차시 · 엑셀</h2>
+  <h3>마지막 방 글</h3>
+  <figure><img src="guide/t08_wall.webp" alt="마지막 방 글" loading="lazy"><figcaption>질문과 함께 학생들의 1~2줄 글을 번호 순서로 모아 보여 줘요. 좋은 글을 골라 다음 시간 도입에 소개해 보세요.</figcaption></figure>
+  <h3>전 차시 한눈에</h3>
+  <figure><img src="guide/t09_all.webp" alt="전 차시 한눈에" loading="lazy"><figcaption>번호별로 통과한 차시의 별 개수(숫자)와 도전 중(노란 칸 …)을 한 표로 봐요. 오른쪽으로 밀면 34차시와 보스전(👾Ⅰ·Ⅱ·Ⅲ)까지 나와요.</figcaption></figure>
+  <h3>엑셀(CSV)로 내려받기</h3>
+  <p><span class="btnlike">⬇ 엑셀(CSV)</span>을 누르면 <b>지금 고른 차시</b>의 기록이 파일로 내려받아져요. 반·번호·상태·별·한 번에 맞힌 자물쇠·오답·걸린 시간·자물쇠별 시도·마지막 방 글·통과 시각이 들어 있어요. 엑셀에서 바로 열립니다.</p>
+  <div class="tip">수행평가(12·13·15·28차시 관련)나 생활기록부 근거 자료로 쓸 때는 차시별로 내려받아 보관하세요.</div>
+</section>
+
+<section id="s9">
+  <h2><span class="no">9</span>반 관리 버튼</h2>
+  <figure><img src="guide/t05_classbuttons.webp" alt="반 관리 버튼" loading="lazy"><figcaption>반 이름 오른쪽 버튼 세 개</figcaption></figure>
+  <ol class="steps">
+    <li><b>🟢 기록 받는 중 → 닫기</b> — 누르면 <b>🔒 기록 닫힘</b>이 되고, 학생은 금고를 <b>연습</b>으로만 할 수 있어요(기록이 바뀌지 않음). 평가처럼 정해진 시간에만 받고 싶을 때 쓰세요. 다시 누르면 열려요.</li>
+    <li><b>학생 수</b> — 번호 칸 개수를 바꿔요(1~60). 전학생이 오면 늘리세요.</li>
+    <li><b>반 삭제</b> — 그 반의 <b>모든 기록</b>이 지워지고 되돌릴 수 없어요. 실수를 막으려고 반 코드를 그대로 입력해야 지워져요. 학년이 끝나면 엑셀로 내려받은 뒤 지우세요.</li>
+  </ol>
+</section>
+
+<section id="s10">
+  <h2><span class="no">10</span>단원 보스전</h2>
+  <div class="two">
+    <figure><img src="guide/s09_boss_intro.webp" alt="보스전 시작 화면" loading="lazy"><figcaption>보스전 시작 화면</figcaption></figure>
+    <figure><img src="guide/s10_boss_battle.webp" alt="보스전 전투 화면" loading="lazy"><figcaption>전투 화면: 보스가 문제를 내고, 맞히면 공격·틀리면 반격</figcaption></figure>
+  </div>
+  <table class="t"><tr><th>보스</th><th>열리는 조건</th><th>나오는 문제</th></tr>
+    <tr><td>Ⅰ단원 👹 지름 도깨비</td><td>1~7차시 금고 <b>4개</b> 이상 통과</td><td rowspan="3">그 학생이 <b>통과한 금고</b>의 문제를 차시별로 섞어서</td></tr>
+    <tr><td>Ⅱ단원 🐉 버블 드래곤</td><td>8~28차시 금고 <b>11개</b> 이상 통과</td></tr>
+    <tr><td>Ⅲ단원 👻 될대로 유령</td><td>29~34차시 금고 <b>3개</b> 이상 통과</td></tr></table>
+  <ul>
+    <li><b>10문제</b>를 맞히면 승리, 틀릴 때마다 에너지 1칸이 줄고 <b>3칸</b>을 모두 잃으면 처음부터 다시 도전해요.</li>
+    <li>별: 이긴 판에서 한 번도 안 틀리면 ★★★, 1번 ★★, 2번 ★. 이기면 보스 카드를 받아요.</li>
+    <li>대사 상자를 누르거나 <span class="key">Space</span>를 누르면 대사가 빨리 넘어가요.</li>
+  </ul>
+  <figure><img src="guide/t11_boss.webp" alt="교사 화면 보스전 현황" loading="lazy"><figcaption>교사 화면 차시 고르기 맨 아래 '단원 보스전'을 고르면: 격파 현황, 격파까지 진 횟수, <b>틀린 문제가 많이 나온 차시</b></figcaption></figure>
+  <div class="tip">'틀린 문제가 많이 나온 차시'는 단원 정리 시간에 어느 차시를 복습하면 좋을지 알려 줘요. 단원을 마무리하는 시간에 다 같이 보스전에 도전해 보세요.</div>
+</section>
+
+<section id="s11">
+  <h2><span class="no">11</span>관리자: 선생님 등록하기</h2>
+  <figure><img src="guide/t12_admin.webp" alt="선생님 관리" loading="lazy"><figcaption>관리자에게만 보이는 왼쪽 '👥 선생님 관리'</figcaption></figure>
+  <ol class="steps">
+    <li>등록할 선생님의 <b>구글 이메일</b>을 넣어요(그 선생님이 로그인했을 때 화면에 보인 이메일).</li>
+    <li>이름·학교는 선택. 다른 선생님을 관리자로 만들 때만 <b>관리자 권한도 주기</b>를 체크하세요.</li>
+    <li><span class="btnlike">등록하기</span> → 그 선생님이 교사 화면을 새로고침하면 바로 반을 만들 수 있어요.</li>
+  </ol>
+  <div class="tip ok">선생님마다 <b>자기가 만든 반의 기록만</b> 보여요. 관리자도 다른 선생님 반의 학생 기록은 볼 수 없어요. 등록을 지워도 그 선생님이 만든 반 기록은 남아 있어요.</div>
+</section>
+
+<section id="s12">
+  <h2><span class="no">12</span>이럴 땐 이렇게 (자주 묻는 질문)</h2>
+  <details open><summary>학생 화면에 "이 번호는 다른 기기에서 이미 시작했어요"가 나와요.</summary>
+    <figure><img src="guide/s08_blocked.webp" alt="다른 기기 안내" loading="lazy"></figure>
+    <p>같은 번호를 다른 크롬북(또는 다른 브라우저·시크릿 창)에서 먼저 시작한 경우예요. ① 학생이 번호를 잘못 고른 게 아닌지 확인하고 ② 맞다면 교사 화면 → 그 차시 → 현황 → 그 번호의 <span class="btnlike red">기록 풀기</span>를 누르세요. 학생이 새로고침하면 처음부터 다시 할 수 있어요.</p></details>
+  <details><summary>학생이 다른 친구 번호를 골라서 시작했어요.</summary>
+    <p>잘못 고른 번호의 그 차시 기록을 <b>기록 풀기</b>로 지운 뒤, 학생 화면 아래 <b>반·번호 바꾸기</b>에서 자기 번호를 다시 고르게 하세요.</p></details>
+  <details><summary>크롬북을 바꿨더니 도감이 비어 있어요.</summary>
+    <p>기록은 교사 화면에 그대로 남아 있어요. 다만 새 크롬북에서는 '새 학생'으로 보여 예전 차시 금고를 열면 다른 기기 안내가 나올 수 있어요. 필요한 차시만 기록 풀기를 해 주세요. 같은 크롬북·같은 계정으로 들어오면 그대로 이어집니다.</p></details>
+  <details><summary>인터넷이 끊겼어요. 기록이 날아가나요?</summary>
+    <p>금고는 그대로 풀 수 있고, 화면 위에 '저장 대기'가 보여요. 다시 연결되면 자동으로 보내요. 통과 화면에 "⚠ 아직 보내지 못했어요"가 보이면 그 화면을 닫지 말고 연결을 확인하게 하세요.</p></details>
+  <details><summary>중간에 창을 닫았어요.</summary>
+    <p>다시 들어오면 처음부터 시작해요. 이미 틀렸던 자물쇠는 '한 번에 맞힘'으로 바뀌지 않아(별 계산에 반영) 기록이 공정하게 남아요. 교사 화면에는 '다시 시작 1'처럼 보여요.</p></details>
+  <details><summary>시험처럼 정해진 시간에만 기록을 받고 싶어요.</summary>
+    <p>평소에는 <b>기록 닫힘</b>으로 두고(9번), 그 시간에만 <b>기록 받는 중</b>으로 바꾸세요. 닫혀 있는 동안 학생은 연습만 할 수 있어요.</p></details>
+  <details><summary>학습지(워드·PDF 제출)도 같이 쓸 수 있나요?</summary>
+    <p>네. 수업 키트 홈의 [학습지]는 그대로 있어요. 금고 탈출은 짧게 확인하고, 학습지는 깊이 생각할 활동이 필요한 차시에 골라 쓰셔도 됩니다.</p></details>
+  <details><summary>문제가 틀렸거나 고치고 싶어요.</summary>
+    <p>차시·자물쇠 이름과 고칠 내용을 관리자에게 알려 주세요. 문제는 차시마다 파일 하나(game/data/chNN.js)에 들어 있어 그 부분만 고치면 바로 반영돼요.</p></details>
+</section>
+
+<section id="s13">
+  <h2><span class="no">13</span>학생 정보와 기록</h2>
+  <table class="t">
+    <tr><th>받는 것</th><td>반 코드, 번호, 자물쇠별 시도 횟수, 걸린 시간, 마지막 방 1~2줄 글, 보스전에서 틀린 문제의 차시 번호</td></tr>
+    <tr><th>받지 않는 것</th><td>이름, 이메일, 학번, 연락처. 학생은 익명으로 접속해 구글 계정 정보가 남지 않아요.</td></tr>
+    <tr><th>볼 수 있는 사람</th><td>그 반을 만든 선생님만 (보안 규칙으로 막혀 있음). 학생은 자기 기록만 볼 수 있어요.</td></tr>
+    <tr><th>지우는 방법</th><td>한 번호·한 차시: <b>기록 풀기</b> / 반 전체: <b>반 삭제</b> (학년 말)</td></tr>
+  </table>
+  <div class="tip">마지막 방 글에는 이름·연락처 같은 개인정보를 쓰지 말라고 학생 화면에 안내되어 있어요. 학교에 외부 서비스 사용 절차(정보·개인정보 담당 확인)가 있다면 그에 따르세요.</div>
+  <p style="color:var(--grey);font-size:14px;margin-top:20px">이 설명서의 그림은 체험용 예시 학급으로 찍은 화면이에요. 화면 모습은 조금씩 바뀔 수 있어요.</p>
+</section>
+</main>
+</div>
+</body>
+</html>

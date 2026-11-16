@@ -11,6 +11,7 @@ body{margin:0;font-family:"Malgun Gothic","맑은 고딕","Apple SD Gothic Neo",
 button{font:inherit;cursor:pointer}
 input,select,textarea{font:inherit}
 .hide{display:none!important}
+.welcome{display:flex;align-items:center;gap:16px;border:3px solid var(--amber);background:var(--lamber)}
 .top{display:flex;align-items:center;gap:14px;padding:12px 22px;background:var(--pine);color:#fff}
 .top .logo{font-weight:900;font-size:19px}.top .logo b{color:var(--amber)}
 .top .sp{flex:1}
@@ -78,7 +79,7 @@ tr.none td{color:#a3b0ad}
 </style>
 </head>
 <body>
-<div class="top"><div class="logo">금고 탈출 · <b>교사 화면</b></div><div class="sp"></div><span id="who" class="muted" style="color:#cfe6e2"></span><button class="btn small ghost hide" id="out">로그아웃</button></div>
+<div class="top"><div class="logo">금고 탈출 · <b>교사 화면</b></div><div class="sp"></div><a class="btn small ghost" href="guide.html" target="_blank" rel="noopener" style="color:#fff;text-decoration:none">📖 사용 설명서</a><span id="who" class="muted" style="color:#cfe6e2"></span><button class="btn small ghost hide" id="out">로그아웃</button></div>
 <div id="app"></div>
 <script src="firebase-config.js"></script>
 <script src="chapters.js"></script>
@@ -113,12 +114,14 @@ function viewLogin() {
     <p>학생들이 차시별 금고(퀴즈 방탈출)를 통과했는지, 어떤 문제를 많이 틀렸는지, 마지막 방에 무엇을 썼는지 볼 수 있어요.</p>
     ${DB.mode === "demo" ? `<div class="demo"><b>체험 모드</b>예요. Firebase 설정 전이라 기록은 이 브라우저에만 저장돼요. 예시 반(DEMO01)에 다른 학생 기록이 미리 들어 있어요.</div>` : ""}
     <p><button class="btn" id="in">${DB.mode === "demo" ? "체험 선생님으로 들어가기" : "구글 계정으로 로그인"}</button></p>
-    <p class="muted">처음 쓰시는 선생님은 관리자에게 구글 이메일을 알려 등록을 받아야 해요.</p></div>`;
+    <p class="muted">처음 쓰시는 선생님은 관리자에게 구글 이메일을 알려 등록을 받아야 해요.</p>
+    <p><a href="guide.html" target="_blank" rel="noopener" style="color:var(--teal);font-weight:700">📖 처음 쓰시나요? 그림으로 보는 사용 설명서</a></p></div>`;
   $("#in").onclick = () => DB.signIn().catch(e => toast("로그인하지 못했어요: " + (e.code || e.message)));
 }
 function viewUnregistered() {
   $("#app").innerHTML = `<div class="hero"><h1>아직 등록되지 않은 선생님이에요</h1>
-    <p>로그인한 계정: <b>${esc(U.email)}</b></p><p>이 사이트 관리자에게 위 이메일을 알려 주시면, 관리자가 '선생님 관리'에서 등록해 드려요. 등록되면 이 화면을 새로고침하세요.</p></div>`;
+    <p>로그인한 계정: <b>${esc(U.email)}</b></p><p>이 사이트 관리자에게 위 이메일을 알려 주시면, 관리자가 '선생님 관리'에서 등록해 드려요. 등록되면 이 화면을 새로고침하세요.</p>
+    <p><a href="guide.html" target="_blank" rel="noopener" style="color:var(--teal);font-weight:700">📖 기다리는 동안 사용 설명서 읽어 보기</a></p></div>`;
 }
 async function loadClasses() {
   classes = (await DB.listClasses()).sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
@@ -132,12 +135,17 @@ function render() {
     <h4>학생 입장 주소</h4><div class="muted" style="word-break:break-all">${esc(gameURL())}</div>
     <button class="btn small ghost" id="cp" style="margin-top:6px;color:var(--teal)">주소 복사</button>
     ${DB.mode === "demo" ? `<h4>체험 모드</h4><button class="btn small ghost" style="color:var(--brick)" id="rs">체험 기록 초기화</button>` : ""}
-    </div><div class="main" id="main"></div></div>`;
+    <h4>도움말</h4><a class="btn small ghost" href="guide.html" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:none;display:inline-block">📖 사용 설명서</a>
+    </div><div class="main">${DB.LS.get("fg_t_guide_hide", false) ? "" : `<div class="card welcome" id="welcome"><div style="font-size:40px">📖</div>
+      <div style="flex:1"><b style="color:var(--pine);font-size:18px">처음 쓰시나요? 그림으로 보는 사용 설명서가 있어요.</b>
+      <div class="muted">로그인 → 반 만들기 → 학생 안내 → 현황 보기까지 화면 그림과 함께 차례대로 설명해요. (약 5분)</div></div>
+      <a class="btn" href="guide.html" target="_blank" rel="noopener" style="text-decoration:none">설명서 열기</a><button class="btn small ghost" id="wx" style="color:var(--grey)">다시 보지 않기</button></div>`}<div id="main"></div></div></div>`;
   $("#clist").innerHTML = classes.map(c => `<button class="cls ${c.code === curCode ? "on" : ""}" data-c="${c.code}">${esc(c.name)}<small>${c.code}${c.open === false ? " · 기록 닫힘" : ""}</small></button>`).join("") || `<p class="muted">아직 반이 없어요.</p>`;
   document.querySelectorAll("#clist .cls").forEach(b => b.onclick = () => { curCode = b.dataset.c; render(); });
   $("#newc").onclick = () => { curCode = "#new"; render(); };
   if ($("#adm")) $("#adm").onclick = () => { curCode = "#admin"; render(); };
   $("#cp").onclick = () => navigator.clipboard.writeText(gameURL()).then(() => toast("복사했어요"));
+  if ($("#wx")) $("#wx").onclick = () => { DB.LS.set("fg_t_guide_hide", true); $("#welcome").remove(); };
   if ($("#rs")) $("#rs").onclick = () => { if (confirm("체험 기록을 모두 지우고 처음 상태로 돌릴까요?")) { DB.resetDemo(); location.reload(); } };
   unwatch(); unwatch = () => {};
   if (curCode === "#new" || !curCode) return viewNew();
