@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>교사 화면 · 금고 탈출</title>
+<style>
+:root{--pine:#10403B;--teal:#127475;--blue:#1C6E8C;--amber:#E08E0B;--amberdk:#A96A08;--brick:#8C3A3A;--lteal:#E9F2F0;--lamber:#FCF4E4;--ink:#1d2b29;--grey:#5f6f6c;--line:#d5e3e0;--bg:#f3f6f5}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Malgun Gothic","맑은 고딕","Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:var(--ink);background:var(--bg)}
+button{font:inherit;cursor:pointer}
+input,select,textarea{font:inherit}
+.hide{display:none!important}
+.top{display:flex;align-items:center;gap:14px;padding:12px 22px;background:var(--pine);color:#fff}
+.top .logo{font-weight:900;font-size:19px}.top .logo b{color:var(--amber)}
+.top .sp{flex:1}
+.btn{border:0;border-radius:10px;padding:10px 18px;font-size:15px;font-weight:700;background:var(--teal);color:#fff}
+.btn:hover{filter:brightness(1.08)}
+.btn.amber{background:var(--amberdk)}.btn.red{background:var(--brick)}
+.btn.ghost{background:transparent;border:2px solid currentColor;color:inherit}
+.btn.small{padding:6px 12px;font-size:13px;border-radius:8px}
+.btn:disabled{background:#a9b9b6;cursor:not-allowed}
+.layout{display:grid;grid-template-columns:270px 1fr;min-height:calc(100vh - 56px)}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+.side{background:#fff;border-right:1px solid var(--line);padding:18px}
+.side h4{margin:18px 0 8px;color:var(--grey);font-size:13px;letter-spacing:.5px}
+.cls{display:block;width:100%;text-align:left;border:0;background:transparent;border-radius:10px;padding:10px 12px;font-size:15px;color:var(--ink)}
+.cls:hover{background:var(--lteal)}.cls.on{background:var(--teal);color:#fff}
+.cls small{display:block;font-size:12px;opacity:.75}
+.main{padding:24px 28px 60px;min-width:0}
+.card{background:#fff;border-radius:16px;padding:20px 22px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.chead{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+.chead h2{margin:0;font-size:24px;color:var(--pine)}
+.code{font-size:34px;font-weight:900;letter-spacing:6px;color:var(--amberdk);background:var(--lamber);border-radius:12px;padding:6px 16px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.muted{color:var(--grey);font-size:14px}
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.sum div{background:var(--lteal);border-radius:12px;padding:12px 14px}
+.sum b{display:block;font-size:26px;color:var(--pine)}
+.sum span{font-size:13px;color:var(--grey)}
+.bars{display:flex;flex-direction:column;gap:8px}
+.bar{display:grid;grid-template-columns:170px 1fr 130px;gap:10px;align-items:center;font-size:14px}
+.bar .t{height:18px;background:#eef2f1;border-radius:9px;overflow:hidden}
+.bar .t i{display:block;height:100%;background:var(--teal)}
+.bar .t i.low{background:var(--brick)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:var(--pine);color:#fff;padding:9px 8px;font-weight:700;position:sticky;top:0}
+td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+tr.none td{color:#a3b0ad}
+.st{display:inline-block;border-radius:6px;padding:2px 8px;font-size:12px;font-weight:700}
+.st.c{background:var(--teal);color:#fff}.st.p{background:var(--lamber);color:var(--amberdk)}.st.n{background:#eef2f1;color:#8a9895}
+.lks span{display:inline-block;min-width:26px;text-align:center;border-radius:5px;margin-right:2px;font-size:12px;padding:1px 3px}
+.lks .y{background:#d6efe9;color:var(--teal)}.lks .w{background:#f6dede;color:var(--brick)}.lks .e{background:#eef2f1;color:#a3b0ad}
+.wr{max-width:340px;line-height:1.5}
+.tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.tab{border:0;border-radius:9px;padding:8px 14px;background:#e3eae8;font-weight:700;color:var(--grey)}
+.tab.on{background:var(--teal);color:#fff}
+.mat{overflow:auto}
+.mat td,.mat th{text-align:center;padding:5px 4px;font-size:12px;min-width:30px}
+.mat td.ok{background:#d6efe9;color:var(--teal);font-weight:700}
+.mat td.pl{background:var(--lamber);color:var(--amberdk)}
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.wall div{background:var(--lamber);border-radius:12px;padding:14px;line-height:1.6;font-size:15px}
+.wall b{display:block;color:var(--amberdk);font-size:13px;margin-bottom:4px}
+.form{display:grid;gap:10px;max-width:460px}
+.form input,.form select{padding:10px 12px;border:2px solid var(--line);border-radius:10px;font-size:15px}
+.hero{max-width:720px;margin:50px auto;background:#fff;border-radius:20px;padding:36px 40px;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.hero h1{margin:0 0 10px;color:var(--pine)}
+.hero p,.hero li{line-height:1.8;font-size:16px}
+.demo{background:var(--lamber);border-left:5px solid var(--amber);padding:10px 14px;border-radius:8px;font-size:14px;color:#5b4106;margin:10px 0}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#222;color:#fff;padding:12px 20px;border-radius:12px;z-index:99}
+.tv{position:fixed;inset:0;background:var(--pine);color:#fff;z-index:50;padding:30px 40px;overflow:auto}
+.tv h1{margin:0;font-size:40px}.tv .big{font-size:120px;font-weight:900;color:var(--amber);line-height:1}
+.tv .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:12px;margin-top:26px}
+.tv .grid div{border-radius:14px;padding:14px 8px;text-align:center;font-size:28px;font-weight:900;background:rgba(255,255,255,.08);color:rgba(255,255,255,.4)}
+.tv .grid div.p{background:rgba(224,142,11,.3);color:#ffd27a}.tv .grid div.c{background:var(--amber);color:#2b1d02}
+.tv .grid small{display:block;font-size:14px;font-weight:400}
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">금고 탈출 · <b>교사 화면</b></div><div class="sp"></div><span id="who" class="muted" style="color:#cfe6e2"></span><button class="btn small ghost hide" id="out">로그아웃</button></div>
+<div id="app"></div>
+<script src="firebase-config.js"></script>
+<script src="chapters.js"></script>
+<script src="db.js"></script>
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmt = n => Number(n).toLocaleString("ko-KR");
+const mmss = s => s == null ? "" : `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+function toast(t) { const d = document.createElement("div"); d.className = "toast"; d.textContent = t; document.body.appendChild(d); setTimeout(() => d.remove(), 2600); }
+window.GAMES = {};
+function GAME(d) { GAMES[d.n] = d; }
+function loadGame(n) { return new Promise((res, rej) => { if (GAMES[n]) return res(GAMES[n]); const s = document.createElement("script"); s.src = `data/ch${DB.pad(n)}.js`; s.onload = () => GAMES[n] ? res(GAMES[n]) : rej(); s.onerror = rej; document.head.appendChild(s); }); }
+const gameURL = () => new URL("./", location.href).href;
+
+let U = null, T = null, classes = [], curCode = null, curCh = READY[0], tab = "now", recs = [], unwatch = () => {};
+
+DB.init().then(() => DB.onAuth(async u => {
+  U = u; T = u ? await DB.teacherInfo() : null;
+  $("#who").textContent = u ? `${u.name || ""} ${u.email}` : "";
+  $("#out").classList.toggle("hide", !u);
+  if (!u) return viewLogin();
+  if (!T) return viewUnregistered();
+  await loadClasses(); render();
+}));
+$("#out").onclick = () => DB.signOut();
+
+function viewLogin() {
+  unwatch();
+  $("#app").innerHTML = `<div class="hero"><h1>🔐 금고 탈출 · 교사 화면</h1>
+    <p>학생들이 차시별 금고(퀴즈 방탈출)를 통과했는지, 어떤 문제를 많이 틀렸는지, 마지막 방에 무엇을 썼는지 볼 수 있어요.</p>
+    ${DB.mode === "demo" ? `<div class="demo"><b>체험 모드</b>예요. Firebase 설정 전이라 기록은 이 브라우저에만 저장돼요. 예시 반(DEMO01)에 다른 학생 기록이 미리 들어 있어요.</div>` : ""}
+    <p><button class="btn" id="in">${DB.mode === "demo" ? "체험 선생님으로 들어가기" : "구글 계정으로 로그인"}</button></p>
+    <p class="muted">처음 쓰시는 선생님은 관리자에게 구글 이메일을 알려 등록을 받아야 해요.</p></div>`;
+  $("#in").onclick = () => DB.signIn().catch(e => toast("로그인하지 못했어요: " + (e.code || e.message)));
+}
+function viewUnregistered() {
+  $("#app").innerHTML = `<div class="hero"><h1>아직 등록되지 않은 선생님이에요</h1>
+    <p>로그인한 계정: <b>${esc(U.email)}</b></p><p>이 사이트 관리자에게 위 이메일을 알려 주시면, 관리자가 '선생님 관리'에서 등록해 드려요. 등록되면 이 화면을 새로고침하세요.</p></div>`;
+}
+async function loadClasses() {
+  classes = (await DB.listClasses()).sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+  if (!classes.find(c => c.code === curCode)) curCode = classes.length ? classes[0].code : null;
+}
+function render() {
+  $("#app").innerHTML = `<div class="layout"><div class="side">
+    <h4>내 반</h4><div id="clist"></div>
+    <button class="btn small" id="newc" style="margin-top:10px">＋ 새 반 만들기</button>
+    ${T.admin ? `<h4>관리자</h4><button class="cls ${curCode === "#admin" ? "on" : ""}" id="adm">👥 선생님 관리</button>` : ""}
+    <h4>학생 입장 주소</h4><div class="muted" style="word-break:break-all">${esc(gameURL())}</div>
+    <button class="btn small ghost" id="cp" style="margin-top:6px;color:var(--teal)">주소 복사</button>
+    ${DB.mode === "demo" ? `<h4>체험 모드</h4><button class="btn small ghost" style="color:var(--brick)" id="rs">체험 기록 초기화</button>` : ""}
+    </div><div class="main" id="main"></div></div>`;
+  $("#clist").innerHTML = classes.map(c => `<button class="cls ${c.code === curCode ? "on" : ""}" data-c="${c.code}">${esc(c.name)}<small>${c.code}${c.open === false ? " · 기록 닫힘" : ""}</small></button>`).join("") || `<p class="muted">아직 반이 없어요.</p>`;
+  document.querySelectorAll("#clist .cls").forEach(b => b.onclick = () => { curCode = b.dataset.c; render(); });
+  $("#newc").onclick = () => { curCode = "#new"; render(); };
+  if ($("#adm")) $("#adm").onclick = () => { curCode = "#admin"; render(); };
+  $("#cp").onclick = () => navigator.clipboard.writeText(gameURL()).then(() => toast("복사했어요"));
+  if ($("#rs")) $("#rs").onclick = () => { if (confirm("체험 기록을 모두 지우고 처음 상태로 돌릴까요?")) { DB.resetDemo(); location.reload(); } };
+  unwatch(); unwatch = () => {};
+  if (curCode === "#new" || !curCode) return viewNew();
+  if (curCode === "#admin") return viewAdmin();
+  viewClass();
+}
+
+function viewNew() {
+  $("#main").innerHTML = `<div class="card"><h2 style="margin-top:0;color:var(--pine)">새 반 만들기</h2>
+    <div class="form"><label>반 이름 <input id="nn" placeholder="예: 2학년 3반" maxlength="30"></label>
+    <label>학교 <input id="ns" value="${esc(T.school || "")}" maxlength="30"></label>
+    <label>학생 수 (번호 고르기 칸 개수) <input id="nz" type="number" min="1" max="60" value="30"></label>
+    <button class="btn" id="mk">반 만들고 코드 받기</button></div>
+    <p class="muted">반 코드는 6자리로 자동으로 정해져요. 학생은 반 코드와 번호만 넣고 들어와요(이름·이메일은 받지 않아요).</p></div>`;
+  $("#mk").onclick = async () => {
+    const name = $("#nn").value.trim(); if (!name) return toast("반 이름을 써 주세요.");
+    $("#mk").disabled = true;
+    try { curCode = await DB.createClass({ name, school: $("#ns").value.trim(), size: Math.max(1, Math.min(60, +$("#nz").value || 30)) }); await loadClasses(); render(); toast("반을 만들었어요."); }
+    catch (e) { toast("만들지 못했어요: " + (e.code || e.message)); $("#mk").disabled = false; }
+  };
+}
+
+function viewClass() {
+  const c = classes.find(x => x.code === curCode);
+  $("#main").innerHTML = `<div class="card chead"><div><h2>${esc(c.name)}</h2><div class="muted">${esc(c.school || "")} · 학생 ${c.size}명</div></div>
+      <div><div class="muted">학생 입장 코드</div><div class="code">${c.code}</div></div>
+      <div class="row" style="margin-left:auto">
+        <button class="btn small ${c.open === false ? "amber" : ""}" id="op">${c.open === false ? "🔒 기록 닫힘 → 열기" : "🟢 기록 받는 중 → 닫기"}</button>
+        <button class="btn small ghost" id="sz" style="color:var(--teal)">학생 수</button>
+        <button class="btn small red" id="dc">반 삭제</button></div></div>
+    <div class="card"><div class="row" style="margin-bottom:12px"><label>차시 <select id="chs">${READY.map(n => `<option value="${n}" ${n === curCh ? "selected" : ""}>${n}차시 · ${esc(CHAPTERS[n - 1].t)}</option>`).join("")}</select></label>
+      <div class="tabs" style="margin:0 0 0 8px">${[["now", "현황"], ["wall", "마지막 방 글"], ["all", "전 차시 한눈에"]].map(([k, t]) => `<button class="tab ${tab === k ? "on" : ""}" data-t="${k}">${t}</button>`).join("")}</div>
+      <div style="margin-left:auto" class="row"><button class="btn small" id="tvb">📺 TV에 진행판 띄우기</button><button class="btn small ghost" id="csv" style="color:var(--teal)">⬇ 엑셀(CSV)</button></div></div>
+      <div id="body" class="muted">불러오는 중…</div></div>`;
+  $("#op").onclick = async () => { await DB.updateClass(c.code, { open: c.open === false }); await loadClasses(); render(); };
+  $("#sz").onclick = async () => { const v = prompt("학생 수 (1~60)", c.size); if (!v) return; await DB.updateClass(c.code, { size: Math.max(1, Math.min(60, +v || c.size)) }); await loadClasses(); render(); };
+  $("#dc").onclick = async () => {
+    const v = prompt(`'${c.name}'의 모든 기록이 지워지고 되돌릴 수 없어요.\n지우려면 반 코드 ${c.code}를 그대로 입력하세요.`);
+    if (v !== c.code) return;
+    await DB.deleteClass(c.code); curCode = null; await loadClasses(); render(); toast("반을 지웠어요.");
+  };
+  $("#chs").onchange = e => { curCh = +e.target.value; drawBody(); };
+  document.querySelectorAll(".tab").forEach(b => b.onclick = () => { tab = b.dataset.t; document.querySelectorAll(".tab").forEach(x => x.classList.toggle("on", x === b)); drawBody(); });
+  $("#csv").onclick = () => exportCSV(c);
+  $("#tvb").onclick = () => openTV(c);
+  unwatch = DB.watchRecords(c.code, r => { recs = r; drawBody(); drawTV(); });
+}
+
+async function drawBody() {
+  const c = classes.find(x => x.code === curCode); if (!c || !$("#body")) return;
+  let g = null; try { g = await loadGame(curCh); } catch (e) {}
+  const rs = recs.filter(r => r.ch === curCh);
+  const byNum = Object.fromEntries(rs.map(r => [+r.num, r]));
+  const nums = Array.from({ length: Math.max(c.size, ...rs.map(r => +r.num), 0) }, (_, i) => i + 1);
+  const body = $("#body"); body.className = "";
+  if (tab === "all") return drawAll(c, nums);
+  if (tab === "wall") {
+    const w = rs.filter(r => r.writing).sort((a, b) => +a.num - +b.num);
+    body.innerHTML = g ? `<p><b>질문</b> ${esc(g.final.q)}</p>` : "";
+    body.innerHTML += w.length ? `<div class="wall">${w.map(r => `<div><b>${+r.num}번 · ${"★".repeat(r.stars || 1)}</b>${esc(r.writing)}</div>`).join("")}</div>` : `<p class="muted">아직 마지막 방까지 간 학생이 없어요.</p>`;
+    return;
+  }
+  const cl = rs.filter(r => r.status === "cleared"), pl = rs.filter(r => r.status !== "cleared");
+  const nL = g ? g.locks.length : 5;
+  const avg = a => a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0;
+  const lockStat = Array.from({ length: nL }, (_, i) => {
+    const tried = rs.filter(r => r.locks && r.locks[i] && r.locks[i].tries > 0);
+    return { t: g ? g.locks[i].title : `자물쇠 ${i + 1}`, n: tried.length, first: tried.filter(r => r.locks[i].firstOk).length, wrong: tried.reduce((a, r) => a + Math.max(0, r.locks[i].tries - (r.locks[i].ok ? 1 : 0)), 0) };
+  });
+  body.innerHTML = `<div class="sum">
+      <div><b>${cl.length} / ${c.size}</b><span>통과</span></div><div><b>${pl.length}</b><span>도전 중</span></div><div><b>${Math.max(0, c.size - rs.length)}</b><span>아직 시작 안 함</span></div>
+      <div><b>${cl.length ? avg(cl.map(r => r.firstOk)).toFixed(1) : "–"} / ${nL}</b><span>한 번에 연 자물쇠 (평균)</span></div>
+      <div><b>${cl.length ? mmss(Math.round(avg(cl.map(r => r.sec || 0)))) : "–"}</b><span>걸린 시간 (평균, 분:초)</span></div></div>
+    <h3 style="color:var(--pine);margin:22px 0 10px;font-size:17px">자물쇠별 '한 번에 맞힌' 비율 <span class="muted">— 낮은 자물쇠의 개념을 다음 시간에 다시 짚어 주세요</span></h3>
+    <div class="bars">${lockStat.map(s => { const p = s.n ? Math.round(s.first / s.n * 100) : 0; return `<div class="bar"><span>${esc(s.t)}</span><span class="t"><i class="${p < 60 ? "low" : ""}" style="width:${p}%"></i></span><span>${s.n ? p + "%" : "–"} <span class="muted">(오답 ${s.wrong})</span></span></div>`; }).join("")}</div>
+    <h3 style="color:var(--pine);margin:22px 0 10px;font-size:17px">학생별 <span class="muted">— 칸: ✓ 한 번에 맞힘 · 숫자 = 틀린 횟수 · 실시간으로 바뀌어요</span></h3>
+    <div style="overflow:auto"><table><tr><th>번호</th><th>상태</th><th>별</th><th>자물쇠</th><th>한 번에</th><th>오답</th><th>시간</th><th>마지막 방 글</th><th></th></tr>
+    ${nums.map(n => { const r = byNum[n];
+      if (!r) return `<tr class="none"><td>${n}</td><td><span class="st n">시작 안 함</span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>`;
+      const lk = Array.from({ length: nL }, (_, i) => { const l = (r.locks || [])[i]; if (!l || !l.tries) return `<span class="e">·</span>`; if (l.ok && l.firstOk) return `<span class="y">✓</span>`; return `<span class="w">${l.tries - (l.ok ? 1 : 0)}</span>`; }).join("");
+      return `<tr><td><b>${n}</b></td><td><span class="st ${r.status === "cleared" ? "c" : "p"}">${r.status === "cleared" ? "통과" : "도전 중"}</span>${r.restarts ? `<br><span class="muted">다시 시작 ${r.restarts}</span>` : ""}</td>
+        <td style="color:var(--amber)">${r.stars ? "★".repeat(r.stars) : ""}</td><td class="lks">${lk}</td><td>${r.firstOk || 0}/${nL}</td><td>${r.wrong || 0}</td><td>${mmss(r.sec)}</td>
+        <td class="wr">${esc(r.writing || "")}</td><td><button class="btn small ghost" style="color:var(--brick)" data-del="${r.id}">기록 풀기</button></td></tr>`; }).join("")}
+    </table></div>
+    <p class="muted">'기록 풀기'는 그 번호의 이 차시 기록을 지워요. 학생이 번호를 잘못 골랐거나 다른 기기로 바꿔야 할 때 쓰세요.</p>`;
+  body.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => { if (!confirm(`${+b.dataset.del.split("_")[1]}번의 ${curCh}차시 기록을 지울까요? 되돌릴 수 없어요.`)) return; await DB.deleteRecord(c.code, b.dataset.del); toast("기록을 지웠어요."); });
+}
+function drawAll(c, nums) {
+  const chs = CHAPTERS.map(x => x.n);
+  const m = {}; recs.forEach(r => { m[r.num + "_" + r.ch] = r; });
+  $("#body").innerHTML = `<p class="muted">학생별로 통과한 차시(별 개수)를 한눈에 봐요. 노란 칸은 도전 중.</p><div class="mat"><table><tr><th>번호</th>${chs.map(n => `<th title="${esc(CHAPTERS[n - 1].t)}">${n}</th>`).join("")}<th>합계</th></tr>
+    ${nums.map(n => { let s = 0; const tds = chs.map(ch => { const r = m[DB.pad(n) + "_" + ch]; if (r && r.status === "cleared") { s++; return `<td class="ok">${r.stars || 1}</td>`; } if (r) return `<td class="pl">…</td>`; return `<td></td>`; }).join("");
+      return `<tr><td><b>${n}</b></td>${tds}<td><b>${s}</b></td></tr>`; }).join("")}</table></div>`;
+}
+function exportCSV(c) {
+  const g = GAMES[curCh], nL = g ? g.locks.length : 5;
+  const head = ["반", "번호", "차시", "상태", "별", "한번에맞힌자물쇠", "오답", "걸린시간(초)", "다시시작", ...Array.from({ length: nL }, (_, i) => (g ? g.locks[i].title : "자물쇠" + (i + 1)) + "(시도)"), "마지막방글", "통과시각"];
+  const rows = recs.filter(r => r.ch === curCh).sort((a, b) => +a.num - +b.num).map(r => [c.name, +r.num, r.ch, r.status === "cleared" ? "통과" : "도전중", r.stars || "", r.firstOk || 0, r.wrong || 0, r.sec || "", r.restarts || 0,
+    ...Array.from({ length: nL }, (_, i) => ((r.locks || [])[i] || {}).tries || 0), r.writing || "", r.clearedAt ? new Date(r.clearedAt).toLocaleString("ko-KR") : ""]);
+  const csv = "﻿" + [head, ...rows].map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\r\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = `금고탈출_${c.name}_${curCh}차시.csv`; a.click();
+}
+/* TV 진행판: 번호만 보여 줌 (별·오답은 숨김) */
+let tvOn = false;
+function openTV(c) { tvOn = true; const d = document.createElement("div"); d.className = "tv"; d.id = "tv"; document.body.appendChild(d); d.onclick = e => { if (e.target.id === "tvx") { tvOn = false; d.remove(); } }; drawTV(); d.requestFullscreen && d.requestFullscreen().catch(() => {}); }
+function drawTV() {
+  const d = $("#tv"); if (!tvOn || !d) return;
+  const c = classes.find(x => x.code === curCode); if (!c) return;
+  const rs = recs.filter(r => r.ch === curCh), by = Object.fromEntries(rs.map(r => [+r.num, r]));
+  const cl = rs.filter(r => r.status === "cleared").length, nL = GAMES[curCh] ? GAMES[curCh].locks.length : 5;
+  d.innerHTML = `<div style="display:flex;align-items:flex-end;gap:30px;flex-wrap:wrap"><div><div style="font-size:22px;color:#b9d3cf">${curCh}차시 금고 · ${esc(CHAPTERS[curCh - 1].t)}</div><h1>금고 탈출 진행판</h1>
+    <div style="font-size:22px;margin-top:8px">반 코드 <b style="color:#ffd27a;letter-spacing:4px">${c.code}</b></div></div>
+    <div style="margin-left:auto;text-align:right"><div class="big">${cl}<span style="font-size:50px;color:#fff"> / ${c.size}</span></div><div style="font-size:20px">탈출 성공</div></div></div>
+    <div class="grid">${Array.from({ length: c.size }, (_, i) => { const r = by[i + 1]; const k = r ? (r.status === "cleared" ? "c" : "p") : ""; return `<div class="${k}">${i + 1}<small>${k === "c" ? "탈출!" : k === "p" ? `자물쇠 ${(r.locks || []).filter(l => l.ok).length}/${nL}` : "&nbsp;"}</small></div>`; }).join("")}</div>
+    <p style="margin-top:26px"><button class="btn ghost" id="tvx">닫기</button></p>`;
+}
+
+/* 관리자: 선생님 등록 */
+async function viewAdmin() {
+  const list = await DB.listTeachers();
+  $("#main").innerHTML = `<div class="card"><h2 style="margin-top:0;color:var(--pine)">선생님 관리</h2>
+    <p class="muted">여기에 등록된 구글 이메일만 반을 만들 수 있어요. 각 선생님은 자기가 만든 반의 기록만 볼 수 있어요.</p>
+    <div class="form"><input id="te" placeholder="구글 이메일 (예: teacher@school.kr)"><input id="tn" placeholder="이름 (선택)"><input id="tsc" placeholder="학교 (선택)">
+    <label><input type="checkbox" id="ta"> 관리자 권한도 주기</label><button class="btn" id="tadd">등록하기</button></div></div>
+    <div class="card"><table><tr><th>이메일</th><th>이름</th><th>학교</th><th>권한</th><th></th></tr>
+    ${list.map(t => `<tr><td>${esc(t.email)}</td><td>${esc(t.name || "")}</td><td>${esc(t.school || "")}</td><td>${t.admin ? "관리자" : "선생님"}</td><td>${t.email === U.email ? "" : `<button class="btn small ghost" style="color:var(--brick)" data-rm="${esc(t.email)}">삭제</button>`}</td></tr>`).join("")}</table></div>`;
+  $("#tadd").onclick = async () => {
+    const e = $("#te").value.trim().toLowerCase(); if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)) return toast("이메일을 확인해 주세요.");
+    await DB.addTeacher(e, { name: $("#tn").value.trim(), school: $("#tsc").value.trim(), admin: $("#ta").checked, addedAt: Date.now() });
+    toast("등록했어요."); viewAdmin();
+  };
+  document.querySelectorAll("[data-rm]").forEach(b => b.onclick = async () => { if (!confirm(b.dataset.rm + " 선생님 등록을 지울까요? (그 선생님이 만든 반 기록은 남아 있어요)")) return; await DB.removeTeacher(b.dataset.rm); viewAdmin(); });
+}
+</script>
+</body>
+</html>

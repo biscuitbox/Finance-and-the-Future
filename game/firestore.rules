@@ -1,0 +1,64 @@
+rules_version = '2';
+// 금고 탈출 — Firestore 보안 규칙
+// Firebase 콘솔 → Firestore Database → 규칙 탭에 이 내용을 그대로 붙여 넣고 [게시]를 누르세요.
+//  · 학생(익명 로그인): 반 코드 확인, 자기 기록 쓰기·읽기만 가능. 다른 학생 기록은 볼 수 없음
+//  · 선생님(구글 로그인 + teachers 목록에 등록): 반 만들기, 자기 반 기록만 보기·지우기
+//  · 관리자(teachers 문서에 admin: true): 선생님 등록·삭제
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function email() { return request.auth.token.email.lower(); }
+    function isGoogle() {
+      return signedIn() && request.auth.token.firebase.sign_in_provider == 'google.com'
+        && request.auth.token.email_verified == true;
+    }
+    function teacherDoc() { return /databases/$(database)/documents/teachers/$(email()); }
+    function isTeacher() { return isGoogle() && exists(teacherDoc()); }
+    function isAdmin() { return isTeacher() && get(teacherDoc()).data.get('admin', false) == true; }
+
+    // 선생님 명단 — 관리자만 고침. 선생님은 자기 문서만 읽음
+    match /teachers/{em} {
+      allow get: if isGoogle() && (em == email() || isAdmin());
+      allow list: if isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /classes/{code} {
+      // 학생이 반 코드를 확인할 때 하나씩만 읽을 수 있음 (목록 훑어보기는 안 됨)
+      allow get: if signedIn();
+      allow list: if isTeacher() && resource.data.ownerUid == request.auth.uid;
+      allow create: if isTeacher()
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.name is string && request.resource.data.name.size() <= 40
+        && request.resource.data.size is int && request.resource.data.size <= 60;
+      allow update: if isTeacher() && resource.data.ownerUid == request.auth.uid
+        && request.resource.data.ownerUid == resource.data.ownerUid;
+      allow delete: if isTeacher() && resource.data.ownerUid == request.auth.uid;
+
+      match /records/{rid} {
+        function cls() { return get(/databases/$(database)/documents/classes/$(code)).data; }
+        function isOwner() { return signedIn() && cls().ownerUid == request.auth.uid; }
+        function validRecord() {
+          let d = request.resource.data;
+          return d.uid == request.auth.uid
+            && d.ch is int && d.ch >= 1 && d.ch <= 40
+            && d.num is string && d.num.size() == 2
+            && rid == string(d.ch) + '_' + d.num
+            && int(d.num) >= 1 && int(d.num) <= cls().size
+            && d.status in ['playing', 'cleared']
+            && (!('writing' in d) || (d.writing is string && d.writing.size() <= 400));
+        }
+        // 학생: 자기 기록만 읽음 / 선생님: 자기 반 기록 모두 읽음
+        // (아직 없는 기록을 확인하는 것은 허용 — 처음 시작하는 학생용)
+        allow read: if signedIn() && (resource == null || resource.data.uid == request.auth.uid || isOwner());
+        // 학생: 기록을 받는 반에만, 처음 쓴 기기(uid)만 이어서 씀. 통과한 기록은 다시 바꿀 수 없음
+        allow create: if signedIn() && cls().open == true && validRecord();
+        allow update: if signedIn() && cls().open == true && validRecord()
+          && resource.data.uid == request.auth.uid && resource.data.status != 'cleared';
+        // 선생님: '기록 풀기'
+        allow delete: if isOwner();
+      }
+    }
+  }
+}
