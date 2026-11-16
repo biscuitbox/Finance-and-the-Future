@@ -1,40 +1,41 @@
 /* 단원 보스전 — 턴제 전투 화면 */
-.battle{max-width:1320px;margin:0 auto;padding:18px 18px 40px;display:grid;grid-template-columns:minmax(440px,520px) 1fr;gap:20px;align-items:start}
-.bleft{position:sticky;top:76px}
-.arena{position:relative;height:430px;border-radius:22px 22px 0 0;overflow:hidden;border:4px solid #0b2f2b;border-bottom:0;user-select:none}
+/* 전투장이 화면의 주인공: 왼쪽 칸을 넓게(1.25 : 1), 단 화면 높이 안에 전투장+대사 상자가 다 들어오게 너비를 제한 */
+.battle{max-width:1480px;margin:0 auto;padding:16px 18px 40px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(380px,1fr);gap:20px;align-items:start}
+.bleft{position:sticky;top:72px;width:min(100%,calc((100vh - 250px) * 1.25));justify-self:center}
+.arena{position:relative;aspect-ratio:5/4;container-type:inline-size;border-radius:22px 22px 0 0;overflow:hidden;border:4px solid #0b2f2b;border-bottom:0;user-select:none}
 .arena.u1{background:linear-gradient(#bfe6f0 0%,#d9f1e6 52%,#9fd38a 52%,#7fbf6e 100%)}
 .arena.u2{background:linear-gradient(#f3b98a 0%,#f7d9a6 50%,#5f8f4f 50%,#3f6b3a 100%)}
 .arena.u3{background:linear-gradient(#1c2e5c 0%,#3c5d9c 52%,#2f6f8f 52%,#1f4f6f 100%)}
-.arena .deco{position:absolute;font-size:34px;opacity:.55;pointer-events:none}
+.arena .deco{position:absolute;font-size:6cqw;opacity:.55;pointer-events:none}
 .arena .plat{position:absolute;border-radius:50%;background:radial-gradient(ellipse at center,rgba(0,0,0,.28),rgba(0,0,0,.08) 60%,transparent 70%)}
-.arena .plat.e{right:3%;top:178px;width:230px;height:56px}
-.arena .plat.p{left:2%;top:360px;width:250px;height:60px}
+.arena .plat.e{right:2%;top:40%;width:46%;height:11%}
+.arena .plat.p{left:1%;top:82%;width:50%;height:12%}
 .sprite{position:absolute;line-height:1;filter:drop-shadow(0 8px 0 rgba(0,0,0,.25));transition:transform .35s,opacity .8s}
-.sprite.e{right:8%;top:58px;font-size:124px}
-.sprite.p{left:9%;top:250px;font-size:116px}
+.sprite.e{right:7%;top:9%;font-size:26cqw}
+.sprite.p{left:8%;top:52%;font-size:24cqw}
 .sprite.enter-e{animation:enterE .8s ease-out}
 .sprite.enter-p{animation:enterP .8s ease-out}
-@keyframes enterE{from{transform:translateX(420px)}to{transform:none}}
-@keyframes enterP{from{transform:translateX(-420px)}to{transform:none}}
-.sprite.lunge-e{transform:translate(-70px,40px) scale(1.12)}
-.sprite.lunge-p{transform:translate(60px,-30px) scale(1.08)}
+@keyframes enterE{from{transform:translateX(60cqw)}to{transform:none}}
+@keyframes enterP{from{transform:translateX(-60cqw)}to{transform:none}}
+.sprite.lunge-e{transform:translate(-12cqw,8cqw) scale(1.12)}
+.sprite.lunge-p{transform:translate(10cqw,-6cqw) scale(1.08)}
 .sprite.hurt{animation:hurt .6s}
 @keyframes hurt{0%,100%{transform:none;filter:none}15%{transform:translateX(-14px);filter:brightness(2.2) drop-shadow(0 0 12px #fff)}30%{transform:translateX(12px);opacity:.35}45%{transform:translateX(-8px);opacity:1}60%{transform:translateX(6px);opacity:.4}80%{opacity:1}}
 .sprite.faint{transform:translateY(90px) scale(.6);opacity:0}
 .sprite.idle{animation:idle 2.4s ease-in-out infinite}
 @keyframes idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.stat-box{position:absolute;background:#fffdf6;border:4px solid #10403B;border-radius:14px;padding:10px 16px 12px;min-width:230px;box-shadow:0 6px 0 rgba(0,0,0,.25);color:#10403B}
-.stat-box.e{left:4%;top:18px}
-.stat-box.p{right:4%;top:300px}
-.stat-box .nm{display:flex;justify-content:space-between;align-items:baseline;font-weight:900;font-size:20px;gap:14px}
-.stat-box .nm small{font-size:14px;color:#5f6f6c;font-weight:700}
-.gauge{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13px;font-weight:900;color:#A96A08}
-.gauge .bar{flex:1;height:14px;border-radius:8px;background:#d5e3e0;overflow:hidden;border:2px solid #10403B}
+.stat-box{position:absolute;background:#fffdf6;border:4px solid #10403B;border-radius:14px;padding:1.6cqw 2.6cqw 2cqw;width:46%;box-shadow:0 6px 0 rgba(0,0,0,.25);color:#10403B}
+.stat-box.e{left:3%;top:4%}
+.stat-box.p{right:3%;top:64%}
+.stat-box .nm{display:flex;justify-content:space-between;align-items:baseline;font-weight:900;font-size:clamp(15px,4.2cqw,26px);gap:10px}
+.stat-box .nm small{font-size:clamp(11px,2.6cqw,16px);color:#5f6f6c;font-weight:700}
+.gauge{display:flex;align-items:center;gap:8px;margin-top:1.2cqw;font-size:clamp(11px,2.5cqw,16px);font-weight:900;color:#A96A08}
+.gauge .bar{flex:1;height:clamp(10px,2.6cqw,18px);border-radius:8px;background:#d5e3e0;overflow:hidden;border:2px solid #10403B}
 .gauge .bar i{display:block;height:100%;width:100%;background:#2fae6b;transition:width .7s ease,background .3s}
 .gauge .bar i.mid{background:#E08E0B}
 .gauge .bar i.low{background:#d24d4d}
-.gauge .num{min-width:58px;text-align:right;color:#10403B;font-size:15px}
-.msgbox{background:#10403B;color:#fff;border:4px solid #0b2f2b;border-top:6px solid #E08E0B;border-radius:0 0 22px 22px;padding:14px 20px;min-height:100px;font-size:20px;font-weight:700;line-height:1.5;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.gauge .num{min-width:3.4em;text-align:right;color:#10403B;font-size:clamp(12px,3cqw,19px)}
+.msgbox{background:#10403B;color:#fff;border:4px solid #0b2f2b;border-top:6px solid #E08E0B;border-radius:0 0 22px 22px;padding:14px 22px;min-height:110px;font-size:22px;font-weight:700;line-height:1.55;display:flex;align-items:center;gap:10px;flex-wrap:wrap;cursor:pointer}
 .msgbox .who{color:#ffd27a;flex:none}
 .msgbox .caret{margin-left:auto;animation:blink 1s infinite;color:#ffd27a}
 @keyframes blink{50%{opacity:0}}
@@ -48,16 +49,16 @@
 .bq .res b.k{color:var(--brick)}
 .bq .res .row{display:flex;gap:12px;justify-content:flex-end;margin-top:12px}
 /* 효과 */
-.fx{position:absolute;font-size:56px;line-height:1;pointer-events:none;z-index:6;will-change:transform}
+.fx{position:absolute;font-size:11cqw;line-height:1;pointer-events:none;z-index:6;will-change:transform}
 .spark{position:absolute;width:12px;height:12px;border-radius:50%;pointer-events:none;z-index:6;animation:spark .6s ease-out forwards}
 @keyframes spark{from{transform:translate(0,0) scale(1);opacity:1}to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
 .flash{position:absolute;inset:0;pointer-events:none;z-index:7;animation:flash .35s ease-out forwards}
 @keyframes flash{from{opacity:.65}to{opacity:0}}
-.slash{position:absolute;width:220px;height:8px;border-radius:4px;background:linear-gradient(90deg,transparent,#fff,transparent);pointer-events:none;z-index:6;animation:slash .35s ease-out forwards;box-shadow:0 0 14px #fff}
+.slash{position:absolute;width:40cqw;height:8px;border-radius:4px;background:linear-gradient(90deg,transparent,#fff,transparent);pointer-events:none;z-index:6;animation:slash .35s ease-out forwards;box-shadow:0 0 14px #fff}
 @keyframes slash{from{transform:rotate(var(--r)) scaleX(0);opacity:1}to{transform:rotate(var(--r)) scaleX(1.2);opacity:0}}
 .bolt{position:absolute;width:16px;pointer-events:none;z-index:6;background:linear-gradient(#fff,#ffd84d);clip-path:polygon(40% 0,100% 0,55% 40%,90% 40%,10% 100%,35% 55%,0 55%);animation:boltin .45s ease-out forwards}
 @keyframes boltin{0%{opacity:0;transform:scaleY(.2)}30%{opacity:1;transform:scaleY(1)}100%{opacity:0}}
-.dmg{position:absolute;font-size:34px;font-weight:900;color:#fff;-webkit-text-stroke:2px #8C3A3A;pointer-events:none;z-index:8;animation:dmg 1s ease-out forwards}
+.dmg{position:absolute;font-size:clamp(24px,6.5cqw,44px);font-weight:900;color:#fff;-webkit-text-stroke:2px #8C3A3A;pointer-events:none;z-index:8;animation:dmg 1s ease-out forwards}
 .dmg.p{-webkit-text-stroke:2px #10403B;color:#ffd27a}
 @keyframes dmg{from{transform:translateY(0);opacity:1}to{transform:translateY(-60px);opacity:0}}
 .arena.shake{animation:shake .45s}
@@ -65,11 +66,8 @@
 @keyframes vs{0%{transform:scale(3);opacity:0}30%{transform:scale(1);opacity:1}80%{opacity:1}100%{opacity:0}}
 @media (max-width:1000px){
   .battle{grid-template-columns:1fr}
-  .bleft{position:static}
-  .arena{height:300px}
-  .sprite.e{font-size:96px;top:40px}.sprite.p{font-size:86px;top:170px}
-  .stat-box{min-width:190px;padding:8px 12px}.stat-box .nm{font-size:16px}
-  .stat-box.p{top:206px}.arena .plat.p{top:244px}.arena .plat.e{top:130px}
-  .msgbox{font-size:18px;min-height:80px}.bq{min-height:0}
+  .bleft{position:static;width:min(100%,calc(52vh * 1.25))}
+  .msgbox{font-size:19px;min-height:90px}.bq{min-height:0}
 }
+.msgbox .caret.wait{animation:none;opacity:.35}
 .bq.lock .res{pointer-events:auto;opacity:1}

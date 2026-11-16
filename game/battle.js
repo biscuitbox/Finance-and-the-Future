@@ -68,7 +68,7 @@ function startBoss(B0, games, rec, practice) {
     prevWrong: practice ? 0 : old ? old.prevWrong + old.wrong : (rec && rec.status === "playing" ? rec.wrong || 0 : 0),
     saveState: practice ? "practice" : "idle", pending: null, pname: `${+me().num}번 탐험가`
   };
-  const u = B0.u, deco = REGIONS[u].deco, spots = [["44%", "372px"], ["40%", "140px"], ["58%", "250px"], ["4%", "150px"], ["80%", "230px"]];
+  const u = B0.u, deco = REGIONS[u].deco, spots = [["44%", "86%"], ["40%", "30%"], ["58%", "56%"], ["4%", "34%"], ["82%", "50%"]];
   $("#app").innerHTML = topbar(`<span class="pill">${esc(B0.t)}${practice ? '<span class="badge">연습</span>' : ""}</span><span class="pill">⏱ <span id="elapsed">0분 0초</span></span><span class="pill" id="sv"></span>`) +
     `<div class="battle">
       <div class="bleft"><div class="arena u${u}" id="arena">
@@ -88,6 +88,7 @@ function startBoss(B0, games, rec, practice) {
   saveBoss(false);
   const tick = setInterval(() => { const e = $("#elapsed"); if (e) e.textContent = mmss(Math.floor((Date.now() - S.startedAt) / 1000)); }, 1000);
   cleanup = () => clearInterval(tick);
+  bindSayKeys();
   introSeq(S.bid);
 }
 const alive = bid => S && S.bid === bid && document.getElementById("arena");
@@ -97,7 +98,7 @@ async function introSeq(bid) {
   sfx("start"); await sleep(900); if (!alive(bid)) return;
   $("#spE").classList.remove("enter-e"); $("#spE").classList.add("idle"); $("#spP").classList.remove("enter-p");
   await say(`${B0.name}${iga(B0.name)} 앞을 가로막았다!`); if (!alive(bid)) return;
-  await say(`“${B0.intro}”`, B0.name, 700); if (!alive(bid)) return;
+  await say(`“${B0.intro}”`, B0.name); if (!alive(bid)) return;
   bossTurn(bid);
 }
 
@@ -109,9 +110,10 @@ async function bossTurn(bid) {
   const it = S.deck[S.qi++], L = it.g.locks[it.li];
   S.cur = it; S.v = variantOf(L, it.st); S.phase = "ask";
   const bq = $("#bq"); bq.classList.add("lock"); bq.innerHTML = "";
-  await say(`${B0.name}의 ${S.qi}번째 문제 공격! — ${it.g.n}차시 「${it.g.title}」`, "", 250); if (!alive(bid)) return;
+  await say(`${B0.name}의 ${S.qi}번째 문제 공격! — ${it.g.n}차시 「${it.g.title}」`, "", 500); if (!alive(bid)) return;
   bq.innerHTML = `<span class="qtag">⚔️ ${S.qi}번째 문제 · ${L.icon || "🔒"} ${esc(L.title)}</span><div class="bsrc">${it.g.n}차시 · ${esc(it.g.title)}</div>` + qHTML(S.v, "정답으로 공격! ⚔️");
   bq.classList.remove("lock"); S.phase = "boss"; S.askAt = Date.now();
+  if (innerWidth <= 1000) bq.scrollIntoView({ block: "nearest", behavior: "smooth" });   /* 좁은 화면: 문제가 보이게 */
   bindQ(bq, S.v, judgeBoss);
 }
 
@@ -141,25 +143,25 @@ async function judgeBoss(ok, extra = "", info = {}) {
   saveBoss(false);
   if (ok) {
     const [sk, kind] = R.one(LN.s), fast = Date.now() - S.askAt < 15000;
-    await say(`정답! ${S.pname}의 「${sk}」!`, "", 120); if (!alive(bid)) return;
+    await say(`정답! ${S.pname}의 「${sk}」!`, "", 500); if (!alive(bid)) return;
     P.classList.add("lunge-p"); sfx("zap"); await sleep(220); P.classList.remove("lunge-p");
     await cast(kind, P, E); if (!alive(bid)) return;
     sfx("boom"); E.classList.remove("idle"); E.classList.add("hurt"); dmg(E, "−1", ""); drawGauges();
     await sleep(650); if (!alive(bid)) return;
     E.classList.remove("hurt"); if (S.hp > 0) E.classList.add("idle");
-    if (fast && S.hp > 0) { await say("빠르고 정확한 일격! 보스가 크게 휘청거린다!", "", 150); if (!alive(bid)) return; }
-    await say(`“${reactLine(true, v, info)}”`, B0.name, 150); if (!alive(bid)) return;
+    if (fast && S.hp > 0) { await say("빠르고 정확한 일격! 보스가 크게 휘청거린다!"); if (!alive(bid)) return; }
+    await say(`“${reactLine(true, v, info)}”`, B0.name, 600); if (!alive(bid)) return;
   } else {
-    await say("앗, 틀렸다! 빈틈이 생겼다…", "", 150); if (!alive(bid)) return;
+    await say("앗, 틀렸다! 빈틈이 생겼다…"); if (!alive(bid)) return;
     const [ak, kind] = R.one(BOSS_ATK[B0.n] || [["반격", "hex"]]);
-    await say(`${B0.name}의 「${ak}」!`, "", 120); if (!alive(bid)) return;
+    await say(`${B0.name}의 「${ak}」!`, "", 500); if (!alive(bid)) return;
     E.classList.remove("idle"); E.classList.add("lunge-e"); sfx("roar"); await sleep(240); E.classList.remove("lunge-e");
     await cast(kind, E, P); if (!alive(bid)) return;
     sfx("hurt"); A.classList.remove("shake"); void A.offsetWidth; A.classList.add("shake");
     P.classList.add("hurt"); dmg(P, "에너지 −1", "p"); drawGauges(); E.classList.add("idle");
     await sleep(650); if (!alive(bid)) return;
     P.classList.remove("hurt");
-    await say(`“${reactLine(false, v, info)}”`, B0.name, 150); if (!alive(bid)) return;
+    await say(`“${reactLine(false, v, info)}”`, B0.name, 600); if (!alive(bid)) return;
   }
   showRes(bid, ok, v, extra);
 }
@@ -184,14 +186,14 @@ async function winSeq(bid) {
   E.classList.remove("idle"); E.classList.add("hurt"); sfx("boom"); await sleep(500); if (!alive(bid)) return;
   E.classList.add("faint"); sfx("win");
   await say(`${B0.name}${iga(B0.name)} 쓰러졌다!`); if (!alive(bid)) return;
-  await say(`“${B0.lose}”`, B0.name, 900); if (!alive(bid)) return;
+  await say(`“${B0.lose}”`, B0.name); if (!alive(bid)) return;
   finishBoss();
 }
 async function loseSeq(bid) {
   const P = $("#spP");
   $("#bq").innerHTML = "";
   P.classList.add("faint"); sfx("hurt");
-  await say("에너지가 바닥났다… 일단 물러나서 금고를 복습하자!", "", 900); if (!alive(bid)) return;
+  await say("에너지가 바닥났다… 일단 물러나서 금고를 복습하자!"); if (!alive(bid)) return;
   loseBoss();
 }
 
@@ -204,13 +206,26 @@ function drawGauges() {
   $("#nE").textContent = `${Math.max(0, S.hp)}/${B0.hp}`; $("#nP").textContent = `${Math.max(0, S.lives)}/${B0.lives}`;
   $("#cnt").textContent = `맞힘 ${S.right} · 틀림 ${S.wrong}`;
 }
-/* 메시지 상자에 한 글자씩 */
-async function say(text, who = "", hold = 450) {
+/* 메시지 상자에 한 글자씩 — 읽을 수 있게 천천히 쓰고, 글 길이만큼 기다린다.
+   대사 상자를 누르거나 Space·Enter를 누르면 바로 다 보이고, 한 번 더 누르면 다음으로 넘어간다. */
+let sayTap = null;
+const SAY_CHAR = 45, SAY_BASE = 1100, SAY_PER = 55, SAY_MAX = 4500;
+async function say(text, who = "", hold = null) {
   const bid = S && S.bid, el = $("#msg"); if (!el) return;
-  el.innerHTML = `${who ? `<span class="who">${esc(who)}:</span>` : ""}<span id="mt"></span><span class="caret">▼</span>`;
-  const mt = $("#mt"); let i = 0;
-  while (i < text.length) { if (!alive(bid)) return; i = Math.min(text.length, i + 2); mt.textContent = text.slice(0, i); await sleep(28); }
-  await sleep(hold);
+  el.innerHTML = `${who ? `<span class="who">${esc(who)}:</span>` : ""}<span id="mt"></span><span class="caret wait">▼</span>`;
+  const mt = $("#mt"); let i = 0, skip = false;
+  sayTap = () => { skip = true; };
+  while (i < text.length) { if (!alive(bid)) return; i = skip ? text.length : i + 1; mt.textContent = text.slice(0, i); if (i < text.length) await sleep(SAY_CHAR); }
+  const c = el.querySelector(".caret"); if (c) c.classList.remove("wait");
+  const wait = hold == null ? Math.min(SAY_MAX, SAY_BASE + text.length * SAY_PER) : hold;
+  await new Promise(res => { const t = setTimeout(res, wait); sayTap = () => { clearTimeout(t); res(); }; });
+  sayTap = null;
+}
+function bindSayKeys() {
+  $("#msg").onclick = () => { if (sayTap) sayTap(); };
+  const kh = e => { if ((e.key === " " || e.key === "Enter") && sayTap && !/INPUT|TEXTAREA|BUTTON/.test(document.activeElement.tagName)) { e.preventDefault(); sayTap(); } };
+  document.addEventListener("keydown", kh);
+  const pc = cleanup; cleanup = () => { document.removeEventListener("keydown", kh); sayTap = null; pc(); };
 }
 
 /* ---------- 효과 ---------- */
