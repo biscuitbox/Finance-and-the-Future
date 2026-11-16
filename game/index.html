@@ -212,12 +212,16 @@ table.calc td:first-child{text-align:left;font-weight:700}
 .badge{display:inline-block;background:var(--amberdk);color:#fff;border-radius:8px;padding:3px 10px;font-size:13px;font-weight:700;margin-left:8px;vertical-align:middle}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#222;color:#fff;padding:12px 20px;border-radius:12px;z-index:99;font-size:15px}
 </style>
+<link rel="stylesheet" href="map.css">
+<link rel="stylesheet" href="battle.css">
 </head>
 <body>
 <div id="app"></div>
 <script src="firebase-config.js"></script>
 <script src="chapters.js"></script>
 <script src="db.js"></script>
+<script src="map.js"></script>
+<script src="battle.js"></script>
 <script>
 "use strict";
 /* ============ 도우미 ============ */
@@ -267,7 +271,7 @@ function dexPut(n, v) { const d = dexLocal(); d[n] = { ...(d[n] || {}), ...v }; 
 /* ============ 화면 전환 ============ */
 let cleanup = () => {};
 function route() {
-  cleanup(); cleanup = () => {};
+  cleanup(); cleanup = () => {}; HUBV++;
   const h = location.hash.slice(1);
   const m = me();
   if (!m || h === "join") return viewJoin();
@@ -338,50 +342,29 @@ async function syncDex() {
     for (const r of recs) if (r.status === "cleared" && String(r.num) === DB.pad(m.num)) dexPut(r.ch, { stars: r.stars, firstOk: r.firstOk, at: r.clearedAt });
   } catch (e) {}
 }
+let HUBV = 0;
 function viewHub(tab) {
   const m = me();
-  $("#app").innerHTML = topbar() + `<div class="wrap"><div class="hubhead"><div><h2>${tab === "dex" ? "내 금융 도감" : "금고 지도"}</h2>
-    <p>${tab === "dex" ? "금고를 열 때마다 낱말 카드를 하나씩 모아요." : "차시마다 금고가 하나씩 있어요. 수업이 끝나면 그 차시 금고에 도전하세요."}</p></div>
-    <div class="tabs"><button class="tab ${tab === "map" ? "on" : ""}" id="tmap">🗺️ 금고 지도</button><button class="tab ${tab === "dex" ? "on" : ""}" id="tdex">📒 내 도감</button></div></div>
+  $("#app").innerHTML = topbar() + `<div class="wrap"><div class="hubhead"><div><h2>${tab === "dex" ? "내 금융 도감" : "모험 지도"}</h2>
+    <p>${tab === "dex" ? "금고를 열 때마다 낱말 카드를 하나씩 모아요." : "세 지역을 지나며 차시 금고를 열고, 지역 끝의 보스를 물리쳐요. 수업이 끝나면 그 차시 금고에 도전하세요."}</p></div>
+    <div class="tabs"><button class="tab ${tab === "map" ? "on" : ""}" id="tmap">🗺️ 모험 지도</button><button class="tab ${tab === "dex" ? "on" : ""}" id="tdex">📒 내 도감</button></div></div>
     <div id="hubbody"></div><p style="text-align:center;margin-top:26px"><a href="#join" style="color:#9fc3bd;font-size:14px">반·번호 바꾸기</a></p></div>`;
   bindTop();
   $("#tmap").onclick = () => location.hash = "";
   $("#tdex").onclick = () => location.hash = "dex";
-  const draw = () => tab === "dex" ? drawDex() : drawMap();
+  mapScrolled = false; mapSel = null;
+  const vid = ++HUBV;   /* 화면을 바꾼 뒤 늦게 끝난 그리기가 덮어쓰지 않게 */
+  const draw = () => { if (vid !== HUBV || !$("#hubbody")) return; return tab === "dex" ? drawDex(vid) : drawMap(); };
   draw();
   syncDex().then(draw);
 }
-function drawMap() {
-  const dex = dexLocal();
-  $("#hubbody").innerHTML = [1, 2, 3].map(u => {
-    const chs = CHAPTERS.filter(c => c.u === u);
-    const got = chs.filter(c => dex[c.n]).length;
-    return `<div class="unit"><h3>${esc(UNITS[u])} <small>금고 ${got} / ${chs.length}</small></h3><div class="tiles">` +
-      chs.map(c => {
-        const d = dex[c.n], ready = READY.includes(c.n);
-        if (d) return `<button class="tile clear" data-ch="${c.n}"><span class="no">${c.n}차시</span><span class="tt">${esc(c.t)}</span><span class="st stars">${"★".repeat(d.stars || 1)}${"☆".repeat(3 - (d.stars || 1))}</span></button>`;
-        if (ready) return `<button class="tile ready" data-ch="${c.n}"><span class="lockic">🔒</span><span class="no">${c.n}차시</span><span class="tt">${esc(c.t)}</span><span class="st">도전하기 ▶</span></button>`;
-        return `<div class="tile"><span class="lockic">⏳</span><span class="no">${c.n}차시</span><span class="tt">${esc(c.t)}</span><span class="st">준비 중</span></div>`;
-      }).join("") +
-      (SPECIAL[u] || []).map(s => s.kind === "boss" && s.ready ? bossTile(s, u, dex) : `<div class="tile special ${s.ready ? "ready" : ""}"><span class="lockic">${s.kind === "boss" ? "👾" : "🎒"}</span><span class="no">${s.kind === "boss" ? "단원 보스전" : "스토리 게임"}</span><span class="tt">${esc(s.t)}</span><span class="st">${s.ready ? "도전하기 ▶" : "준비 중"}</span></div>`).join("") +
-      `</div></div>`;
-  }).join("");
-  document.querySelectorAll(".tile[data-ch]").forEach(b => b.onclick = () => location.hash = "ch" + b.dataset.ch);
-  document.querySelectorAll(".tile[data-boss]").forEach(b => b.onclick = () => location.hash = "boss" + b.dataset.boss);
-}
-function bossTile(s, u, dex) {
-  const B0 = BOSSES.find(b => b.n === s.n), d = dex[s.n];
-  const got = CHAPTERS.filter(c => c.u === u && dex[c.n]).length;
-  if (d) return `<button class="tile clear boss" data-boss="${u}"><span class="no">단원 보스전 · 격파!</span><span class="tt">${B0.icon} ${esc(B0.name)}</span><span class="st stars">${"★".repeat(d.stars || 1)}${"☆".repeat(3 - (d.stars || 1))}</span></button>`;
-  if (got >= B0.need) return `<button class="tile boss ready" data-boss="${u}"><span class="lockic">${B0.icon}</span><span class="no">단원 보스전</span><span class="tt">${esc(B0.name)} 등장!</span><span class="st">도전하기 ▶</span></button>`;
-  return `<button class="tile special boss" data-boss="${u}"><span class="lockic">${B0.icon}</span><span class="no">단원 보스전</span><span class="tt">${esc(B0.t)}</span><span class="prog"><i style="width:${Math.round(got / B0.need * 100)}%"></i></span><span class="st">금고 ${got} / ${B0.need}개를 열면 도전</span></button>`;
-}
-async function drawDex() {
+async function drawDex(vid) {
   const dex = dexLocal();
   const n = Object.keys(dex).filter(k => +k <= 34).length;
   // 다른 기기에서 통과해 카드 글이 없는 경우 데이터 불러오기 (보스 카드는 BOSSES에서)
   Object.keys(dex).filter(k => +k > 34 && !dex[k].term).forEach(k => { const B0 = BOSSES.find(b => b.n === +k); if (B0) dexPut(k, B0.card); });
   await Promise.all(Object.keys(dex).filter(k => +k <= 34 && !dex[k].term).map(k => loadGame(+k).then(g => dexPut(k, g.card)).catch(() => {})));
+  if (vid !== HUBV || !$("#hubbody")) return;
   const d2 = dexLocal();
   $("#hubbody").innerHTML = `<p class="dexsum">모은 카드 <b style="color:#ffd27a;font-size:22px">${n}</b> / ${CHAPTERS.length}장 · ★★★ 카드는 금빛 테두리</p><div class="dexgrid">` +
     CHAPTERS.map(c => {
@@ -402,7 +385,7 @@ async function viewGame(n) {
   const m = me();
   $("#app").innerHTML = topbar() + `<div class="wrap" style="color:#fff">금고를 불러오는 중…</div>`; bindTop();
   let g;
-  try { g = await loadGame(n); } catch (e) { $("#app").innerHTML = topbar() + `<div class="wrap" style="color:#fff">${n}차시 금고는 아직 준비 중이에요. <a href="#" style="color:#ffd27a">금고 지도로</a></div>`; return; }
+  try { g = await loadGame(n); } catch (e) { $("#app").innerHTML = topbar() + `<div class="wrap" style="color:#fff">${n}차시 금고는 아직 준비 중이에요. <a href="#" style="color:#ffd27a">모험 지도로</a></div>`; return; }
   let rec = null, cls = null, offline = false;
   try { [cls, rec] = await Promise.all([DB.getClass(m.code), DB.getRecord(m.code, n, m.num)]); } catch (e) { offline = true; }
   if (rec && rec._foreign) return viewBlocked(g, "foreign");
@@ -421,7 +404,7 @@ async function viewGame(n) {
     ${closed && !cleared ? `<div class="demo">선생님이 지금은 기록을 닫아 두었어요. <b>연습</b>으로만 할 수 있어요.</div>` : ""}
     ${offline ? `<div class="demo">인터넷 연결이 불안정해요. 게임은 할 수 있고, 연결되면 기록을 다시 보내요.</div>` : ""}
     ${rec && rec.status === "playing" && !cleared ? `<div class="demo">하다가 멈춘 기록이 있어요. 처음부터 다시 시작하지만, <b>이미 틀렸던 자물쇠</b>는 '한 번에 맞힘'으로 바뀌지 않아요.</div>` : ""}
-    <div class="act"><button class="btn big amber" id="start">${cleared || closed ? "연습으로 도전" : "금고 도전 시작"} ▶</button><a class="btn big ghost" style="color:var(--pine);text-decoration:none" href="#">금고 지도</a></div></div>`;
+    <div class="act"><button class="btn big amber" id="start">${cleared || closed ? "연습으로 도전" : "금고 도전 시작"} ▶</button><a class="btn big ghost" style="color:var(--pine);text-decoration:none" href="#">모험 지도</a></div></div>`;
   bindTop();
   $("#start").onclick = () => startGame(g, rec, cleared || closed);
 }
@@ -429,7 +412,7 @@ function viewBlocked(g, why) {
   const t = why === "foreign"
     ? `이 번호(${+me().num}번)는 <b>다른 기기</b>에서 이미 ${g.n > 34 ? esc(chTitle(g.n)) + "을" : g.n + "차시 금고를"} 시작했어요.<br>내 번호가 맞는지 확인하고, 맞다면 선생님께 말씀드려 기록을 풀어 달라고 하세요.`
     : `반 코드를 찾을 수 없어요. 선생님께 반 코드를 다시 확인하세요.`;
-  $("#app").innerHTML = topbar() + `<div class="intro"><h1>잠깐! ✋</h1><p style="font-size:19px;line-height:1.7">${t}</p><div class="act"><a class="btn" href="#join" style="text-decoration:none">반·번호 확인하기</a><a class="btn ghost" style="color:var(--pine);text-decoration:none" href="#">금고 지도</a></div></div>`;
+  $("#app").innerHTML = topbar() + `<div class="intro"><h1>잠깐! ✋</h1><p style="font-size:19px;line-height:1.7">${t}</p><div class="act"><a class="btn" href="#join" style="text-decoration:none">반·번호 확인하기</a><a class="btn ghost" style="color:var(--pine);text-decoration:none" href="#">모험 지도</a></div></div>`;
   bindTop();
 }
 
@@ -516,24 +499,24 @@ function qHTML(v, subLabel) {
   return `<div class="qtext">${esc(v.q)}</div>${tbl}${body}`;
 }
 function bindQ(qp, v, cb) {
-  if (v.type === "choice") qp.querySelectorAll(".opt").forEach(b => b.onclick = () => cb(v.opts[+b.dataset.k].ok));
+  if (v.type === "choice") qp.querySelectorAll(".opt").forEach(b => b.onclick = () => cb(v.opts[+b.dataset.k].ok, "", { pick: v.opts[+b.dataset.k].t }));
   if (v.type === "order") {
     const seq = [];
     const upd = () => { qp.querySelectorAll(".ordi").forEach(b => { const p = seq.indexOf(+b.dataset.k); b.classList.toggle("on", p >= 0); b.querySelector(".k").textContent = p >= 0 ? p + 1 : ""; }); $("#sub").disabled = seq.length !== v.items.length; };
     qp.querySelectorAll(".ordi").forEach(b => b.onclick = () => { const k = +b.dataset.k, p = seq.indexOf(k); if (p >= 0) seq.splice(p, 1); else seq.push(k); beep("tick"); upd(); });
-    $("#sub").onclick = () => cb(seq.every((k, p) => v.shuffled[k].j === p));
+    $("#sub").onclick = () => cb(seq.every((k, p) => v.shuffled[k].j === p), "", {});
   }
   if (v.type === "sort") {
     const pick = v.items.map(() => null);
     qp.querySelectorAll(".seg button").forEach(b => b.onclick = () => { const k = +b.dataset.k, j = +b.dataset.j; pick[k] = j;
       b.parentNode.querySelectorAll("button").forEach(x => x.className = +x.dataset.j === j ? "on" + j : ""); beep("tick"); $("#sub").disabled = pick.includes(null); });
-    $("#sub").onclick = () => { const wrong = v.items.filter((o, k) => o.a !== pick[k]).length; cb(wrong === 0, wrong ? `${wrong}개를 잘못 분류했어요.` : ""); };
+    $("#sub").onclick = () => { const wrong = v.items.filter((o, k) => o.a !== pick[k]).length; cb(wrong === 0, wrong ? `${wrong}개를 잘못 분류했어요.` : "", { wrong }); };
   }
   if (v.type === "number") {
     const inp = $("#numin");
     inp.oninput = () => $("#sub").disabled = !inp.value.trim();
     inp.onkeydown = e => { if (e.key === "Enter" && inp.value.trim()) $("#sub").click(); };
-    $("#sub").onclick = () => { const x = parseNum(inp.value); if (x === null) { toast("숫자로 써 주세요."); return; } cb(x === v.answer); };
+    $("#sub").onclick = () => { const x = parseNum(inp.value); if (x === null) { toast("숫자로 써 주세요."); return; } cb(x === v.answer, "", { pick: x }); };
     setTimeout(() => inp.focus(), 50);
   }
 }
@@ -641,7 +624,7 @@ function finish() {
     <div class="stats"><div class="stat"><b>${firstOk} / ${S.locks.length}</b><span>한 번에 연 자물쇠</span></div><div class="stat"><b>${wrong}번</b><span>경보 (오답)</span></div><div class="stat"><b>${mmss(sec)}</b><span>걸린 시간</span></div></div>
     <div class="flip" id="flip"><div class="in"><div class="f">❓</div><div class="b s${stars}"><span class="cn">${S.g.n}차시 도감 카드</span><span class="ci">${c.icon}</span><span class="ct">${esc(c.term)}</span><span class="cl">${esc(c.line)}</span><span style="color:var(--amber);font-size:24px">${"★".repeat(stars)}</span></div></div></div>
     <p class="saved" id="savedmsg">${S.practice ? "연습이라 기록은 바뀌지 않았어요." : "기록을 보내는 중…"}</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a class="btn big amber" href="#dex" style="text-decoration:none">📒 내 도감 보기</a><a class="btn big" href="#" style="text-decoration:none">🗺️ 금고 지도</a></div></div>`;
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a class="btn big amber" href="#dex" style="text-decoration:none">📒 내 도감 보기</a><a class="btn big" href="#" style="text-decoration:none">🗺️ 모험 지도</a></div></div>`;
   bindTop();
   setTimeout(() => { $("#flip") && $("#flip").classList.add("go"); beep("open"); }, 700);
 }
@@ -688,151 +671,6 @@ function drawSave() {
 }
 window.addEventListener("beforeunload", e => { if (S && S.pending) { e.preventDefault(); e.returnValue = ""; } });
 
-
-/* ============ 단원 보스전 ============
-   통과한 차시 금고의 자물쇠 문제를 섞어 냄. 맞히면 보스 체력 −1, 틀리면 목숨 −1.
-   체력이 0이면 승리(보스 카드), 목숨이 0이면 패배 → 처음부터 다시. 기록은 차시 번호 35~37 */
-async function viewBoss(u) {
-  const B0 = BOSSES.find(b => b.u === u); if (!B0) { location.hash = ""; return; }
-  const m = me();
-  $("#app").innerHTML = topbar() + `<div class="wrap" style="color:#fff">보스를 부르는 중…</div>`; bindTop();
-  await syncDex();
-  const dex = dexLocal();
-  const got = CHAPTERS.filter(c => c.u === u && dex[c.n]).map(c => c.n);
-  if (got.length < B0.need) {
-    $("#app").innerHTML = topbar() + `<div class="intro"><span class="qtag">${esc(B0.t)}</span><h1>${B0.icon} 아직 잠겨 있어요</h1>
-      <div class="story">${esc(UNITS[u])} 금고를 <b>${B0.need}개 이상</b> 열면 ${esc(B0.name)}에게 도전할 수 있어요. 지금 <b>${got.length}개</b> 열었어요.</div>
-      <div class="act"><a class="btn big" href="#" style="text-decoration:none">금고 지도로</a></div></div>`;
-    bindTop(); return;
-  }
-  let rec = null, cls = null, offline = false;
-  try { [cls, rec] = await Promise.all([DB.getClass(m.code), DB.getRecord(m.code, B0.n, m.num)]); } catch (e) { offline = true; }
-  if (rec && rec._foreign) return viewBlocked({ n: B0.n }, "foreign");
-  if (cls === null && !offline) return viewBlocked({ n: B0.n }, "noclass");
-  const closed = cls && cls.open === false, cleared = rec && rec.status === "cleared";
-  if (cleared) dexPut(B0.n, { ...B0.card, stars: rec.stars });
-  const games = (await Promise.all(got.map(n => loadGame(n).catch(() => null)))).filter(Boolean);
-  $("#app").innerHTML = topbar() + `<div class="intro">
-    <span class="qtag">${esc(B0.t)}</span><h1>${B0.icon} ${esc(B0.name)} 등장!</h1>
-    <div class="story">“${esc(B0.intro)}”</div>
-    <ul><li>문제를 맞힐 때마다 보스 체력이 1씩 줄어요. <b>${B0.hp}문제</b>를 맞히면 승리!</li>
-      <li>목숨은 <b>❤️ ${B0.lives}개</b>. 틀릴 때마다 하나씩 잃고, 모두 잃으면 처음부터 다시 도전해요.</li>
-      <li>내가 연 금고 <b>${games.length}개</b>(${got.map(n => n + "차시").join(", ")})에서 문제가 섞여 나와요.</li>
-      <li>별: 한 번도 안 틀리면 ★★★ · 1번 ★★ · 2번 ★. 이기면 <b>보스 카드</b>를 받아요.</li></ul>
-    ${cleared ? `<div class="demo">이미 물리친 보스예요 (${"★".repeat(rec.stars || 1)}). 다시 하면 <b>연습</b>이라 기록은 바뀌지 않아요.</div>` : ""}
-    ${closed && !cleared ? `<div class="demo">선생님이 지금은 기록을 닫아 두었어요. <b>연습</b>으로만 할 수 있어요.</div>` : ""}
-    ${offline ? `<div class="demo">인터넷 연결이 불안정해요. 게임은 할 수 있고, 연결되면 기록을 다시 보내요.</div>` : ""}
-    <div class="act"><button class="btn big amber" id="start">${cleared || closed ? "연습으로 도전" : "보스에게 도전"} ▶</button><a class="btn big ghost" style="color:var(--pine);text-decoration:none" href="#">금고 지도</a></div></div>`;
-  bindTop();
-  $("#start").onclick = () => startBoss(B0, games, rec, cleared || closed);
-}
-/* 차시를 돌아가며 자물쇠를 하나씩 뽑아 문제 순서를 만듦 (같은 차시가 몰리지 않게) */
-/* 받침에 따라 을/를 */
-const eul = w => { const c = w.charCodeAt(w.length - 1) - 0xAC00; return c >= 0 && c <= 11171 && c % 28 ? "을" : "를"; };
-function bossDeck(games) {
-  const lists = R.shuffle(games).map(g => R.shuffle(g.locks.map((_, i) => ({ g, li: i, st: { used: [] } }))));
-  const deck = [];
-  for (let r = 0; lists.some(l => l[r]); r++) lists.forEach(l => { if (l[r]) deck.push(l[r]); });
-  return deck;
-}
-function startBoss(B0, games, rec, practice) {
-  const old = S && S.boss === B0 ? S : null;
-  S = {
-    g: { n: B0.n, title: B0.t }, boss: B0, games, practice, phase: "boss",
-    hp: B0.hp, lives: B0.lives, right: 0, wrong: 0, miss: [], qi: 0,
-    allMiss: practice ? [] : old ? old.allMiss.slice() : (rec && rec.status === "playing" ? (rec.miss || []).slice() : []), deck: bossDeck(games), v: null, cur: null,
-    startedAt: Date.now(), firstStart: (rec && rec.startedAt) || (old && old.firstStart) || Date.now(),
-    restarts: practice ? 0 : old ? old.restarts + 1 : (rec && rec.status === "playing" ? (rec.restarts || 0) + 1 : (rec && rec.restarts) || 0),
-    prevWrong: practice ? 0 : old ? old.prevWrong + old.wrong : (rec && rec.status === "playing" ? rec.wrong || 0 : 0),
-    saveState: practice ? "practice" : "idle", pending: null, line: B0.intro
-  };
-  $("#app").innerHTML = topbar(`<span class="pill">${esc(B0.t)}${practice ? '<span class="badge">연습</span>' : ""}</span><span class="pill">⏱ <span id="elapsed">0분 0초</span></span><span class="pill" id="sv"></span>`) +
-    `<div class="game"><div class="vaultpane bosspane"><h3>${esc(B0.t)} · ${esc(B0.name)}</h3>
-      <div class="bossface" id="bf">${B0.icon}</div><div class="bubble" id="bb"></div>
-      <div class="hplabel"><span>보스 체력</span><span id="hpn"></span></div><div class="hpbar" id="hp"></div>
-      <div class="lives" id="lv"></div><div style="font-size:15px;color:#f2d6d6" id="cnt"></div></div>
-      <div class="qpane" id="qp"></div></div>`;
-  bindTop(); drawBoss(); drawSave();
-  nextBossQ();
-  saveBoss(false);
-  const tick = setInterval(() => { const e = $("#elapsed"); if (e) e.textContent = mmss(Math.floor((Date.now() - S.startedAt) / 1000)); }, 1000);
-  cleanup = () => clearInterval(tick);
-}
-function drawBoss() {
-  const B0 = S.boss;
-  $("#hp").innerHTML = Array.from({ length: B0.hp }, (_, i) => `<i class="${i < S.hp ? "" : "off"}"></i>`).join("");
-  $("#hpn").textContent = `${S.hp} / ${B0.hp}`;
-  $("#lv").innerHTML = "❤️".repeat(S.lives) + "🤍".repeat(B0.lives - S.lives);
-  $("#cnt").textContent = `맞힘 ${S.right} · 틀림 ${S.wrong}`;
-  $("#bb").textContent = S.line;
-}
-function nextBossQ() {
-  S.phase = "boss";
-  if (S.qi >= S.deck.length) { S.deck = S.deck.concat(bossDeck(S.games)); }
-  const it = S.deck[S.qi++];
-  S.cur = it; S.v = variantOf(it.g.locks[it.li], it.st);
-  const qp = $("#qp");
-  qp.innerHTML = `<span class="qtag">⚔️ ${S.qi}번째 공격 · ${it.g.locks[it.li].icon || "🔒"} ${esc(it.g.locks[it.li].title)}</span><div class="bsrc">${it.g.n}차시 · ${esc(it.g.title)}</div>` + qHTML(S.v, "공격하기");
-  bindQ(qp, S.v, judgeBoss);
-}
-function judgeBoss(ok, extra = "") {
-  if (S.phase !== "boss") return;
-  S.phase = "result";
-  const B0 = S.boss, v = S.v, qp = $("#qp"), bf = $("#bf");
-  if (ok) { S.hp--; S.right++; S.line = R.one(B0.hit); beep("ok"); bf.classList.remove("hit"); void bf.offsetWidth; bf.classList.add("hit"); }
-  else { S.lives--; S.wrong++; S.miss.push(S.cur.g.n); S.allMiss.push(S.cur.g.n); S.line = R.one(B0.taunt); beep("bad"); bf.classList.add("atk"); setTimeout(() => bf.classList.remove("atk"), 600); qp.classList.remove("shake"); void qp.offsetWidth; qp.classList.add("shake"); }
-  drawBoss(); saveBoss(false);
-  const win = S.hp <= 0, lose = S.lives <= 0;
-  const ov = document.createElement("div"); ov.className = "ov " + (ok ? "good" : "bad");
-  ov.innerHTML = ok
-    ? `<h2 style="color:var(--teal)">명중! 💥 보스 체력 −1</h2><div class="exp">💡 ${esc(v.explain || "")}</div><button class="btn big amber" id="nx">${win ? "보스를 물리쳤어요! ▶" : "다음 공격 ▶"}</button>`
-    : `<h2>보스의 반격! 💔 목숨 −1</h2>${extra ? `<div style="font-size:19px">${esc(extra)}</div>` : ""}
-       <div class="hint"><b>힌트</b> ${esc(v.hint || "")}</div><div class="hint"><b>풀이</b> ${esc(v.explain || "")}</div>
-       <button class="btn big" id="nx" disabled style="background:#fff;color:var(--brick)">${lose ? "결과 보기" : "다음 문제"} (<span id="wt">3</span>)</button>`;
-  qp.appendChild(ov);
-  const go = () => { if (win) return finishBoss(); if (lose) return loseBoss(); nextBossQ(); };
-  $("#nx").onclick = go;
-  if (ok) $("#nx").focus();
-  else { let t = 3; const iv = setInterval(() => { t--; const w = $("#wt"); if (w) w.textContent = t; if (t <= 0) { clearInterval(iv); const b = $("#nx"); if (b) { b.disabled = false; b.textContent = lose ? "결과 보기 ▶" : "다음 문제 ▶"; b.focus(); } } }, 1000);
-    const pc = cleanup; cleanup = () => { clearInterval(iv); pc(); }; }
-}
-function loseBoss() {
-  S.phase = "lost"; cleanup();
-  const B0 = S.boss;
-  $("#app").innerHTML = topbar() + `<div class="clear"><div style="font-size:120px">${B0.icon}</div>
-    <h1>앗, 목숨을 모두 잃었어요</h1><p style="font-size:20px;color:#f2d6d6">“${esc(R.one(B0.taunt))} 다시 와 봐!”</p>
-    <div class="stats"><div class="stat"><b>${S.right} / ${B0.hp}</b><span>맞힌 문제</span></div><div class="stat"><b>${B0.hp - S.right}</b><span>남은 보스 체력</span></div></div>
-    <p style="color:#b9d3cf">틀린 문제의 차시: ${[...new Set(S.miss)].sort((a, b) => a - b).map(n => n + "차시").join(", ")} — 그 금고를 다시 풀어 보면 도움이 돼요.</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><button class="btn big amber" id="again">다시 도전 ▶</button><a class="btn big" href="#" style="text-decoration:none">🗺️ 금고 지도</a></div></div>`;
-  bindTop();
-  $("#again").onclick = () => startBoss(B0, S.games, null, S.practice);
-}
-function finishBoss() {
-  S.phase = "done";
-  const B0 = S.boss, stars = S.wrong === 0 ? 3 : S.wrong === 1 ? 2 : 1, sec = Math.floor((Date.now() - S.startedAt) / 1000);
-  S.result = { stars, sec };
-  if (!S.practice) { dexPut(B0.n, { ...B0.card, stars, at: Date.now() }); saveBoss(true); }
-  cleanup();
-  const c = B0.card;
-  $("#app").innerHTML = topbar() + `<div class="clear">
-    <div style="font-size:18px;color:#b9d3cf">${esc(B0.t)}${S.practice ? '<span class="badge">연습</span>' : ""}</div>
-    <div class="bossface dead" style="margin:10px auto 0">${B0.icon}</div>
-    <h1>${esc(B0.name)}${eul(B0.name)} 물리쳤어요! 🎉</h1><p style="font-size:19px;color:#f2d6d6">“${esc(B0.lose)}”</p><div class="bigstars">${starTxt(stars)}</div>
-    <div class="stats"><div class="stat"><b>${S.right}</b><span>맞힌 문제</span></div><div class="stat"><b>${S.wrong}번</b><span>틀림</span></div><div class="stat"><b>${mmss(sec)}</b><span>걸린 시간</span></div></div>
-    <div class="flip" id="flip"><div class="in"><div class="f">${B0.icon}</div><div class="b s${stars}" style="border-color:#8C3A3A"><span class="cn">보스 카드</span><span class="ci">${c.icon}</span><span class="ct">${esc(c.term)}</span><span class="cl">${esc(c.line)}</span><span style="color:var(--amber);font-size:24px">${"★".repeat(stars)}</span></div></div></div>
-    <p class="saved" id="savedmsg">${S.practice ? "연습이라 기록은 바뀌지 않았어요." : "기록을 보내는 중…"}</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a class="btn big amber" href="#dex" style="text-decoration:none">📒 내 도감 보기</a><a class="btn big" href="#" style="text-decoration:none">🗺️ 금고 지도</a></div></div>`;
-  bindTop(); drawSave();
-  setTimeout(() => { $("#flip") && $("#flip").classList.add("go"); beep("open"); }, 700);
-}
-function saveBoss(final) {
-  if (S.practice) return;
-  if (S.pending && S.pending.status === "cleared" && !final) return;
-  const p = { status: final ? "cleared" : "playing", locks: [], firstOk: S.right, wrong: S.prevWrong + S.wrong, miss: S.allMiss.slice(-30),
-    restarts: S.restarts, startedAt: S.firstStart };
-  if (final) Object.assign(p, { stars: S.result.stars, clearedAt: Date.now(), sec: S.result.sec });
-  S.pending = p; flush();
-}
 
 /* ============ 시작 ============ */
 DB.init().then(route).catch(() => { $("#app").innerHTML = `<div class="join"><div class="joincard"><h1>연결 오류</h1><p>잠시 뒤 다시 열어 주세요.</p></div></div>`; });
