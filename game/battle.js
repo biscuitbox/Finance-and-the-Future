@@ -122,12 +122,12 @@ async function bossTurn(bid) {
 function reactLine(ok, v, info) {
   const q = s => s.length > 22 ? s.slice(0, 21) + "…" : s, u = v.unit || "";
   if (ok) {
-    if (v.type === "choice") { const t = v.opts.find(o => o.ok).t; return R.one([`으윽, '${q(t)}' — 정답을 알고 있었구나!`, `'${q(t)}'${eul(q(t))} 맞히다니… 크으윽!`]); }
+    if (v.type === "choice") { const t = v.opts.find(o => o.ok).t; return R.one([`으윽, 「${q(t)}」 — 정답을 알고 있었구나!`, `「${q(t)}」${eul(q(t))} 맞히다니… 크으윽!`]); }
     if (v.type === "number") return R.one([`${fmt(v.answer)}${u}?! 계산까지 정확하다니!`, `${fmt(v.answer)}${u}… 계산기도 없이 맞혔다고?!`]);
     if (v.type === "order") return R.one(["순서를 하나도 안 틀리다니… 크윽!", "차례차례 정확하게… 내 작전이 무너진다!"]);
     return R.one([`${v.items.length}개를 전부 바르게 나누다니!`, "하나도 안 헷갈리고 다 나눴다고?! 으악!"]);
   }
-  if (v.type === "choice") return R.one([`헤헤, '${q(info.pick || "")}'? 땡! 그건 아니지롱~`, `'${q(info.pick || "")}'${eul(q(info.pick || "") || "답")} 골랐어? 걸려들었다!`]);
+  if (v.type === "choice") return R.one([`헤헤, 「${q(info.pick || "")}」? 땡! 그건 아니지롱~`, `「${q(info.pick || "")}」${eul(q(info.pick || "") || "답")} 골랐어? 걸려들었다!`]);
   if (v.type === "number") return R.one([`${fmt(info.pick)}${u}? 계산이 틀렸지롱~`, `${fmt(info.pick)}${u}… 아깝지만 땡! 다시 계산해 봐~`]);
   if (v.type === "order") return R.one(["순서가 뒤죽박죽이야~ 헤헤!", "앞뒤가 바뀌었지롱~ 처음부터 차근차근 생각해 봐!"]);
   return R.one([`${info.wrong || "몇"}개나 잘못 나눴지롱~`, `헷갈렸지? ${info.wrong || "몇"}개가 틀렸어~`]);
@@ -212,10 +212,16 @@ let sayTap = null;
 const SAY_CHAR = 45, SAY_BASE = 1100, SAY_PER = 55, SAY_MAX = 4500;
 async function say(text, who = "", hold = null) {
   const bid = S && S.bid, el = $("#msg"); if (!el) return;
-  el.innerHTML = `${who ? `<span class="who">${esc(who)}:</span>` : ""}<span id="mt"></span><span class="caret wait">▼</span>`;
-  const mt = $("#mt"); let i = 0, skip = false;
+  /* 글 전체를 먼저 자리 잡아 두고(보이지 않게) 한 글자씩 드러낸다 → 두 줄 대사도 처음부터 두 줄 자리에서 나와 줄바꿈 때 글이 튀지 않는다 */
+  const chars = Array.from(text);
+  el.innerHTML = `${who ? `<span class="who">${esc(who)}:</span>` : ""}<span class="mtext" id="mt">${chars.map(c => `<span class="ch">${esc(c)}</span>`).join("")}</span><span class="caret wait">▼</span>`;
+  const cs = $("#mt").children; let i = 0, skip = false;
   sayTap = () => { skip = true; };
-  while (i < text.length) { if (!alive(bid)) return; i = skip ? text.length : i + 1; mt.textContent = text.slice(0, i); if (i < text.length) await sleep(SAY_CHAR); }
+  while (i < cs.length) {
+    if (!alive(bid)) return;
+    if (skip) { for (; i < cs.length; i++) cs[i].classList.add("on"); break; }
+    cs[i++].classList.add("on"); if (i < cs.length) await sleep(SAY_CHAR);
+  }
   const c = el.querySelector(".caret"); if (c) c.classList.remove("wait");
   const wait = hold == null ? Math.min(SAY_MAX, SAY_BASE + text.length * SAY_PER) : hold;
   await new Promise(res => { const t = setTimeout(res, wait); sayTap = () => { clearTimeout(t); res(); }; });
