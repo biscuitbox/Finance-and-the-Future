@@ -15,8 +15,8 @@ input,textarea,select{font:inherit}
 .hide{display:none!important}
 #app{min-height:100%}
 /* 공통 상단 */
-.top{display:flex;align-items:center;gap:14px;padding:12px 22px;background:var(--pine);color:#fff;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.25)}
-.top .logo{font-weight:900;font-size:20px;letter-spacing:-.5px}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:12px 22px;background:var(--pine);color:#fff;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.top .logo{font-weight:900;font-size:20px;letter-spacing:-.5px;white-space:nowrap}
 .top .logo b{color:var(--amber)}
 .top .sp{flex:1}
 .pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border-radius:99px;padding:6px 14px;font-size:15px;white-space:nowrap}
@@ -55,9 +55,9 @@ input,textarea,select{font:inherit}
 .unit h3{margin:0 0 14px;color:var(--pine);font-size:19px;display:flex;align-items:center;gap:10px}
 .unit h3 small{font-weight:400;color:var(--grey);font-size:14px}
 .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-.tile{position:relative;border:0;text-align:left;border-radius:14px;padding:14px 14px 12px;min-height:108px;background:#eef2f1;color:#7b8a87;display:flex;flex-direction:column;gap:6px}
+.tile{position:relative;border:0;text-align:left;border-radius:14px;padding:14px 14px 12px;min-height:108px;background:#eef2f1;color:#7b8a87;display:flex;flex-direction:column;align-items:flex-start;gap:6px;width:100%;font-family:inherit}
 .tile .no{font-size:13px;font-weight:700}
-.tile .tt{font-size:15px;font-weight:700;line-height:1.3}
+.tile .tt{font-size:15px;font-weight:700;line-height:1.3;text-align:left}
 .tile .st{margin-top:auto;font-size:13px}
 .tile.ready{background:var(--teal);color:#fff;box-shadow:0 6px 0 #0b5253}
 .tile.ready:hover{transform:translateY(-2px)}
@@ -122,6 +122,9 @@ input,textarea,select{font:inherit}
 .seg button{border:2px solid var(--line);background:#fff;border-radius:10px;padding:8px 14px;font-weight:700;font-size:16px;color:var(--grey)}
 .seg button.on0{background:var(--teal);border-color:var(--teal);color:#fff}
 .seg button.on1{background:var(--brick);border-color:var(--brick);color:#fff}
+.seg button.on2{background:var(--blue);border-color:var(--blue);color:#fff}
+.seg button.on3{background:var(--amberdk);border-color:var(--amberdk);color:#fff}
+@media (max-width:700px){.sorti{flex-wrap:wrap}.seg{flex-wrap:wrap}}
 table.calc{border-collapse:collapse;margin:0 0 6px;font-size:20px;min-width:60%}
 table.calc th{background:var(--teal);color:#fff;padding:10px 18px;font-weight:700}
 table.calc td{padding:10px 18px;border-bottom:2px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
@@ -416,13 +419,17 @@ function startGame(g, rec, practice) {
 }
 function nextVariant(i) {
   const L = S.g.locks[i], st = S.locks[i];
-  if (L.gen) { st.v = L.gen(R); return; }
-  let idx = L.pool.map((_, k) => k).filter(k => !st.used.includes(k));
-  if (!idx.length) { st.used = st.used.slice(-1); idx = L.pool.map((_, k) => k).filter(k => !st.used.includes(k)); }
-  const k = R.one(idx); st.used.push(k);
-  const v = { ...L.pool[k] };
-  if (v.type === "choice") { const order = R.shuffle(v.options.map((_, j) => j)); v.opts = order.map(j => ({ t: v.options[j], ok: j === v.answer })); }
-  if (v.type === "order") v.shuffled = R.shuffle(v.items.map((t, j) => ({ t, j })));
+  let v;
+  if (L.gen) v = L.gen(R);
+  else {
+    let idx = L.pool.map((_, k) => k).filter(k => !st.used.includes(k));
+    if (!idx.length) { st.used = st.used.slice(-1); idx = L.pool.map((_, k) => k).filter(k => !st.used.includes(k)); }
+    const k = R.one(idx); st.used.push(k);
+    v = { ...L.pool[k] };
+  }
+  /* 보기·순서 섞기 (pool 문제와 gen 문제 모두) */
+  if (v.type === "choice" && !v.opts) { const order = R.shuffle(v.options.map((_, j) => j)); v.opts = order.map(j => ({ t: v.options[j], ok: j === v.answer })); }
+  if (v.type === "order" && !v.shuffled) v.shuffled = R.shuffle(v.items.map((t, j) => ({ t, j })));
   S.locks[i].v = v;
 }
 function renderGameShell() {
@@ -460,9 +467,11 @@ function renderLock() {
   if (v.type === "choice") body = `<div class="opts">${v.opts.map((o, k) => `<button class="opt" data-k="${k}"><span class="k">${"ABCD"[k]}</span>${esc(o.t)}</button>`).join("")}</div>`;
   if (v.type === "order") body = `<div class="ord">${v.shuffled.map((o, k) => `<button class="ordi" data-k="${k}"><span class="k"></span>${esc(o.t)}</button>`).join("")}</div><button class="btn big submit" id="sub" disabled>자물쇠에 넣기</button>`;
   if (v.type === "sort") body = `<div class="sortl">${v.items.map((o, k) => `<div class="sorti"><span class="nm">${esc(o.t)}</span><span class="seg">${v.bins.map((b, j) => `<button data-k="${k}" data-j="${j}">${esc(b)}</button>`).join("")}</span></div>`).join("")}</div><button class="btn big submit" id="sub" disabled>자물쇠에 넣기</button>`;
-  if (v.type === "number") body = (v.table ? `<table class="calc"><tr>${v.table.head.map(h => `<th>${esc(h)}</th>`).join("")}</tr>${v.table.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</table><div class="tnote">${esc(v.table.note || "")}</div>` : "") +
+  if (v.type === "number") body =
     `<div class="numrow"><input class="numin" id="numin" inputmode="numeric" autocomplete="off" placeholder="숫자"><span class="u">${esc(v.unit || "")}</span></div><p class="note">쉼표는 없어도 돼요. 계산기를 써도 좋아요.</p><button class="btn big submit" id="sub" disabled>자물쇠에 넣기</button>`;
-  qp.innerHTML = `<span class="qtag">${L.icon || "🔒"} ${i + 1} / ${S.g.locks.length} · ${esc(L.title)}</span><div class="qtext">${esc(v.q)}</div>${body}`;
+  /* 표는 모든 문제 유형에서 보여 줄 수 있음 */
+  const tbl = v.table ? `<table class="calc"><tr>${v.table.head.map(h => `<th>${esc(h)}</th>`).join("")}</tr>${v.table.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</table><div class="tnote">${esc(v.table.note || "")}</div>` : "";
+  qp.innerHTML = `<span class="qtag">${L.icon || "🔒"} ${i + 1} / ${S.g.locks.length} · ${esc(L.title)}</span><div class="qtext">${esc(v.q)}</div>${tbl}${body}`;
 
   if (v.type === "choice") qp.querySelectorAll(".opt").forEach(b => b.onclick = () => judge(v.opts[+b.dataset.k].ok));
   if (v.type === "order") {
@@ -486,7 +495,7 @@ function renderLock() {
   }
 }
 function parseNum(s) {
-  s = String(s).replace(/[,\s원]/g, "").replace(/만$/, "");
+  s = String(s).replace(/[,\s원%개점명세년배번살]/g, "").replace(/만$/, "");
   const m = s.match(/^(\d+)억(\d*)만?$/);
   if (m) return +m[1] * 10000 + (+m[2] || 0);
   if (!/^\d+(\.\d+)?$/.test(s)) return null;

@@ -18,7 +18,7 @@ window.CHAPTERS = [
   [33, 3, "미래 직업 탐구"], [34, 3, "은퇴 설계"]
 ].map(([n, u, t]) => ({ n, u, t }));
 /* 금고가 준비된 차시 */
-window.READY = [18];
+window.READY = CHAPTERS.map(c => c.n);  /* 34차시 모두 준비됨 (2026. 11. 16.) */
 /* 단원 끝 특별 스테이지 (준비되면 ready: true) */
 window.SPECIAL = {
   1: [{ id: "boss1", kind: "boss", t: "Ⅰ단원 보스전", ready: false }],
