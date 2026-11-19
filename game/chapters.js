@@ -110,9 +110,12 @@ window.REGIONS = { 1: { name: "선택의 마을", deco: ["🏠", "🌳", "🏪",
    gate 없음 또는 on: false → 모든 금고 열림(처음 상태)
    on: true → open 목록(차시 1~34, 보스 35~37, 스토리 38~39)만 열림
    stu: { "05": { add: [번호], del: [번호] } } → 그 학생만 더 열거나(add) 닫음(del). 반 설정보다 앞섬
-   닫아도 기록은 지워지지 않고, 이미 통과한 곳은 연습으로 다시 할 수 있음 */
+   seq: true → 순서대로 모드: 바로 앞 차시 금고가 그 학생에게 열려 있으면 그것을 통과해야 다음 금고 시작(1~34차시만, 보스·스토리 제외)
+   닫아도 기록은 지워지지 않고, 이미 통과한 곳은 연습으로 다시 할 수 있음.
+   보안 규칙(firestore.rules)도 같은 뜻으로 '새로 시작'을 막음 */
 window.gateBase = (gate, n) => !gate || !gate.on || (gate.open || []).includes(n);
 window.gateOpen = (gate, num, n) => {
   const s = (gate && gate.stu && gate.stu[String(num).padStart(2, "0")]) || {};
   return (gateBase(gate, n) || (s.add || []).includes(n)) && !(s.del || []).includes(n);
 };
+window.gateSeqOk = (gate, num, n, done) => !gate || !gate.seq || n <= 1 || n > 34 || !gateOpen(gate, num, n - 1) || !!done(n - 1);

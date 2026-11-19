@@ -20,6 +20,11 @@
     const a = new Uint32Array(6); crypto.getRandomValues(a);
     return Array.from(a, x => ALPH[x % ALPH.length]).join("");
   }
+  /* 선생님 '통과 처리' 기록: 학생이 하던 기록(old)은 uid를 그대로 두고 통과로, 없으면 uid 'teacher'로 새로 만듦 */
+  const passData = (ch, num, old) => ({ ch, num: pad(num), uid: old ? old.uid : "teacher", status: "cleared", byTeacher: true,
+    stars: (old && old.stars) || 1, clearedAt: Date.now(), updatedAt: Date.now(), ...(old ? {} : { startedAt: Date.now(), locks: [], firstOk: 0, wrong: 0 }) });
+  /* 순서대로 모드에서 앞 금고 통과 여부 */
+  const seqOkRecs = (gate, ch, num, recOf) => window.gateSeqOk(gate, num, ch, n => { const r = recOf(n); return !!(r && r.status === "cleared"); });
   const normCode = c => String(c || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6);
 
   /* ---------------- 체험 모드 (localStorage) ---------------- */
@@ -65,7 +70,7 @@
       async getRecord(code, ch, num) {
         const s = st(); const r = (s.records[code] || {})[recId(ch, num)];
         if (!r) return null;
-        if (r.uid !== s.uid && !(s.teacher && s.classes[code].ownerUid === s.teacher.uid)) return { _foreign: true };
+        if (r.uid !== s.uid && !r.byTeacher && !(s.teacher && s.classes[code].ownerUid === s.teacher.uid)) return { _foreign: true };
         return r;
       },
       async saveRecord(code, ch, num, data) {
@@ -74,10 +79,13 @@
         s.records[code] = s.records[code] || {};
         const id = recId(ch, num), old = s.records[code][id];
         if (old && old.uid !== s.uid) throw new Error("foreign");
+        if (old && old.status === "cleared") throw new Error("foreign");
+        /* 보안 규칙과 같게: 새로 시작할 때만 열린 금고·순서 확인 */
+        if (!old && (!gateOpen(c.gate, num, ch) || !seqOkRecs(c.gate, ch, num, n => s.records[code][recId(n, num)]))) throw new Error("gated");
         s.records[code][id] = { ...(old || {}), ...data, ch, num: pad(num), uid: s.uid, updatedAt: Date.now() };
         save(s);
       },
-      async myRecords(code) { const s = st(); return Object.values(s.records[code] || {}).filter(r => r.uid === s.uid); },
+      async myRecords(code, num) { const s = st(); return Object.values(s.records[code] || {}).filter(r => r.uid === s.uid || (r.byTeacher && num != null && r.num === pad(num))); },
 
       onAuth(cb) { const f = () => cb(st().teacher); listeners.add(f); f(); return () => listeners.delete(f); },
       async signIn() { const s = st(); s.teacher = { uid: "demo-teacher", email: "demo@example.com", name: "체험 선생님" }; save(s); },
@@ -98,6 +106,12 @@
         return () => { listeners.delete(f); clearInterval(t); };
       },
       async deleteRecord(code, id) { const s = st(); delete (s.records[code] || {})[id]; save(s); },
+      async deleteRecords(code, ids) { const s = st(); ids.forEach(id => delete (s.records[code] || {})[id]); save(s); },
+      async teacherPass(code, ch, nums) {
+        const s = st(); s.records[code] = s.records[code] || {};
+        nums.forEach(num => { const id = recId(ch, num), old = s.records[code][id]; if (old && old.status === "cleared") return; s.records[code][id] = { ...(old || {}), ...passData(ch, num, old) }; });
+        save(s);
+      },
       async listTeachers() { return Object.entries(st().teachers).map(([email, t]) => ({ email, ...t })); },
       async addTeacher(email, info) { const s = st(); s.teachers[email.toLowerCase()] = info; save(s); },
       async removeTeacher(email) { const s = st(); delete s.teachers[email]; save(s); },
@@ -142,14 +156,17 @@
         try { await F.setDoc(rec(code, recId(ch, num)), { ...data, ch, num: pad(num), uid, updatedAt: Date.now() }, { merge: true }); }
         catch (e) {
           if (!denied(e)) throw e;
-          let c = null; try { c = await this.getClass(code); } catch (e2) {}
-          throw new Error(c && c.open === false ? "closed" : "foreign");
+          let c = null, r = null; try { c = await this.getClass(code); r = await this.getRecord(code, ch, num); } catch (e2) {}
+          /* 기록 닫힘 / 아직 안 연 금고(또는 순서대로 모드에서 앞 금고 미통과) / 다른 기기 기록 */
+          throw new Error(c && c.open === false ? "closed" : c && !r ? "gated" : "foreign");
         }
       },
-      async myRecords(code) {
-        const uid = await this.ensureStudent();
-        const q = F.query(F.collection(db, "classes", code, "records"), F.where("uid", "==", uid));
-        return (await F.getDocs(q)).docs.map(d => d.data());
+      async myRecords(code, num) {
+        const uid = await this.ensureStudent(), col = F.collection(db, "classes", code, "records");
+        const out = (await F.getDocs(F.query(col, F.where("uid", "==", uid)))).docs.map(d => d.data());
+        /* 선생님이 통과 처리한 기록 (내 번호) */
+        if (num != null) try { (await F.getDocs(F.query(col, F.where("num", "==", pad(num)), F.where("byTeacher", "==", true)))).docs.forEach(d => { const x = d.data(); if (!out.some(o => o.ch === x.ch)) out.push(x); }); } catch (e) { console.warn(e); }
+        return out;
       },
 
       onAuth(cb) {
@@ -200,6 +217,20 @@
         return () => { stop = true; un(); };
       },
       async deleteRecord(code, id) { await init(); await F.deleteDoc(rec(code, id)); },
+      async deleteRecords(code, ids) {
+        await init();
+        for (let i = 0; i < ids.length; i += 400) { const b = F.writeBatch(db); ids.slice(i, i + 400).forEach(id => b.delete(rec(code, id))); await b.commit(); }
+      },
+      async teacherPass(code, ch, nums) {
+        await init();
+        const b = F.writeBatch(db);
+        for (const num of nums) {
+          const ref = rec(code, recId(ch, num)), snap = await F.getDoc(ref), old = snap.exists() ? snap.data() : null;
+          if (old && old.status === "cleared") continue;
+          b.set(ref, passData(ch, num, old), { merge: true });
+        }
+        await b.commit();
+      },
       async listTeachers() { await init(); return (await F.getDocs(F.collection(db, "teachers"))).docs.map(d => ({ email: d.id, ...d.data() })); },
       async addTeacher(email, info) { await init(); await F.setDoc(F.doc(db, "teachers", email.toLowerCase()), info); },
       async removeTeacher(email) { await init(); await F.deleteDoc(F.doc(db, "teachers", email)); }

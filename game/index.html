@@ -277,10 +277,13 @@ const dexLocal = () => LS.get(dexKey(), {});
 function dexPut(n, v) { const d = dexLocal(); d[n] = { ...(d[n] || {}), ...v }; LS.set(dexKey(), d); }
 /* 선생님이 연 금고 (반 문서의 gate, 인터넷이 끊겨도 쓰도록 이 기기에 보관) */
 const myGate = () => { const m = me(), c = LS.get("fg_gate", null); return m && c && c.code === m.code ? c.gate : null; };
-const gateMine = n => PREVIEW || gateOpen(myGate(), me().num, n);
+/* 막힌 까닭: null(열림) · "closed"(선생님이 아직 안 엶) · "seq"(순서대로 모드 — 앞 금고 먼저) */
+const gateWhy = n => PREVIEW ? null : !gateOpen(myGate(), me().num, n) ? "closed" : !gateSeqOk(myGate(), me().num, n, k => dexLocal()[k]) ? "seq" : null;
+const gateMine = n => !gateWhy(n);
 function setGate(cls) { if (cls && cls.code && !PREVIEW) LS.set("fg_gate", { code: cls.code, gate: cls.gate || null }); }
-function viewGated(label) {
-  $("#app").innerHTML = topbar() + `<div class="intro"><h1>아직 닫혀 있어요 🔒</h1><p style="font-size:19px;line-height:1.7"><b>${esc(label)}</b> — 선생님이 아직 열지 않았어요.<br>수업에서 배운 뒤 선생님이 열어 주시면 도전할 수 있어요.</p><div class="act"><a class="btn" href="#" style="text-decoration:none">모험 지도로</a></div></div>`;
+function viewGated(label, why = "closed", n = 0) {
+  const t = why === "seq" ? `순서대로 푸는 반이에요. <b>${n - 1}차시 금고</b>를 먼저 열면 도전할 수 있어요.` : "선생님이 아직 열지 않았어요.<br>수업에서 배운 뒤 선생님이 열어 주시면 도전할 수 있어요.";
+  $("#app").innerHTML = topbar() + `<div class="intro"><h1>아직 닫혀 있어요 🔒</h1><p style="font-size:19px;line-height:1.7"><b>${esc(label)}</b> — ${t}</p><div class="act"><a class="btn" href="#" style="text-decoration:none">모험 지도로</a></div></div>`;
   bindTop();
 }
 
@@ -362,8 +365,12 @@ function viewJoin() {
 async function syncDex() {
   const m = me(); if (!m || PREVIEW) return;
   try {
-    const recs = await DB.myRecords(m.code);
-    for (const r of recs) if (r.status === "cleared" && String(r.num) === DB.pad(m.num)) dexPut(r.ch, { stars: r.stars, firstOk: r.firstOk, at: r.clearedAt });
+    const recs = await DB.myRecords(m.code, m.num), on = new Set();
+    for (const r of recs) if (r.status === "cleared" && String(r.num) === DB.pad(m.num)) { on.add(r.ch); dexPut(r.ch, { stars: r.stars, firstOk: r.firstOk, at: r.clearedAt, byTeacher: !!r.byTeacher }); }
+    /* 선생님이 '기록 풀기'로 지운 곳은 이 기기 도감에서도 뺌 (이 기기에서 방금 통과해 아직 보내는 중일 수 있는 10분 안의 카드는 둠) */
+    const d = dexLocal(); let cut = false;
+    Object.keys(d).forEach(k => { if (!on.has(+k) && !(d[k].loc && Date.now() - d[k].loc < 600000)) { delete d[k]; cut = true; } });
+    if (cut) LS.set(dexKey(), d);
   } catch (e) {}
 }
 let HUBV = 0;
@@ -423,7 +430,9 @@ async function viewGame(n) {
   setGate(cls);
   const closed = cls && cls.open === false;
   const cleared = rec && rec.status === "cleared";
-  if (!cleared && !gateMine(n)) return viewGated(`${n}차시 금고 · ${CHAPTERS[n - 1].t}`);
+  if (!PREVIEW && !cleared && myGate() && myGate().seq && !dexLocal()[n - 1]) await syncDex();   /* 순서대로 모드: 앞 금고 통과를 서버 기록으로 확인 */
+  const why = gateWhy(n);
+  if (!cleared && !(rec && rec.status === "playing") && why) return viewGated(`${n}차시 금고 · ${CHAPTERS[n - 1].t}`, why, n);   /* 이미 시작한 금고는 끝까지 */
   if (cleared) dexPut(n, { ...g.card, stars: rec.stars, firstOk: rec.firstOk });
   $("#app").innerHTML = topbar() + `<div class="intro">
     <span class="qtag">${n}차시 금고</span><h1>${esc(g.vault)} 🔐</h1>
@@ -432,7 +441,7 @@ async function viewGame(n) {
       <li>틀리면 경보가 울려 자물쇠가 <b>잠시 잠기고</b>, 힌트를 본 뒤 <b>다른 문제</b>가 나와요.</li>
       <li><b>한 번에 맞힌 자물쇠</b>가 많을수록 별이 늘어요. (5개 ★★★ · 3~4개 ★★)</li>
       <li>금고를 열면 마지막 방에서 <b>1~2줄 쓰기</b>를 하고 도감 카드를 받아요.</li></ul>
-    ${cleared ? `<div class="demo">이미 통과한 금고예요 (${"★".repeat(rec.stars || 1)}). 다시 하면 <b>연습</b>이라 기록은 바뀌지 않아요.</div>` : ""}
+    ${cleared && rec.byTeacher ? `<div class="demo">선생님이 <b>통과 처리</b>한 금고예요. 해 보면 <b>연습</b>이라 기록은 바뀌지 않아요.</div>` : cleared ? `<div class="demo">이미 통과한 금고예요 (${"★".repeat(rec.stars || 1)}). 다시 하면 <b>연습</b>이라 기록은 바뀌지 않아요.</div>` : ""}
     ${PREVIEW ? PV_NOTE : ""}
     ${closed && !cleared ? `<div class="demo">선생님이 지금은 기록을 닫아 두었어요. <b>연습</b>으로만 할 수 있어요.</div>` : ""}
     ${offline ? `<div class="demo">인터넷 연결이 불안정해요. 게임은 할 수 있고, 연결되면 기록을 다시 보내요.</div>` : ""}
@@ -648,7 +657,7 @@ function finish() {
   const firstOk = S.locks.filter(l => l.firstOk).length, stars = starsOf(firstOk);
   const sec = Math.floor((Date.now() - S.startedAt) / 1000), wrong = S.locks.reduce((a, l) => a + l.prevWrongs + l.wrongs, 0);
   S.result = { firstOk, stars, sec, wrong };
-  if (!S.practice) { dexPut(S.g.n, { ...S.g.card, stars, firstOk, at: Date.now() }); save(true); }
+  if (!S.practice) { dexPut(S.g.n, { ...S.g.card, stars, firstOk, at: Date.now(), loc: Date.now() }); save(true); }
   else if (PREVIEW) dexPut(S.g.n, { ...S.g.card, stars, firstOk, at: Date.now() });
   cleanup();
   const c = S.g.card;
@@ -691,17 +700,17 @@ async function flush() {
     if (S.pending === data) S.pending = null;
     S.saveState = "ok";
   } catch (e) {
-    if (e.message === "foreign" || e.message === "closed") { S.saveState = e.message; S.pending = null; }
+    if (e.message === "foreign" || e.message === "closed" || e.message === "gated") { S.saveState = e.message; S.pending = null; }
     else { S.saveState = "wait"; clearTimeout(retryT); retryT = setTimeout(flush, 5000); }
   }
   saving = false; drawSave();
   if (S.pending) flush();
 }
 function drawSave() {
-  const t = { idle: "", saving: "☁ 저장 중…", ok: "☁ 저장됨", wait: "⚠ 저장 대기 (인터넷 확인)", foreign: "⚠ 다른 기기 기록", closed: "⚠ 기록 닫힘", practice: "연습 모드" }[S.saveState] || "";
+  const t = { idle: "", saving: "☁ 저장 중…", ok: "☁ 저장됨", wait: "⚠ 저장 대기 (인터넷 확인)", foreign: "⚠ 다른 기기 기록", closed: "⚠ 기록 닫힘", gated: "⚠ 열리지 않은 금고", practice: "연습 모드" }[S.saveState] || "";
   const el = $("#sv"); if (el) el.textContent = t;
   const sm = $("#savedmsg");
-  if (sm && !S.practice) sm.textContent = S.saveState === "ok" ? "✅ 선생님께 기록을 보냈어요." : S.saveState === "wait" ? "⚠ 아직 보내지 못했어요. 이 화면을 닫지 말고 인터넷 연결을 확인하세요. 자동으로 다시 보내요." : S.saveState === "foreign" ? "⚠ 이 번호는 다른 기기의 기록이 있어 보내지 못했어요. 선생님께 말씀드리세요." : S.saveState === "closed" ? "⚠ 선생님이 기록을 닫아 두어 보내지 못했어요. 선생님께 말씀드리세요." : "기록을 보내는 중…";
+  if (sm && !S.practice) sm.textContent = S.saveState === "ok" ? "✅ 선생님께 기록을 보냈어요." : S.saveState === "wait" ? "⚠ 아직 보내지 못했어요. 이 화면을 닫지 말고 인터넷 연결을 확인하세요. 자동으로 다시 보내요." : S.saveState === "foreign" ? "⚠ 이 번호는 다른 기기의 기록이 있어 보내지 못했어요. 선생님께 말씀드리세요." : S.saveState === "closed" ? "⚠ 선생님이 기록을 닫아 두어 보내지 못했어요. 선생님께 말씀드리세요." : S.saveState === "gated" ? "⚠ 아직 열리지 않은 곳이라 기록을 보내지 못했어요. 선생님께 말씀드리세요." : "기록을 보내는 중…";
 }
 window.addEventListener("beforeunload", e => { if (S && S.pending) { e.preventDefault(); e.returnValue = ""; } });
 

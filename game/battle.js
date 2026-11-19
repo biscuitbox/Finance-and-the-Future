@@ -31,7 +31,7 @@ async function viewBoss(u) {
   if (cls === null && !offline && !PREVIEW) return viewBlocked({ n: B0.n }, "noclass");
   const closed = cls && cls.open === false, cleared = rec && rec.status === "cleared";
   setGate(cls);
-  if (!cleared && !gateMine(B0.n)) return viewGated(`${B0.t} · ${B0.name}`);
+  if (!cleared && !(rec && rec.status === "playing") && gateWhy(B0.n)) return viewGated(`${B0.t} · ${B0.name}`);
   if (cleared) dexPut(B0.n, { ...B0.card, stars: rec.stars });
   const games = (await Promise.all(got.map(n => loadGame(n).catch(() => null)))).filter(Boolean);
   $("#app").innerHTML = topbar() + `<div class="intro">
@@ -319,7 +319,7 @@ function finishBoss() {
   S.phase = "done";
   const B0 = S.boss, stars = S.wrong === 0 ? 3 : S.wrong === 1 ? 2 : 1, sec = Math.floor((Date.now() - S.startedAt) / 1000);
   S.result = { stars, sec };
-  if (!S.practice) { dexPut(B0.n, { ...B0.card, stars, at: Date.now() }); saveBoss(true); }
+  if (!S.practice) { dexPut(B0.n, { ...B0.card, stars, at: Date.now(), loc: Date.now() }); saveBoss(true); }
   else if (PREVIEW) dexPut(B0.n, { ...B0.card, stars, at: Date.now() });
   cleanup();
   const c = B0.card;

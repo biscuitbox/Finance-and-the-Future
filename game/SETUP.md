@@ -18,6 +18,7 @@ Firebase를 연결하기 전에는 **체험 모드**로 작동합니다(기록�
 3. Authentication → **설정 → 승인된 도메인**에 `biscuitbox.github.io`(사이트 주소의 도메인)를 추가합니다.
 4. **빌드 → Firestore Database → 데이터베이스 만들기** → 위치 `asia-northeast3 (서울)` → **프로덕션 모드**.
 5. Firestore → **규칙** 탭에 `game/firestore.rules` 내용을 그대로 붙여 넣고 **게시**합니다.
+   - **2026. 11. 19. 규칙이 바뀌었어요**(금고 열기·순서대로 모드를 서버에서도 막기, 선생님 '통과 처리'). 이미 연결한 학교도 이 파일 내용을 다시 붙여 넣고 **게시**해야 통과 처리가 작동합니다.
 6. Firestore → **데이터** 탭 → 컬렉션 시작: 컬렉션 ID `teachers`, 문서 ID에 **내 구글 이메일(소문자)**, 필드 `admin` (boolean) = `true`, `name` (string) = 내 이름. → 이것으로 내가 관리자가 됩니다.
 7. **프로젝트 설정(톱니) → 일반 → 내 앱 → 웹(</>)** 으로 앱을 등록하고, 나오는 `firebaseConfig` 값을 `game/firebase-config.js`의 `window.FIREBASE_CONFIG = { … }` 자리에 붙여 넣어 저장소에 올립니다.
 8. `…/game/teacher.html`에서 로그인 → **새 반 만들기** → 나온 6자리 반 코드를 학생에게 알려 줍니다.

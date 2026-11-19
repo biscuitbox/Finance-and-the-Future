@@ -95,9 +95,9 @@ async function shot(pg, name, clip) { await pg.waitForTimeout(250); await pg.scr
   await marks(pg, [['.sum', '1', 't'], ['.bars', '2', 't']]);
   await shot(pg, 't06_now_summary');
   await pg.evaluate(POLISH);
-  await pg.evaluate(() => { const t = document.querySelector('#body table'); t.scrollIntoView(); scrollBy(0, -60); });
+  await pg.evaluate(() => { const t = document.querySelector('#body .bulk'); t.scrollIntoView(); scrollBy(0, -40); });
   await pg.waitForTimeout(300);
-  await marks(pg, [['#body td.lks', '1', 't'], ['#body [data-del]', '2', 'l']]);
+  await marks(pg, [['#body td.lks', '1', 't'], ['#body [data-del]', '2', 't'], ['#body [data-pass]', '3', 'r'], ['#body td.pk', '4', 'l'], ['#pkpass', '5', 't'], ['#pkdelall', '6', 't']]);
   await shot(pg, 't07_now_students');
   await pg.evaluate(POLISH);
   /* 마지막 방 글 */
@@ -139,7 +139,10 @@ async function shot(pg, name, clip) { await pg.waitForTimeout(250); await pg.scr
   await shot(sp, 's01_join');
   await sp.evaluate(POLISH);
   await sp.click('#go'); await sp.waitForSelector('#tmap');
-  await sp.evaluate(() => { const d = {}; [1, 2, 3, 4, 5, 8, 9].forEach(n => d[n] = { stars: 1 + n % 3 }); localStorage.setItem('fg_dex', JSON.stringify(d)); });
+  /* 23번 학생이 1~5·8·9차시를 통과한 것으로 (체험 저장소에 기록을 넣어야 지도가 서버 기록과 맞춤) */
+  await sp.evaluate(code => { const st = JSON.parse(localStorage.getItem('fg_demo_v1')); const d = {};
+    [1, 2, 3, 4, 5, 8, 9].forEach(n => { const stars = 1 + n % 3; d[n] = { stars }; st.records[code][`${n}_23`] = { ch: n, num: '23', uid: st.uid, status: 'cleared', stars, firstOk: stars === 3 ? 5 : 3, locks: [], wrong: 1, sec: 400, clearedAt: Date.now() - 86400000 }; });
+    localStorage.setItem('fg_demo_v1', JSON.stringify(st)); localStorage.setItem('fg_dex', JSON.stringify(d)); }, CODE);
   await sp.goto(G + '#dex'); await sp.goto(G + '#'); await sp.waitForTimeout(1500); await sp.evaluate(() => scrollTo(0, 0)); await sp.waitForTimeout(300);
   await shot(sp, 's02_map');
   /* 금고 문제 */

@@ -95,6 +95,11 @@ tr.none td{color:#a3b0ad}
 .gleg{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--grey);margin-top:12px}
 .gleg i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:4px}
 .mat td.cl{background:#eceff0;color:#b5c0bd}
+.bulk{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--lteal);border-radius:12px;padding:10px 12px;margin:0 0 10px}
+.bulk b{color:var(--pine)}
+td.pk,th.pk{width:34px;text-align:center}
+td.pk input,th.pk input{width:18px;height:18px;cursor:pointer}
+.st.tp{background:var(--amberdk);color:#fff}
 </style>
 </head>
 <body>
@@ -236,7 +241,7 @@ async function drawBody() {
     body.innerHTML += w.length ? `<div class="wall">${w.map(r => `<div><b>${+r.num}번 · ${"★".repeat(r.stars || 1)}</b>${esc(r.writing)}</div>`).join("")}</div>` : `<p class="muted">아직 마지막 방까지 간 학생이 없어요.</p>`;
     return;
   }
-  const cl = rs.filter(r => r.status === "cleared"), pl = rs.filter(r => r.status !== "cleared");
+  const cl = rs.filter(r => r.status === "cleared"), pl = rs.filter(r => r.status !== "cleared"), clA = cl.filter(r => !r.byTeacher);   /* 평균은 선생님 통과 처리 빼고 */
   const nL = g ? g.locks.length : 5;
   const avg = a => a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0;
   const lockStat = Array.from({ length: nL }, (_, i) => {
@@ -245,8 +250,8 @@ async function drawBody() {
   });
   body.innerHTML = `<div class="sum">
       <div><b>${cl.length} / ${c.size}</b><span>통과</span></div><div><b>${pl.length}</b><span>도전 중</span></div><div><b>${Math.max(0, c.size - rs.length)}</b><span>아직 시작 안 함</span></div>
-      <div><b>${cl.length ? avg(cl.map(r => r.firstOk)).toFixed(1) : "–"} / ${nL}</b><span>한 번에 연 자물쇠 (평균)</span></div>
-      <div><b>${cl.length ? mmss(Math.round(avg(cl.map(r => r.sec || 0)))) : "–"}</b><span>걸린 시간 (평균, 분:초)</span></div></div>
+      <div><b>${clA.length ? avg(clA.map(r => r.firstOk)).toFixed(1) : "–"} / ${nL}</b><span>한 번에 연 자물쇠 (평균)</span></div>
+      <div><b>${clA.length ? mmss(Math.round(avg(clA.map(r => r.sec || 0)))) : "–"}</b><span>걸린 시간 (평균, 분:초)</span></div></div>
     <h3 style="color:var(--pine);margin:22px 0 10px;font-size:17px">자물쇠별 '한 번에 맞힌' 비율 <span class="muted">— 낮은 자물쇠의 개념을 다음 시간에 다시 짚어 주세요</span></h3>
     <div class="bars">${lockStat.map(s => { const p = s.n ? Math.round(s.first / s.n * 100) : 0; return `<div class="bar"><span>${esc(s.t)}</span><span class="t"><i class="${p < 60 ? "low" : ""}" style="width:${p}%"></i></span><span>${s.n ? p + "%" : "–"} <span class="muted">(오답 ${s.wrong})</span></span></div>`; }).join("")}</div>
     <h3 style="color:var(--pine);margin:22px 0 10px;font-size:17px">학생별 <span class="muted">— 칸: ✓ 한 번에 맞힘 · 숫자 = 틀린 횟수 · 실시간으로 바뀌어요</span></h3>
@@ -260,6 +265,7 @@ async function drawBody() {
     </table></div>
     <p class="muted">'기록 풀기'는 그 번호의 이 차시 기록을 지워요. 학생이 번호를 잘못 골랐거나 다른 기기로 바꿔야 할 때 쓰세요.</p>`;
   body.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => { if (!confirm(`${+b.dataset.del.split("_")[1]}번의 ${curCh}차시 기록을 지울까요? 되돌릴 수 없어요.`)) return; await DB.deleteRecord(c.code, b.dataset.del); toast("기록을 지웠어요."); });
+  enhanceTable(c, byNum, nums);
 }
 const tMoney = (D, v) => { if (!(D && D.ui && D.ui.money === "man")) return fmt(v) + "원"; const e = Math.floor(v / 10000), r = v % 10000; if (!v) return "0"; return e ? `${e}억${r ? " " + fmt(r) + "만" : ""}` : `${fmt(r)}만`; };
 /* 스토리 게임 현황: 엔딩 분포, 지식 문제별 정답률, 학생별 엔딩·선택 */
@@ -268,14 +274,14 @@ async function drawStoryT(c, rs, byNum, nums) {
   let D = null; try { D = await loadStoryT(M); } catch (e) {}
   if (!$("#body") || curCh !== M.n) return;
   const qs = D ? D.scenes.filter(sc => sc.quiz || sc.type === "number") : [];
-  const cl = rs.filter(r => r.status === "cleared"), pl = rs.filter(r => r.status !== "cleared");
+  const cl = rs.filter(r => r.status === "cleared"), pl = rs.filter(r => r.status !== "cleared"), clA = cl.filter(r => !r.byTeacher);   /* 평균은 선생님 통과 처리 빼고 */
   const avg = a => a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0;
   const ends = D ? D.endings.map(e => ({ e, k: cl.filter(r => r.ending === e.id).length })) : [];
   const mx = Math.max(1, ...ends.map(x => x.k));
   body.innerHTML = `<p class="muted">${M.icon} <b>${esc(M.t)}</b> — ${M.chs.map(n => n + "차시").join("·")} 금고를 ${M.need}개 이상 연 학생에게 열려요. 선택에 따라 ${D && D.ui && D.ui.lab ? Object.values(D.ui.lab).map(x => esc(x.replace(/^\S+\s/, "").replace(/ \(.*\)$/, ""))).join("·") : "지갑·통장·만족·신용"} 상태가 바뀌고 엔딩이 5가지로 갈려요. 별은 지식 문제 ${qs.length}개의 정답 수예요.</p>
     <div class="sum"><div><b>${cl.length} / ${c.size}</b><span>완주</span></div><div><b>${pl.length}</b><span>하는 중</span></div><div><b>${Math.max(0, c.size - rs.length)}</b><span>아직 시작 안 함</span></div>
-      <div><b>${cl.length ? avg(cl.map(r => r.firstOk || 0)).toFixed(1) : "–"} / ${qs.length}</b><span>지식 문제 정답 (평균)</span></div>
-      <div><b>${cl.length ? mmss(Math.round(avg(cl.map(r => r.sec || 0)))) : "–"}</b><span>걸린 시간 (평균, 분:초)</span></div></div>
+      <div><b>${clA.length ? avg(clA.map(r => r.firstOk || 0)).toFixed(1) : "–"} / ${qs.length}</b><span>지식 문제 정답 (평균)</span></div>
+      <div><b>${clA.length ? mmss(Math.round(avg(clA.map(r => r.sec || 0)))) : "–"}</b><span>걸린 시간 (평균, 분:초)</span></div></div>
     <h3 style="color:var(--pine);margin:22px 0 10px;font-size:17px">엔딩 분포</h3>
     <div class="bars">${ends.map(({ e, k }) => `<div class="bar"><span>${e.icon} ${esc(e.t)}</span><span class="t"><i style="width:${Math.round(k / mx * 100)}%"></i></span><span>${k}명</span></div>`).join("")}</div>
     <h3 style="color:var(--pine);margin:22px 0 10px;font-size:17px">지식 문제별 정답률 <span class="muted">— 낮은 문제의 개념을 다시 짚어 주세요</span></h3>
@@ -293,19 +299,64 @@ async function drawStoryT(c, rs, byNum, nums) {
     </table></div>
     <p class="muted">'기록 풀기'는 그 번호의 이 스토리 기록을 지워요. 엔딩별로 학생 이야기를 들어 보면 좋은 수업 마무리가 돼요.</p>`;
   body.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => { if (!confirm(`${+b.dataset.del.split("_")[1]}번의 ${M.t} 기록을 지울까요? 되돌릴 수 없어요.`)) return; await DB.deleteRecord(c.code, b.dataset.del); toast("기록을 지웠어요."); });
+  enhanceTable(c, byNum, nums);
+}
+/* 학생별 표 보강: 고르기 칸 · 통과 처리 · 고른 학생 일괄 통과/기록 풀기 · 이 차시 기록 모두 풀기 (금고·보스전·스토리 공통) */
+let pick = new Set(), pickKey = "";
+function enhanceTable(c, byNum, nums) {
+  const tbl = $("#body table"); if (!tbl) return;
+  const key = c.code + "_" + curCh; if (key !== pickKey) { pickKey = key; pick = new Set(); }
+  const title = curCh > 34 ? chTitle(curCh) : `${curCh}차시 금고`;
+  const rows = [...tbl.querySelectorAll("tr")];
+  rows.forEach((tr, i) => {
+    if (i === 0) { const th = document.createElement("th"); th.className = "pk"; th.innerHTML = `<input type="checkbox" id="pkall" title="모두 고르기">`; tr.prepend(th); return; }
+    const n = parseInt(tr.cells[0].textContent, 10), r = byNum[n];
+    const td = document.createElement("td"); td.className = "pk"; td.innerHTML = `<input type="checkbox" data-pk="${n}" ${pick.has(n) ? "checked" : ""}>`; tr.prepend(td);
+    if (r && r.byTeacher) { const st = tr.cells[2].querySelector(".st"); if (st) { st.className = "st tp"; st.textContent = "선생님 통과"; } }
+    if (!r || r.status !== "cleared") { const last = tr.cells[tr.cells.length - 1], b = document.createElement("button"); b.className = "btn small ghost"; b.style.cssText = "color:var(--teal);margin-left:4px"; b.dataset.pass = n; b.textContent = "통과 처리"; last.appendChild(b); }
+  });
+  const nCl = nums.filter(n => byNum[n] && byNum[n].status === "cleared").length, nRec = Object.keys(byNum).length;
+  const bar = document.createElement("div"); bar.className = "bulk";
+  bar.innerHTML = `<b>고른 학생 <span id="pkn">${pick.size}</span>명</b>
+    <button class="btn small" id="pkpass" title="학생 대신 이 곳을 통과로 표시해요 (별 1개)">✔ 고른 학생 통과 처리</button>
+    <button class="btn small ghost" style="color:var(--brick)" id="pkdel">고른 학생 기록 풀기</button>
+    <span style="flex:1"></span>
+    <button class="btn small red" id="pkdelall" ${nRec ? "" : "disabled"}>이 ${curCh > 34 ? "게임" : "차시"} 기록 모두 풀기 (${nRec}개)</button>`;
+  tbl.parentElement.before(bar);
+  const sync = () => { $("#pkn").textContent = pick.size; const all = $("#pkall"); all.checked = pick.size && nums.every(n => pick.has(n)); };
+  tbl.querySelectorAll("[data-pk]").forEach(x => x.onchange = () => { const n = +x.dataset.pk; x.checked ? pick.add(n) : pick.delete(n); sync(); });
+  $("#pkall").onchange = e => { pick = e.target.checked ? new Set(nums) : new Set(); tbl.querySelectorAll("[data-pk]").forEach(x => x.checked = e.target.checked); sync(); };
+  sync();
+  const doPass = async ns => {
+    ns = ns.filter(n => !(byNum[n] && byNum[n].status === "cleared"));
+    if (!ns.length) return toast("고른 학생은 이미 모두 통과했어요.");
+    if (!confirm(`${ns.join(", ")}번 학생의 「${title}」를 통과로 처리할까요?\n· 학생 화면에 통과(별 1개)와 도감 카드가 생기고, 순서대로 모드에서는 다음 금고가 열려요.\n· 평균 통계에는 넣지 않아요.\n· 되돌리려면 '기록 풀기'를 누르세요.`)) return;
+    try { await DB.teacherPass(c.code, curCh, ns); toast(`${ns.length}명을 통과 처리했어요.`); } catch (e) { toast("처리하지 못했어요: " + (e.code || e.message)); }
+  };
+  const doDel = async (ns, all) => {
+    const ids = ns.filter(n => byNum[n]).map(n => byNum[n].id);
+    if (!ids.length) return toast("지울 기록이 없어요.");
+    if (all) { const v = prompt(`「${title}」 기록 ${ids.length}개(모든 학생)를 지워요. 되돌릴 수 없어요.\n학생들은 처음부터 다시 도전하게 돼요. 지우려면 '모두 풀기'라고 입력하세요.`); if (v !== "모두 풀기") return; }
+    else if (!confirm(`${ns.filter(n => byNum[n]).join(", ")}번 학생의 「${title}」 기록을 지울까요? 되돌릴 수 없어요.`)) return;
+    try { await DB.deleteRecords(c.code, ids); pick = new Set(); toast(`기록 ${ids.length}개를 지웠어요.`); } catch (e) { toast("지우지 못했어요: " + (e.code || e.message)); }
+  };
+  tbl.querySelectorAll("[data-pass]").forEach(b => b.onclick = () => doPass([+b.dataset.pass]));
+  $("#pkpass").onclick = () => pick.size ? doPass([...pick].sort((a, b) => a - b)) : toast("먼저 왼쪽 칸에서 학생을 고르세요.");
+  $("#pkdel").onclick = () => pick.size ? doDel([...pick].sort((a, b) => a - b)) : toast("먼저 왼쪽 칸에서 학생을 고르세요.");
+  $("#pkdelall").onclick = () => doDel(nums, true);
 }
 /* 단원 보스전 현황: 별·맞힘·틀림·패배 횟수, 자주 틀린 차시 */
 function drawBoss(c, rs, byNum, nums) {
   const B0 = BOSSES.find(b => b.n === curCh), body = $("#body");
-  const cl = rs.filter(r => r.status === "cleared"), pl = rs.filter(r => r.status !== "cleared");
+  const cl = rs.filter(r => r.status === "cleared"), pl = rs.filter(r => r.status !== "cleared"), clA = cl.filter(r => !r.byTeacher);   /* 평균은 선생님 통과 처리 빼고 */
   const avg = a => a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0;
   const miss = {}; rs.forEach(r => (r.miss || []).forEach(n => miss[n] = (miss[n] || 0) + 1));
   const top = Object.entries(miss).sort((a, b) => b[1] - a[1]).slice(0, 6);
   const mx = top.length ? top[0][1] : 1;
   body.innerHTML = `<p class="muted">${B0.icon} <b>${esc(B0.name)}</b> — ${esc(UNITS[B0.u])} 금고를 ${B0.need}개 이상 연 학생에게 열려요. 학생이 통과한 금고의 문제가 섞여 나오고, ${B0.hp}문제를 맞히면 승리 · 목숨 ${B0.lives}개. 탭 '마지막 방 글'은 보스전에 없어요.</p>
     <div class="sum"><div><b>${cl.length} / ${c.size}</b><span>격파</span></div><div><b>${pl.length}</b><span>도전 중·패배 후</span></div><div><b>${Math.max(0, c.size - rs.length)}</b><span>아직 시작 안 함</span></div>
-      <div><b>${cl.length ? avg(cl.map(r => r.restarts || 0)).toFixed(1) : "–"}</b><span>격파까지 패배 (평균)</span></div>
-      <div><b>${cl.length ? mmss(Math.round(avg(cl.map(r => r.sec || 0)))) : "–"}</b><span>걸린 시간 (평균, 분:초)</span></div></div>
+      <div><b>${clA.length ? avg(clA.map(r => r.restarts || 0)).toFixed(1) : "–"}</b><span>격파까지 패배 (평균)</span></div>
+      <div><b>${clA.length ? mmss(Math.round(avg(clA.map(r => r.sec || 0)))) : "–"}</b><span>걸린 시간 (평균, 분:초)</span></div></div>
     <h3 style="color:var(--pine);margin:22px 0 10px;font-size:17px">틀린 문제가 많이 나온 차시 <span class="muted">— 진 판까지 모두 셈 · 다음 시간에 다시 짚어 주세요</span></h3>
     ${top.length ? `<div class="bars">${top.map(([n, k]) => `<div class="bar"><span>${n}차시 · ${esc(chTitle(+n))}</span><span class="t"><i class="low" style="width:${Math.round(k / mx * 100)}%"></i></span><span>${k}번</span></div>`).join("")}</div>` : `<p class="muted">아직 틀린 문제가 없어요.</p>`}
     <h3 style="color:var(--pine);margin:22px 0 10px;font-size:17px">학생별</h3>
@@ -318,18 +369,19 @@ function drawBoss(c, rs, byNum, nums) {
     </table></div>
     <p class="muted">'기록 풀기'는 그 번호의 보스전 기록을 지워요.</p>`;
   body.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => { if (!confirm(`${+b.dataset.del.split("_")[1]}번의 ${B0.t} 기록을 지울까요? 되돌릴 수 없어요.`)) return; await DB.deleteRecord(c.code, b.dataset.del); toast("기록을 지웠어요."); });
+  enhanceTable(c, byNum, nums);
 }
 function drawAll(c, nums) {
   const chs = [...CHAPTERS.map(x => x.n), ...BOSSES.map(b => b.n), ...STORIES.map(b => b.n)];
   const m = {}; recs.forEach(r => { m[r.num + "_" + r.ch] = r; });
-  $("#body").innerHTML = `<p class="muted">학생별로 통과한 차시(별 개수)를 한눈에 봐요. 노란 칸은 도전 중, 🔒은 아직 열지 않은 곳.</p><div class="mat"><table><tr><th>번호</th>${chs.map(n => `<th title="${esc(chTitle(n))}">${n > 37 ? (STORIES.find(b => b.n === n) || { icon: "🎒" }).icon + ["Ⅰ", "Ⅱ", "Ⅲ"][(STORIES.find(b => b.n === n) || { u: 2 }).u - 1] : n > 34 ? "👾" + ["Ⅰ", "Ⅱ", "Ⅲ"][n - 35] : n}</th>`).join("")}<th>합계</th></tr>
-    ${nums.map(n => { let s = 0; const tds = chs.map(ch => { const r = m[DB.pad(n) + "_" + ch]; if (r && r.status === "cleared") { s++; return `<td class="ok">${r.stars || 1}</td>`; } if (r) return `<td class="pl">…</td>`; return gateOpen(c.gate, n, ch) ? `<td></td>` : `<td class="cl" title="닫힌 금고">🔒</td>`; }).join("");
+  $("#body").innerHTML = `<p class="muted">학생별로 통과한 차시(별 개수)를 한눈에 봐요. 노란 칸은 도전 중, '선'은 선생님이 통과 처리한 곳, 🔒은 아직 열지 않은 곳.</p><div class="mat"><table><tr><th>번호</th>${chs.map(n => `<th title="${esc(chTitle(n))}">${n > 37 ? (STORIES.find(b => b.n === n) || { icon: "🎒" }).icon + ["Ⅰ", "Ⅱ", "Ⅲ"][(STORIES.find(b => b.n === n) || { u: 2 }).u - 1] : n > 34 ? "👾" + ["Ⅰ", "Ⅱ", "Ⅲ"][n - 35] : n}</th>`).join("")}<th>합계</th></tr>
+    ${nums.map(n => { let s = 0; const tds = chs.map(ch => { const r = m[DB.pad(n) + "_" + ch]; if (r && r.status === "cleared") { s++; return r.byTeacher ? `<td class="ok" title="선생님 통과 처리">선</td>` : `<td class="ok">${r.stars || 1}</td>`; } if (r) return `<td class="pl">…</td>`; return gateOpen(c.gate, n, ch) ? `<td></td>` : `<td class="cl" title="닫힌 금고">🔒</td>`; }).join("");
       return `<tr><td><b>${n}</b></td>${tds}<td><b>${s}</b></td></tr>`; }).join("")}</table></div>`;
 }
 function exportCSV(c) {
   const g = GAMES[curCh], nL = curCh > 34 ? 0 : g ? g.locks.length : 5;
   const head = ["반", "번호", "차시", "상태", "별", "한번에맞힌자물쇠", "오답", "걸린시간(초)", "다시시작", ...Array.from({ length: nL }, (_, i) => (g ? g.locks[i].title : "자물쇠" + (i + 1)) + "(시도)"), "마지막방글", "통과시각", "틀린차시", "엔딩", "고른선택"];
-  const rows = recs.filter(r => r.ch === curCh).sort((a, b) => +a.num - +b.num).map(r => [c.name, +r.num, r.ch, r.status === "cleared" ? "통과" : "도전중", r.stars || "", r.firstOk || 0, r.wrong || 0, r.sec || "", r.restarts || 0,
+  const rows = recs.filter(r => r.ch === curCh).sort((a, b) => +a.num - +b.num).map(r => [c.name, +r.num, r.ch, r.status === "cleared" ? (r.byTeacher ? "통과(선생님 처리)" : "통과") : "도전중", r.stars || "", r.firstOk || 0, r.wrong || 0, r.sec || "", r.restarts || 0,
     ...Array.from({ length: nL }, (_, i) => ((r.locks || [])[i] || {}).tries || 0), r.writing || "", r.clearedAt ? new Date(r.clearedAt).toLocaleString("ko-KR") : "", (r.miss || []).join(" "), r.endingT || "", (r.picks || []).join(" → ")]);
   const csv = "﻿" + [head, ...rows].map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\r\n");
   const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = `금고탈출_${c.name}_${curCh > 34 ? chTitle(curCh) : curCh + "차시"}.csv`; a.click();
@@ -354,6 +406,7 @@ function gSummary() {
     const chs = G.open.filter(n => n <= 34).sort((a, b) => a - b), sp = GALL.filter(n => n > 34 && G.open.includes(n));
     t = `열림: ${chs.length ? gRanges(chs) + "차시" : "차시 금고 없음"}${sp.length ? " · " + sp.map(n => chTitle(n)).join(", ") : ""}`;
   }
+  if (G.seq) t += " · 🔢 순서대로";
   return t + (ov.length ? ` · 학생별 설정 ${ov.length}명 (${ov.map(k => +k + "번").join(", ")})` : "");
 }
 function gSetStu(num, n, want) {
@@ -372,7 +425,7 @@ function gSave(c) {
 }
 function drawGate() {
   const c = classes.find(x => x.code === curCode), box = $("#gatec"); if (!c || !box) return;
-  if (gCode !== c.code) { gCode = c.code; const g0 = c.gate || {}; G = { on: !!g0.on, open: (g0.open || []).slice(), stu: JSON.parse(JSON.stringify(g0.stu || {})) }; gSel = new Set(); }
+  if (gCode !== c.code) { gCode = c.code; const g0 = c.gate || {}; G = { on: !!g0.on, seq: !!g0.seq, open: (g0.open || []).slice(), stu: JSON.parse(JSON.stringify(g0.stu || {})) }; gSel = new Set(); }
   const head = `<div class="ghead"><b class="t">🔓 금고 열기 · 진도 조절</b><span class="muted">${esc(gSummary())}</span>
     <button class="btn small ${gExp ? "ghost" : ""}" id="gx" style="margin-left:auto;${gExp ? "color:var(--teal)" : ""}">${gExp ? "접기 ▴" : "열 금고 정하기 ▾"}</button></div>`;
   if (!gExp) { box.innerHTML = head; $("#gx").onclick = () => { gExp = true; drawGate(); }; return; }
@@ -397,7 +450,8 @@ function drawGate() {
   let bodyH;
   if (gScope === "all") {
     bodyH = `<div class="gmode"><label><input type="radio" name="gm" value="off" ${G.on ? "" : "checked"}> <b>모든 금고 열기</b> — 학생이 아무 금고나 순서 없이 도전해요 (처음 설정)</label>
-      <label><input type="radio" name="gm" value="on" ${G.on ? "checked" : ""}> <b>선생님이 연 금고만</b> — 수업 진도에 맞춰 열어 줘요</label></div>
+      <label><input type="radio" name="gm" value="on" ${G.on ? "checked" : ""}> <b>선생님이 연 금고만</b> — 수업 진도에 맞춰 열어 줘요</label>
+      <label style="margin-top:6px;padding-top:8px;border-top:1px dashed var(--line)"><input type="checkbox" id="gSeq" ${G.seq ? "checked" : ""}> <b>🔢 순서대로</b> — 열린 금고 안에서도 바로 앞 차시 금고를 통과해야 다음 금고를 시작해요 (보스전·스토리는 해당 없음, 학생별 설정에도 적용)</label></div>
       <div class="row">${nSel}<button class="btn small" id="gUp">까지만 열기</button><button class="btn small ghost" style="color:var(--teal)" id="gAll">모두 열기</button><button class="btn small ghost" style="color:var(--brick)" id="gNone">모두 닫기</button>
       <span class="muted">보스전·스토리 게임은 그 단원(관련 차시) 금고를 모두 열 때 함께 열려요. 칸을 눌러 따로 정할 수도 있어요.</span></div>` + grid + legend;
   } else {
@@ -414,6 +468,7 @@ function drawGate() {
   box.querySelectorAll("[data-gs]").forEach(b => b.onclick = () => { gScope = b.dataset.gs; drawGate(); });
   const N = () => { const v = +$("#gN").value; DB.LS.set("fg_t_gN", v); return v; };
   const upTo = n => GALL.filter(x => (x <= 34 ? x : gNeedMax(x)) <= n);
+  if ($("#gSeq")) $("#gSeq").onchange = e => { G.seq = e.target.checked; gSave(c); };
   box.querySelectorAll("[name=gm]").forEach(r => r.onchange = () => { if (r.value === "on") gTurnOn(); else G.on = false; gSave(c); });
   box.querySelectorAll("[data-g]").forEach(b => b.onclick = () => {
     const n = +b.dataset.g;

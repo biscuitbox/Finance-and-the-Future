@@ -53,7 +53,7 @@ function drawMap() {
   st.forEach(s => s.state = stopState(s, dex));
   const target = st.find(s => s.kind === "ch" && s.state === "open") || st.find(s => s.kind === "boss" && s.state === "open") || null;
   if (!mapSel || !st.find(s => s.kind + s.n === mapSel)) mapSel = target ? target.kind + target.n : "ch1";
-  const nOpen = PREVIEW ? 34 : CHAPTERS.filter(c => dex[c.n] || gateMine(c.n)).length;
+  const nOpen = PREVIEW ? 34 : CHAPTERS.filter(c => dex[c.n] || gateOpen(myGate(), me().num, c.n)).length, seq = !PREVIEW && myGate() && myGate().seq;
   const nCh = st.filter(s => s.kind === "ch" && s.state === "clear").length, nB = st.filter(s => s.kind === "boss" && s.state === "clear").length;
 
   /* 길: 칸과 칸 사이를 부드럽게 잇는다. 앞 칸을 통과했으면 금빛 */
@@ -115,7 +115,7 @@ function drawMap() {
     const hero = isT ? `<text class="bob" x="${s.x}" y="${s.y - (s.kind === "boss" ? 58 : 46)}" text-anchor="middle" font-size="44">🧙</text>` : "";
     return `<g class="node${sel}" data-k="${key}"><title>${s.kind === "ch" ? s.n + "차시 · " : ""}${esc(s.t)}</title>${ring}${g}${hero}</g>`;
   }).join("");
-  $("#hubbody").innerHTML = `<div class="mapstat"><span>🗺️ 탐험한 금고 <b>${nCh}</b> / 34</span><span>👾 쓰러뜨린 보스 <b>${nB}</b> / 3</span>${nOpen < 34 ? `<span>🔓 열린 금고 <b>${nOpen}</b>개 · 나머지는 수업 뒤에 열려요</span>` : ""}<span>🧙 = 다음에 갈 곳 · 칸을 눌러 보세요</span></div>
+  $("#hubbody").innerHTML = `<div class="mapstat"><span>🗺️ 탐험한 금고 <b>${nCh}</b> / 34</span><span>👾 쓰러뜨린 보스 <b>${nB}</b> / 3</span>${nOpen < 34 ? `<span>🔓 열린 금고 <b>${nOpen}</b>개 · 나머지는 수업 뒤에 열려요</span>` : ""}${seq ? `<span>🔢 순서대로 — 앞 금고를 열어야 다음 금고가 열려요</span>` : ""}<span>🧙 = 다음에 갈 곳 · 칸을 눌러 보세요</span></div>
     <div class="advmap"><svg viewBox="0 0 1000 ${L.H}" role="img" aria-label="모험 지도">
       <defs><radialGradient id="gold" cx=".35" cy=".3"><stop offset="0" stop-color="#ffe8a8"/><stop offset=".6" stop-color="#f5bf45"/><stop offset="1" stop-color="#d99a14"/></radialGradient></defs>
       ${regs}${paths}${nodes}</svg></div>
@@ -127,7 +127,7 @@ function drawMap() {
     if (s.kind === "ch") {
       const d = dex[s.n];
       ic = d ? "🔓" : "🔒"; sm = `${REGIONS[s.u].name} · ${s.n}차시 금고`; ti = s.t;
-      extra = d ? `<span>${"★".repeat(d.stars || 1)}${"☆".repeat(3 - (d.stars || 1))}</span> 연 금고 — 다시 하면 연습이에요` : s.state === "locked" ? "선생님이 아직 열지 않은 금고예요. 수업에서 배운 뒤에 열려요" : "아직 열지 않은 금고";
+      extra = d ? `<span>${"★".repeat(d.stars || 1)}${"☆".repeat(3 - (d.stars || 1))}</span> 연 금고 — 다시 하면 연습이에요` : s.state === "locked" ? (gateWhy(s.n) === "seq" ? `순서대로 푸는 반이에요. 앞 금고(${s.n - 1}차시)를 먼저 열어야 해요` : "선생님이 아직 열지 않은 금고예요. 수업에서 배운 뒤에 열려요") : "아직 열지 않은 금고";
       btn = s.state === "locked" ? "" : `<button class="btn big ${d ? "" : "amber"}" id="mgo">${d ? "다시 보기" : "도전하기"} ▶</button>`;
     } else if (s.kind === "boss") {
       ic = s.B0.icon; sm = `${REGIONS[s.u].name} · 단원 보스`; ti = s.B0.name;

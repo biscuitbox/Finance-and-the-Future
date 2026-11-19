@@ -49,7 +49,7 @@ async function viewStory(u) {
   if (cls === null && !offline && !PREVIEW) return viewBlocked({ n: M.n }, "noclass");
   const closed = cls && cls.open === false, cleared = rec && rec.status === "cleared";
   setGate(cls);
-  if (!cleared && !gateMine(M.n)) return viewGated(`스토리 게임 「${M.t}」`);
+  if (!cleared && !(rec && rec.status === "playing") && gateWhy(M.n)) return viewGated(`스토리 게임 「${M.t}」`);
   if (cleared) dexPut(M.n, { term: `${D.title} · ${rec.endingT || "완주"}`, icon: rec.endingIcon || M.icon, line: rec.endingLine || "", stars: rec.stars });
   const q = storyQuizCount(D);
   $("#app").innerHTML = topbar() + `<div class="intro">
@@ -226,7 +226,7 @@ function storyEnd() {
   const D = S.D, U = SUI(D), s = S.st, E = D.endings.find(e => e.when(s)), stars = storyStars(D, S.right), q = storyQuizCount(D);
   const sec = Math.floor((Date.now() - S.startedAt) / 1000);
   S.result = { stars, sec, E };
-  if (!S.practice) { dexPut(D.n, { term: `${D.title} · ${E.t}`, icon: E.icon, line: E.line, stars, at: Date.now() }); saveStory(true); }
+  if (!S.practice) { dexPut(D.n, { term: `${D.title} · ${E.t}`, icon: E.icon, line: E.line, stars, at: Date.now(), loc: Date.now() }); saveStory(true); }
   else if (PREVIEW) dexPut(D.n, { term: `${D.title} · ${E.t}`, icon: E.icon, line: E.line, stars, at: Date.now() });
   cleanup(); beep("open");
   $("#app").innerHTML = topbar() + `<div class="send">
