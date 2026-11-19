@@ -76,6 +76,25 @@ tr.none td{color:#a3b0ad}
 .tv .grid div{border-radius:14px;padding:14px 8px;text-align:center;font-size:28px;font-weight:900;background:rgba(255,255,255,.08);color:rgba(255,255,255,.4)}
 .tv .grid div.p{background:rgba(224,142,11,.3);color:#ffd27a}.tv .grid div.c{background:var(--amber);color:#2b1d02}
 .tv .grid small{display:block;font-size:14px;font-weight:400}
+.ghead{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.ghead b.t{color:var(--pine);font-size:17px}
+.gmode{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-size:15px}
+.gmode label{cursor:pointer}
+.gunit{display:flex;gap:8px;align-items:center;margin:14px 0 6px;font-weight:700;color:var(--pine);font-size:14px}
+.gtiles{display:flex;flex-wrap:wrap;gap:6px}
+.gt{position:relative;min-width:58px;border:2px solid #cfd8d6;border-radius:10px;background:#f1f4f3;color:#8a9895;padding:5px 6px;text-align:center;font-weight:900;font-size:18px;line-height:1.15}
+.gt small{display:block;font-size:11px;font-weight:400;min-height:13px}
+.gt.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.gt.half{background:var(--lamber);border:2px dashed var(--amberdk);color:var(--amberdk)}
+.gt.sp{font-size:14px;min-width:92px}
+.gt .dot{position:absolute;right:4px;top:4px;width:9px;height:9px;border-radius:50%;background:var(--amber)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chip{border:2px solid var(--line);background:#fff;border-radius:999px;min-width:44px;padding:5px 9px;font-weight:700;color:var(--ink)}
+.chip.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.chip.ov{box-shadow:inset 0 -4px 0 var(--amber)}
+.gleg{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--grey);margin-top:12px}
+.gleg i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:4px}
+.mat td.cl{background:#eceff0;color:#b5c0bd}
 </style>
 </head>
 <body>
@@ -179,6 +198,7 @@ function viewClass() {
         <button class="btn small ${c.open === false ? "amber" : ""}" id="op">${c.open === false ? "🔒 기록 닫힘 → 열기" : "🟢 기록 받는 중 → 닫기"}</button>
         <button class="btn small ghost" id="sz" style="color:var(--teal)">학생 수</button>
         <button class="btn small red" id="dc">반 삭제</button></div></div>
+    <div class="card" id="gatec"></div>
     <div class="card"><div class="row" style="margin-bottom:12px"><label>차시 <select id="chs">${READY.map(n => `<option value="${n}" ${n === curCh ? "selected" : ""}>${n}차시 · ${esc(CHAPTERS[n - 1].t)}</option>`).join("")}<optgroup label="단원 보스전">${BOSSES.map(b => `<option value="${b.n}" ${b.n === curCh ? "selected" : ""}>👾 ${esc(b.t)} · ${esc(b.name)}</option>`).join("")}</optgroup><optgroup label="스토리 게임">${STORIES.map(b => `<option value="${b.n}" ${b.n === curCh ? "selected" : ""}>${b.icon} ${esc(b.t)} (${["", "Ⅰ", "Ⅱ", "Ⅲ"][b.u]}단원)</option>`).join("")}</optgroup></select></label>
       <div class="tabs" style="margin:0 0 0 8px">${[["now", "현황"], ["wall", "마지막 방 글"], ["all", "전 차시 한눈에"]].map(([k, t]) => `<button class="tab ${tab === k ? "on" : ""}" data-t="${k}">${t}</button>`).join("")}</div>
       <div style="margin-left:auto" class="row"><a class="btn small ghost" id="pvb" target="_blank" rel="noopener" href="index.html#preview" style="color:var(--teal);text-decoration:none" title="학생 화면에서 바로 해 보기 (기록 안 남음)">🎮 이 게임 미리 하기</a><button class="btn small" id="tvb">📺 TV에 진행판 띄우기</button><button class="btn small ghost" id="csv" style="color:var(--teal)">⬇ 엑셀(CSV)</button></div></div>
@@ -194,7 +214,8 @@ function viewClass() {
   document.querySelectorAll(".tab").forEach(b => b.onclick = () => { tab = b.dataset.t; document.querySelectorAll(".tab").forEach(x => x.classList.toggle("on", x === b)); drawBody(); });
   $("#csv").onclick = () => exportCSV(c);
   $("#tvb").onclick = () => openTV(c);
-  unwatch = DB.watchRecords(c.code, r => { recs = r; drawBody(); drawTV(); });
+  unwatch = DB.watchRecords(c.code, r => { recs = r; drawBody(); drawTV(); if (gExp) drawGate(); });
+  drawGate();
 }
 
 async function drawBody() {
@@ -301,8 +322,8 @@ function drawBoss(c, rs, byNum, nums) {
 function drawAll(c, nums) {
   const chs = [...CHAPTERS.map(x => x.n), ...BOSSES.map(b => b.n), ...STORIES.map(b => b.n)];
   const m = {}; recs.forEach(r => { m[r.num + "_" + r.ch] = r; });
-  $("#body").innerHTML = `<p class="muted">학생별로 통과한 차시(별 개수)를 한눈에 봐요. 노란 칸은 도전 중.</p><div class="mat"><table><tr><th>번호</th>${chs.map(n => `<th title="${esc(chTitle(n))}">${n > 37 ? (STORIES.find(b => b.n === n) || { icon: "🎒" }).icon + ["Ⅰ", "Ⅱ", "Ⅲ"][(STORIES.find(b => b.n === n) || { u: 2 }).u - 1] : n > 34 ? "👾" + ["Ⅰ", "Ⅱ", "Ⅲ"][n - 35] : n}</th>`).join("")}<th>합계</th></tr>
-    ${nums.map(n => { let s = 0; const tds = chs.map(ch => { const r = m[DB.pad(n) + "_" + ch]; if (r && r.status === "cleared") { s++; return `<td class="ok">${r.stars || 1}</td>`; } if (r) return `<td class="pl">…</td>`; return `<td></td>`; }).join("");
+  $("#body").innerHTML = `<p class="muted">학생별로 통과한 차시(별 개수)를 한눈에 봐요. 노란 칸은 도전 중, 🔒은 아직 열지 않은 곳.</p><div class="mat"><table><tr><th>번호</th>${chs.map(n => `<th title="${esc(chTitle(n))}">${n > 37 ? (STORIES.find(b => b.n === n) || { icon: "🎒" }).icon + ["Ⅰ", "Ⅱ", "Ⅲ"][(STORIES.find(b => b.n === n) || { u: 2 }).u - 1] : n > 34 ? "👾" + ["Ⅰ", "Ⅱ", "Ⅲ"][n - 35] : n}</th>`).join("")}<th>합계</th></tr>
+    ${nums.map(n => { let s = 0; const tds = chs.map(ch => { const r = m[DB.pad(n) + "_" + ch]; if (r && r.status === "cleared") { s++; return `<td class="ok">${r.stars || 1}</td>`; } if (r) return `<td class="pl">…</td>`; return gateOpen(c.gate, n, ch) ? `<td></td>` : `<td class="cl" title="닫힌 금고">🔒</td>`; }).join("");
       return `<tr><td><b>${n}</b></td>${tds}<td><b>${s}</b></td></tr>`; }).join("")}</table></div>`;
 }
 function exportCSV(c) {
@@ -313,6 +334,111 @@ function exportCSV(c) {
   const csv = "﻿" + [head, ...rows].map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\r\n");
   const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = `금고탈출_${c.name}_${curCh > 34 ? chTitle(curCh) : curCh + "차시"}.csv`; a.click();
 }
+/* ============ 금고 열기 (진도 조절) ============
+   반 문서 gate = { on, open: [번호], stu: { "05": { add: [번호], del: [번호] } } } — 뜻은 chapters.js gateOpen()
+   반 전체: '모든 금고 열기'(처음 상태) 또는 '선생님이 연 금고만'. 학생별: 고른 학생에게만 더 열거나 닫음 */
+let gExp = false, gScope = "all", gSel = new Set(), G = null, gCode = null, gTimer = null;
+const GSTAGES = [1, 2, 3].map(u => ({ u, items: [
+  ...CHAPTERS.filter(c => c.u === u).map(c => ({ n: c.n, lab: String(c.n), t: `${c.n}차시 · ${c.t}` })),
+  ...(SPECIAL[u] || []).map(x => { const B0 = BOSSES.find(b => b.n === x.n), St = STORIES.find(b => b.n === x.n);
+    return { n: x.n, sp: true, lab: B0 ? `${B0.icon} 보스전` : `${St.icon} 스토리`, t: B0 ? `${B0.t} · ${B0.name}` : `스토리 게임 「${St.t}」` }; })] }));
+const GALL = GSTAGES.flatMap(x => x.items.map(i => i.n));
+/* 보스·스토리는 그 단원(스토리는 관련 차시) 금고를 모두 열 때 함께 열림 */
+const gNeedMax = n => { const B0 = BOSSES.find(b => b.n === n); if (B0) return Math.max(...CHAPTERS.filter(c => c.u === B0.u).map(c => c.n)); const St = STORIES.find(b => b.n === n); return St ? Math.max(...St.chs) : n; };
+const gRanges = a => { const o = []; for (let i = 0; i < a.length; i++) { let j = i; while (j + 1 < a.length && a[j + 1] === a[j] + 1) j++; o.push(i === j ? `${a[i]}` : `${a[i]}~${a[j]}`); i = j; } return o.join(", "); };
+function gSummary() {
+  const ov = Object.keys(G.stu).sort();
+  let t;
+  if (!G.on) t = "모든 금고가 열려 있어요 (학생이 순서 없이 도전)";
+  else {
+    const chs = G.open.filter(n => n <= 34).sort((a, b) => a - b), sp = GALL.filter(n => n > 34 && G.open.includes(n));
+    t = `열림: ${chs.length ? gRanges(chs) + "차시" : "차시 금고 없음"}${sp.length ? " · " + sp.map(n => chTitle(n)).join(", ") : ""}`;
+  }
+  return t + (ov.length ? ` · 학생별 설정 ${ov.length}명 (${ov.map(k => +k + "번").join(", ")})` : "");
+}
+function gSetStu(num, n, want) {
+  const k = DB.pad(num), x = G.stu[k] || (G.stu[k] = { add: [], del: [] });
+  x.add = (x.add || []).filter(v => v !== n); x.del = (x.del || []).filter(v => v !== n);
+  if (want !== gateBase(G, n)) (want ? x.add : x.del).push(n);
+}
+function gTurnOn() { if (!G.on) { G.on = true; if (!G.open.length) G.open = GALL.slice(); toast("'선생님이 연 금고만'으로 바꿨어요"); } }
+function gSave(c) {
+  Object.keys(G.stu).forEach(k => { const x = G.stu[k]; if (!(x.add || []).length && !(x.del || []).length) delete G.stu[k]; });
+  G.open = GALL.filter(n => G.open.includes(n));
+  const snap = JSON.parse(JSON.stringify(G)), code = c.code; c.gate = snap;
+  clearTimeout(gTimer);
+  gTimer = setTimeout(() => DB.updateClass(code, { gate: snap }).then(() => toast("저장했어요 · 학생 화면에 바로 반영돼요")).catch(e => toast("저장하지 못했어요: " + (e.code || e.message))), 450);
+  drawGate();
+}
+function drawGate() {
+  const c = classes.find(x => x.code === curCode), box = $("#gatec"); if (!c || !box) return;
+  if (gCode !== c.code) { gCode = c.code; const g0 = c.gate || {}; G = { on: !!g0.on, open: (g0.open || []).slice(), stu: JSON.parse(JSON.stringify(g0.stu || {})) }; gSel = new Set(); }
+  const head = `<div class="ghead"><b class="t">🔓 금고 열기 · 진도 조절</b><span class="muted">${esc(gSummary())}</span>
+    <button class="btn small ${gExp ? "ghost" : ""}" id="gx" style="margin-left:auto;${gExp ? "color:var(--teal)" : ""}">${gExp ? "접기 ▴" : "열 금고 정하기 ▾"}</button></div>`;
+  if (!gExp) { box.innerHTML = head; $("#gx").onclick = () => { gExp = true; drawGate(); }; return; }
+  const sel = [...gSel].sort((a, b) => a - b), cleared = (num, n) => recs.some(r => r.ch === n && +r.num === num && r.status === "cleared");
+  const nSel = `<select id="gN">${CHAPTERS.map(x => `<option value="${x.n}" ${x.n === (+DB.LS.get("fg_t_gN", 0) || Math.min(curCh, 34)) ? "selected" : ""}>${x.n}차시</option>`).join("")}</select>`;
+  const tile = it => {
+    let cls = "", sm = "", dot = false;
+    if (gScope === "all") {
+      cls = gateBase(G, it.n) ? "on" : "";
+      const k = recs.filter(r => r.ch === it.n && r.status === "cleared").length; sm = k ? `통과 ${k}` : "";
+    } else {
+      const k = sel.filter(num => gateOpen(G, num, it.n)).length;
+      cls = !sel.length ? "" : k === sel.length ? "on" : k ? "half" : "";
+      dot = sel.some(num => { const x = G.stu[DB.pad(num)]; return x && ((x.add || []).includes(it.n) || (x.del || []).includes(it.n)); });
+      sm = sel.length === 1 ? (cleared(sel[0], it.n) ? "통과" : dot ? "학생별" : "") : sel.length ? `${k}/${sel.length}명` : "";
+    }
+    return `<button class="gt ${cls} ${it.sp ? "sp" : ""}" data-g="${it.n}" title="${esc(it.t)}">${dot ? `<span class="dot"></span>` : ""}${esc(it.lab)}<small>${sm}</small></button>`;
+  };
+  const grid = GSTAGES.map(x => `<div class="gunit">${esc(UNITS[x.u])}<button class="btn small ghost" style="color:var(--teal)" data-uo="${x.u}">이 단원 열기</button><button class="btn small ghost" style="color:var(--grey)" data-uc="${x.u}">닫기</button></div>
+    <div class="gtiles">${x.items.map(tile).join("")}</div>`).join("");
+  const legend = `<div class="gleg"><span><i style="background:var(--teal)"></i>열림</span><span><i style="background:#f1f4f3;border:1px solid #cfd8d6"></i>닫힘</span>${gScope === "stu" ? `<span><i style="background:var(--lamber);border:1px dashed var(--amberdk)"></i>고른 학생 가운데 일부만 열림</span><span><i style="background:var(--amber);border-radius:50%"></i>반 설정과 다르게 정한 곳</span>` : ""}<span>칸을 누르면 열고 닫혀요 · 닫아도 기록은 지워지지 않고, 이미 통과한 곳은 연습으로 다시 할 수 있어요</span></div>`;
+  let bodyH;
+  if (gScope === "all") {
+    bodyH = `<div class="gmode"><label><input type="radio" name="gm" value="off" ${G.on ? "" : "checked"}> <b>모든 금고 열기</b> — 학생이 아무 금고나 순서 없이 도전해요 (처음 설정)</label>
+      <label><input type="radio" name="gm" value="on" ${G.on ? "checked" : ""}> <b>선생님이 연 금고만</b> — 수업 진도에 맞춰 열어 줘요</label></div>
+      <div class="row">${nSel}<button class="btn small" id="gUp">까지만 열기</button><button class="btn small ghost" style="color:var(--teal)" id="gAll">모두 열기</button><button class="btn small ghost" style="color:var(--brick)" id="gNone">모두 닫기</button>
+      <span class="muted">보스전·스토리 게임은 그 단원(관련 차시) 금고를 모두 열 때 함께 열려요. 칸을 눌러 따로 정할 수도 있어요.</span></div>` + grid + legend;
+  } else {
+    const ovN = Object.keys(G.stu).map(k => +k);
+    bodyH = `<p class="muted" style="margin:10px 0 0">번호를 눌러 학생을 고르세요(여러 명 가능). 결석·보충하는 학생, 진도가 빠른 학생에게 금고를 더 열어 주거나 특정 학생만 닫을 때 써요. 학생별 설정은 반 전체 설정보다 앞서요.</p>
+      <div class="chips">${Array.from({ length: c.size }, (_, i) => i + 1).map(n => `<button class="chip ${gSel.has(n) ? "on" : ""} ${ovN.includes(n) ? "ov" : ""}" data-s="${n}" title="${ovN.includes(n) ? "학생별 설정 있음" : ""}">${n}</button>`).join("")}</div>
+      <div class="row"><button class="btn small ghost" style="color:var(--teal)" id="gSa">모두 고르기</button><button class="btn small ghost" style="color:var(--grey)" id="gSn">고르기 해제</button>
+        ${ovN.length ? `<button class="btn small ghost" style="color:var(--amberdk)" id="gSo">학생별 설정 있는 학생 고르기 (${ovN.length}명)</button>` : ""}</div>
+      ${sel.length ? `<div class="row" style="margin-top:10px"><b style="color:var(--pine)">고른 학생 ${sel.length}명</b> <span class="muted">${sel.join(", ")}번</span>${nSel}<button class="btn small" id="gUpS">까지 열어 주기</button>
+        <button class="btn small ghost" style="color:var(--brick)" id="gRst">반 설정대로 되돌리기</button></div>` + grid + legend : `<p class="muted" style="margin-top:14px">학생을 고르면 그 학생에게 열린 금고가 아래에 나와요.</p>`}`;
+  }
+  box.innerHTML = head + `<div class="tabs" style="margin:14px 0 0">${[["all", "반 전체"], ["stu", "학생별"]].map(([k, t]) => `<button class="tab ${gScope === k ? "on" : ""}" data-gs="${k}">${t}</button>`).join("")}</div>` + bodyH;
+  $("#gx").onclick = () => { gExp = false; drawGate(); };
+  box.querySelectorAll("[data-gs]").forEach(b => b.onclick = () => { gScope = b.dataset.gs; drawGate(); });
+  const N = () => { const v = +$("#gN").value; DB.LS.set("fg_t_gN", v); return v; };
+  const upTo = n => GALL.filter(x => (x <= 34 ? x : gNeedMax(x)) <= n);
+  box.querySelectorAll("[name=gm]").forEach(r => r.onchange = () => { if (r.value === "on") gTurnOn(); else G.on = false; gSave(c); });
+  box.querySelectorAll("[data-g]").forEach(b => b.onclick = () => {
+    const n = +b.dataset.g;
+    if (gScope === "all") { gTurnOn(); G.open = G.open.includes(n) ? G.open.filter(x => x !== n) : [...G.open, n]; }
+    else { const want = sel.filter(num => gateOpen(G, num, n)).length !== sel.length; sel.forEach(num => gSetStu(num, n, want)); }
+    gSave(c);
+  });
+  const unitN = u => GSTAGES.find(x => x.u === u).items.map(i => i.n);
+  box.querySelectorAll("[data-uo],[data-uc]").forEach(b => b.onclick = () => {
+    const open = "uo" in b.dataset, ns = unitN(+(b.dataset.uo || b.dataset.uc));
+    if (gScope === "all") { gTurnOn(); G.open = open ? [...new Set([...G.open, ...ns])] : G.open.filter(x => !ns.includes(x)); }
+    else sel.forEach(num => ns.forEach(n => gSetStu(num, n, open)));
+    gSave(c);
+  });
+  if ($("#gUp")) $("#gUp").onclick = () => { const n = N(); G.on = true; G.open = upTo(n); gSave(c); };
+  if ($("#gAll")) $("#gAll").onclick = () => { if (G.on) { G.open = GALL.slice(); gSave(c); } else toast("이미 모든 금고가 열려 있어요"); };
+  if ($("#gNone")) $("#gNone").onclick = () => { if (!confirm("모든 금고·보스전·스토리 게임을 닫을까요? (학생별로 연 곳은 그대로예요)")) return; G.on = true; G.open = []; gSave(c); };
+  box.querySelectorAll("[data-s]").forEach(b => b.onclick = () => { const n = +b.dataset.s; gSel.has(n) ? gSel.delete(n) : gSel.add(n); drawGate(); });
+  if ($("#gSa")) $("#gSa").onclick = () => { gSel = new Set(Array.from({ length: c.size }, (_, i) => i + 1)); drawGate(); };
+  if ($("#gSn")) $("#gSn").onclick = () => { gSel = new Set(); drawGate(); };
+  if ($("#gSo")) $("#gSo").onclick = () => { gSel = new Set(Object.keys(G.stu).map(k => +k)); drawGate(); };
+  if ($("#gUpS")) $("#gUpS").onclick = () => { const n = N(), ns = upTo(n); sel.forEach(num => ns.forEach(x => gSetStu(num, x, true))); gSave(c); };
+  if ($("#gRst")) $("#gRst").onclick = () => { sel.forEach(num => delete G.stu[DB.pad(num)]); gSave(c); };
+}
+
 /* TV 진행판: 번호만 보여 줌 (별·오답은 숨김) */
 let tvOn = false;
 function openTV(c) { tvOn = true; const d = document.createElement("div"); d.className = "tv"; d.id = "tv"; document.body.appendChild(d); d.onclick = e => { if (e.target.id === "tvx") { tvOn = false; d.remove(); } }; drawTV(); d.requestFullscreen && d.requestFullscreen().catch(() => {}); }

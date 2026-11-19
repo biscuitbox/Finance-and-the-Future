@@ -48,6 +48,8 @@ async function viewStory(u) {
   if (rec && rec._foreign) return viewBlocked({ n: M.n }, "foreign");
   if (cls === null && !offline && !PREVIEW) return viewBlocked({ n: M.n }, "noclass");
   const closed = cls && cls.open === false, cleared = rec && rec.status === "cleared";
+  setGate(cls);
+  if (!cleared && !gateMine(M.n)) return viewGated(`스토리 게임 「${M.t}」`);
   if (cleared) dexPut(M.n, { term: `${D.title} · ${rec.endingT || "완주"}`, icon: rec.endingIcon || M.icon, line: rec.endingLine || "", stars: rec.stars });
   const q = storyQuizCount(D);
   $("#app").innerHTML = topbar() + `<div class="intro">

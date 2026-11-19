@@ -106,3 +106,13 @@ window.BOSS_ATK = {
 };
 /* 모험 지도 지역 이름 */
 window.REGIONS = { 1: { name: "선택의 마을", deco: ["🏠", "🌳", "🏪", "🌼", "🏡", "🌳"] }, 2: { name: "투자의 숲과 산맥", deco: ["🌲", "⛰️", "🍄", "🌲", "🏦", "⛰️", "🌲", "🪨"] }, 3: { name: "미래의 항구", deco: ["⚓", "🌊", "⛵", "🏰", "🌅", "🐚"] } };
+/* 선생님이 정한 '열린 금고' (진도 조절) — 반 문서 classes/{code}.gate
+   gate 없음 또는 on: false → 모든 금고 열림(처음 상태)
+   on: true → open 목록(차시 1~34, 보스 35~37, 스토리 38~39)만 열림
+   stu: { "05": { add: [번호], del: [번호] } } → 그 학생만 더 열거나(add) 닫음(del). 반 설정보다 앞섬
+   닫아도 기록은 지워지지 않고, 이미 통과한 곳은 연습으로 다시 할 수 있음 */
+window.gateBase = (gate, n) => !gate || !gate.on || (gate.open || []).includes(n);
+window.gateOpen = (gate, num, n) => {
+  const s = (gate && gate.stu && gate.stu[String(num).padStart(2, "0")]) || {};
+  return (gateBase(gate, n) || (s.add || []).includes(n)) && !(s.del || []).includes(n);
+};

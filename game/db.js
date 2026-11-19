@@ -3,7 +3,7 @@
    교사: 구글 로그인 → teachers/{이메일} 문서가 있어야 반을 만들고 자기 반 기록을 볼 수 있음
    데이터 구조
      teachers/{email}                 { name, school, admin? }
-     classes/{code}                   { name, school, size, open, ownerUid, ownerEmail, ownerName, createdAt }
+     classes/{code}                   { name, school, size, open, gate?, ownerUid, ownerEmail, ownerName, createdAt }   (gate: 열린 금고, chapters.js gateOpen)
      classes/{code}/records/{ch_번호}  { ch, num, uid, status, locks[], firstOk, wrong, stars, writing, ... } */
 (function () {
   "use strict";
@@ -91,6 +91,7 @@
       },
       async updateClass(code, patch) { const s = st(); Object.assign(s.classes[code], patch); save(s); },
       async deleteClass(code) { const s = st(); delete s.classes[code]; delete s.records[code]; save(s); },
+      watchClass(code, cb) { const f = () => { const c = st().classes[code]; cb(c ? { code, ...c } : null); }; listeners.add(f); f(); return () => listeners.delete(f); },
       watchRecords(code, cb) {
         const f = () => cb(Object.entries(st().records[code] || {}).map(([id, r]) => ({ id, ...r })));
         listeners.add(f); f(); const t = setInterval(f, 4000);
@@ -190,6 +191,12 @@
       watchRecords(code, cb) {
         let un = () => {}, stop = false;
         init().then(() => { if (!stop) un = F.onSnapshot(F.collection(db, "classes", code, "records"), s => cb(s.docs.map(d => ({ id: d.id, ...d.data() }))), e => console.warn(e)); });
+        return () => { stop = true; un(); };
+      },
+      /* 반 문서 지켜보기 — 학생 지도가 선생님이 연 금고를 바로 보여 줌 (학생도 반 문서 하나는 읽을 수 있음) */
+      watchClass(code, cb) {
+        let un = () => {}, stop = false;
+        this.ensureStudent().then(() => { if (!stop) un = F.onSnapshot(cls(code), s => cb(s.exists() ? { code: s.id, ...s.data() } : null), e => console.warn(e)); }).catch(e => console.warn(e));
         return () => { stop = true; un(); };
       },
       async deleteRecord(code, id) { await init(); await F.deleteDoc(rec(code, id)); },

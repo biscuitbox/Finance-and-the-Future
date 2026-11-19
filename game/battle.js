@@ -30,6 +30,8 @@ async function viewBoss(u) {
   if (rec && rec._foreign) return viewBlocked({ n: B0.n }, "foreign");
   if (cls === null && !offline && !PREVIEW) return viewBlocked({ n: B0.n }, "noclass");
   const closed = cls && cls.open === false, cleared = rec && rec.status === "cleared";
+  setGate(cls);
+  if (!cleared && !gateMine(B0.n)) return viewGated(`${B0.t} · ${B0.name}`);
   if (cleared) dexPut(B0.n, { ...B0.card, stars: rec.stars });
   const games = (await Promise.all(got.map(n => loadGame(n).catch(() => null)))).filter(Boolean);
   $("#app").innerHTML = topbar() + `<div class="intro">

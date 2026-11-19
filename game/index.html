@@ -275,6 +275,14 @@ const me = () => PREVIEW ? PV_ME : LS.get("fg_me", null);
 const dexKey = () => PREVIEW ? "fg_pv_dex" : "fg_dex";
 const dexLocal = () => LS.get(dexKey(), {});
 function dexPut(n, v) { const d = dexLocal(); d[n] = { ...(d[n] || {}), ...v }; LS.set(dexKey(), d); }
+/* 선생님이 연 금고 (반 문서의 gate, 인터넷이 끊겨도 쓰도록 이 기기에 보관) */
+const myGate = () => { const m = me(), c = LS.get("fg_gate", null); return m && c && c.code === m.code ? c.gate : null; };
+const gateMine = n => PREVIEW || gateOpen(myGate(), me().num, n);
+function setGate(cls) { if (cls && cls.code && !PREVIEW) LS.set("fg_gate", { code: cls.code, gate: cls.gate || null }); }
+function viewGated(label) {
+  $("#app").innerHTML = topbar() + `<div class="intro"><h1>아직 닫혀 있어요 🔒</h1><p style="font-size:19px;line-height:1.7"><b>${esc(label)}</b> — 선생님이 아직 열지 않았어요.<br>수업에서 배운 뒤 선생님이 열어 주시면 도전할 수 있어요.</p><div class="act"><a class="btn" href="#" style="text-decoration:none">모험 지도로</a></div></div>`;
+  bindTop();
+}
 
 /* ============ 화면 전환 ============ */
 let cleanup = () => {};
@@ -373,6 +381,7 @@ function viewHub(tab) {
   const draw = () => { if (vid !== HUBV || !$("#hubbody")) return; return tab === "dex" ? drawDex(vid) : drawMap(); };
   draw();
   syncDex().then(draw);
+  if (!PREVIEW) { const un = DB.watchClass(m.code, c => { if (c) { setGate(c); draw(); } }); cleanup = () => un(); }   /* 선생님이 금고를 열면 바로 지도에 반영 */
 }
 async function drawDex(vid) {
   const dex = dexLocal();
@@ -411,8 +420,10 @@ async function viewGame(n) {
   if (!PREVIEW) try { [cls, rec] = await Promise.all([DB.getClass(m.code), DB.getRecord(m.code, n, m.num)]); } catch (e) { offline = true; }
   if (rec && rec._foreign) return viewBlocked(g, "foreign");
   if (cls === null && !offline && !PREVIEW) return viewBlocked(g, "noclass");
+  setGate(cls);
   const closed = cls && cls.open === false;
   const cleared = rec && rec.status === "cleared";
+  if (!cleared && !gateMine(n)) return viewGated(`${n}차시 금고 · ${CHAPTERS[n - 1].t}`);
   if (cleared) dexPut(n, { ...g.card, stars: rec.stars, firstOk: rec.firstOk });
   $("#app").innerHTML = topbar() + `<div class="intro">
     <span class="qtag">${n}차시 금고</span><h1>${esc(g.vault)} 🔐</h1>

@@ -116,6 +116,17 @@ async function shot(pg, name, clip) { await pg.waitForTimeout(250); await pg.scr
   await pg.evaluate(() => { document.querySelector('#body').scrollIntoView(); scrollBy(0, -150); }); await pg.waitForTimeout(300);
   await shot(pg, 't11_boss');
   await pg.selectOption('#chs', '1'); await pg.waitForTimeout(300);
+  /* 금고 열기 · 진도 조절 (반 전체 → 학생별). 찍은 뒤 처음 상태(모두 열림)로 되돌림 */
+  await pg.evaluate(() => scrollTo(0, 0));
+  const gshot = async name => { await pg.waitForTimeout(400); await pg.evaluate(() => document.querySelectorAll('.toast').forEach(e => e.remove())); const el = await pg.$('#gatec'); await el.scrollIntoViewIfNeeded(); await el.screenshot({ path: `${OUT}/${name}.png` }); console.log('shot', name); };
+  await pg.click('#gx'); await pg.selectOption('#gN', '12'); await pg.click('#gUp'); await pg.waitForTimeout(600); await pg.evaluate(POLISH);
+  await marks(pg, [['.gmode', '1', 't'], ['#gUp', '2', 'r'], ['.gtiles .gt.on', '3', 't']]);
+  await gshot('t14_gate_all'); await pg.evaluate(POLISH);
+  await pg.click('[data-gs="stu"]'); await pg.click('[data-s="3"]'); await pg.click('[data-s="7"]'); await pg.selectOption('#gN', '16'); await pg.click('#gUpS'); await pg.waitForTimeout(600); await pg.evaluate(POLISH);
+  await marks(pg, [['[data-s="7"]', '1', 'r'], ['#gUpS', '2', 'r'], ['#gRst', '3', 'r']]);
+  await gshot('t15_gate_stu'); await pg.evaluate(POLISH);
+  await pg.evaluate(async () => { const c = classes.find(x => x.code === curCode); await DB.updateClass(c.code, { gate: null }); c.gate = null; gCode = null; gExp = false; gScope = 'all'; drawGate(); });
+  await pg.waitForTimeout(600);
   /* 선생님 관리 */
   await pg.evaluate(() => scrollTo(0, 0));
   const adm = await pg.$('text=선생님 관리'); if (adm) { await adm.click(); await pg.waitForTimeout(600); await pg.evaluate(POLISH); await shot(pg, 't12_admin', { x: 0, y: 0, width: 1280, height: 700 }); }
